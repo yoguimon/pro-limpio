@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @GetMapping
     public String preuba(){
+        System.out.println("mensaje nuevo");
         return "register.html";
     }
 }
