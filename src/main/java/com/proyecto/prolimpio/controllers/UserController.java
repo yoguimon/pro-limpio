@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class UserController {
     @GetMapping
-    public String preuba(){
-        System.out.println("mensaje nuevo");
-        return "register.html";
+    public String prueba(){
+        return "hola";
     }
 }
