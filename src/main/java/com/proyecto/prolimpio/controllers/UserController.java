@@ -1,15 +1,26 @@
 package com.proyecto.prolimpio.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.proyecto.prolimpio.dao.EmpleadoDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-
-@RequestMapping("/")
 public class UserController {
+    @Autowired
+    private EmpleadoDao usuarioDao;
     @GetMapping
     public String prueba(){
         return "hola";
     }
+    /*@RequestMapping(value = "api/login", method = RequestMethod.POST)
+    public String login(@RequestBody Persona usuario){
+        boolean res = usuarioDao.verificarUsuario(usuario);
+        if(res==true){
+            return "OK";
+        }else{
+            return "fallo!";
+        }
+    }*/
+
+
 }
