@@ -21,9 +21,9 @@ async function cargarEmpleados(){
             let cont = 0;
           for(let empleado of empleados){
                 cont=cont+1;
-                let botonEditar = '<a href="#" onclick = "mostrarEmpleado('+empleado.idPersona+')" class="btn btn-warning btn-circle btn-sm"></a>';
-                let botonEliminar = '<a href="#" onclick = "eliminarEmpleado('+empleado.idPersona+')" class="btn btn-danger btn-circle btn-sm"><i class="fass fa-trash"></i></a>';
-                let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado.carnet+'</td><td>'+empleado.nombres+'</td><td>'+empleado.apellidoPaterno+'</td><td>'+empleado.apellidoMaterno+'</td><td>'+empleado.sexo+'</td><td>'+empleado.rol+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
+                let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarEmpleado('+empleado[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
+                let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarEmpleado('+empleado[0]+')"><i class="fas fa-trash"></i></a>';
+                let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+empleado[2]+'</td><td>'+empleado[3]+'</td><td>'+empleado[4]+'</td><td>'+empleado[5]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                 listadoHtml+=empleadoHtml;
           }
 
@@ -31,6 +31,7 @@ async function cargarEmpleados(){
           document.querySelector('#listaEmpleados tbody').outerHTML=listadoHtml;
 
 }
+
 async function mostrarEmpleado(id){
     $('#formEdicion').modal('show');
     const request = await fetch('api/empleados/'+id, {
@@ -40,38 +41,61 @@ async function mostrarEmpleado(id){
                   'Content-Type': 'application/json'
                 }
         });
+
         //me devuelve una lista de empleados
         const empleado = await request.json();
 
 
+        document.getElementById('txtcarnet').value=empleado.carnet;
+        document.getElementById('txtnombre').value=empleado.nombre;
+        document.getElementById('txtapellido').value=empleado.apellido;
+        document.getElementById('txtFechaContratacion').value=empleado.fecha_contratacion;
+        document.getElementById('cbxpuesto').value=empleado.puesto;
+        document.getElementById('txtsalario').value=empleado.salario;
+        document.getElementById('txtFechaNacimiento').value=empleado.fecha_nacimiento;
+        document.getElementById('cbxestado').value=empleado.estado_civil;
+        document.getElementById('cbxsexo').value=empleado.sexo;
+        document.getElementById('txtdireccion').value=empleado.direccion;
+        document.getElementById('txttelefono').value=empleado.telefono;
+        document.getElementById('txtemail').value=empleado.correo;
+        //datos.foto = "sin foto";
 
-        document.getElementById("txtcarnet").value=empleado.carnet;
-        document.getElementById("txtnombres").value=empleado.nombres;
-        document.getElementById("txtapellido1").value=empleado.apellidoPaterno;
-        document.getElementById("txtapellido2").value=empleado.apellidoMaterno;
-        document.getElementById("cbxsexo").value=empleado.sexo;
-        document.getElementById("cbxrol").value=empleado.rol;
+        document.getElementById('btnSaveChanges').innerHTML = '';
+        document.getElementById('btnCancel').innerHTML = '';
 
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarEmpleado('+empleado.idPersona+')">Modificar</button>';
+        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarEmpleado('+empleado.idEmpleado+')">Modificar</button>';
         let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</button>';
 
+        document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;
+        document.getElementById('btnCancel').innerHTML = btnCancel;
 
-        let botones = btnCancel+btnSaveChanges;
-        document.querySelector('#botones').outerHTML=botones;
 }
 
 async function editarEmpleado(id){
-    let empleadoEditado={};
-    empleadoEditado.idPersona=id;
-    empleadoEditado.carnet=document.getElementById('txtcarnet').value;
-    empleadoEditado.nombres=document.getElementById('txtnombres').value;
-    empleadoEditado.apellidoPaterno=document.getElementById('txtapellido1').value;
-    empleadoEditado.apellidoMaterno=document.getElementById('txtapellido2').value;
-    empleadoEditado.sexo=document.getElementById('cbxsexo').value;
-    empleadoEditado.rol=document.getElementById('cbxrol').value;
 
-    const request = await fetch('api/modificar',{
-                method: 'POST',
+     const contratacion = document.getElementById('txtFechaContratacion').value;
+     const fechaContratacion = new Date(contratacion);
+     const nacimiento=document.getElementById('txtFechaNacimiento').value;
+     const fechaNacimiento = new Date(nacimiento);
+
+    let empleadoEditado={};
+    empleadoEditado.idEmpleado=id;
+    empleadoEditado.carnet = document.getElementById('txtcarnet').value;
+    empleadoEditado.nombre = document.getElementById('txtnombre').value;
+    empleadoEditado.apellido = document.getElementById('txtapellido').value;
+    empleadoEditado.fecha_contratacion = fechaContratacion;
+    empleadoEditado.puesto = document.getElementById('cbxpuesto').value;
+    empleadoEditado.salario = document.getElementById('txtsalario').value;
+    empleadoEditado.fecha_nacimiento = fechaNacimiento;
+    empleadoEditado.estado_civil = document.getElementById('cbxestado').value;
+    empleadoEditado.sexo = document.getElementById('cbxsexo').value;
+    empleadoEditado.direccion = document.getElementById('txtdireccion').value;
+    empleadoEditado.telefono = document.getElementById('txttelefono').value;
+    empleadoEditado.correo = document.getElementById('txtemail').value;
+    empleadoEditado.foto = "sin foto";
+
+    const request = await fetch('api/empleados',{
+                method: 'PUT',
                         headers: {
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'

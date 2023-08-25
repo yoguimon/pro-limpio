@@ -14,10 +14,6 @@
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
-
-  <script src="vendor/fontawesome-free/js/all.js"></script>
-  <script src="vendor/fontawesome-free/js/all.min.js"></script>
-
   <link
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
@@ -28,6 +24,10 @@
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <script src="vendor/fontawesome-free/js/all.js"></script>
+  <script src="vendor/fontawesome-free/js/all.min.js"></script>
+
+
 
 </head>
 
@@ -96,6 +96,24 @@
           <a class="collapse-item" href="reportesFecha.html">Reportes por Fecha</a>
           <a class="collapse-item" href="reportesLugares.html">Reportes por Lugares</a>
           <a class="collapse-item" href="generarQrAsistencia.html">Generar Qr</a>
+        </div>
+      </div>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu Servicios-->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
+         aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-solid fa-toolbox"></i>
+        <span>Servicios</span>
+      </a>
+      <div id="collapseServicios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Modulo servicios:</h6>
+          <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
+          <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
+          <a class="collapse-item" href="crearServicio.html">Crear Servicio</a>
+          <a class="collapse-item" href="historialServicios.html">Historial de Servicios</a>
         </div>
       </div>
     </li>
@@ -201,6 +219,7 @@
               </button>
             </div>
           </div>
+
         </form>
 
         <!-- Topbar Navbar -->
@@ -407,50 +426,122 @@
               </div>
               <div class="modal-body">
                 <form class="user">
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="txtcarnet" placeholder="Ingrese carnet">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-sm-6">
-                      <input type="text" class="form-control form-control-user" id="txtnombres" placeholder="Ingrese nombres">
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card" style="width: 15rem;">
+                            <a href="#">
+                              <img src="img/logo.png" class="card-img-top" alt="..." width="15" height="120">
+                            </a>
+                            <div class="card-body">
+                              <a href="#" class="btn btn-primary">Subir Foto</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="txtcarnet"
+                             placeholder="Carnet">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txtnombre"
+                             placeholder="Nombres">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txtapellido"
+                             placeholder="Apellidos">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user"
-                             id="txtapellido1" placeholder="Ingrese Apellido Paterno">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                      <input type="text" id="txtFechaNacimiento" class="form-control form-control-user"
+                             placeholder="Fecha Nacimiento">
+
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                       <input type="text" class="form-control form-control-user"
-                             id="txtapellido2" placeholder="Ingrese Apellido Materno">
+                             id="txtFechaContratacion" placeholder="Fecha Contratacion">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user"
+                             id="txtsalario" placeholder="Salario">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0 form-group">
-                      <label for="cbxsexo">Seleccione su sexo:</label>
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="txtdireccion"
+                             placeholder="Direccion Domicilio">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txttelefono"
+                             placeholder="Telefono/Celular">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="email" class="form-control form-control-user" id="txtemail"
+                             placeholder="Correo Electronico">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0 form-group">
                       <select class="form-control" id="cbxsexo" name="sexo">
-                        <option value="sexo" selected>Sexo</option>
-                        <option value="H">Hombre</option>
-                        <option value="M">Mujer</option>
+                        <option value="" selected disabled>Seleccione Sexo</option>
+                        <option value="F">Mujer</option>
+                        <option value="M">Hombre</option>
                       </select>
                     </div>
 
-                    <div class="col-sm-6 form-group">
-                      <label for="cbxrol">Seleccione el Rol:</label>
-                      <select class="form-control" id="cbxrol" name="rol">
-                        <option value="rol" selected>Rol</option>
-                        <option value="Empleado">Empleado</option>
+                    <div class="col-sm-4 form-group">
+                      <select class="form-control" id="cbxpuesto" name="rol">
+                        <option value="" selected disabled>Seleccione Cargo</option>
+                        <option value="Auxiliar Limpieza">Auxiliar Limpieza</option>
                         <option value="Supervisor">Supervisor</option>
                       </select>
                     </div>
+
+                    <div class="col-sm-4 form-group">
+                      <select class="form-control" id="cbxestado" name="estad0">
+                        <option value="" selected disabled>Estado Civil</option>
+                        <option value="Soltero">Solter@</option>
+                        <option value="Casado">Casad@</option>
+                        <option value="Viudo">Viud@</option>
+                      </select>
+                    </div>
                   </div>
 
 
+
                 </form>
-              </div>
-              <div class="modal-footer" id="botones">
 
               </div>
+              <div class="form-group row" id="botones">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <button id="btnSaveChanges" type="button" class="btn btn-primary btn-user btn-block">Modificar</button>
+                </div>
+                <div class="col-sm-6">
+                  <button id="btnCancel" type="button" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </div>
@@ -464,6 +555,7 @@
               </h6>
             </div>
           </form>
+        </div>
 
 
 
@@ -475,10 +567,9 @@
                   <th>Nro</th>
                   <th>Carnet</th>
                   <th>Nombres</th>
-                  <th>Apellido Paterno</th>
-                  <th>Apellido Materno</th>
-                  <th>Sexo</th>
-                  <th>Rol</th>
+                  <th>Apellidos</th>
+                  <th>Puesto</th>
+                  <th>telefono</th>
                   <th>Editar</th>
                   <th>Eliminar</th>
                 </tr>
@@ -488,10 +579,9 @@
                   <th>Nro</th>
                   <th>Carnet</th>
                   <th>Nombres</th>
-                  <th>Apellido Paterno</th>
-                  <th>Apellido Materno</th>
-                  <th>Sexo</th>
-                  <th>Rol</th>
+                  <th>Apellidos</th>
+                  <th>Puesto</th>
+                  <th>telefono</th>
                   <th>Editar</th>
                   <th>Eliminar</th>
                 </tr>
@@ -515,7 +605,7 @@
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2020</span>
+          <span>Copyright &copy; Jhonny 2023</span>
         </div>
       </div>
     </footer>
@@ -552,6 +642,7 @@
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
 <script src="js/listaEmpleados.js"></script>
+
 
 </body>
 

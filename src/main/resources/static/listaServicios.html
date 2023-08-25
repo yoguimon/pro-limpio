@@ -33,16 +33,18 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
       <div class="sidebar-brand-icon rotate-n-15">
+        <!--<i class="fas fa-laugh-wink"></i>-->
         <img src="img/logo.png" alt="" width="40">
       </div>
-      <div class="sidebar-brand-text mx-3">PRO LIMPIO</div>
+
+      <div class="sidebar-brand-text mx-3">Pro Limpio</div>
     </a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
+    <li class="nav-item active">
       <a class="nav-link" href="index.html">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
@@ -57,9 +59,9 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu EMPLEADOS-->
-    <li class="nav-item active">
-      <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-         aria-controls="collapseTwo">
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fa fa-user fa-fw"></i>
         <span>Empleados</span>
       </a>
@@ -80,10 +82,10 @@
         <i class="fa fa-calendar" aria-hidden="true"></i>
         <span>Asistencia</span>
       </a>
-      <div id="collapseAsistencia" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseAsistencia" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo asistencia:</h6>
-          <a class="collapse-item active" href="reportes.html">Reportes Asistencia</a>
+          <a class="collapse-item" href="reportes.html">Reportes Asistencia</a>
           <a class="collapse-item" href="reportesFecha.html">Reportes por Fecha</a>
           <a class="collapse-item" href="reportesLugares.html">Reportes por Lugares</a>
           <a class="collapse-item" href="generarQrAsistencia.html">Generar Qr</a>
@@ -98,10 +100,11 @@
         <i class="fa fa-solid fa-toolbox"></i>
         <span>Servicios</span>
       </a>
-      <div id="collapseServicios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseServicios" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo servicios:</h6>
-          <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
+          <a class="collapse-item active" href="listaServicios.html">Lista de Servicios</a>
+          <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
           <a class="collapse-item" href="crearServicio.html">Crear Servicio</a>
           <a class="collapse-item" href="historialServicios.html">Historial de Servicios</a>
         </div>
@@ -176,6 +179,13 @@
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+    <!-- Sidebar Message -->
+    <div class="sidebar-card d-none d-lg-flex">
+      <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+      <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+      <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
     </div>
 
   </ul>
@@ -344,7 +354,7 @@
                   <div class="status-indicator bg-success"></div>
                 </div>
                 <div>
-                  <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                  <div class="text-truncate">Am I a good boy? The reason I ask is bbecause someone
                     told me that people say this to all dogs, even if they aren't good...</div>
                   <div class="small text-gray-500">Chicken the Dog · 2w</div>
                 </div>
@@ -392,16 +402,123 @@
       <!-- End of Topbar -->
 
       <!-- Begin Page Content -->
-      <div class="container-fluid">
+      <h1>lista Servicios</h1>
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Reportes Empleado</h1>
+
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card" style="width: 18rem;">
+                  <a href="mostrarDatos.html">
+                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
+                  </a>
+                  <div class="card-body">
+                    <h5 class="card-title">Edificio Colon</h5>
+                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
+                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card" style="width: 18rem;">
+                  <a href="mostrarDatos.html">
+                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
+                  </a>
+                  <div class="card-body">
+                    <h5 class="card-title">Edificio Colon</h5>
+                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
+                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card" style="width: 18rem;">
+                  <a href="mostrarDatos.html">
+                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
+                  </a>
+                  <div class="card-body">
+                    <h5 class="card-title">Edificio Colon</h5>
+                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
+                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+        <br><br>
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card" style="width: 18rem;">
+                  <a href="mostrarDatos.html">
+                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
+                  </a>
+                  <div class="card-body">
+                    <h5 class="card-title">Edificio Colon</h5>
+                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
+                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card" style="width: 18rem;">
+                  <a href="mostrarDatos.html">
+                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
+                  </a>
+                  <div class="card-body">
+                    <h5 class="card-title">Edificio Colon</h5>
+                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
+                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card" style="width: 18rem;">
+                  <a href="mostrarDatos.html">
+                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
+                  </a>
+                  <div class="card-body">
+                    <h5 class="card-title">Edificio Colon</h5>
+                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
+                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
+
       <!-- /.container-fluid -->
 
     </div>
@@ -411,7 +528,7 @@
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2020</span>
+          <span>Copyright &copy; Your Website 2021</span>
         </div>
       </div>
     </footer>
@@ -457,7 +574,14 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
-<script src="js/agregar.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+
 </body>
 
 </html>

@@ -11,14 +11,23 @@
 
   <title>PRO LIMPIO</title>
 
-  <!-- Custom fonts for this template-->
+  <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+
   <link
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
-  <!-- Custom styles for this template-->
+
+  <!-- Custom styles for this template -->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <script src="vendor/fontawesome-free/js/all.js"></script>
+  <script src="vendor/fontawesome-free/js/all.min.js"></script>
 
 </head>
 
@@ -35,7 +44,7 @@
       <div class="sidebar-brand-icon rotate-n-15">
         <img src="img/logo.png" alt="" width="40">
       </div>
-      <div class="sidebar-brand-text mx-3">PRO LIMPIO</div>
+      <div class="sidebar-brand-text mx-3">Pro Limpio</div>
     </a>
 
     <!-- Divider -->
@@ -56,19 +65,55 @@
       Interface
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item active">
-      <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-         aria-controls="collapseTwo">
+    <!-- Nav Item - Pages Collapse Menu EMPLEADOS-->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+         aria-expanded="true" aria-controls="collapseTwo">
         <i class="fa fa-user fa-fw"></i>
         <span>Empleados</span>
       </a>
-      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo empleados:</h6>
-          <a class="collapse-item active" href="listaEmpleados.html">Lista de Empleados</a>
+          <a class="collapse-item" href="listaEmpleados.html">Lista de Empleados</a>
           <a class="collapse-item" href="asignarLugares.html">Asignar Lugares de Trabajo</a>
           <a class="collapse-item" href="buscarEmpleados.html">Buscar Empleados</a>
+        </div>
+      </div>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu ASISTENCIA -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAsistencia"
+         aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span>Asistencia</span>
+      </a>
+      <div id="collapseAsistencia" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Modulo asistencia:</h6>
+          <a class="collapse-item" href="reportes.html">Reportes Asistencia</a>
+          <a class="collapse-item" href="reportesFecha.html">Reportes por Fecha</a>
+          <a class="collapse-item" href="reportesLugares.html">Reportes por Lugares</a>
+          <a class="collapse-item" href="generarQrAsistencia.html">Generar Qr</a>
+        </div>
+      </div>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu Servicios-->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
+         aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-solid fa-toolbox"></i>
+        <span>Servicios</span>
+      </a>
+      <div id="collapseServicios" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Modulo servicios:</h6>
+          <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
+          <a class="collapse-item active" href="listaClientes.html">Lista Clientes</a>
+          <a class="collapse-item" href="crearServicio.html">Crear Servicio</a>
+          <a class="collapse-item" href="historialServicios.html">Historial de Servicios</a>
         </div>
       </div>
     </li>
@@ -129,7 +174,7 @@
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
+    <li class="nav-item active">
       <a class="nav-link" href="tables.html">
         <i class="fas fa-fw fa-table"></i>
         <span>Tables</span></a>
@@ -156,9 +201,11 @@
       <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
         <!-- Sidebar Toggle (Topbar) -->
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-          <i class="fa fa-bars"></i>
-        </button>
+        <form class="form-inline">
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+        </form>
 
         <!-- Topbar Search -->
         <form
@@ -172,6 +219,7 @@
               </button>
             </div>
           </div>
+
         </form>
 
         <!-- Topbar Navbar -->
@@ -360,67 +408,165 @@
       <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Editar Empleado</h1>
+        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+          For more information about DataTables, please visit the <a target="_blank"
+                                                                     href="https://datatables.net">official DataTables documentation</a>.</p>
+
+
+        <!--MODAL-->
+        <div class="modal fade" id="formEdicion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Datos</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="user">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card" style="width: 15rem;">
+                            <img src="img/logo.png" class="card-img-top" alt="..." width="15" height="120">
+                            <div class="card-body">
+                              <a href="#" class="btn btn-primary">Subir Foto</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="txtnombreEmpresa"
+                             placeholder="Nombre Empresa">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txtnombre"
+                             placeholder="Nombre">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txtapellido"
+                             placeholder="Apellido">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="txtdireccion"
+                             placeholder="Direccion">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txttelefono"
+                             placeholder="telefono">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txtcorreo"
+                             placeholder="Correo">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                      <input type="text" id="txtfechaRegistro" class="form-control form-control-user"
+                             placeholder="Fecha Registro" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control form-control-user"
+                             id="txtnotas" placeholder="datos importantes">
+                    </div>
+                  </div>
+
+
+                </form>
+                <div class="d-flex justify-content-between mt-3" id="botones">
+                  <button id="btnSaveChanges" type="button" class="btn btn-primary flex-grow-1 me-2">Modificar</button>
+                  <button id="btnCancel" type="button" class="btn btn-warning flex-grow-1" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
         </div>
 
-        <form class="user">
-          <div class="form-group row">
-            <div class="col-sm-6 mb-3 mb-sm-0">
-              <input type="text" class="form-control form-control-user" id="txtcarnet1"
-                     placeholder="Carnet">
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+          <form action="formularioCliente.html">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">
+                <button type="submit" class="btn btn-primary">Agregar Cliente</button>
+              </h6>
             </div>
-            <div class="col-sm-6">
-              <input type="text" class="form-control form-control-user" id="txtnombres1"
-                     placeholder="nombres">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6 mb-3 mb-sm-0">
-              <input type="text" class="form-control form-control-user"
-                     id="txtapellido11" placeholder="Apellido Paterno">
-            </div>
-            <div class="col-sm-6">
-              <input type="text" class="form-control form-control-user"
-                     id="txtapellido21" placeholder="Apellido Materno">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6 mb-3 mb-sm-0 form-group">
-              <label for="cbxsexo1">Seleccione su sexo:</label>
-              <select class="form-control" id="cbxsexo1" name="sexo">
-                <option value="" selected>Sexo</option>
-                <option value="H">Hombre</option>
-                <option value="M">Mujer</option>
-              </select>
-            </div>
+          </form>
+        </div>
 
-            <div class="col-sm-6 form-group">
-              <label for="cbxrol1">Seleccione el Rol:</label>
-              <select class="form-control" id="cbxrol1" name="rol">
-                <option value="" selected>Rol</option>
-                <option value="Empleado">Empleado</option>
-                <option value="Supervisor">Supervisor</option>
-              </select>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="listaClientes" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                  <th>Nro</th>
+                  <th>Nombre Empresa</th>
+                  <th>Nombres</th>
+                  <th>Direccion</th>
+                  <th>Telefono</th>
+                  <th>Correo</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                  <th>Nro</th>
+                  <th>Nombre Empresa</th>
+                  <th>Nombre</th>
+                  <th>Direccion</th>
+                  <th>Telefono</th>
+                  <th>Correo</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
+                </tr>
+                </tfoot>
+                <tbody>
+
+
+                </tbody>
+              </table>
             </div>
           </div>
-          <div id="botones">
-
-          </div>
-
-        </form>
+      </div>
 
       </div>
       <!-- /.container-fluid -->
 
-    </div>
-    <!-- End of Main Content -->
+
 
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2020</span>
+          <span>Copyright &copy; Jhonny 2023</span>
         </div>
       </div>
     </footer>
@@ -438,35 +584,27 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-        <a class="btn btn-primary" href="login.html">Logout</a>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
 <!-- Core plugin JavaScript-->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
-<script src="js/agregar.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/datatables-demo.js"></script>
+<script src="js/listaClientes.js"></script>
+
+
 </body>
 
 </html>
