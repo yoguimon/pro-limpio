@@ -23,4 +23,34 @@ public class Usuario {
     private String pass;
     @Column(name="rol")
     private String rol;
+
+    public Usuario(){
+
+    }
+
+    public Usuario(Long idUsuario, Empleado empleado, String email, String pass, String rol) {
+        this.idUsuario = idUsuario;
+        this.empleado = empleado;
+        this.email = email;
+        this.pass = pass;
+        this.rol = rol;
+    }
+
+    public Usuario(Long idUsuario, String email, String pass, String rol) {
+        this.idUsuario = idUsuario;
+        this.email = email;
+        this.pass = pass;
+        this.rol = rol;
+    }
+
+    public Usuario(Long idUsuario, String email, String pass) {
+        this.idUsuario = idUsuario;
+        this.email = email;
+        this.pass = pass;
+    }
+
+    public Usuario(String email, String pass) {
+        this.email = email;
+        this.pass = pass;
+    }
 }

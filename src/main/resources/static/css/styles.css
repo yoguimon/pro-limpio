@@ -1,0 +1,20 @@
+.form-inputs {
+    margin-bottom: 0px;
+}
+
+.form-inputs input,
+.form-inputs label {
+    margin-bottom: 0px;
+}
+
+.form-inputs label {
+    color: red; /* Cambia el color de los labels a rojo */
+    font-size: 10px; /* Oculta los labels inicialmente */
+    margin-rigth: 50px;
+}
+
+label{
+    margin-left: 20px;
+}
+
+

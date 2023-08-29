@@ -40,7 +40,7 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
         Query insertQuery = entityManager.createNativeQuery(query)
                 .setParameter("idEmpleado",empleado.getIdEmpleado())
                 .setParameter("email",empleado.getCorreo())
-                .setParameter("pass","prolimpio")
+                .setParameter("pass",empleado.getCarnet())
                 .setParameter("rol",empleado.getPuesto());
 
         insertQuery.executeUpdate();

@@ -1,11 +1,8 @@
 package com.proyecto.prolimpio.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.proyecto.prolimpio.dao.UsuarioDao;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import org.apache.tomcat.util.buf.UDecoder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -68,6 +65,12 @@ public class Empleado {
         this.telefono = telefono;
     }
     public Empleado(){}
+
+    public Empleado(String carnet, String correo) {
+        this.carnet = carnet;
+        this.correo = correo;
+    }
+
     public Empleado(Long idEmpleado, String carnet, String nombre, String apellido, LocalDate fecha_contrato, String puesto, int salario, LocalDate fecha_nacimiento, String estado_civil, char sexo, String direccion, String telefono, String correo, String foto, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
         this.idEmpleado = idEmpleado;
         this.carnet = carnet;
