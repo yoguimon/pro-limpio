@@ -27,39 +27,18 @@ async function registrarUsuario(){
 
 }
 
-async function iniciarSesionAux(){
-    alert("esta fallando");
-    /*let datos = {};
-    datos.email = document.getElementById('txtEmail').value;
-    datos.password = document.getElementById('txtPassword').value;
+function mostrarAlerta(){
+        var popup = document.getElementById("popup");
+        popup.style.display = "block";
 
-      const request = await fetch('api/login', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(datos)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
-        // y lo convierte en json
-      });
-    const respuesta = await request.text();
-    if(respuesta=='Fail'){
-        alert("inicio de sesion fallido");
-    }
-    if(respuesta=='Supervisor'){
-          window.location.href = 'index.html';
-    }
-    if(respuesta=='Auxiliar Limpieza'){
-        window.location.href = 'indexAuxiliar.html';
-    }*/
-
+        setTimeout(function() {
+            popup.style.display = "none";
+        }, 2000); // 2000 milliseconds = 2 seconds
 }
-
-async function iniciarSesion(){
+async function iniciarSesion(email,pass){
     let datos = {};
-    datos.email = document.getElementById('txtEmail').value;
-    datos.pass = document.getElementById('txtPassword').value;
-
+    datos.email = email;
+    datos.pass = pass;
      const request = await fetch('api/usuarios/verificar', {
                     method: 'POST',
                     headers: {
@@ -77,8 +56,32 @@ async function iniciarSesion(){
             }else if(answer=='viejo'){
                 verificarYAsignarRol();
             }else{
-                alert("respodio otra cosa");
+                mostrarAlerta();
             }
+}
+function validarLogin(){
+    let datos = {};
+    datos.email = document.getElementById('txtEmail').value;
+    datos.pass = document.getElementById('txtPassword').value;
+    const errorEmail = document.getElementById('lblErrorEmail');
+    const errorPass = document.getElementById('lblErrorPass');
+        if(datos.email===''){
+            errorEmail.innerHTML="Ingrese correo";
+        }else if(!esValidoCorreo(datos.email)){
+            errorEmail.innerHTML="Correo en formato incorrecto";
+        }else{
+            errorEmail.innerHTML="";
+        }
+        if(datos.pass===''){
+            errorPass.innerHTML="Ingrese contrasena";
+        }else if(datos.pass.length<8){
+            errorPass.innerHTML="Contrasena errorea";
+        }else{
+            errorPass.innerHTML="";
+        }
+        if(errorEmail.innerHTML === "" && errorPass.innerHTML === ""){
+            iniciarSesion(datos.email,datos.pass);
+        }
 }
 async function verificarYAsignarRol(){
         let login = {};
@@ -95,7 +98,7 @@ async function verificarYAsignarRol(){
           });
         const respuesta = await request.text();
         if(respuesta=='Fail'){
-            alert("inicio de sesion fallido");
+            mostrarAlerta();
         }
         if(respuesta=='Supervisor'){
               window.location.href = 'index.html';//para el supervisor
@@ -143,6 +146,10 @@ function validarContrasena(){
         if (errorActual.innerHTML === "" && errorNueva.innerHTML === "" && errorRepetir.innerHTML === "") {
             agregarPassBD(email,nueva.value);
         }
+}
+function esValidoCorreo(email){
+    const patron = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+    return patron.test(String(email));
 }
 function esValidaLaContrasena(pass) {
     const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;

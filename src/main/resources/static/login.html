@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Pro Limpio</title>
-
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -22,10 +22,14 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary" id="cuerpo">
 
     <div class="container">
-
+        <div id="popup" class="popup">
+            <img src="img/error.png">
+            <h2>Datos Incorectos!</h2>
+            <p>revisar usuario y contrasena</p>
+        </div>
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -52,16 +56,19 @@
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
                                     </div>
                                     <form class="user">
-                                        <div class="form-group">
+                                        <div class="form-inputs">
                                             <input type="email" class="form-control form-control-user"
                                                 id="txtEmail" aria-describedby="emailHelp"
                                                 placeholder="Ingrese su Correo...">
+                                            <label id="lblErrorEmail"></label>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-inputs">
                                             <input type="password" class="form-control form-control-user"
                                                 id="txtPassword" placeholder="Password">
+                                            <label id="lblErrorPass"></label>
                                         </div>
-                                        <a onclick="iniciarSesion()" href="#" class="btn btn-primary btn-user btn-block">
+
+                                        <a onclick="validarLogin()" href="#" class="btn btn-primary btn-user btn-block">
                                             Ingresar
                                         </a>
                                     </form>

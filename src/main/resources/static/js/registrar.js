@@ -23,12 +23,6 @@ async function agregarEmpleado(){
     datos.telefono = document.getElementById('txttelefono').value;
     datos.correo = document.getElementById('txtemail').value;
     datos.foto = "sin foto";
-    /*const fotoSeleccionada = document.getElementById('fotoInput').files[0];
-        if (fotoSeleccionada) {
-            datos.foto = fotoSeleccionada.name.toString();
-        } else {
-            datos.foto = "sin foto";
-        }*/
         const request = await fetch('api/empleados', {
                 method: 'POST',
                 headers: {
