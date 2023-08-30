@@ -155,6 +155,7 @@ function esValidaLaContrasena(pass) {
     const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return expresion.test(String(pass));
 }
+
 async function agregarPassBD(correo,passs){
     let datos = {};
         datos.email = correo;

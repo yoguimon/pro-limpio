@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>PRO LIMPIO</title>
-
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -394,7 +394,11 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                    <div id="popup" class="popup">
+                        <img src="img/bien.jpg">
+                        <h2>Empleado Creado!</h2>
+                        <p>se creo correctamente el empleado</p>
+                    </div>
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Agregar Empleado</h1>
@@ -431,57 +435,65 @@
                             </div>
                         </div>
                         <br>
-                        <div class="form-group row">
+                        <div class="form-inputs row">
                             <div class="col-sm-4 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user" id="txtcarnet"
+                                    <input type="text" class="form-control form-control-user" id="txtcarnet"
                                        placeholder="Carnet" name="txtcarnet">
-                                <div id="carnetError" class="error"></div>
+                                    <label id="lblErrorCarnet"></label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control form-control-user" id="txtnombre"
+                                    <input type="text" class="form-control form-control-user" id="txtnombre"
                                        placeholder="Nombres">
+                                <label id="lblErrorNombres"></label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control form-control-user" id="txtapellido"
                                        placeholder="Apellidos">
+                                <label id="lblErrorApellidos"></label>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-inputs row">
                             <div class="col-sm-4 mb-3 mb-sm-0">
                                 <input type="text" id="txtFechaNacimiento" class="form-control form-control-user"
                                        placeholder="Fecha Nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')">
-
+                                <label id="lblErrorFN"></label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control form-control-user"
                                        id="txtFechaContratacion" placeholder="Fecha Contratacion" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+                                <label id="lblErrorFC">prueba</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control form-control-user"
                                        id="txtsalario" placeholder="Salario">
+                                <label id="lblErrorSalario">prueba</label>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-inputs row">
                             <div class="col-sm-4 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user" id="txtdireccion"
                                        placeholder="Direccion Domicilio">
+                                <label id="lblErrorDireccion">prueba</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control form-control-user" id="txttelefono"
                                        placeholder="Telefono/Celular">
+                                <label id="lblErrorTelefono">prueba</label>
                             </div>
                             <div class="col-sm-4">
                                 <input type="email" class="form-control form-control-user" id="txtemail"
                                        placeholder="Correo Electronico">
+                                <label id="lblErrorCorreo">prueba</label>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-inputs row">
                             <div class="col-sm-4 mb-3 mb-sm-0 form-group">
                                 <select class="form-control" id="cbxsexo" name="sexo">
                                     <option value="" selected disabled>Seleccione Sexo</option>
                                     <option value="M">Hombre</option>
                                     <option value="F">Mujer</option>
                                 </select>
+                                <label id="lblErrorSexo">prueba</label>
                             </div>
 
                             <div class="col-sm-4 form-group">
@@ -490,6 +502,7 @@
                                     <option value="Auxiliar Limpieza">Auxiliar Limpieza</option>
                                     <option value="Supervisor">Supervisor</option>
                                 </select>
+                                <label id="lblErrorPuesto">prueba</label>
                             </div>
 
                             <div class="col-sm-4 form-group">
@@ -499,11 +512,12 @@
                                     <option value="Casado">Casad@</option>
                                     <option value="Casado">Viud@</option>
                                 </select>
+                                <label id="lblErrorEC">prueba</label>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <a class="btn btn-primary btn-user btn-block" onclick="agregarEmpleado()">
+                                <a class="btn btn-primary btn-user btn-block" onclick="validarEmpleado()" href="#">
                                     Agregar Empleado
                                 </a>
                             </div>
