@@ -93,7 +93,7 @@ function validarEmpleado(){
         errorApellidos.innerHTML = "";
     }
     //fecha contratacion
-    errorFC.innerHTML = validarFC(fechaContratacion);
+    errorFC.innerHTML = validarFC(contratacion);
     //puesto
     if(datos.puesto===""){
         errorPuesto.innerHTML="Ingreso puesto"
@@ -114,7 +114,7 @@ function validarEmpleado(){
         errorSalario.innerHTML="";
     }
     //fecha nacimiento
-    errorFN.innerHTML = validarFN(fechaNacimiento);
+    errorFN.innerHTML = validarFN(nacimiento);
     //estado
     if(datos.estado_civil===""){
         errorEC.innerHTML="Ingreso estado civil"
@@ -182,28 +182,30 @@ function esValidoCorreo(email){
 }
 
 function validarFN(fecha){//validamos fecha nacimiento
+    const fechaN = new Date(fecha);
     var anoActual=parseInt(new Date().getFullYear(),10);
-    var anoFecha = parseInt(fecha.getFullYear(),10);
-    if (!fecha) {
+    var anoFecha = parseInt(fechaN.getFullYear(),10);
+    if (fecha==="") {
         return "La fecha de nacimiento no puede estar vacía.";
     }else if(anoFecha>anoActual){
-        return "La fecha debe ser menor a la fecha actual"
+        return "La fecha debe ser menor a la fecha actual";
     }else if((anoActual-anoFecha)<17){
-        return "El empleado debe ser > 16 anios"
+        return "El empleado debe ser > 16 anios";
     }else if((anoActual-anoFecha)>60){
-        return "El empleado no debe ser > 60 anios"
+        return "El empleado no debe ser > 60 anios";
     }
     return "";
 }
 function validarFC(fecha){//validamos fecha contratacion
+    const fechaC = new Date(fecha);
     var anoActual=parseInt(new Date().getFullYear(),10);
-    var anoFecha = parseInt(fecha.getFullYear(),10);
-    if (!fecha) {
+    var anoFecha = parseInt(fechaC.getFullYear(),10);
+    if (fecha==="") {
         return "La fecha de contratacion no puede estar vacía.";
     }else if(anoFecha>anoActual){
-        return "La fecha debe ser menor a la fecha actual"
+        return "La fecha debe ser menor a la fecha actual";
     }else if((anoActual-anoFecha)>30){
-        return "No creo que que la fecha de contratacion fue hace mas de 30 anios"
+        return "No creo que que la fecha de contratacion fue hace mas de 30 anios";
     }
     return "";
 }

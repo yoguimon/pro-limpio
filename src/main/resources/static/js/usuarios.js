@@ -1,4 +1,6 @@
-
+//amilcar@gmail.com = 12344Aa@
+//juanluis@gmail.com = 123456Aa!
+// este caracter no da : #
 async function registrarUsuario(){
 
     let datos = {};
@@ -54,6 +56,8 @@ async function iniciarSesion(email,pass){
                 window.location.href = 'cambiarContrasena.html';
 
             }else if(answer=='viejo'){
+                localStorage.setItem('email', datos.email);
+                localStorage.setItem('pass', datos.pass);
                 verificarYAsignarRol();
             }else{
                 mostrarAlerta();
@@ -74,7 +78,7 @@ function validarLogin(){
         }
         if(datos.pass===''){
             errorPass.innerHTML="Ingrese contrasena";
-        }else if(datos.pass.length<8){
+        }else if(datos.pass.length<6){
             errorPass.innerHTML="Contrasena errorea";
         }else{
             errorPass.innerHTML="";
@@ -101,9 +105,11 @@ async function verificarYAsignarRol(){
             mostrarAlerta();
         }
         if(respuesta=='Supervisor'){
+              //guardar datos de session usuario,pass
               window.location.href = 'index.html';//para el supervisor
         }
         if(respuesta=='Auxiliar Limpieza'){
+            //guardar datos de session usuario,pass
             window.location.href = 'indexAuxiliar.html';
         }
 }
@@ -130,7 +136,9 @@ function validarContrasena(){
         if(nueva.value===''){
             errorNueva.innerHTML="Ingrese su pass nueva";
         }else if(!esValidaLaContrasena(nueva.value)){
-            errorNueva.innerHTML="Pass nueva en formato incorrecto";
+            errorNueva.innerHTML="La contraseña debe ser >= 8 digitos. Al menos tener 1 letra mayuscula, 1 miniscula, 1 numero y 1 caracter especial";
+        }else if(nueva.value.length<8){
+            errorNueva.innerHTML="no debe ser menor a 8 digitos";
         }else{
             errorNueva.innerHTML="";
         }
