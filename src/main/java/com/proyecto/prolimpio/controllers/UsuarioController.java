@@ -64,6 +64,20 @@ public class UsuarioController {
         }
     }
 
+    @PostMapping(value = "api/usuarios/passwordXcorreo")//inserto la pass nuevo que lo realize con envio de email
+    public String insertPasswordXCorreo(@RequestBody Usuario usuario){
+        String pass = usuario.getPass().toString().trim();
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+        String hash = argon2.hash(1,1024,1,pass);
+
+        usuario.setPass(hash);
+        if(usuarioDaoImp.insertPass(usuario)){
+            return "exito";
+        }else{
+            return "fail";
+        }
+    }
+
 
 
 }

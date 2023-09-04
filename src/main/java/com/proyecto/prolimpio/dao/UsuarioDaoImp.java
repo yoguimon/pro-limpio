@@ -92,6 +92,7 @@ public class UsuarioDaoImp implements CrudDao<Usuario>{
 
     public boolean insertPass(Usuario usuario) {
         try{
+            //System.out.println("correo$"+usuario.getEmail());
             String jpqlQuery = "SELECT u FROM Usuario u WHERE u.email = :email";
             TypedQuery<Usuario> query = entityManager.createQuery(jpqlQuery, Usuario.class)
                     .setParameter("email", usuario.getEmail());

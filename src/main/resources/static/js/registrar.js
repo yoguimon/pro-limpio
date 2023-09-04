@@ -159,6 +159,9 @@ function validarEmpleado(){
      }else{
          errorCorreo.innerHTML="";
      }
+     if(errorCorreo.innerHTML===""){
+         existeCorreo(datos.correo);
+     }
 
 
     if(errorCarnet.innerHTML==="" && errorNombres.innerHTML==="" && errorApellidos.innerHTML==="" && errorSalario.innerHTML===""
@@ -167,6 +170,26 @@ function validarEmpleado(){
         agregarEmpleado(datos);
     }
 
+}
+async function existeCorreo(email){
+    const errorEmail = document.getElementById('lblErrorCorreo');
+    const requestData = { email: email };
+    const request = await fetch('api/usuarios/verificarEmail', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+    });
+    const answer = await request.text();
+    if(answer=='existe'){
+        errorEmail.innerHTML="El correo ya existe en la base de datos!";
+    }else if(answer=='fail'){
+        errorEmail.innerHTML="";
+    }else{
+        errorEmail.innerHTML="algo raro paso!";
+    }
 }
 function esNro(texto){
     const patron =/^([0-9])*$/;
