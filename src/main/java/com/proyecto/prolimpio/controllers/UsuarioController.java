@@ -3,21 +3,27 @@ package com.proyecto.prolimpio.controllers;
 import com.proyecto.prolimpio.dao.UsuarioDaoImp;
 import com.proyecto.prolimpio.models.Empleado;
 import com.proyecto.prolimpio.models.Usuario;
+import com.proyecto.prolimpio.util.EmailUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 public class UsuarioController {
     @Autowired
     private UsuarioDaoImp usuarioDaoImp;
+    @Autowired
+    EmailUtil emailUtil;
 
     @RequestMapping(value = "api/login", method = RequestMethod.POST)//revisar si el metodo es util
     public String login(@RequestBody Usuario usuario){
         return usuarioDaoImp.verificarUsuario(usuario);
     }
-    @PostMapping("api/usuarios")//revisar si el metodo es util
+    @PostMapping("api/usuarios")
     public void registrarUsuario(@RequestBody Usuario usuario){
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
         String hash = argon2.hash(1,1024,1,usuario.getPass());
@@ -43,6 +49,16 @@ public class UsuarioController {
         usuario.setPass(hash);
         if(usuarioDaoImp.insertPass(usuario)){
             return "exito";
+        }else{
+            return "fail";
+        }
+    }
+    @PostMapping("api/usuarios/verificarEmail")
+    public String exiteCorreo(@RequestBody Map<String, String> requestData) throws MessagingException {
+        String email=requestData.get("email");
+        if(usuarioDaoImp.verificarSiExiste(email)){
+            emailUtil.sendPasswordEmail(email);
+            return "existe";
         }else{
             return "fail";
         }

@@ -1,6 +1,12 @@
 //amilcar@gmail.com = 12344Aa@
 //juanluis@gmail.com = 123456Aa!
 // este caracter no da : #
+$(document).ready(function() {
+    //onready
+    //localStorage.removeItem('email');
+    //localStorage.removeItem('pass');
+});
+
 async function registrarUsuario(){
 
     let datos = {};
@@ -160,7 +166,8 @@ function esValidoCorreo(email){
     return patron.test(String(email));
 }
 function esValidaLaContrasena(pass) {
-    const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    //const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#(){}[\]^\\/\|<>,.:;_-])[A-Za-z\d@$!%*?&#(){}[\]^\\/\|<>,.:;_-]{8,}$/;
     return expresion.test(String(pass));
 }
 
@@ -185,4 +192,39 @@ async function agregarPassBD(correo,passs){
                 }else{
                     alert("respodio otra cosa");
                 }
+}
+function correoEsValido(){
+    const email = document.getElementById('txtemail').value
+    const errorEmail = document.getElementById('lblErrorEmail');
+    if(email===''){
+        errorEmail.innerHTML="Ingrese correo";
+    }else if(!esValidoCorreo(email)){
+        errorEmail.innerHTML="Correo en formato incorrecto";
+    }else{
+        errorEmail.innerHTML="";
+    }
+    if(errorEmail.innerHTML===""){
+        existeCorreo(email);
+    }
+}
+async function existeCorreo(email){
+    const errorEmail = document.getElementById('lblErrorEmail');
+    const requestData = { email: email };
+    const request = await fetch('api/usuarios/verificarEmail', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+    });
+    const answer = await request.text();
+    if(answer=='existe'){
+        //window.location.href = 'login.html';
+        errorEmail.innerHTML="Revisa tu correo, te enviamos un link";
+    }else if(answer=='fail'){
+        errorEmail.innerHTML="El correo no esta registrado en la Base de Datos";
+    }else{
+        errorEmail.innerHTML="algo raro paso!";
+    }
 }

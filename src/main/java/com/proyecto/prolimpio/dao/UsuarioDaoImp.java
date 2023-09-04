@@ -2,6 +2,7 @@ package com.proyecto.prolimpio.dao;
 
 import com.proyecto.prolimpio.models.Empleado;
 import com.proyecto.prolimpio.models.Usuario;
+import com.proyecto.prolimpio.util.EmailUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import jakarta.persistence.EntityManager;
@@ -9,9 +10,12 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.boot.jaxb.SourceType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -104,5 +108,20 @@ public class UsuarioDaoImp implements CrudDao<Usuario>{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean verificarSiExiste(String email) {
+        try {
+            String sql = "SELECT email FROM usuario WHERE email = :email";
+            List<String> results = entityManager
+                    .createNativeQuery(sql)
+                    .setParameter("email", email)
+                    .getResultList();
+            // Verificar si la lista de resultados no está vacía
+            return !results.isEmpty();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

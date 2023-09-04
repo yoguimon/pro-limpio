@@ -1,6 +1,8 @@
 package com.proyecto.prolimpio.dao;
 
 import com.proyecto.prolimpio.models.Empleado;
+import com.proyecto.prolimpio.models.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
