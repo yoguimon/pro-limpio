@@ -11,14 +11,21 @@
 
   <title>PRO LIMPIO</title>
 
-  <!-- Custom fonts for this template-->
+  <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
   <link
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
-  <!-- Custom styles for this template-->
+
+  <!-- Custom styles for this template -->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this page -->
+  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <script src="vendor/fontawesome-free/js/all.js"></script>
+  <script src="vendor/fontawesome-free/js/all.min.js"></script>
 
 </head>
 
@@ -33,10 +40,8 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
       <div class="sidebar-brand-icon rotate-n-15">
-        <!--<i class="fas fa-laugh-wink"></i>-->
         <img src="img/logo.png" alt="" width="40">
       </div>
-
       <div class="sidebar-brand-text mx-3">Pro Limpio</div>
     </a>
 
@@ -44,7 +49,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item">
       <a class="nav-link" href="index.html">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
@@ -65,10 +70,10 @@
         <i class="fa fa-user fa-fw"></i>
         <span>Empleados</span>
       </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo empleados:</h6>
-          <a class="collapse-item" href="listaEmpleados.html">Lista de Empleados</a>
+          <a class="collapse-item active" href="listaEmpleados.html">Lista de Empleados</a>
           <a class="collapse-item" href="asignarLugares.html">Asignar Lugares de Trabajo</a>
           <a class="collapse-item" href="buscarEmpleados.html">Buscar Empleados</a>
         </div>
@@ -100,10 +105,10 @@
         <i class="fa fa-solid fa-toolbox"></i>
         <span>Servicios</span>
       </a>
-      <div id="collapseServicios" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseServicios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo servicios:</h6>
-          <a class="collapse-item active" href="listaServicios.html">Lista de Servicios</a>
+          <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
           <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
           <a class="collapse-item" href="crearServicio.html">Crear Servicio</a>
           <a class="collapse-item" href="historialServicios.html">Historial de Servicios</a>
@@ -167,7 +172,7 @@
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item">
+    <li class="nav-item active">
       <a class="nav-link" href="tables.html">
         <i class="fas fa-fw fa-table"></i>
         <span>Tables</span></a>
@@ -175,6 +180,7 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+
   </ul>
   <!-- End of Sidebar -->
 
@@ -186,6 +192,7 @@
 
       <!-- Topbar -->
       <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
@@ -212,7 +219,7 @@
                 Cambiar Contraseña
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" onclick="finalizarSession()">
+              <a class="dropdown-item" href="login.html" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cerrar Session
               </a>
@@ -225,132 +232,203 @@
       <!-- End of Topbar -->
 
       <!-- Begin Page Content -->
-      <div class="container">
-        <h1 class="h3 mb-2 text-gray-800">Lista Servicios</h1>
-        <p class="mb-4">info soble los Servicios</p>
-        <div class="row">
+      <div class="container-fluid">
 
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card" style="width: 18rem;">
-                  <a href="mostrarDatos.html">
-                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
-                  </a>
-                  <div class="card-body">
-                    <h5 class="card-title">Edificio Colon</h5>
-                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
-                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Lista de Empleados</h1>
+        <p class="mb-4">Tabla de todos los empleados que trabajan en la empresa PRO LIMPIO</p>
+
+        <!--MODAL-->
+        <div class="modal fade" id="formEdicion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Datos</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="user">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card" style="width: 15rem;">
+                            <a href="#">
+                              <img src="img/logo.png" class="card-img-top" alt="..." width="15" height="120">
+                            </a>
+                            <div class="card-body">
+                              <a href="#" class="btn btn-primary">Subir Foto</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  <br>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="txtcarnet"
+                             placeholder="Carnet">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txtnombre"
+                             placeholder="Nombres">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txtapellido"
+                             placeholder="Apellidos">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                      <input type="text" id="txtFechaNacimiento" class="form-control form-control-user"
+                             placeholder="Fecha Nacimiento">
+
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user"
+                             id="txtFechaContratacion" placeholder="Fecha Contratacion">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user"
+                             id="txtsalario" placeholder="Salario">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="txtdireccion"
+                             placeholder="Direccion Domicilio">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" id="txttelefono"
+                             placeholder="Telefono/Celular">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="email" class="form-control form-control-user" id="txtemail"
+                             placeholder="Correo Electronico">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-4 mb-3 mb-sm-0 form-group">
+                      <select class="form-control" id="cbxsexo" name="sexo">
+                        <option value="" selected disabled>Seleccione Sexo</option>
+                        <option value="F">Mujer</option>
+                        <option value="M">Hombre</option>
+                      </select>
+                    </div>
+
+                    <div class="col-sm-4 form-group">
+                      <select class="form-control" id="cbxpuesto" name="rol">
+                        <option value="" selected disabled>Seleccione Cargo</option>
+                        <option value="Auxiliar Limpieza">Auxiliar Limpieza</option>
+                        <option value="Supervisor">Supervisor</option>
+                      </select>
+                    </div>
+
+                    <div class="col-sm-4 form-group">
+                      <select class="form-control" id="cbxestado" name="estad0">
+                        <option value="" selected disabled>Estado Civil</option>
+                        <option value="Soltero">Solter@</option>
+                        <option value="Casado">Casad@</option>
+                        <option value="Viudo">Viud@</option>
+                      </select>
+                    </div>
+                  </div>
+
+
+
+                </form>
+
+              </div>
+              <div class="form-group row" id="botones">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <button id="btnSaveChanges" type="button" class="btn btn-primary btn-user btn-block">Modificar</button>
+                </div>
+                <div class="col-sm-6">
+                  <button id="btnCancel" type="button" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</button>
                 </div>
               </div>
+
+
             </div>
           </div>
-
-
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card" style="width: 18rem;">
-                  <a href="mostrarDatos.html">
-                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
-                  </a>
-                  <div class="card-body">
-                    <h5 class="card-title">Edificio Colon</h5>
-                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
-                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card" style="width: 18rem;">
-                  <a href="mostrarDatos.html">
-                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
-                  </a>
-                  <div class="card-body">
-                    <h5 class="card-title">Edificio Colon</h5>
-                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
-                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
-        <br><br>
-        <div class="row">
 
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card" style="width: 18rem;">
-                  <a href="mostrarDatos.html">
-                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
-                  </a>
-                  <div class="card-body">
-                    <h5 class="card-title">Edificio Colon</h5>
-                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
-                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+          <form action="formulario.html">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">
+                <button type="submit" class="btn btn-primary">Agregar Empleado</button>
+              </h6>
             </div>
+          </form>
+
+
+
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="listaEmpleados" width="100%" cellspacing="0">
+              <thead>
+              <tr>
+                <th>Nro</th>
+                <th>Carnet</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Puesto</th>
+                <th>telefono</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+              </thead>
+              <tfoot>
+              <tr>
+                <th>Nro</th>
+                <th>Carnet</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Puesto</th>
+                <th>telefono</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+              </tfoot>
+              <tbody>
+
+
+              </tbody>
+            </table>
           </div>
-
-
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card" style="width: 18rem;">
-                  <a href="mostrarDatos.html">
-                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
-                  </a>
-                  <div class="card-body">
-                    <h5 class="card-title">Edificio Colon</h5>
-                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
-                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card" style="width: 18rem;">
-                  <a href="mostrarDatos.html">
-                    <img src="img/logo.png" class="card-img-top" alt="..." width="30" height="180">
-                  </a>
-                  <div class="card-body">
-                    <h5 class="card-title">Edificio Colon</h5>
-                    <p class="card-text">Calle Mexico entre 25 de Mayo Nro 323</p>
-                    <a href="mostrarDatos.html" class="btn btn-primary">Ver</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
 
-      <!-- /.container-fluid -->
-
     </div>
-    <!-- End of Main Content -->
+    <!-- /.container-fluid -->
+  </div>
+  <!-- End of Main Content -->
 
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2021</span>
+          <span>Copyright &copy; Your Website 2020</span>
         </div>
       </div>
     </footer>
@@ -367,10 +445,11 @@
   <i class="fas fa-angle-up"></i>
 </a>
 
+
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
 <!-- Core plugin JavaScript-->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -378,12 +457,12 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
-<script src="js/control.js"></script>
+<script src="js/demo/datatables-demo.js"></script>
+<script src="js/listaEmpleados.js"></script>
 </body>
 
 </html>

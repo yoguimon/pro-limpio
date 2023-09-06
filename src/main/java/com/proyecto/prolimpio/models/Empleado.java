@@ -25,6 +25,8 @@ public class Empleado {
     private String nombre;
     @Column(name="apellido")
     private String apellido;
+    @Column(name="apellido_materno")
+    private String apellido_materno;
     @Column(name="fecha_contratacion")
     public LocalDate fecha_contratacion;
     @Column(name="puesto")
@@ -56,11 +58,12 @@ public class Empleado {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "empleado") //importante, mapea con usuario PONE TODOS LOS DATOS DEL USUARIO DE ESTE EMPLEADO
     private Usuario usuario;
 
-    public Empleado(Long idEmpleado, String carnet, String nombre, String apellido, String puesto, String telefono) {
+    public Empleado(Long idEmpleado, String carnet, String nombre, String apellido, String apellido_materno, String puesto, String telefono) {
         this.idEmpleado = idEmpleado;
         this.carnet = carnet;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.apellido_materno=apellido_materno;
         this.puesto = puesto;
         this.telefono = telefono;
     }
@@ -71,11 +74,12 @@ public class Empleado {
         this.correo = correo;
     }
 
-    public Empleado(Long idEmpleado, String carnet, String nombre, String apellido, LocalDate fecha_contrato, String puesto, int salario, LocalDate fecha_nacimiento, String estado_civil, char sexo, String direccion, String telefono, String correo, String foto, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
+    public Empleado(Long idEmpleado, String carnet, String nombre, String apellido, String apellido_materno, LocalDate fecha_contrato, String puesto, int salario, LocalDate fecha_nacimiento, String estado_civil, char sexo, String direccion, String telefono, String correo, String foto, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
         this.idEmpleado = idEmpleado;
         this.carnet = carnet;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.apellido_materno=apellido_materno;
         this.fecha_contratacion = fecha_contratacion;
         this.puesto = puesto;
         this.salario = salario;

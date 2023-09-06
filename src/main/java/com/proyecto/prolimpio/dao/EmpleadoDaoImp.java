@@ -65,6 +65,7 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
         vieja.setCarnet(empleado.getCarnet());
         vieja.setNombre(empleado.getNombre());
         vieja.setApellido(empleado.getApellido());
+        vieja.setApellido_materno(empleado.getApellido_materno());
         vieja.setFecha_contratacion(empleado.getFecha_contratacion());
         vieja.setPuesto(empleado.getPuesto());
         vieja.setSalario(empleado.getSalario());

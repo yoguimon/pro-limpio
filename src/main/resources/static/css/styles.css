@@ -48,5 +48,7 @@ label{
 #cuerpo{
     z-index: 1;
 }
-
+#lblpass{
+    display: none;
+}
 

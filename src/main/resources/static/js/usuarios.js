@@ -1,11 +1,4 @@
-//amilcar@gmail.com = 12344Aa@
-//juanluis@gmail.com = 123456Aa!
-// este caracter no da : #
-$(document).ready(function() {
-    //onready
-    //localStorage.removeItem('email');
-    //localStorage.removeItem('pass');
-});
+
 
 async function registrarUsuario(){
 

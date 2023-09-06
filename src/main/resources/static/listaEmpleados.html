@@ -27,8 +27,6 @@
   <script src="vendor/fontawesome-free/js/all.js"></script>
   <script src="vendor/fontawesome-free/js/all.min.js"></script>
 
-
-
 </head>
 
 <body id="page-top">
@@ -99,6 +97,7 @@
         </div>
       </div>
     </li>
+
 
     <!-- Nav Item - Pages Collapse Menu Servicios-->
     <li class="nav-item">
@@ -183,7 +182,6 @@
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
-
   </ul>
   <!-- End of Sidebar -->
 
@@ -195,7 +193,6 @@
 
       <!-- Topbar -->
       <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
           <div class="topbar-divider d-none d-sm-block"></div>
@@ -204,7 +201,7 @@
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas sdfs</span>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="txtEmailUser">Douglas McGee</span>
               <img class="img-profile rounded-circle"
                    src="img/undraw_profile.svg">
             </a>
@@ -220,7 +217,7 @@
                 Cambiar Contraseña
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="login.html">
+              <a class="dropdown-item" onclick="finalizarSession()">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cerrar Session
               </a>
@@ -231,6 +228,7 @@
 
       </nav>
       <!-- End of Topbar -->
+
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
@@ -283,17 +281,21 @@
                   </div>
                   <br>
                   <div class="form-group row">
-                    <div class="col-sm-4 mb-3 mb-sm-0">
+                    <div class="col-sm-3 mb-3 mb-sm-0">
                       <input type="text" class="form-control form-control-user" id="txtcarnet"
                              placeholder="Carnet">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                       <input type="text" class="form-control form-control-user" id="txtnombre"
                              placeholder="Nombres">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                       <input type="text" class="form-control form-control-user" id="txtapellido"
-                             placeholder="Apellidos">
+                             placeholder="Apellido Paterno">
+                    </div>
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control form-control-user" id="txtapellidoM"
+                             placeholder="Apellido Materno">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -384,44 +386,44 @@
 
 
 
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="listaEmpleados" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                  <th>Nro</th>
-                  <th>Carnet</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>Puesto</th>
-                  <th>telefono</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                  <th>Nro</th>
-                  <th>Carnet</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>Puesto</th>
-                  <th>telefono</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
-                </tr>
-                </tfoot>
-                <tbody>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="listaEmpleados" width="100%" cellspacing="0">
+              <thead>
+              <tr>
+                <th>Nro</th>
+                <th>Carnet</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Puesto</th>
+                <th>telefono</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+              </thead>
+              <tfoot>
+              <tr>
+                <th>Nro</th>
+                <th>Carnet</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Puesto</th>
+                <th>telefono</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              </tr>
+              </tfoot>
+              <tbody>
 
 
-                </tbody>
-              </table>
-            </div>
+              </tbody>
+            </table>
           </div>
         </div>
-
       </div>
-      <!-- /.container-fluid -->
+
+    </div>
+    <!-- /.container-fluid -->
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
@@ -429,15 +431,15 @@
         </div>
       </div>
     </footer>
-    </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-
-    <!-- End of Footer -->
-
   </div>
-  <!-- End of Content Wrapper -->
+  <!-- End of Main Content -->
+
+  <!-- Footer -->
+
+  <!-- End of Footer -->
+
+</div>
+<!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->
@@ -468,7 +470,7 @@
 <script src="js/demo/datatables-demo.js"></script>
 <script src="js/listaEmpleados.js"></script>
 
-
 </body>
 
 </html>
+

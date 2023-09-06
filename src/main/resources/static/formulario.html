@@ -192,7 +192,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="txtEmailUser">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -208,7 +208,7 @@
                                     Cambiar Contraseña
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="login.html">
+                                <a class="dropdown-item" onclick="finalizarSession()">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar Session
                                 </a>
@@ -264,20 +264,25 @@
                         </div>
                         <br>
                         <div class="form-inputs row">
-                            <div class="col-sm-4 mb-3 mb-sm-0">
+                            <div class="col-sm-3 mb-3 mb-sm-0">
                                     <input type="text" class="form-control form-control-user" id="txtcarnet"
                                        placeholder="Carnet" name="txtcarnet">
                                     <label id="lblErrorCarnet"></label>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                     <input type="text" class="form-control form-control-user" id="txtnombre"
                                        placeholder="Nombres">
                                 <label id="lblErrorNombres"></label>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <input type="text" class="form-control form-control-user" id="txtapellido"
-                                       placeholder="Apellidos">
+                                       placeholder="Apellido Paterno">
                                 <label id="lblErrorApellidos"></label>
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control form-control-user" id="txtapellidoM"
+                                       placeholder="Apellido Materno">
+                                <label id="lblErrorApellidoM"></label>
                             </div>
                         </div>
                         <div class="form-inputs row">
@@ -378,6 +383,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+    <!-- Logout Modal-->
 
 
     <!-- Bootstrap core JavaScript-->
@@ -389,8 +395,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/control.js"></script>
     <script src="js/registrar.js"></script>
     <script src="js/cargarImagen.js"></script>
+
 </body>
 
 </html>

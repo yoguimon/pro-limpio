@@ -19,19 +19,6 @@ public class EmpleadoController {
     @PostMapping("api/empleados")
     public void registrarEmpleado(@RequestBody Empleado empleado){
         empleadoDaoImp.crear(empleado);
-
-        /*Usuario usuario = new Usuario();
-        usuario.setEmpleado(empleado);
-        usuario.setEmail(empleado.getCorreo());
-        usuario.setPassword("prolimpio");
-
-        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2d);
-        String hash = argon2.hash(1,1024,1,usuario.getPassword());
-
-        usuario.setPassword(hash);
-        usuario.setRol(empleado.getPuesto());
-
-        usuarioDao.registrar(usuario);//aqui esta el error*/
     }
     @DeleteMapping("api/empleados/{id}")
     public void eliminar(@PathVariable Long id){

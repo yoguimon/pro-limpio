@@ -1,7 +1,5 @@
 // Call the dataTables jQuery plugin
-$(document).ready(function() {
-    //onready
-});
+
 function mostrarAlerta(){
         var popup = document.getElementById("popup");
         popup.style.display = "block";
@@ -17,8 +15,7 @@ async function agregarEmpleado(datos){
                   'Accept': 'application/json',
                   'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(datos)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
-                // y lo convierte en json
+                body: JSON.stringify(datos)
               });
               mostrarAlerta();
               window.location.href = 'listaEmpleados.html';
@@ -33,6 +30,7 @@ function validarEmpleado(){
     datos.carnet = document.getElementById('txtcarnet').value;
     datos.nombre = document.getElementById('txtnombre').value;
     datos.apellido = document.getElementById('txtapellido').value;
+    datos.apellido_materno=document.getElementById('txtapellidoM').value;
     datos.fecha_contratacion = fechaContratacion;
     datos.puesto = document.getElementById('cbxpuesto').value;
     datos.salario = document.getElementById('txtsalario').value;
@@ -47,6 +45,7 @@ function validarEmpleado(){
     const errorCarnet = document.getElementById('lblErrorCarnet');
     const errorNombres = document.getElementById('lblErrorNombres');
     const errorApellidos = document.getElementById('lblErrorApellidos');
+    const errorApellidoM = document.getElementById('lblErrorApellidoM');
     const errorFN = document.getElementById('lblErrorFN');
     const errorFC = document.getElementById('lblErrorFC');
     const errorSalario = document.getElementById('lblErrorSalario');
@@ -56,6 +55,18 @@ function validarEmpleado(){
     const errorSexo = document.getElementById('lblErrorSexo');
     const errorPuesto = document.getElementById('lblErrorPuesto');
     const errorEC = document.getElementById('lblErrorEC');
+
+    //coorreo
+         if(datos.correo===''){
+             errorCorreo.innerHTML="Ingrese correo";
+         }else if(!esValidoCorreo(datos.correo)){
+             errorCorreo.innerHTML="Correo en formato incorrecto";
+         }else{
+             errorCorreo.innerHTML="";
+         }
+         if(errorCorreo.innerHTML===""){
+             existeCorreo(datos.correo);
+         }
 
     if(datos.carnet===""){
         errorCarnet.innerHTML = "Ingrese su carnet";
@@ -92,6 +103,17 @@ function validarEmpleado(){
     }else{
         errorApellidos.innerHTML = "";
     }
+
+    if(datos.apellido_materno===""){
+        errorApellidoM.innerHTML = "";
+    }else if(datos.apellido_materno.length>20){
+        errorApellidoM.innerHTML = "El apellido es muy largo";
+    }else if(!soloLetras(datos.apellido_materno)){
+        errorApellidoM.innerHTML = "El apellido debe ser de solo letras";
+    }else{
+        errorApellidoM.innerHTML = "";
+    }
+
     //fecha contratacion
     errorFC.innerHTML = validarFC(contratacion);
     //puesto
@@ -151,20 +173,10 @@ function validarEmpleado(){
      } else {
          errorTelefono.innerHTML = "";
      }
-     //coorreo
-     if(datos.correo===''){
-         errorCorreo.innerHTML="Ingrese correo";
-     }else if(!esValidoCorreo(datos.correo)){
-         errorCorreo.innerHTML="Correo en formato incorrecto";
-     }else{
-         errorCorreo.innerHTML="";
-     }
-     if(errorCorreo.innerHTML===""){
-         existeCorreo(datos.correo);
-     }
 
 
-    if(errorCarnet.innerHTML==="" && errorNombres.innerHTML==="" && errorApellidos.innerHTML==="" && errorSalario.innerHTML===""
+
+    if(errorCarnet.innerHTML==="" && errorNombres.innerHTML==="" && errorApellidos.innerHTML==="" && errorApellidoM.innerHTML === "" && errorSalario.innerHTML===""
         && errorDireccion.innerHTML==="" && errorTelefono.innerHTML==="" && errorCorreo.innerHTML==="" && errorPuesto.innerHTML===""
         && errorEC.innerHTML==="" && errorFC.innerHTML==="" && errorFN.innerHTML==="") {
         agregarEmpleado(datos);

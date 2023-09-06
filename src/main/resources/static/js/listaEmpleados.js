@@ -1,10 +1,30 @@
 
 
 $(document).ready(function() {
-    cargarEmpleados();
+  verificarAutenticacion();
+  cargarEmpleados();
   $('#listaEmpleados').DataTable();
+  actualizarEmailUser();
 });
+function finalizarSession(){
+    localStorage.clear();
+    window.location.href = 'login.html';
+}
+function actualizarEmailUser(){
+    document.getElementById('txtEmailUser').outerHTML=localStorage.email;
+}
+function verificarAutenticacion() {
+    const jwtToken = localStorage.getItem('token');
 
+    if (!jwtToken) {
+        // No hay token JWT, el usuario no ha iniciado sesión
+        // Redirigir a la página de inicio de sesión o mostrar un mensaje de error
+        window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión
+    }
+}
+function actualizarEmailUser(){
+    document.getElementById('txtEmailUser').outerHTML=localStorage.email;
+}
 async function cargarEmpleados(){
     const request = await fetch('api/empleados', {
             method: 'GET',
@@ -26,10 +46,7 @@ async function cargarEmpleados(){
                 let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+empleado[2]+'</td><td>'+empleado[3]+'</td><td>'+empleado[4]+'</td><td>'+empleado[5]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                 listadoHtml+=empleadoHtml;
           }
-
-
           document.querySelector('#listaEmpleados tbody').outerHTML=listadoHtml;
-
 }
 
 async function mostrarEmpleado(id){
@@ -49,6 +66,7 @@ async function mostrarEmpleado(id){
         document.getElementById('txtcarnet').value=empleado.carnet;
         document.getElementById('txtnombre').value=empleado.nombre;
         document.getElementById('txtapellido').value=empleado.apellido;
+        document.getElementById('txtapellidoM').value=empleado.apellido_materno;
         document.getElementById('txtFechaContratacion').value=empleado.fecha_contratacion;
         document.getElementById('cbxpuesto').value=empleado.puesto;
         document.getElementById('txtsalario').value=empleado.salario;
@@ -83,6 +101,7 @@ async function editarEmpleado(id){
     empleadoEditado.carnet = document.getElementById('txtcarnet').value;
     empleadoEditado.nombre = document.getElementById('txtnombre').value;
     empleadoEditado.apellido = document.getElementById('txtapellido').value;
+    empleadoEditado.apellido_materno = document.getElementById('txtapellidoM').value;
     empleadoEditado.fecha_contratacion = fechaContratacion;
     empleadoEditado.puesto = document.getElementById('cbxpuesto').value;
     empleadoEditado.salario = document.getElementById('txtsalario').value;

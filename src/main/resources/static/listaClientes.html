@@ -202,7 +202,7 @@
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="txtEmailUser">Douglas McGee</span>
               <img class="img-profile rounded-circle"
                    src="img/undraw_profile.svg">
             </a>
@@ -218,7 +218,7 @@
                 Cambiar Contraseña
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="login.html">
+              <a class="dropdown-item" onclick="finalizarSession()">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cerrar Session
               </a>
@@ -427,7 +427,6 @@
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
 <script src="js/listaClientes.js"></script>
-
 
 </body>
 
