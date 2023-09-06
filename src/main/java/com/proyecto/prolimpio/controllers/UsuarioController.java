@@ -4,12 +4,15 @@ import com.proyecto.prolimpio.dao.UsuarioDaoImp;
 import com.proyecto.prolimpio.models.Empleado;
 import com.proyecto.prolimpio.models.Usuario;
 import com.proyecto.prolimpio.util.EmailUtil;
+import com.proyecto.prolimpio.util.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,11 +20,22 @@ public class UsuarioController {
     @Autowired
     private UsuarioDaoImp usuarioDaoImp;
     @Autowired
-    EmailUtil emailUtil;
+    private EmailUtil emailUtil;
+    @Autowired
+    private JWTUtil jwtUtil;
 
     @RequestMapping(value = "api/login", method = RequestMethod.POST)//revisar si el metodo es util
-    public String login(@RequestBody Usuario usuario){
-        return usuarioDaoImp.verificarUsuario(usuario);
+    public List<String> login(@RequestBody Usuario usuario){
+        List<String> res = new ArrayList<>();
+        Usuario usuarioLogeado= usuarioDaoImp.verificarUsuario(usuario);
+        if(usuarioLogeado!=null){
+            String tokenJwt = jwtUtil.create(usuarioLogeado.getIdUsuario().toString(),usuarioLogeado.getEmail());
+            res.add(tokenJwt);
+            String rol = usuarioLogeado.getRol();
+            res.add(rol);
+            return res;
+        }
+        return res;
     }
     @PostMapping("api/usuarios")
     public void registrarUsuario(@RequestBody Usuario usuario){
@@ -54,7 +68,7 @@ public class UsuarioController {
         }
     }
     @PostMapping("api/usuarios/verificarEmail")
-    public String exiteCorreo(@RequestBody Map<String, String> requestData) throws MessagingException {
+    public String existeCorreo(@RequestBody Map<String, String> requestData) throws MessagingException {
         String email=requestData.get("email");
         if(usuarioDaoImp.verificarSiExiste(email)){
             emailUtil.sendPasswordEmail(email);

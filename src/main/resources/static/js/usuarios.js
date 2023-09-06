@@ -57,12 +57,10 @@ async function iniciarSesion(email,pass){
             });
             const answer = await request.text();
             if(answer=='nuevo'){
-                localStorage.setItem('email', datos.email);
                 localStorage.setItem('pass', datos.pass);
                 window.location.href = 'cambiarContrasena.html';
 
             }else if(answer=='viejo'){
-                localStorage.setItem('email', datos.email);
                 localStorage.setItem('pass', datos.pass);
                 verificarYAsignarRol();
             }else{
@@ -106,17 +104,22 @@ async function verificarYAsignarRol(){
             },
             body: JSON.stringify(login)
           });
-        const respuesta = await request.text();
-        if(respuesta=='Fail'){
+        const respuesta = await request.json();
+        if(respuesta.length!=0){
+            localStorage.token = respuesta[0];
+            localStorage.email = login.email;
+            localStorage.rol = respuesta[1];
+            if(respuesta[1]=='Supervisor'){
+                window.location.href = 'index.html';
+            }else{
+                if(respuesta[1]=='Auxiliar Limpieza'){
+                    window.location.href = 'indexAuxiliar.html';
+                }else{
+                    mostrarAlerta();
+                }
+            }
+        }else{
             mostrarAlerta();
-        }
-        if(respuesta=='Supervisor'){
-              //guardar datos de session usuario,pass
-              window.location.href = 'index.html';//para el supervisor
-        }
-        if(respuesta=='Auxiliar Limpieza'){
-            //guardar datos de session usuario,pass
-            window.location.href = 'indexAuxiliar.html';
         }
 }
 

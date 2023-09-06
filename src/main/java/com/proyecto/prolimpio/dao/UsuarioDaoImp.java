@@ -24,7 +24,7 @@ public class UsuarioDaoImp implements CrudDao<Usuario>{
     @PersistenceContext //carga el objeto entitymanager
     EntityManager entityManager;
 
-    public String verificarUsuario(Usuario usuario) {
+    public Usuario verificarUsuario(Usuario usuario) {
         //si existe retorna el rol Supervisor,Auxiliar Limpieza
         //si no retorna Fail
         try{
@@ -36,8 +36,8 @@ public class UsuarioDaoImp implements CrudDao<Usuario>{
                 String passwordHashed = lista.get(0).getPass();
                 Argon2 argon2= Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
                 if(argon2.verify(passwordHashed,usuario.getPass())){
-
-                    Usuario aux = lista.get(0);
+                    return lista.get(0);
+                    /*Usuario aux = lista.get(0);
                     String rol = aux.getRol();
                     if(rol.equals("Supervisor")){
                         return "Supervisor";
@@ -47,14 +47,16 @@ public class UsuarioDaoImp implements CrudDao<Usuario>{
                         }else{
                             return "Fail";
                         }
-                    }
+                    }*/
                 }
             }
-            return "Fail";
+            //return "Fail";
+            return null;
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        return "Fail";
+        //return "Fail";
+        return null;
     }
 
     public boolean getEmp(Usuario usuario){//obtengo verdad si usuario es nuevo ya que la pass=carnet
