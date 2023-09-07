@@ -1,12 +1,15 @@
 // Call the dataTables jQuery plugin
 
-function mostrarAlerta(){
-        var popup = document.getElementById("popup");
-        popup.style.display = "block";
+function mostrarAlerta(redireccionURL) {
+    var popup = document.getElementById("popup");
+    popup.style.display = "block";
 
-        setTimeout(function() {
-            popup.style.display = "none";
-        }, 5000);
+    setTimeout(function() {
+        popup.style.display = "none";
+
+        // Redirige a la URL pasada como parámetro
+        window.location.href = redireccionURL;
+    }, 2000);
 }
 async function agregarEmpleado(datos){
         const request = await fetch('api/empleados', {
@@ -17,10 +20,14 @@ async function agregarEmpleado(datos){
                 },
                 body: JSON.stringify(datos)
               });
-              mostrarAlerta();
-              window.location.href = 'listaEmpleados.html';
+              mostrarAlerta('listaEmpleados.html');
 }
-function validarEmpleado(){
+async function validarEmpleado(){
+    const botonCargar = document.getElementById('botonCargar');
+
+    botonCargar.disabled = true;
+    botonCargar.textContent = 'Validando...';
+
     const contratacion = document.getElementById('txtFechaContratacion').value;
     const fechaContratacion = new Date(contratacion);
     const nacimiento=document.getElementById('txtFechaNacimiento').value;
@@ -55,18 +62,6 @@ function validarEmpleado(){
     const errorSexo = document.getElementById('lblErrorSexo');
     const errorPuesto = document.getElementById('lblErrorPuesto');
     const errorEC = document.getElementById('lblErrorEC');
-
-    //coorreo
-         if(datos.correo===''){
-             errorCorreo.innerHTML="Ingrese correo";
-         }else if(!esValidoCorreo(datos.correo)){
-             errorCorreo.innerHTML="Correo en formato incorrecto";
-         }else{
-             errorCorreo.innerHTML="";
-         }
-         if(errorCorreo.innerHTML===""){
-             existeCorreo(datos.correo);
-         }
 
     if(datos.carnet===""){
         errorCarnet.innerHTML = "Ingrese su carnet";
@@ -174,7 +169,19 @@ function validarEmpleado(){
          errorTelefono.innerHTML = "";
      }
 
-
+//coorreo
+       if(datos.correo===''){
+             errorCorreo.innerHTML="Ingrese correo";
+      }else if(!esValidoCorreo(datos.correo)){
+            errorCorreo.innerHTML="Correo en formato incorrecto";
+      }else{
+            errorCorreo.innerHTML="";
+      }
+      if(errorCorreo.innerHTML===""){
+            await existeCorreo(datos.correo);
+     }
+     botonCargar.disabled = false;
+     botonCargar.textContent = 'Agregar Empleado';
 
     if(errorCarnet.innerHTML==="" && errorNombres.innerHTML==="" && errorApellidos.innerHTML==="" && errorApellidoM.innerHTML === "" && errorSalario.innerHTML===""
         && errorDireccion.innerHTML==="" && errorTelefono.innerHTML==="" && errorCorreo.innerHTML==="" && errorPuesto.innerHTML===""

@@ -52,3 +52,15 @@ label{
     display: none;
 }
 
+
+.ocultar {
+    display: none;
+}
+
+/* Clase para mostrar un elemento */
+.mostrar {
+    display: block;
+}
+
+
+

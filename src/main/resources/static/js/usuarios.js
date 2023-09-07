@@ -204,6 +204,10 @@ function correoEsValido(){
     }
 }
 async function existeCorreo(email){
+    const botonEnviar = document.getElementById('enviarCorreo');
+    botonEnviar.disabled = true;
+    botonEnviar.textContent = 'Espere unos segundos...';
+
     const errorEmail = document.getElementById('lblErrorEmail');
     const requestData = { email: email };
     const request = await fetch('api/usuarios/verificarEmail', {
@@ -215,6 +219,8 @@ async function existeCorreo(email){
     body: JSON.stringify(requestData)
     });
     const answer = await request.text();
+    botonEnviar.disabled = false;
+    botonEnviar.textContent = 'Cambiar Contraseña';
     if(answer=='existe'){
         errorEmail.innerHTML="Revisa tu correo, te enviamos un link";
     }else if(answer=='fail'){
