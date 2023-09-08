@@ -1,9 +1,7 @@
 // Call the dataTables jQuery plugin
 
-function mostrarAlerta(redireccionURL) {
-    var popup = document.getElementById("popup");
+function mostrarAlerta(redireccionURL,popup) {
     popup.style.display = "block";
-
     setTimeout(function() {
         popup.style.display = "none";
 
@@ -12,6 +10,7 @@ function mostrarAlerta(redireccionURL) {
     }, 2000);
 }
 async function agregarEmpleado(datos){
+        var popup = document.getElementById("popupEmpleado");
         const request = await fetch('api/empleados', {
                 method: 'POST',
                 headers: {
@@ -20,7 +19,7 @@ async function agregarEmpleado(datos){
                 },
                 body: JSON.stringify(datos)
               });
-              mostrarAlerta('listaEmpleados.html');
+              mostrarAlerta('listaEmpleados.html',popup);
 }
 async function validarEmpleado(){
     const botonCargar = document.getElementById('botonCargar');
@@ -254,6 +253,7 @@ function validarFC(fecha){//validamos fecha contratacion
 
 
 async function agregarCliente(datos){
+    var popup = document.getElementById("popupCliente");
       const request = await fetch('api/clientes', {
         method: 'POST',
         headers: {
@@ -263,13 +263,12 @@ async function agregarCliente(datos){
         body: JSON.stringify(datos)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
         // y lo convierte en json
       });
-      alert("el cliente se creo de forma correcta");
-      window.location.href = 'listaClientes.html';
+      mostrarAlerta('listaClientes.html',popup);
 
 
 
 }
-function validarCliente(){
+function validacionCliente(){
     const registro = document.getElementById('txtfechaRegistro').value;
     const fechaRegistro = new Date(registro);
 
@@ -277,17 +276,19 @@ function validarCliente(){
     datos.nombre_empresa = document.getElementById('txtnombreEmpresa').value;
     datos.nombre = document.getElementById('txtnombre').value;
     datos.apellido = document.getElementById('txtapellido').value;
+    datos.apellido_materno = document.getElementById('txtapellidoM').value;
 
-    datos.direccion = document.getElementById('txtdireccion').value;
     datos.telefono = document.getElementById('txttelefono').value;
     datos.correo = document.getElementById('txtcorreo').value;
     datos.foto = "sin foto";
     datos.fecha_registro=fechaRegistro;
+    datos.direccion = document.getElementById('txtdireccion').value;
     datos.notas = document.getElementById('txtnotas').value;
 
     const errorNombreE = document.getElementById('lblErrorNombreE');
     const errorNombre = document.getElementById('lblErrorNombre');
     const errorApellidoP = document.getElementById('lblErrorApellidoP');
+    const errorApellidoM = document.getElementById('lblErrorApellidoM');
     const errorDireccion =  document.getElementById('lblErrorDireccion');
     const errorTelefono =  document.getElementById('lblErrorTelefono');
     const errorCorreo = document.getElementById('lblErrorCorreo');
@@ -296,13 +297,14 @@ function validarCliente(){
     errorNombreE.innerHTML = validarNombre(datos.nombre_empresa);
     errorNombre.innerHTML = validarNombre(datos.nombre);
     errorApellidoP.innerHTML = validarApellidoP(datos.apellido);
+    errorApellidoM.innerHTML = validarApellidoM(datos.apellido_materno);
     errorDireccion.innerHTML = validarDireccion(datos.direccion);
     errorTelefono.innerHTML = validarTelefono(datos.telefono);
     errorCorreo.innerHTML = validarCorreo(datos.correo);
     errorFR.innerHTML = validarFR(registro);
 
-    if(errorNombreE.innerHTML==="" && errorNombre.innerHTML==="" && errorApellidoP.innerHTML==="" && errorDireccion.innerHTML==="" &&
-        errorTelefono.innerHTML==="" && errorCorreo.innerHTML==="" && errorFR.innerHTML===""){
+    if(errorNombreE.innerHTML==="" && errorNombre.innerHTML==="" && errorApellidoP.innerHTML==="" && errorApellidoM.innerHTML==="" &&
+        errorDireccion.innerHTML==="" && errorTelefono.innerHTML==="" && errorCorreo.innerHTML==="" && errorFR.innerHTML===""){
          agregarCliente(datos);
     }
 }
@@ -328,6 +330,17 @@ function validarApellidoP(apellidoP){
         return "El apellido es muy largo";
     }else if(!soloLetras(apellidoP)){
        return "El apellido debe ser de solo letras";
+    }else{
+        return "";
+    }
+}
+function validarApellidoM(apellidoM){
+    if(apellidoM===""){
+        return "";
+    }else if(apellidoM.length>20){
+        return "El apellido es muy largo";
+    }else if(!soloLetras(apellidoM)){
+        return "El apellido debe ser de solo letras";
     }else{
         return "";
     }

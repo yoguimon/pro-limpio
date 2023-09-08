@@ -222,7 +222,11 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
+                <div id="popupCliente" class="popup">
+                    <img src="img/bien.jpg">
+                    <h2>Cliente Creado!</h2>
+                    <p>se creo correctamente el cliente</p>
+                </div>
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Agregar Cliente</h1>
@@ -272,15 +276,15 @@
                         </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control form-control-user" id="txtapellido"
-                                   placeholder="Apellidos">
+                                   placeholder="Apellido Paterno">
                             <label id="lblErrorApellidoP"></label>
                         </div>
                     </div>
                     <div class="form-inputs row">
                         <div class="col-sm-4 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="txtdireccion"
-                                   placeholder="Direccion">
-                            <label id="lblErrorDireccion"></label>
+                            <input type="text" class="form-control form-control-user" id="txtapellidoM"
+                                   placeholder="Apellido Materno">
+                            <label id="lblErrorApellidoM"></label>
                         </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control form-control-user" id="txttelefono"
@@ -298,16 +302,20 @@
                             <input type="text" id="txtfechaRegistro" class="form-control form-control-user"
                                    placeholder="Fecha Registro" onfocus="(this.type='date')" onfocusout="(this.type='text')">
                             <label id="lblErrorFR"></label>
-
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control form-control-user" id="txtdireccion"
+                                   placeholder="Direccion">
+                            <label id="lblErrorDireccion"></label>
+                        </div>
+                        <div class="col-sm-4">
                             <input type="text" class="form-control form-control-user"
                                    id="txtnotas" placeholder="datos importantes">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <a class="btn btn-primary btn-user btn-block" onclick="validarCliente()">
+                            <a class="btn btn-primary btn-user btn-block" onclick="validacionCliente()">
                                 Agregar Cliente
                             </a>
                         </div>

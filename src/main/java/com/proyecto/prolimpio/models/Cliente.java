@@ -22,8 +22,8 @@ public class Cliente {
     private String nombre;
     @Column(name="apellido")
     private String apellido;
-    @Column(name="direccion")
-    private String direccion;
+    @Column(name="apellido_materno")
+    private String apellido_materno;
     @Column(name="telefono")
     private String telefono;
     @Column(name="correo")
@@ -32,6 +32,8 @@ public class Cliente {
     private String foto;
     @Column(name="fecha_registro")
     private LocalDate fecha_registro;
+    @Column(name="direccion")
+    private String direccion;
     @Column(name="notas")//mensaje
     private String notas;
     @CreationTimestamp

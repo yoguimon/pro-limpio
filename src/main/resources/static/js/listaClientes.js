@@ -65,11 +65,12 @@ async function mostrarCliente(id){
         document.getElementById('txtnombreEmpresa').value=cliente.nombre_empresa;
         document.getElementById('txtnombre').value=cliente.nombre;
         document.getElementById('txtapellido').value=cliente.apellido;
-        document.getElementById('txtdireccion').value=cliente.direccion;
+        document.getElementById('txtapellidoM').value=cliente.apellido_materno;
         document.getElementById('txttelefono').value=cliente.telefono;
         document.getElementById('txtcorreo').value=cliente.correo;
         //datos.foto = "sin foto";
         document.getElementById('txtfechaRegistro').value=cliente.fecha_registro;
+        document.getElementById('txtdireccion').value=cliente.direccion;
         document.getElementById('txtnotas').value=cliente.notas;
 
         document.getElementById('btnSaveChanges').innerHTML = '';
@@ -92,11 +93,12 @@ async function editarCliente(id){
     clienteEditado.nombre_empresa = document.getElementById('txtnombreEmpresa').value;
     clienteEditado.nombre = document.getElementById('txtnombre').value;
     clienteEditado.apellido = document.getElementById('txtapellido').value;
-    clienteEditado.direccion = document.getElementById('txtdireccion').value;
+    clienteEditado.apellido_materno = document.getElementById('txtapellidoM').value;
     clienteEditado.telefono = document.getElementById('txttelefono').value;
     clienteEditado.correo = document.getElementById('txtcorreo').value;
     clienteEditado.foto = "sin foto";
     clienteEditado.fecha_registro=fechaRegistro;
+    clienteEditado.direccion = document.getElementById('txtdireccion').value;
     clienteEditado.notas = document.getElementById('txtnotas').value;
 
     const request = await fetch('api/clientes',{
