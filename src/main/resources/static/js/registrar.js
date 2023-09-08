@@ -253,7 +253,23 @@ function validarFC(fecha){//validamos fecha contratacion
 }
 
 
-async function agregarCliente(){
+async function agregarCliente(datos){
+      const request = await fetch('api/clientes', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
+        // y lo convierte en json
+      });
+      alert("el cliente se creo de forma correcta");
+      window.location.href = 'listaClientes.html';
+
+
+
+}
+function validarCliente(){
     const registro = document.getElementById('txtfechaRegistro').value;
     const fechaRegistro = new Date(registro);
 
@@ -269,19 +285,111 @@ async function agregarCliente(){
     datos.fecha_registro=fechaRegistro;
     datos.notas = document.getElementById('txtnotas').value;
 
+    const errorNombreE = document.getElementById('lblErrorNombreE');
+    const errorNombre = document.getElementById('lblErrorNombre');
+    const errorApellidoP = document.getElementById('lblErrorApellidoP');
+    const errorDireccion =  document.getElementById('lblErrorDireccion');
+    const errorTelefono =  document.getElementById('lblErrorTelefono');
+    const errorCorreo = document.getElementById('lblErrorCorreo');
+    const errorFR = document.getElementById('lblErrorFR');
 
-      const request = await fetch('api/clientes', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(datos)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
-        // y lo convierte en json
-      });
-      alert("el cliente se creo de forma correcta");
-      window.location.href = 'listaClientes.html';
+    errorNombreE.innerHTML = validarNombre(datos.nombre_empresa);
+    errorNombre.innerHTML = validarNombre(datos.nombre);
+    errorApellidoP.innerHTML = validarApellidoP(datos.apellido);
+    errorDireccion.innerHTML = validarDireccion(datos.direccion);
+    errorTelefono.innerHTML = validarTelefono(datos.telefono);
+    errorCorreo.innerHTML = validarCorreo(datos.correo);
+    errorFR.innerHTML = validarFR(registro);
 
-
-
+    if(errorNombreE.innerHTML==="" && errorNombre.innerHTML==="" && errorApellidoP.innerHTML==="" && errorDireccion.innerHTML==="" &&
+        errorTelefono.innerHTML==="" && errorCorreo.innerHTML==="" && errorFR.innerHTML===""){
+         agregarCliente(datos);
+    }
+}
+function validarNombre(nombre){
+    if(nombre===""){
+            return "Ingrese el nombre";
+        }else if(nombre.length<3){
+            return "El nombre no debe ser tan corto";
+        }else if(nombre.length>30){
+            return "El nombre es muy largo";
+        }else if(!soloLetras(nombre)){
+            return "El nombres debe ser de solo letras";
+        }else{
+            return "";
+        }
+}
+function validarApellidoP(apellidoP){
+    if(apellidoP===""){
+        return "Ingrese el apellido";
+    }else if(apellidoP.length<3){
+        return "El apellido no debe ser tan corto";
+    }else if(apellidoP.length>20){
+        return "El apellido es muy largo";
+    }else if(!soloLetras(apellidoP)){
+       return "El apellido debe ser de solo letras";
+    }else{
+        return "";
+    }
+}
+function validarDireccion(direccion){
+    if(direccion===""){
+         return "Ingreso su direccion"
+     }else if(direccion.length>99){
+         return "Es muy larga la direccion";
+     }else if(direccion.length<5){
+        return "La direccion al menos debe tener 5 letras";
+     }else{
+        return "";
+     }
+}
+function validarTelefono(telefono){
+    if (telefono === "") {
+         return "Ingrese su telefono";
+     } else if (!esNro(telefono)) {
+         return "El telefono deben ser números";
+     } else if (telefono.length < 7) {
+         return "El telefono debe ser mayor a 6 dígitos";
+     } else if (telefono.length > 8) {
+         return "El telefono no debe superar los 8 dígitos";
+     } else if (telefono[0] !== "6" && telefono[0] !== "7" && telefono[0] !== "4") {
+         return "El telefono debe comenzar con 6, 7 o 4";
+     } else {
+         return "";
+     }
+}
+function validarCorreo(correo){
+    let res="";
+    if(correo===''){
+       res = "Ingrese correo";
+    }else if(!esValidoCorreo(correo)){
+       res = "Correo en formato incorrecto";
+    }else{
+       res = "";
+    }
+    //aqui toda ver si existe correo en bd
+    return res;
+}
+function validarFR(fecha){//fecha de registro
+    const fechaC = new Date(fecha);
+    var anoActual=parseInt(new Date().getFullYear(),10);
+    var anoFecha = parseInt(fechaC.getFullYear(),10);
+    var mesActual = new Date().getMonth() + 1;
+    var mesFecha = fechaC.getMonth() + 1;
+    var diaActual = new Date().getDate();
+    var diaFecha = fechaC.getDate();
+    if (fecha==="") {
+        return "La fecha de contratacion no puede estar vacía.";
+    }else if(anoFecha>anoActual){
+        return "La fecha debe ser menor o igual a la fecha actual";
+    }else if(anoFecha===anoActual){
+            if(mesFecha>mesActual){
+                return "La fecha debe ser menor o igual a la fecha actual";
+            }else if(mesFecha===mesActual){
+                if(diaFecha>diaActual){
+                    return "La fecha debe ser menor o igual a la fecha actual";
+                }
+            }
+    }
+    return "";
 }

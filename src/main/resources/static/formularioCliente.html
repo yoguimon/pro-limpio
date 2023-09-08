@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>PRO LIMPIO</title>
-
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -259,38 +259,45 @@
                         </div>
                     </div>
                     <br>
-                    <div class="form-group row">
+                    <div class="form-inputs row">
                         <div class="col-sm-4 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user" id="txtnombreEmpresa"
                                    placeholder="Nombre Empresa">
+                            <label id="lblErrorNombreE"></label>
                         </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control form-control-user" id="txtnombre"
                                    placeholder="Nombre Cliente">
+                            <label id="lblErrorNombre"></label>
                         </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control form-control-user" id="txtapellido"
                                    placeholder="Apellidos">
+                            <label id="lblErrorApellidoP"></label>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-inputs row">
                         <div class="col-sm-4 mb-3 mb-sm-0">
                             <input type="text" class="form-control form-control-user" id="txtdireccion"
                                    placeholder="Direccion">
+                            <label id="lblErrorDireccion"></label>
                         </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control form-control-user" id="txttelefono"
                                    placeholder="telefono">
+                            <label id="lblErrorTelefono"></label>
                         </div>
                         <div class="col-sm-4">
                             <input type="text" class="form-control form-control-user" id="txtcorreo"
                                    placeholder="Correo">
+                            <label id="lblErrorCorreo"></label>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-inputs row">
                         <div class="col-sm-4 mb-3 mb-sm-0">
                             <input type="text" id="txtfechaRegistro" class="form-control form-control-user"
                                    placeholder="Fecha Registro" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+                            <label id="lblErrorFR"></label>
 
                         </div>
                         <div class="col-sm-8">
@@ -300,7 +307,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <a class="btn btn-primary btn-user btn-block" onclick="agregarCliente()">
+                            <a class="btn btn-primary btn-user btn-block" onclick="validarCliente()">
                                 Agregar Cliente
                             </a>
                         </div>
