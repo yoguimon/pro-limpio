@@ -22,9 +22,7 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
     public List<Empleado> getTodos() {
         String query = "SELECT idEmpleado,carnet,nombre,apellido,puesto,telefono\n" +
                         "FROM empleado";
-        //String query = "FROM Empleado";
         List<Empleado> resultado = entityManager.createNativeQuery(query).getResultList();
-        //List<Empleado> resultado = entityManager.createQuery(query).getResultList();
         return resultado;
     }
 

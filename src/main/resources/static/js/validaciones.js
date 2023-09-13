@@ -9,15 +9,15 @@ function mostrarAlerta(redireccionURL,popup) {
 }
 function validarNombre(nombre){
     if(nombre===""){
-            return "Ingrese el nombre";
+            return "Ingrese el nombre boludo ya era hora che!!!";
         }else if(nombre.length<3){
             return "El nombre no debe ser tan corto";
-        }else if(nombre.length>30){
+        }else if(nombre.length>60){
             return "El nombre es muy largo";
         }else if(!soloLetras(nombre)){
             return "El nombres debe ser de solo letras";
         }else{
-            return "esta bueno";
+            return "";
         }
 }
 function validarApellidoP(apellidoP){

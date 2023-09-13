@@ -10,24 +10,15 @@
   <meta name="author" content="">
 
   <title>PRO LIMPIO</title>
-
-  <!-- Custom fonts for this template -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
-
   <link
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
-
-  <!-- Custom styles for this template -->
+  <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-  <script src="vendor/fontawesome-free/js/all.js"></script>
-  <script src="vendor/fontawesome-free/js/all.min.js"></script>
 
 </head>
 
@@ -44,7 +35,7 @@
       <div class="sidebar-brand-icon rotate-n-15">
         <img src="img/logo.png" alt="" width="40">
       </div>
-      <div class="sidebar-brand-text mx-3">Pro Limpio</div>
+      <div class="sidebar-brand-text mx-3">PRO LIMPIO</div>
     </a>
 
     <!-- Divider -->
@@ -65,10 +56,10 @@
       Interface
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu EMPLEADOS-->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-         aria-expanded="true" aria-controls="collapseTwo">
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item active">
+      <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+         aria-controls="collapseTwo">
         <i class="fa fa-user fa-fw"></i>
         <span>Empleados</span>
       </a>
@@ -110,14 +101,13 @@
       <div id="collapseServicios" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo servicios:</h6>
-          <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
-          <a class="collapse-item active" href="listaClientes.html">Lista Clientes</a>
+          <a class="collapse-item active" href="listaServicios.html">Lista de Servicios</a>
+          <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
           <a class="collapse-item" href="listaLugares.html">Lista Lugares</a>
           <a class="collapse-item" href="historialServicios.html">Historial de Servicios</a>
         </div>
       </div>
     </li>
-
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -174,7 +164,7 @@
     </li>
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item active">
+    <li class="nav-item">
       <a class="nav-link" href="tables.html">
         <i class="fas fa-fw fa-table"></i>
         <span>Tables</span></a>
@@ -194,10 +184,10 @@
 
       <!-- Topbar -->
       <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
           <div class="topbar-divider d-none d-sm-block"></div>
-
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -232,168 +222,90 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
-
+        <div id="popupServicio" class="popup">
+          <img src="img/bien.jpg">
+          <h2>Servicio Creado!</h2>
+          <p>se creo correctamente el servicio</p>
+        </div>
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Lista Clientes</h1>
-        <p class="mb-4">info soble los Clientes</p>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Agregar Servicio</h1>
+        </div>
 
+        <form class="user">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
 
-        <!--MODAL-->
-        <div class="modal fade" id="formEdicion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Datos</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form class="user">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="card" style="width: 15rem;">
-                            <img src="img/logo.png" class="card-img-top" alt="..." width="15" height="120">
-                            <div class="card-body">
-                              <a href="#" class="btn btn-primary">Subir Foto</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="form-group row">
-                    <div class="col-sm-4 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="txtnombreEmpresa"
-                             placeholder="Nombre Empresa">
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user" id="txtnombre"
-                             placeholder="Nombre">
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user" id="txtapellido"
-                             placeholder="Apellido Paterno">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-sm-4 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="txtapellidoM"
-                             placeholder="Apellido Materno">
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user" id="txttelefono"
-                             placeholder="telefono">
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user" id="txtcorreo"
-                             placeholder="Correo">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-sm-4 mb-3 mb-sm-0">
-                      <input type="text" id="txtfechaRegistro" class="form-control form-control-user"
-                             placeholder="Fecha Registro" onfocus="(this.type='date')" onfocusout="(this.type='text')">
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user" id="txtdireccion"
-                             placeholder="Direccion">
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user"
-                             id="txtnotas" placeholder="datos importantes">
-                    </div>
-                  </div>
-
-
-                </form>
-                <div class="d-flex justify-content-between mt-3" id="botones">
-                  <button id="btnSaveChanges" type="button" class="btn btn-primary flex-grow-1 me-2">Modificar</button>
-                  <button id="btnCancel" type="button" class="btn btn-warning flex-grow-1" data-dismiss="modal">Cancelar</button>
                 </div>
               </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card" style="width: 15rem;">
+                    <div class="card-body">
+                      <img src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-character-default-avatar-image_2237203.jpg" class="card-img-top" alt="..." width="15" height="120" id="img">
+                      <input type="file" id="foto" class="form-control-file" style="display: none;"/>
+                      <label for="foto" class="btn btn-primary btn-block">Subir Foto</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
 
-
-
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-          <form action="formularioCliente.html">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">
-                <button type="submit" class="btn btn-primary">Agregar Cliente</button>
-              </h6>
+          <br>
+          <div class="form-inputs row">
+            <div class="col-sm-4 mb-3 mb-sm-0">
+              <input type="text" class="form-control form-control-user" id="txtnombreServicio"
+                     placeholder="Nombre Servicio">
+              <label id="lblErrorNombreS"></label>
             </div>
-          </form>
-        </div>
-
-
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="listaClientes" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                  <th>Nro</th>
-                  <th>Nombre Empresa</th>
-                  <th>Nombres</th>
-                  <th>Direccion</th>
-                  <th>Telefono</th>
-                  <th>Correo</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                  <th>Nro</th>
-                  <th>Nombre Empresa</th>
-                  <th>Nombre</th>
-                  <th>Direccion</th>
-                  <th>Telefono</th>
-                  <th>Correo</th>
-                  <th>Editar</th>
-                  <th>Eliminar</th>
-                </tr>
-                </tfoot>
-                <tbody>
-
-
-                </tbody>
-              </table>
+            <div class="col-sm-4">
+              <input type="text" class="form-control form-control-user" id="txtdescripcion"
+                     placeholder="Descripcion">
+              <label id="lblErrorDescripcion"></label>
+            </div>
+            <div class="col-sm-4">
+              <select class="form-control" id="cbxcategoria" name="categoria">
+                <option value="Pisos" selected>Pisos</option>
+                <option value="Ventanas">Ventanas</option>
+              </select>
             </div>
           </div>
-      </div>
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <a class="btn btn-primary btn-user btn-block" onclick="validacionServicio()">
+                Agregar Servicio
+              </a>
+            </div>
+            <div class="col-sm-6">
+              <a class="btn btn-warning btn-user btn-block" href="listaServicios.html">Cancelar</a><!--revisar esto-->
+            </div>
+          </div>
+          <hr>
+
+        </form>
 
       </div>
       <!-- /.container-fluid -->
 
-
+    </div>
+    <!-- End of Main Content -->
 
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Jhonny 2023</span>
+          <span>Copyright &copy; Your Website 2020</span>
         </div>
       </div>
     </footer>
@@ -410,27 +322,20 @@
   <i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Logout Modal-->
-
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
 <!-- Core plugin JavaScript-->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
-<script src="js/listaClientes.js"></script>
-
+<script src="js/control.js"></script>
+<script src="js/validaciones.js"></script>
+<script src="js/registrarServicio.js"></script>
+<script src="js/cargarImagen.js"></script>
 </body>
 
 </html>
