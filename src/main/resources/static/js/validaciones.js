@@ -9,7 +9,7 @@ function mostrarAlerta(redireccionURL,popup) {
 }
 function validarNombre(nombre){
     if(nombre===""){
-            return "Ingrese el nombre boludo ya era hora che!!!";
+            return "Ingrese el nombre";
         }else if(nombre.length<3){
             return "El nombre no debe ser tan corto";
         }else if(nombre.length>60){
