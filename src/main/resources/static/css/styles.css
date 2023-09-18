@@ -61,6 +61,8 @@ label{
 .mostrar {
     display: block;
 }
-
+#map-container {
+    height: 500%;
+  }
 
 
