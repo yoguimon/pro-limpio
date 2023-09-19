@@ -3,7 +3,9 @@ package com.proyecto.prolimpio.controllers;
 import com.proyecto.prolimpio.dao.ClienteDaoImp;
 import com.proyecto.prolimpio.dao.CrudDao;
 import com.proyecto.prolimpio.models.Cliente;
+import com.proyecto.prolimpio.models.ClienteYLugarRequest;
 import com.proyecto.prolimpio.models.Empleado;
+import com.proyecto.prolimpio.models.Lugar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +21,10 @@ public class ClienteController {
         return clienteDaoImp.getTodos();
     }
     @PostMapping("api/clientes")
-    public void registrarCliente(@RequestBody Cliente cliente){
-        clienteDaoImp.crear(cliente);
+    public void registrarCliente(@RequestBody ClienteYLugarRequest request){
+        Cliente cliente = request.getCliente();
+        Lugar lugar = request.getLugar();
+        clienteDaoImp.crearCliente(request);
     }
     @DeleteMapping("api/clientes/{id}")
     public void eliminarCliente(@PathVariable Long id){

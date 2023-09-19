@@ -15,14 +15,13 @@ public class Lugar {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="idLugar")
     private Long idLugar;
-    @Column(name="direccion")
-    private String direccion;
-    @Column(name="nombre")
-    private String nombre;
-    @Column(name="tipo")
-    private String tipo;//oficina,edificio,casa,etc
-    @Column(name="qr")
-    private String qr;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Un usuario se asocia con un empleado
+    @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
+    private Cliente cliente;
+    @Column(name="latitud")
+    private String latitud;
+    @Column(name="longitud")
+    private String longitud;
     @CreationTimestamp
     @Column(name="fecha_creacion")
     private LocalDateTime fecha_creacion;
@@ -32,21 +31,23 @@ public class Lugar {
     public Lugar() {
     }
 
-    public Lugar(Long idLugar, String direccion, String nombre, String tipo, String qr, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
+    public Lugar(Long idLugar, Cliente cliente, String latitud, String longitud, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
         this.idLugar = idLugar;
-        this.direccion = direccion;
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.qr = qr;
+        this.cliente = cliente;
+        this.longitud = longitud;
+        this.latitud = latitud;
         this.fecha_creacion = fecha_creacion;
         this.fecha_actualizacion = fecha_actualizacion;
     }
 
-    public Lugar(Long idLugar, String direccion, String nombre, String tipo, String qr) {
+    public Lugar(Long idLugar, String latitud, String longitud) {
         this.idLugar = idLugar;
-        this.direccion = direccion;
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.qr = qr;
+        this.longitud = longitud;
+        this.latitud = latitud;
+    }
+
+    public Lugar(String latitud, String longitud) {
+        this.longitud = longitud;
+        this.latitud = latitud;
     }
 }

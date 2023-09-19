@@ -1,9 +1,12 @@
 package com.proyecto.prolimpio.dao;
 
 import com.proyecto.prolimpio.models.Cliente;
+import com.proyecto.prolimpio.models.ClienteYLugarRequest;
 import com.proyecto.prolimpio.models.Empleado;
+import com.proyecto.prolimpio.models.Lugar;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +19,7 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
     @Override
     @Transactional
     public List<Cliente> getTodos() {
-        String query = "SELECT idCliente,nombre_empresa,nombre,direccion,telefono,correo\n" +
+        String query = "SELECT idCliente,nombre,telefono,correo\n" +
                 "FROM cliente";
         List<Cliente> resultado = entityManager.createNativeQuery(query).getResultList();
         return resultado;
@@ -31,6 +34,20 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
     @Override
     public void crear(Cliente cliente) {
         entityManager.merge(cliente);
+    }
+    public void crearCliente(ClienteYLugarRequest request){
+        Cliente cliente = request.getCliente();
+        Lugar lugar = request.getLugar();
+        entityManager.persist(cliente);
+        String query = "INSERT INTO lugar(idCliente,latitud,longitud)\n" +
+                "\tVALUES(:idCliente,:latitud,:longitud);";
+        Query insertQuery = entityManager.createNativeQuery(query)
+                .setParameter("idCliente",cliente.getIdCliente())
+                .setParameter("latitud",lugar.getLatitud())
+                .setParameter("longitud",lugar.getLongitud());
+
+        insertQuery.executeUpdate();
+
     }
 
     @Override
