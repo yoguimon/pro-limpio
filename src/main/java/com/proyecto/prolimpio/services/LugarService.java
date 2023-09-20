@@ -25,7 +25,7 @@ public class LugarService implements  CrudService<Lugar>{
 
     @Override
     public void crear(Lugar lugar) {
-        lugarDaoImp.crear(lugar);
+        lugarDaoImp.crearLugar(lugar);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.proyecto.prolimpio.models.Lugar;
 import com.proyecto.prolimpio.models.Servicio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +32,22 @@ public class LugarDaoImp implements CrudDao<Lugar>{
 
     @Override
     public void crear(Lugar lugar) {
-        entityManager.merge(lugar);
+        entityManager.persist(lugar);
+    }
+
+    public void crearLugar(Lugar lugar) {
+        String query = "INSERT INTO lugar (idCliente, nombre, direccion, notas, latitud, longitud) " +
+                "VALUES (:idCliente, :nombre, :direccion, :notas, :latitud, :longitud)";
+
+        Query insertQuery = entityManager.createNativeQuery(query)
+                .setParameter("idCliente", lugar.getCliente().getIdCliente())
+                .setParameter("nombre", lugar.getNombre())
+                .setParameter("direccion", lugar.getDireccion())
+                .setParameter("notas", lugar.getNotas())
+                .setParameter("latitud", lugar.getLatitud())
+                .setParameter("longitud", lugar.getLongitud());
+
+        insertQuery.executeUpdate();
     }
 
     @Override

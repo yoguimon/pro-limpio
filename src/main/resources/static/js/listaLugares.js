@@ -27,6 +27,11 @@ function obtenerIdDeUrl() {
      return id;
 }
 
+function enviarIdAFormulario(){
+    var id = obtenerIdDeUrl();
+    window.location.href = `formularioLugar.html?id=${id}`;
+}
+
 async function mostrarLugaresXCliente(id){
     const request = await fetch('api/lugares/'+id, {
                 method: 'GET',

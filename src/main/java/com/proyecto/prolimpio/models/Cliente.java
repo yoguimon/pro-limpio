@@ -44,6 +44,10 @@ public class Cliente {
 
     public Cliente(){}
 
+    public Cliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+
     public Cliente(Long idCliente, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro) {
         this.idCliente = idCliente;
         this.nombre = nombre;

@@ -19,7 +19,9 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+  <!--maptiler-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 
 <body id="page-top">
@@ -91,6 +93,21 @@
       </div>
     </li>
 
+    <!-- Nav Item - Pages Collapse Menu Clientes-->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClientes"
+         aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-solid fa-toolbox"></i>
+        <span>Clientes</span>
+      </a>
+      <div id="collapseClientes" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Modulo Clientes:</h6>
+          <a class="collapse-item active" href="listaClientes.html">Lista Clientes</a>
+        </div>
+      </div>
+    </li>
+
     <!-- Nav Item - Pages Collapse Menu Servicios-->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
@@ -98,13 +115,10 @@
         <i class="fa fa-solid fa-toolbox"></i>
         <span>Servicios</span>
       </a>
-      <div id="collapseServicios" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseServicios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo servicios:</h6>
           <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
-          <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
-          <a class="collapse-item active" href="listaLugares.html">Lista Lugares</a>
-          <a class="collapse-item" href="historialServicios.html">Historial de Servicios</a>
         </div>
       </div>
     </li>
@@ -265,30 +279,38 @@
           <br>
           <div class="form-inputs row">
             <div class="col-sm-4 mb-3 mb-sm-0">
-              <input type="text" class="form-control form-control-user" id="txtdireccion"
-                     placeholder="Direccion Lugar">
-              <label id="lblErrorDireccion"></label>
-            </div>
-            <div class="col-sm-4">
               <input type="text" class="form-control form-control-user" id="txtnombre"
                      placeholder="Nombre">
               <label id="lblErrorNombre"></label>
             </div>
             <div class="col-sm-4">
-              <select class="form-control" id="cbxtipo" name="tipo">
-                <option value="Oficinas" selected>Oficinas</option>
-                <option value="Hospitales">Hospitales</option>
-              </select>
+              <input type="text" class="form-control form-control-user" id="txtdireccion"
+                     placeholder="Direccion">
+              <label id="lblErrorDireccion"></label>
+            </div>
+            <div class="col-sm-4">
+              <input type="text" class="form-control form-control-user" id="txtnotas"
+                     placeholder="Notas Importantes">
+              <label id="lblErrorNotas"></label>
             </div>
           </div>
-          <div class="form-group row">
-            <div class="col-sm-6 mb-3 mb-sm-0">
-              <a class="btn btn-primary btn-user btn-block" onclick="validacionLugar()">
-                Agregar Lugar
-              </a>
-            </div>
-            <div class="col-sm-6">
-              <a class="btn btn-warning btn-user btn-block" href="listaLugares.html">Cancelar</a><!--revisar esto-->
+
+          <div class="row">
+            <div class="col-md-12">
+              <h3>Ingrese su Ubicacion:</h3>
+              <div id="map-container"></div>
+              <label id="lblErrorMapa"></label>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <a class="btn btn-primary btn-user btn-block" onclick="validacionLugar()">
+                    Agregar Lugar
+                  </a>
+                </div>
+                <div class="col-sm-6">
+                  <a class="btn btn-warning btn-user btn-block" onclick="enviarIdAListaLugares()">Cancelar</a><!--revisar esto-->
+                </div>
+              </div>
+              <br>
             </div>
           </div>
           <hr>
@@ -333,6 +355,7 @@
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
 <script src="js/control.js"></script>
+<script src="js/mapa.js"></script>
 <script src="js/validaciones.js"></script>
 <script src="js/registrarLugar.js"></script>
 <script src="js/cargarImagen.js"></script>
