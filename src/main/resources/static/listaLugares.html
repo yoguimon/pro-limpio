@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>PRO LIMPIO</title>
-
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
@@ -28,6 +28,10 @@
 
   <script src="vendor/fontawesome-free/js/all.js"></script>
   <script src="vendor/fontawesome-free/js/all.min.js"></script>
+  <!--maptiler-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
 
 </head>
 
@@ -99,7 +103,20 @@
         </div>
       </div>
     </li>
-
+    <!-- Nav Item - Pages Collapse Menu Clientes-->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClientes"
+         aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-solid fa-toolbox"></i>
+        <span>Clientes</span>
+      </a>
+      <div id="collapseClientes" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Modulo Clientes:</h6>
+          <a class="collapse-item active" href="listaClientes.html">Lista Clientes</a>
+        </div>
+      </div>
+    </li>
     <!-- Nav Item - Pages Collapse Menu Servicios-->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
@@ -107,13 +124,10 @@
         <i class="fa fa-solid fa-toolbox"></i>
         <span>Servicios</span>
       </a>
-      <div id="collapseServicios" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseServicios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo servicios:</h6>
           <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
-          <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
-          <a class="collapse-item active" href="listaLugares.html">Lista Lugares</a>
-          <a class="collapse-item" href="historialServicios.html">Historial de Servicios</a>
         </div>
       </div>
     </li>
@@ -239,77 +253,7 @@
 
 
         <!--MODAL-->
-        <div class="modal fade" id="formEdicion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Datos</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form class="user">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
 
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="card" style="width: 15rem;">
-                            <img src="img/logo.png" class="card-img-top" alt="..." width="15" height="120">
-                            <div class="card-body">
-                              <a href="#" class="btn btn-primary">Subir Foto</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="form-group row">
-                    <div class="col-sm-12 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="txtdireccion"
-                             placeholder="Direccion">
-                    </div>
-                    <br><br><br>
-                    <div class="col-sm-12 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="txtnombre"
-                             placeholder="nombre">
-                    </div>
-                    <br><br><br>
-                    <div class="col-sm-12 mb-3 mb-sm-0">
-                      <select class="form-control" id="cbxtipo" name="tipo">
-                        <option value="Oficinas">Oficinas</option>
-                        <option value="Hospitales">Hospitales</option>
-                      </select>
-                    </div>
-                  </div>
-
-                </form>
-                <div class="d-flex justify-content-between mt-3" id="botones">
-                  <button id="btnSaveChanges" type="button" class="btn btn-primary flex-grow-1 me-2">Modificar</button>
-                  <button id="btnCancel" type="button" class="btn btn-warning flex-grow-1" data-dismiss="modal">Cancelar</button>
-                </div>
-              </div>
-
-
-
-            </div>
-          </div>
-        </div>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -329,9 +273,9 @@
               <thead>
               <tr>
                 <th>Nro</th>
-                <th>Direccion</th>
                 <th>Nombre</th>
-                <th>Tipo</th>
+                <th>Direccion</th>
+                <th>Nota</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
               </tr>
@@ -339,9 +283,9 @@
               <tfoot>
               <tr>
                 <th>Nro</th>
-                <th>Direccion</th>
                 <th>Nombre</th>
-                <th>Tipo</th>
+                <th>Direccion</th>
+                <th>Nota</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
               </tr>
@@ -353,8 +297,23 @@
             </table>
           </div>
         </div>
-      </div>
+        <form class="user">
+          <div class="row">
+            <div class="col-md-12">
+              <h3>Ubicaciones:</h3>
+              <div id="map-container"></div>
+              <label id="lblErrorMapa"></label>
+              <div class="form-group row">
 
+              </div>
+              <br>
+            </div>
+          </div>
+
+          <hr>
+
+        </form>
+      </div>
     </div>
     <!-- /.container-fluid -->
 
@@ -400,7 +359,9 @@
 
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
+<script src="js/mapa.js"></script>
 <script src="js/listaLugares.js"></script>
+
 
 </body>
 

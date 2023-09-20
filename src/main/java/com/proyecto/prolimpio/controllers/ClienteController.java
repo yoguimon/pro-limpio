@@ -22,8 +22,6 @@ public class ClienteController {
     }
     @PostMapping("api/clientes")
     public void registrarCliente(@RequestBody ClienteYLugarRequest request){
-        Cliente cliente = request.getCliente();
-        Lugar lugar = request.getLugar();
         clienteDaoImp.crearCliente(request);
     }
     @DeleteMapping("api/clientes/{id}")

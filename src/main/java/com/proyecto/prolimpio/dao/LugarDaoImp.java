@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.dao;
 
+import com.proyecto.prolimpio.models.Empleado;
 import com.proyecto.prolimpio.models.Lugar;
 import com.proyecto.prolimpio.models.Servicio;
 import jakarta.persistence.EntityManager;
@@ -41,5 +42,13 @@ public class LugarDaoImp implements CrudDao<Lugar>{
     @Override
     public void modificar(Lugar lugar) {
         entityManager.merge(lugar);
+    }
+
+    public List<Lugar> getTodosXId(Long id) {
+        String query = "SELECT * FROM lugar WHERE idCliente=:id";
+        List<Lugar> resultado = entityManager.createNativeQuery(query)
+                .setParameter("id",id)
+                .getResultList();
+        return resultado;
     }
 }

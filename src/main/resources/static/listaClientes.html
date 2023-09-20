@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>PRO LIMPIO</title>
-
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
@@ -292,10 +292,6 @@
                   </div>
                   <br>
                   <div class="form-group row">
-                    <div class="col-sm-4 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="txtnombreEmpresa"
-                             placeholder="Nombre Empresa">
-                    </div>
                     <div class="col-sm-4">
                       <input type="text" class="form-control form-control-user" id="txtnombre"
                              placeholder="Nombre">
@@ -304,19 +300,9 @@
                       <input type="text" class="form-control form-control-user" id="txtapellido"
                              placeholder="Apellido Paterno">
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-sm-4 mb-3 mb-sm-0">
+                    <div class="col-sm-4">
                       <input type="text" class="form-control form-control-user" id="txtapellidoM"
                              placeholder="Apellido Materno">
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user" id="txttelefono"
-                             placeholder="telefono">
-                    </div>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user" id="txtcorreo"
-                             placeholder="Correo">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -325,12 +311,12 @@
                              placeholder="Fecha Registro" onfocus="(this.type='date')" onfocusout="(this.type='text')">
                     </div>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user" id="txtdireccion"
-                             placeholder="Direccion">
+                      <input type="text" class="form-control form-control-user" id="txttelefono"
+                             placeholder="telefono">
                     </div>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control form-control-user"
-                             id="txtnotas" placeholder="datos importantes">
+                      <input type="text" class="form-control form-control-user" id="txtcorreo"
+                             placeholder="Correo">
                     </div>
                   </div>
 
@@ -369,6 +355,7 @@
                   <th>Nombres</th>
                   <th>Telefono</th>
                   <th>Correo</th>
+                  <th>Lugares</th>
                   <th>Editar</th>
                   <th>Eliminar</th>
                 </tr>
@@ -379,12 +366,12 @@
                   <th>Nombre</th>
                   <th>Telefono</th>
                   <th>Correo</th>
+                  <th>Lugares</th>
                   <th>Editar</th>
                   <th>Eliminar</th>
                 </tr>
                 </tfoot>
                 <tbody>
-
 
                 </tbody>
               </table>
@@ -438,7 +425,6 @@
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
 <script src="js/listaClientes.js"></script>
-
 </body>
 
 </html>

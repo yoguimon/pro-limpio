@@ -37,4 +37,8 @@ public class LugarService implements  CrudService<Lugar>{
     public void modificar(Lugar lugar) {
         lugarDaoImp.modificar(lugar);
     }
+
+    public List<Lugar> getAllXId(Long id) {
+        return lugarDaoImp.getTodosXId(id);
+    }
 }

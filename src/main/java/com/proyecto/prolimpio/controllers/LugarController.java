@@ -34,4 +34,9 @@ public class LugarController {
     public void setLugar(@RequestBody Lugar lugar){
         lugarService.modificar(lugar);
     }
+
+    @GetMapping("/lugares/{id}")
+    public List<Lugar> getTodosXId(@PathVariable Long id){
+        return lugarService.getAllXId(id);
+    }
 }

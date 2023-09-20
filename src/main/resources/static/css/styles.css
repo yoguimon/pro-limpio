@@ -31,7 +31,7 @@ label{
     display: none;
     border: 2px solid #40AA3E;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 2;
+    z-index: 1000;
 }
 .popup img{
     width: 250px;
@@ -63,6 +63,15 @@ label{
 }
 #map-container {
     height: 500%;
-  }
+}
+.table-container {
+     display: flex;
+     justify-content: center; /* Centrar horizontalmente */
+     align-items: center; /* Centrar verticalmente */
+     height: 100vh; /* Esto hace que el contenedor ocupe el 100% del alto de la ventana */
+}
+.leaflet-container {
+    font-size: 16px; /* Ajusta el tamaño de fuente según tus preferencias */
+}
 
 

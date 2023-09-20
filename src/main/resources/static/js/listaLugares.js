@@ -1,6 +1,7 @@
+
 $(document).ready(function() {
   verificarAutenticacion();
-  cargarLugares();
+  mostrarLugaresXCliente(obtenerIdDeUrl());
   $('#listaLugares').DataTable();
   actualizarEmailUser();
 });
@@ -18,6 +19,44 @@ function verificarAutenticacion() {
         // No hay token JWT, el usuario no ha iniciado sesión
         // Redirigir a la página de inicio de sesión o mostrar un mensaje de error
         window.location.href = 'login.html'; // Redirigir a la página de inicio de sesión
+    }
+}
+function obtenerIdDeUrl() {
+     const parametrosDeConsulta = new URLSearchParams(window.location.search);
+     const id = parametrosDeConsulta.get('id');
+     return id;
+}
+
+async function mostrarLugaresXCliente(id){
+    const request = await fetch('api/lugares/'+id, {
+                method: 'GET',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                }
+        });
+        const lugares = await request.json();
+
+        let listadoHtml = '';
+                //para agragar usuarios de json
+               let cont = 0;
+              for(let lugar of lugares){
+                    cont=cont+1;
+                    let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarL('+lugar[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
+                    let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarC('+lugar[0]+')"><i class="fas fa-trash"></i></a>';
+                    let lugarHtml =  '<tr><td>'+cont+'</td><td>'+lugar[2]+'</td><td>'+lugar[3]+'</td><td>'+lugar[4]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
+                    listadoHtml+=lugarHtml;
+              }
+              document.querySelector('#listaLugares tbody').outerHTML=listadoHtml;
+              mostrarUbicaciones(lugares);
+
+}
+function mostrarUbicaciones(lugares){
+    for(let lugar of lugares){
+        if (marker) {
+                map.removeLayer(marker);
+        }
+        var marcador = L.marker([parseFloat(lugar[5]), parseFloat(lugar[6])]).addTo(map);
     }
 }
 async function cargarLugares(){

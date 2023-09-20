@@ -37,9 +37,10 @@ async function cargarClientes(){
             let cont = 0;
           for(let cliente of clientes){
                 cont=cont+1;
+                let botonLugar = '<a href="#" class="btn btn-success btn-circle btn-sm" onclick="mostrarLugares('+cliente[0]+')"><i class="fas fa-home"></i></a>';
                 let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarCliente('+cliente[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
                 let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarCliente('+cliente[0]+')"><i class="fas fa-trash"></i></a>';
-                let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[1]+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+cliente[4]+'</td><td>'+cliente[5]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
+                let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[1]+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+botonLugar+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                 listadoHtml+=clienteHtml;
           }
 
@@ -47,8 +48,12 @@ async function cargarClientes(){
           document.querySelector('#listaClientes tbody').outerHTML=listadoHtml;
 
 }
-
-
+function mostrarLugares(id){
+    // Convierte el ID a cadena de texto
+      const idComoCadena = id.toString();
+      // Redirige a la página "listaLugares.html" con el ID en la URL
+      window.location.href = `listaLugares.html?id=${idComoCadena}`;
+}
 async function mostrarCliente(id){
     $('#formEdicion').modal('show');//posoble error
     const request = await fetch('api/clientes/'+id, {
@@ -62,7 +67,6 @@ async function mostrarCliente(id){
         const cliente = await request.json();
 
 
-        document.getElementById('txtnombreEmpresa').value=cliente.nombre_empresa;
         document.getElementById('txtnombre').value=cliente.nombre;
         document.getElementById('txtapellido').value=cliente.apellido;
         document.getElementById('txtapellidoM').value=cliente.apellido_materno;
@@ -70,8 +74,6 @@ async function mostrarCliente(id){
         document.getElementById('txtcorreo').value=cliente.correo;
         //datos.foto = "sin foto";
         document.getElementById('txtfechaRegistro').value=cliente.fecha_registro;
-        document.getElementById('txtdireccion').value=cliente.direccion;
-        document.getElementById('txtnotas').value=cliente.notas;
 
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
@@ -90,7 +92,6 @@ async function editarCliente(id){
 
     let clienteEditado={};
     clienteEditado.idCliente=id;
-    clienteEditado.nombre_empresa = document.getElementById('txtnombreEmpresa').value;
     clienteEditado.nombre = document.getElementById('txtnombre').value;
     clienteEditado.apellido = document.getElementById('txtapellido').value;
     clienteEditado.apellido_materno = document.getElementById('txtapellidoM').value;
@@ -98,8 +99,6 @@ async function editarCliente(id){
     clienteEditado.correo = document.getElementById('txtcorreo').value;
     clienteEditado.foto = "sin foto";
     clienteEditado.fecha_registro=fechaRegistro;
-    clienteEditado.direccion = document.getElementById('txtdireccion').value;
-    clienteEditado.notas = document.getElementById('txtnotas').value;
 
     const request = await fetch('api/clientes',{
                 method: 'PUT',

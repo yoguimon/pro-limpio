@@ -18,8 +18,6 @@ public class Cliente {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="idCliente")
     private Long idCliente;
-    @Column(name="nombre_empresa")
-    private String nombre_empresa;
     @Column(name="nombre")
     private String nombre;
     @Column(name="apellido")
@@ -34,10 +32,6 @@ public class Cliente {
     private String foto;
     @Column(name="fecha_registro")
     private LocalDate fecha_registro;
-    @Column(name="direccion")
-    private String direccion;
-    @Column(name="notas")//mensaje
-    private String notas;
     @CreationTimestamp
     @Column(name="fecha_creacion")
     private LocalDateTime fecha_creacion;
@@ -50,9 +44,8 @@ public class Cliente {
 
     public Cliente(){}
 
-    public Cliente(Long idCliente, String nombre_empresa, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro, String direccion, String notas) {
+    public Cliente(Long idCliente, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro) {
         this.idCliente = idCliente;
-        this.nombre_empresa = nombre_empresa;
         this.nombre = nombre;
         this.apellido = apellido;
         this.apellido_materno = apellido_materno;
@@ -60,12 +53,9 @@ public class Cliente {
         this.correo = correo;
         this.foto = foto;
         this.fecha_registro = fecha_registro;
-        this.direccion = direccion;
-        this.notas = notas;
     }
 
-    public Cliente(String nombre_empresa, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro, String direccion, String notas) {
-        this.nombre_empresa = nombre_empresa;
+    public Cliente(String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.apellido_materno = apellido_materno;
@@ -73,13 +63,10 @@ public class Cliente {
         this.correo = correo;
         this.foto = foto;
         this.fecha_registro = fecha_registro;
-        this.direccion = direccion;
-        this.notas = notas;
     }
 
-    public Cliente(Long idCliente, String nombre_empresa, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro, String direccion, String notas, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
+    public Cliente(Long idCliente, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
         this.idCliente = idCliente;
-        this.nombre_empresa = nombre_empresa;
         this.nombre = nombre;
         this.apellido = apellido;
         this.apellido_materno = apellido_materno;
@@ -87,8 +74,6 @@ public class Cliente {
         this.correo = correo;
         this.foto = foto;
         this.fecha_registro = fecha_registro;
-        this.direccion = direccion;
-        this.notas = notas;
         this.fecha_creacion = fecha_creacion;
         this.fecha_actualizacion = fecha_actualizacion;
     }

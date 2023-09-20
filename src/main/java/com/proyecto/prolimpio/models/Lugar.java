@@ -18,6 +18,12 @@ public class Lugar {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Un usuario se asocia con un empleado
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     private Cliente cliente;
+    @Column(name="nombre")
+    private String nombre;
+    @Column(name="direccion")
+    private String direccion;
+    @Column(name="notas")
+    private String notas;
     @Column(name="latitud")
     private String latitud;
     @Column(name="longitud")
@@ -31,23 +37,36 @@ public class Lugar {
     public Lugar() {
     }
 
-    public Lugar(Long idLugar, Cliente cliente, String latitud, String longitud, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
+    public Lugar(Long idLugar, String nombre, String direccion, String notas, String latitud, String longitud, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
         this.idLugar = idLugar;
-        this.cliente = cliente;
-        this.longitud = longitud;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.notas = notas;
         this.latitud = latitud;
+        this.longitud = longitud;
         this.fecha_creacion = fecha_creacion;
         this.fecha_actualizacion = fecha_actualizacion;
     }
 
-    public Lugar(Long idLugar, String latitud, String longitud) {
+    public Lugar(Long idLugar, Cliente cliente, String nombre, String direccion, String notas, String latitud, String longitud, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
         this.idLugar = idLugar;
-        this.longitud = longitud;
+        this.cliente = cliente;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.notas = notas;
         this.latitud = latitud;
+        this.longitud = longitud;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_actualizacion = fecha_actualizacion;
     }
 
-    public Lugar(String latitud, String longitud) {
-        this.longitud = longitud;
+    public Lugar(Long idLugar, Cliente cliente, String nombre, String direccion, String notas, String latitud, String longitud) {
+        this.idLugar = idLugar;
+        this.cliente = cliente;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.notas = notas;
         this.latitud = latitud;
+        this.longitud = longitud;
     }
 }

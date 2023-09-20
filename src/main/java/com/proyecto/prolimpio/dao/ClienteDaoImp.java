@@ -39,10 +39,13 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
         Cliente cliente = request.getCliente();
         Lugar lugar = request.getLugar();
         entityManager.persist(cliente);
-        String query = "INSERT INTO lugar(idCliente,latitud,longitud)\n" +
-                "\tVALUES(:idCliente,:latitud,:longitud);";
+        String query = "INSERT INTO lugar(idCliente,nombre,direccion,notas,latitud,longitud)\n" +
+                "\tVALUES(:idCliente,:nombre,:direccion,:notas,:latitud,:longitud);";
         Query insertQuery = entityManager.createNativeQuery(query)
                 .setParameter("idCliente",cliente.getIdCliente())
+                .setParameter("nombre",lugar.getNombre())
+                .setParameter("direccion",lugar.getDireccion())
+                .setParameter("notas",lugar.getNotas())
                 .setParameter("latitud",lugar.getLatitud())
                 .setParameter("longitud",lugar.getLongitud());
 
