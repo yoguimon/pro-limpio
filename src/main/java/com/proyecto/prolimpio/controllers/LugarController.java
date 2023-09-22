@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.controllers;
 
+import com.proyecto.prolimpio.dto.LugarResponse;
 import com.proyecto.prolimpio.models.Lugar;
 import com.proyecto.prolimpio.models.Servicio;
 import com.proyecto.prolimpio.services.LugarService;
@@ -23,8 +24,8 @@ public class LugarController {
         lugarService.eliminar(id);
     }
     @PostMapping("/lugar")
-    public void crearLugar(@RequestBody Lugar lugar){
-        lugarService.crear(lugar);
+    public void crearLugar(@RequestBody LugarResponse lugarResponse){
+        lugarService.crearLugar(lugarResponse);
     }
     @GetMapping("/lugar/{id}")
     public Lugar getLugar(@PathVariable Long id){

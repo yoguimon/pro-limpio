@@ -37,7 +37,7 @@ async function cargarClientes(){
             let cont = 0;
           for(let cliente of clientes){
                 cont=cont+1;
-                let botonLugar = '<a href="#" class="btn btn-success btn-circle btn-sm" onclick="mostrarLugares('+cliente[0]+')"><i class="fas fa-home"></i></a>';
+                let botonLugar = '<a href="#" class="btn btn-success btn-circle btn-sm" onclick="mostrarLugares(' + cliente[0] + ', \'' + cliente[1] + '\')"><i class="fas fa-home"></i></a>';
                 let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarCliente('+cliente[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
                 let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarCliente('+cliente[0]+')"><i class="fas fa-trash"></i></a>';
                 let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[1]+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+botonLugar+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
@@ -48,11 +48,17 @@ async function cargarClientes(){
           document.querySelector('#listaClientes tbody').outerHTML=listadoHtml;
 
 }
-function mostrarLugares(id){
-    // Convierte el ID a cadena de texto
-      const idComoCadena = id.toString();
-      // Redirige a la página "listaLugares.html" con el ID en la URL
-      window.location.href = `listaLugares.html?id=${idComoCadena}`;
+function mostrarLugares(id,nombre){
+    // Convierte el ID y el nombre a cadenas de texto
+        const idComoCadena = id.toString();
+        const nombreComoCadena = nombre.toString();
+
+        // Codifica los valores para asegurarte de que sean seguros en una URL
+        const idCodificado = encodeURIComponent(idComoCadena);
+        const nombreCodificado = encodeURIComponent(nombreComoCadena);
+
+        // Redirige a la página "listaLugares.html" con el ID y el nombre en la URL
+        window.location.href = `listaLugares.html?id=${idCodificado}&nombre=${nombreCodificado}`;
 }
 async function mostrarCliente(id){
     $('#formEdicion').modal('show');//posoble error

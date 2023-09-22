@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,12 +11,13 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name="lugar")
+@JsonIgnoreProperties({"cliente"})
 public class Lugar {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="idLugar")
     private Long idLugar;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Un usuario se asocia con un empleado
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     private Cliente cliente;
     @Column(name="nombre")
@@ -37,15 +39,13 @@ public class Lugar {
     public Lugar() {
     }
 
-    public Lugar(Long idLugar, String nombre, String direccion, String notas, String latitud, String longitud, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
-        this.idLugar = idLugar;
+    public Lugar(Cliente cliente, String nombre, String direccion, String notas, String latitud, String longitud) {
+        this.cliente = cliente;
         this.nombre = nombre;
         this.direccion = direccion;
         this.notas = notas;
         this.latitud = latitud;
         this.longitud = longitud;
-        this.fecha_creacion = fecha_creacion;
-        this.fecha_actualizacion = fecha_actualizacion;
     }
 
     public Lugar(Long idLugar, Cliente cliente, String nombre, String direccion, String notas, String latitud, String longitud, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
@@ -59,7 +59,16 @@ public class Lugar {
         this.fecha_creacion = fecha_creacion;
         this.fecha_actualizacion = fecha_actualizacion;
     }
-
+    public Lugar(Long idLugar, String nombre, String direccion, String notas, String latitud, String longitud, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
+        this.idLugar = idLugar;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.notas = notas;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_actualizacion = fecha_actualizacion;
+    }
     public Lugar(Long idLugar, Cliente cliente, String nombre, String direccion, String notas, String latitud, String longitud) {
         this.idLugar = idLugar;
         this.cliente = cliente;

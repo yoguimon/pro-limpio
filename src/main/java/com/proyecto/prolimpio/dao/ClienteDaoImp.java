@@ -19,7 +19,7 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
     @Override
     @Transactional
     public List<Cliente> getTodos() {
-        String query = "SELECT idCliente,nombre,telefono,correo\n" +
+        String query = "SELECT idCliente,CONCAT(nombre,' ',apellido,' ',apellido_materno),telefono,correo\n" +
                 "FROM cliente";
         List<Cliente> resultado = entityManager.createNativeQuery(query).getResultList();
         return resultado;

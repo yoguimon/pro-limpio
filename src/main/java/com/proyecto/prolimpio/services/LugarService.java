@@ -2,6 +2,7 @@ package com.proyecto.prolimpio.services;
 
 import com.proyecto.prolimpio.dao.LugarDaoImp;
 import com.proyecto.prolimpio.dao.ServicioDaoImp;
+import com.proyecto.prolimpio.dto.LugarResponse;
 import com.proyecto.prolimpio.models.Lugar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,11 @@ public class LugarService implements  CrudService<Lugar>{
 
     @Override
     public void crear(Lugar lugar) {
-        lugarDaoImp.crearLugar(lugar);
-    }
 
+    }
+    public void crearLugar(LugarResponse lugarResponse) {
+        lugarDaoImp.crearLugar(lugarResponse);
+    }
     @Override
     public Lugar getPersona(Long id) {
         return lugarDaoImp.getPersona(id);
@@ -35,7 +38,7 @@ public class LugarService implements  CrudService<Lugar>{
 
     @Override
     public void modificar(Lugar lugar) {
-        lugarDaoImp.modificar(lugar);
+        lugarDaoImp.modificarLugar(lugar);
     }
 
     public List<Lugar> getAllXId(Long id) {

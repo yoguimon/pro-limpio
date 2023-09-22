@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 function initMap(){
 
-    map=L.map('map-container').setView([-17.39571, -66.15817],13);
+    map=L.map('map-container').setView([-17.39571, -66.15817],12);
       /*L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=oJKSCfNuOhhqQ5NzNe0n',{
                 attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
          }).addTo(map);

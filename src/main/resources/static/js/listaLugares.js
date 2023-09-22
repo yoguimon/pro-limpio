@@ -1,4 +1,4 @@
-
+var parametrosDeConsulta;
 $(document).ready(function() {
   verificarAutenticacion();
   mostrarLugaresXCliente(obtenerIdDeUrl());
@@ -22,14 +22,17 @@ function verificarAutenticacion() {
     }
 }
 function obtenerIdDeUrl() {
-     const parametrosDeConsulta = new URLSearchParams(window.location.search);
+     parametrosDeConsulta = new URLSearchParams(window.location.search);
      const id = parametrosDeConsulta.get('id');
+     const nombre = "Cliente: "+parametrosDeConsulta.get('nombre');
+     document.getElementById('nombreCliente').innerHTML = nombre;
      return id;
 }
 
 function enviarIdAFormulario(){
     var id = obtenerIdDeUrl();
-    window.location.href = `formularioLugar.html?id=${id}`;
+    var nom = parametrosDeConsulta.get('nombre');
+    window.location.href = `formularioLugar.html?id=${id}&nombre=${nom}`;
 }
 
 async function mostrarLugaresXCliente(id){
@@ -47,7 +50,7 @@ async function mostrarLugaresXCliente(id){
                let cont = 0;
               for(let lugar of lugares){
                     cont=cont+1;
-                    let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarL('+lugar[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
+                    let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="enviarAFormularioEditar('+lugar[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
                     let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarC('+lugar[0]+')"><i class="fas fa-trash"></i></a>';
                     let lugarHtml =  '<tr><td>'+cont+'</td><td>'+lugar[2]+'</td><td>'+lugar[3]+'</td><td>'+lugar[4]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                     listadoHtml+=lugarHtml;
@@ -64,7 +67,17 @@ function mostrarUbicaciones(lugares){
         var marcador = L.marker([parseFloat(lugar[5]), parseFloat(lugar[6])]).addTo(map);
     }
 }
-async function cargarLugares(){
+function enviarAFormularioEditar(id){
+    // Convierte el ID y el nombre a cadenas de texto
+    const idComoCadena = id.toString();
+    // Codifica los valores para asegurarte de que sean seguros en una URL
+    const idCodificado = encodeURIComponent(idComoCadena);
+    // Redirige a la página "formularioEditarLugar.html" con el ID y el nombre en la URL
+    const nom = parametrosDeConsulta.get('nombre');
+    const idCliente = parametrosDeConsulta.get('id');
+    window.location.href = `formularioEditarLugar.html?id=${idCodificado}&nombre=${nom}&cliente=${idCliente}`;
+}
+/*async function cargarLugares(){
     const request = await fetch('api/lugar', {
             method: 'GET',
             headers: {
@@ -80,6 +93,7 @@ async function cargarLugares(){
             let cont = 0;
               for(let lugar of lugares){
                 cont=cont+1;
+
                 let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarLugar('+lugar[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
                 let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarLugar('+lugar[0]+')"><i class="fas fa-trash"></i></a>';
                 let clienteHtml =  '<tr><td>'+cont+'</td><td>'+lugar[1]+'</td><td>'+lugar[2]+'</td><td>'+lugar[3]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
@@ -91,7 +105,7 @@ async function cargarLugares(){
 
 }
 async function mostrarLugar(id){
-    $('#formEdicion').modal('show');//posoble error
+    window.location.href="formularioEditarLugar.html";
     const request = await fetch('api/lugar/'+id, {
                 method: 'GET',
                 headers: {
@@ -102,12 +116,11 @@ async function mostrarLugar(id){
         //me devuelve una lista de empleados
         const lugar = await request.json();
 
-
-        document.getElementById('txtdireccion').value=lugar.direccion;
         document.getElementById('txtnombre').value=lugar.nombre;
-        document.getElementById('cbxtipo').value=lugar.tipo;
+        document.getElementById('txtdireccion').value=lugar.direccion;
+        document.getElementById('txtnotas').value=lugar.notas;
 
-        document.getElementById('btnSaveChanges').innerHTML = '';
+        /*document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
 
         let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarLugar('+lugar.idLugar+')">Modificar</button>';
@@ -136,7 +149,7 @@ async function editarLugar(id){
     });
     $('#formEdicion').modal('hide');;
     location.reload();
-}
+}*/
 
 async function eliminarLugar(id){
           if(!confirm('Desea eliminar este lugar?')){

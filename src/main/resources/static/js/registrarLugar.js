@@ -1,4 +1,7 @@
-
+var parametrosDeConsultaLugar = new URLSearchParams(window.location.search);
+$(document).ready(function() {
+  ponerNombre();
+});
 async function agregarLugar(datos){
       const request = await fetch('/api/lugar', {
         method: 'POST',
@@ -14,7 +17,8 @@ async function agregarLugar(datos){
 }
 function validacionLugar(){
     let datos = {};
-    datos.cliente={idCliente: parseInt(obtenerIdDeUrl())};
+    const idCli = parseInt(obtenerIdDeUrl());
+    datos.cliente={idCliente: idCli};
     datos.nombre = document.getElementById('txtnombre').value;
     datos.direccion = document.getElementById('txtdireccion').value;
     datos.notas = document.getElementById('txtnotas').value;
@@ -23,21 +27,33 @@ function validacionLugar(){
 
     const errorDireccion = document.getElementById('lblErrorDireccion');
     const errorNombre = document.getElementById('lblErrorNombre');
+    const errorPosicion = document.getElementById('lblErrorMapa');
 
     errorDireccion.innerHTML = validarDireccion(datos.direccion);
     errorNombre.innerHTML = validarNombre(datos.nombre);
+    errorNombre.innerHTML = validarPos(la);
 
-    if(errorDireccion.innerHTML==="" && errorNombre.innerHTML===""){
+    if(errorDireccion.innerHTML==="" && errorNombre.innerHTML==="" && errorPosicion.innerHTML===""){
          agregarLugar(datos);
     }
 }
+function validarPos(la){
+    if(la===undefined){
+        return "Ingrese Ubicacion!"
+    }
+    return "";
+}
+function ponerNombre(){
+    const nombre = "Agregar lugar para el cliente: "+parametrosDeConsultaLugar.get('nombre');
+    document.getElementById('nombreCliente').innerHTML = nombre;
+}
 function obtenerIdDeUrl() {
-     const parametrosDeConsulta = new URLSearchParams(window.location.search);
-     const id = parametrosDeConsulta.get('id');
+     const id = parametrosDeConsultaLugar.get('id');
      return id;
 }
 
 function enviarIdAListaLugares(){
     var id = obtenerIdDeUrl();
-    window.location.href = `listaLugares.html?id=${id}`;
+    var nom = parametrosDeConsultaLugar.get('nombre');
+    window.location.href = `listaLugares.html?id=${id}&nombre=${nom}`;
 }

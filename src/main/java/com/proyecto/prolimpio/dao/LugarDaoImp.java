@@ -1,5 +1,7 @@
 package com.proyecto.prolimpio.dao;
 
+import com.proyecto.prolimpio.dto.LugarResponse;
+import com.proyecto.prolimpio.models.Cliente;
 import com.proyecto.prolimpio.models.Empleado;
 import com.proyecto.prolimpio.models.Lugar;
 import com.proyecto.prolimpio.models.Servicio;
@@ -35,19 +37,16 @@ public class LugarDaoImp implements CrudDao<Lugar>{
         entityManager.persist(lugar);
     }
 
-    public void crearLugar(Lugar lugar) {
-        String query = "INSERT INTO lugar (idCliente, nombre, direccion, notas, latitud, longitud) " +
-                "VALUES (:idCliente, :nombre, :direccion, :notas, :latitud, :longitud)";
-
-        Query insertQuery = entityManager.createNativeQuery(query)
-                .setParameter("idCliente", lugar.getCliente().getIdCliente())
-                .setParameter("nombre", lugar.getNombre())
-                .setParameter("direccion", lugar.getDireccion())
-                .setParameter("notas", lugar.getNotas())
-                .setParameter("latitud", lugar.getLatitud())
-                .setParameter("longitud", lugar.getLongitud());
-
-        insertQuery.executeUpdate();
+    public void crearLugar(LugarResponse lugarResponse) {
+        Cliente cliente = entityManager.find(Cliente.class,lugarResponse.getCliente().getIdCliente());
+        Lugar lugar = new Lugar();
+        lugar.setCliente(cliente);
+        lugar.setNombre(lugarResponse.getNombre());
+        lugar.setDireccion(lugarResponse.getDireccion());
+        lugar.setNotas(lugarResponse.getNotas());
+        lugar.setLatitud(lugarResponse.getLatitud());
+        lugar.setLongitud(lugarResponse.getLongitud());
+        entityManager.persist(lugar);
     }
 
     @Override
@@ -58,6 +57,15 @@ public class LugarDaoImp implements CrudDao<Lugar>{
     @Override
     public void modificar(Lugar lugar) {
         entityManager.merge(lugar);
+    }
+    public void modificarLugar(Lugar lugar) {
+        Lugar lugarViejo = entityManager.find(Lugar.class,lugar.getIdLugar());
+        lugarViejo.setNombre(lugar.getNombre());
+        lugarViejo.setDireccion(lugar.getDireccion());
+        lugarViejo.setNotas(lugar.getNotas());
+        lugarViejo.setLatitud(lugar.getLatitud());
+        lugarViejo.setLongitud(lugar.getLongitud());
+        entityManager.merge(lugarViejo);
     }
 
     public List<Lugar> getTodosXId(Long id) {
