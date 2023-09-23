@@ -17,7 +17,7 @@ public class Lugar {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="idLugar")
     private Long idLugar;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
     private Cliente cliente;
     @Column(name="nombre")

@@ -120,16 +120,20 @@ async function editarCliente(id){
 }
 
 async function eliminarCliente(id){
-          if(!confirm('Desea eliminar este usuario?')){
-              return;
-          }
+    $('#formEliminar').modal('show');
 
-          const request = await fetch('api/clientes/'+id, {
-                  method: 'DELETE',
-                  headers: {
+    // Agrega un evento click al botón "Eliminar" dentro del modal
+        document.getElementById('botonEliminarElemento').addEventListener('click', async function () {
+            // Realiza la eliminación utilizando el ID pasado como parámetro
+            const request = await fetch('api/clientes/' + id, {
+                method: 'DELETE',
+                headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                  }
-          });
-          location.reload();
+                }
+            });
+            $('#formEdicion').modal('hide');
+            // Recarga la página o realiza alguna otra acción después de la eliminación
+            location.reload();
+        });
 }

@@ -51,7 +51,7 @@ async function mostrarLugaresXCliente(id){
               for(let lugar of lugares){
                     cont=cont+1;
                     let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="enviarAFormularioEditar('+lugar[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
-                    let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarC('+lugar[0]+')"><i class="fas fa-trash"></i></a>';
+                    let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarLugar('+lugar[0]+')"><i class="fas fa-trash"></i></a>';
                     let lugarHtml =  '<tr><td>'+cont+'</td><td>'+lugar[2]+'</td><td>'+lugar[3]+'</td><td>'+lugar[4]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                     listadoHtml+=lugarHtml;
               }
@@ -152,16 +152,20 @@ async function editarLugar(id){
 }*/
 
 async function eliminarLugar(id){
-          if(!confirm('Desea eliminar este lugar?')){
-              return;
-          }
+    $('#formEliminar').modal('show');
 
-          const request = await fetch('api/lugar/'+id, {
-                  method: 'DELETE',
-                  headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  }
-          });
-          location.reload();
+// Agrega un evento click al botón "Eliminar" dentro del modal
+    document.getElementById('botonEliminarElemento').addEventListener('click', async function () {
+        // Realiza la eliminación utilizando el ID pasado como parámetro
+        const request = await fetch('api/lugar/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        $('#formEdicion').modal('hide');
+        // Recarga la página o realiza alguna otra acción después de la eliminación
+        location.reload();
+    });
 }
