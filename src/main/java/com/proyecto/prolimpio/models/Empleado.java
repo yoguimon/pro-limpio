@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,8 +18,6 @@ public class Empleado {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="idEmpleado", nullable = false, insertable = false)
     private Long idEmpleado;
-    //@NotEmpty
-
     @Column(name="carnet")
     private String carnet;
     @Column(name="nombre")
@@ -53,10 +52,12 @@ public class Empleado {
     @UpdateTimestamp
     @Column(name="fecha_actualizacion")
     private LocalDateTime fecha_actualizacion;
-
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "empleado") //importante, mapea con usuario PONE TODOS LOS DATOS DEL USUARIO DE ESTE EMPLEADO
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "empleado")
     private Usuario usuario;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "empleado")
+    private List<Asistencia> asistencias;
 
     public Empleado(Long idEmpleado, String carnet, String nombre, String apellido, String apellido_materno, String puesto, String telefono) {
         this.idEmpleado = idEmpleado;
@@ -68,6 +69,10 @@ public class Empleado {
         this.telefono = telefono;
     }
     public Empleado(){}
+
+    public Empleado(Long idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
 
     public Empleado(String carnet, String correo) {
         this.carnet = carnet;

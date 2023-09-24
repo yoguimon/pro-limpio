@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>PRO LIMPIO</title>
-
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link
@@ -144,10 +144,19 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
-
+        <div id="popupEmpleado" class="popup">
+          <img src="img/bien.jpg">
+          <h2>Exito!</h2>
+          <p>Marco Entrada Correctamente</p>
+        </div>
+        <div id="popupEmpleado2" class="popup">
+          <img src="img/bien.jpg">
+          <h2>Exito!</h2>
+          <p>Marco Salida Correctamente</p>
+        </div>
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Asistencia</h1>
+          <h1 class="h3 mb-0 text-gray-800">Asistencia: Asegurate haber recibido mensaje se Exito antes de salir!</h1>
           <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                   class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
@@ -159,7 +168,7 @@
             <div class="card shadow h-100 py-2">
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
-                  <button type="button" class="btn btn-primary btn-user btn-block " style="height: 6rem; font-size: 2.5rem;">Marcar Entrada</button>
+                  <button id="botonCargar1" type="button" onclick="capturarUbicacion('entrada')" class="btn btn-primary btn-user btn-block" style="height: 6rem; font-size: 2.5rem;">Marcar Entrada</button>
                 </div>
               </div>
             </div>
@@ -171,7 +180,7 @@
             <div class="card shadow h-100 py-2">
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
-                  <button type="button" class="btn btn-primary btn-user btn-block " style="height: 6rem; font-size: 2.5rem;">Marcar Salida</button>
+                  <button id="botonCargar2" type="button" onclick="capturarUbicacion('salida')" class="btn btn-primary btn-user btn-block" style="height: 6rem; font-size: 2.5rem;">Marcar Salida</button>
                 </div>
               </div>
             </div>
@@ -219,12 +228,9 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
 <script src="js/control.js"></script>
+<script src="js/empleados.js"></script>
 
 </body>
 

@@ -33,6 +33,7 @@ public class UsuarioController {
             res.add(tokenJwt);
             String rol = usuarioLogeado.getRol();
             res.add(rol);
+            res.add(usuarioLogeado.getEmpleado().getIdEmpleado().toString());
             return res;
         }
         return res;
