@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.controllers;
 
+import com.proyecto.prolimpio.dto.AsistenciaReporte;
 import com.proyecto.prolimpio.dto.AsistenciaResponse;
 import com.proyecto.prolimpio.dto.LugarResponse;
 import com.proyecto.prolimpio.models.Asistencia;
@@ -15,9 +16,9 @@ import java.util.List;
 public class AsistenciaController {
     @Autowired
     private AsistenciaService asistenciaService;
-    @GetMapping("/asisytencia")
-    public List<Asistencia> getTodos(){
-        return asistenciaService.getTodos();
+    @GetMapping("/asistencias/{id}")
+    public List<AsistenciaReporte> getTodos(@PathVariable Long id){
+        return asistenciaService.getTodasAsistencia(id);
     }
     @DeleteMapping("/asistencia/{id}")
     public void eliminarAsistencia(@PathVariable Long id){

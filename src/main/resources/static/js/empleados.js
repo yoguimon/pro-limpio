@@ -1,5 +1,6 @@
 var latAct;
 var lonAct;
+
 function mostrarAlerta(redireccionURL,popup) {
     popup.style.display = "block";
     setTimeout(function() {
@@ -10,21 +11,24 @@ function mostrarAlerta(redireccionURL,popup) {
     }, 2000);
 }
 function capturarUbicacion(mensaje){
+    let asistencia={};
     if (mensaje === 'entrada') {
             const botonCargar = document.getElementById('botonCargar1');
             botonCargar.disabled = true;
             botonCargar.textContent = 'Registrando...';
+            asistencia.tipo=0;
     } else{
             const botonCargar = document.getElementById('botonCargar2');
             botonCargar.disabled = true;
             botonCargar.textContent = 'Registrando...';
+            asistencia.tipo=1;
     }
 
-if (navigator.geolocation) {
+    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (geoLocationPosition) {
             latAct = geoLocationPosition.coords.latitude;
             lonAct = geoLocationPosition.coords.longitude;
-            marcarAsistencia(mensaje); // Llama a marcarAsistencia después de obtener la ubicación
+            marcarAsistencia(asistencia); // Llama a marcarAsistencia después de obtener la ubicación
         }, function(error) {
             alert("Error al obtener la ubicación: " + error.message);
         });
@@ -32,9 +36,8 @@ if (navigator.geolocation) {
         alert("Fallos en el Sistema, corrige tu configuración de geolocalización o conexión.");
     }
 }
-async function marcarAsistencia(mensaje){
+async function marcarAsistencia(asistencia){
     let idEmp = parseInt(localStorage.idEmpleado);
-      let asistencia = {};
       asistencia.empleado={idEmpleado: idEmp};
       asistencia.latitud=latAct;
       asistencia.longitud=lonAct;
@@ -46,13 +49,13 @@ async function marcarAsistencia(mensaje){
     },
     body: JSON.stringify(asistencia)
     });
-    if (mensaje === 'entrada') {
+    if (asistencia.tipo === 0) {
             const botonCargar = document.getElementById('botonCargar1');
             botonCargar.disabled = false;
             botonCargar.textContent = 'Marcar Entrada';
             var popup = document.getElementById("popupEmpleado");
             mostrarAlerta("indexAuxiliar.html",popup);
-    } else if (mensaje === 'salida') {
+    } else if (asistencia.tipo === 1) {
             const botonCargar = document.getElementById('botonCargar2');
             botonCargar.disabled = false;
             botonCargar.textContent = 'Marcar Salida';
@@ -61,8 +64,4 @@ async function marcarAsistencia(mensaje){
     } else {
             alert("Algo fallo Corre!!!"); // Puedes manejar otros casos aquí si es necesario
     }
-
-
-
 }
-

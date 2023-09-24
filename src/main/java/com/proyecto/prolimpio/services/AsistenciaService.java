@@ -2,6 +2,7 @@ package com.proyecto.prolimpio.services;
 
 import com.proyecto.prolimpio.dao.AsistenciaDaoImp;
 import com.proyecto.prolimpio.dao.LugarDaoImp;
+import com.proyecto.prolimpio.dto.AsistenciaReporte;
 import com.proyecto.prolimpio.dto.AsistenciaResponse;
 import com.proyecto.prolimpio.models.Asistencia;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ public class AsistenciaService implements CrudService<Asistencia>{
     public List<Asistencia> getTodos() {
         return null;
     }
-
+    public List<AsistenciaReporte> getTodasAsistencia(Long id) {
+        return asistenciaDaoImp.getTodasAsistencia(id);
+    }
     @Override
     public void eliminar(Long id) {
 

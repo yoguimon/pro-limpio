@@ -27,28 +27,33 @@ public class Asistencia {
     @CreationTimestamp
     @Column(name="fecha_hora")
     private LocalDateTime fecha_hora;
+    @Column(name="tipo")
+    private byte tipo;
 
     public Asistencia() {
     }
 
-    public Asistencia(Long idAsistencia, Empleado empleado, String latitud, String longitud, LocalDateTime fecha_hora) {
+    public Asistencia(Long idAsistencia, Empleado empleado, String latitud, String longitud, LocalDateTime fecha_hora, byte tipo) {
         this.idAsistencia = idAsistencia;
         this.empleado = empleado;
         this.latitud = latitud;
         this.longitud = longitud;
         this.fecha_hora = fecha_hora;
+        this.tipo =tipo;
     }
 
-    public Asistencia(Long idAsistencia, Empleado empleado, String latitud, String longitud) {
+    public Asistencia(Long idAsistencia, Empleado empleado, String latitud, String longitud, byte tipo) {
         this.idAsistencia = idAsistencia;
         this.empleado = empleado;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.tipo=tipo;
     }
 
-    public Asistencia(Empleado empleado, String latitud, String longitud) {
+    public Asistencia(Empleado empleado, String latitud, String longitud, byte tipo) {
         this.empleado = empleado;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.tipo=tipo;
     }
 }

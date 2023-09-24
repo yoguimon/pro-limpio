@@ -1,8 +1,10 @@
 package com.proyecto.prolimpio.dao;
 
+import com.proyecto.prolimpio.dto.AsistenciaReporte;
 import com.proyecto.prolimpio.dto.AsistenciaResponse;
 import com.proyecto.prolimpio.models.Asistencia;
 import com.proyecto.prolimpio.models.Empleado;
+import com.proyecto.prolimpio.models.Lugar;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -46,8 +48,21 @@ public class AsistenciaDaoImp implements CrudDao<Asistencia>{
         asistencia.setEmpleado(empleado);
         asistencia.setLatitud(asistenciaResponse.getLatitud());
         asistencia.setLongitud(asistenciaResponse.getLongitud());
+        asistencia.setTipo(asistenciaResponse.getTipo());
         entityManager.persist(asistencia);
 
 
+    }
+
+    public List<AsistenciaReporte> getTodasAsistencia(Long id) {
+        String query = "SELECT CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),E.carnet,\n" +
+                "       DATE(A.fecha_hora),TIME(A.fecha_hora),A.tipo\n" +
+                "FROM empleado E \n" +
+                "\tINNER JOIN asistencia A ON E.idEmpleado=A.idEmpleado\n" +
+                "WHERE E.idEmpleado=:id";
+        List<AsistenciaReporte> resultado = entityManager.createNativeQuery(query)
+                .setParameter("id",id)
+                .getResultList();
+        return resultado;
     }
 }
