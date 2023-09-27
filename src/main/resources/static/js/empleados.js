@@ -5,7 +5,6 @@ function mostrarAlerta(redireccionURL,popup) {
     popup.style.display = "block";
     setTimeout(function() {
         popup.style.display = "none";
-
         // Redirige a la URL pasada como parámetro
         window.location.href = redireccionURL;
     }, 2000);

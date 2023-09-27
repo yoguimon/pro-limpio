@@ -17,6 +17,7 @@ function validacionCliente(){
     const fechaRegistro = new Date(registro);
 
     let cliente = {};
+    cliente.carnet = document.getElementById('txtcarnet').value;
     cliente.nombre = document.getElementById('txtnombre').value;
     cliente.apellido = document.getElementById('txtapellido').value;
     cliente.apellido_materno = document.getElementById('txtapellidoM').value;
@@ -34,6 +35,7 @@ function validacionCliente(){
     lugar.latitud=la;
     lugar.longitud=lo;
 
+    const errorCarnet = document.getElementById('lblErrorCarnet');
     const errorNombreE = document.getElementById('lblErrorNombreE');
     const errorNombre = document.getElementById('lblErrorNombre');
     const errorApellidoP = document.getElementById('lblErrorApellidoP');
@@ -43,6 +45,7 @@ function validacionCliente(){
     const errorCorreo = document.getElementById('lblErrorCorreo');
     const errorFR = document.getElementById('lblErrorFR');
 
+    errorCarnet.innerHTML=validarCarnet(cliente.carnet)
     errorNombreE.innerHTML = validarNombre(lugar.nombre);
     errorNombre.innerHTML = validarNombre(cliente.nombre);
     errorApellidoP.innerHTML = validarApellidoP(cliente.apellido);
@@ -52,7 +55,7 @@ function validacionCliente(){
     errorCorreo.innerHTML = validarCorreo(cliente.correo);
     errorFR.innerHTML = validarFR(registro);
 
-    if(errorNombreE.innerHTML==="" && errorNombre.innerHTML==="" && errorApellidoP.innerHTML==="" && errorApellidoM.innerHTML==="" &&
+    if(errorCarnet.innerHTML===""&&errorNombreE.innerHTML==="" && errorNombre.innerHTML==="" && errorApellidoP.innerHTML==="" && errorApellidoM.innerHTML==="" &&
         errorDireccion.innerHTML==="" && errorTelefono.innerHTML==="" && errorCorreo.innerHTML==="" && errorFR.innerHTML===""){
         const clienteYlugarData = {
                 cliente,

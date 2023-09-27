@@ -18,6 +18,8 @@ public class Cliente {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="idCliente")
     private Long idCliente;
+    @Column(name="carnet")
+    private String carnet;
     @Column(name="nombre")
     private String nombre;
     @Column(name="apellido")

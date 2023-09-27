@@ -139,7 +139,7 @@
       <div id="collapseAsignaciones" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo asignaciones:</h6>
-          <a class="collapse-item" href="registrar.html">Asignar Trabajo</a>
+          <a class="collapse-item" href="registrarAsignacion.html">Asignar Trabajo</a>
         </div>
       </div>
     </li>
@@ -277,15 +277,19 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <div class="col-sm-4 mb-3 mb-sm-0">
+                    <div class="col-sm-3 mb-3 mb-sm-0">
                       <input type="text" id="txtfechaRegistro" class="form-control form-control-user"
                              placeholder="Fecha Registro" onfocus="(this.type='date')" onfocusout="(this.type='text')">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
+                      <input type="text" class="form-control form-control-user" id="txtcarnet"
+                             placeholder="Carnet">
+                    </div>
+                    <div class="col-sm-3">
                       <input type="text" class="form-control form-control-user" id="txttelefono"
                              placeholder="telefono">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                       <input type="text" class="form-control form-control-user" id="txtcorreo"
                              placeholder="Correo">
                     </div>
@@ -321,9 +325,9 @@
                 <thead>
                 <tr>
                   <th>Nro</th>
+                  <th>Carnet</th>
                   <th>Nombres</th>
                   <th>Telefono</th>
-                  <th>Correo</th>
                   <th>Lugares</th>
                   <th>Editar</th>
                   <th>Eliminar</th>
@@ -332,9 +336,9 @@
                 <tfoot>
                 <tr>
                   <th>Nro</th>
+                  <th>Carnet</th>
                   <th>Nombre</th>
                   <th>Telefono</th>
-                  <th>Correo</th>
                   <th>Lugares</th>
                   <th>Editar</th>
                   <th>Eliminar</th>

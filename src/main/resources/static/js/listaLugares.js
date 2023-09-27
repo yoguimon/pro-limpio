@@ -77,79 +77,7 @@ function enviarAFormularioEditar(id){
     const idCliente = parametrosDeConsulta.get('id');
     window.location.href = `formularioEditarLugar.html?id=${idCodificado}&nombre=${nom}&cliente=${idCliente}`;
 }
-/*async function cargarLugares(){
-    const request = await fetch('api/lugar', {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-    });
-    //me devuelve una lista de empleados
-    const lugares = await request.json();
 
-    let listadoHtml = '';
-            //para agragar usuarios de json
-            let cont = 0;
-              for(let lugar of lugares){
-                cont=cont+1;
-
-                let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarLugar('+lugar[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
-                let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarLugar('+lugar[0]+')"><i class="fas fa-trash"></i></a>';
-                let clienteHtml =  '<tr><td>'+cont+'</td><td>'+lugar[1]+'</td><td>'+lugar[2]+'</td><td>'+lugar[3]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
-                listadoHtml+=clienteHtml;
-          }
-
-
-          document.querySelector('#listaLugares tbody').outerHTML=listadoHtml;
-
-}
-async function mostrarLugar(id){
-    window.location.href="formularioEditarLugar.html";
-    const request = await fetch('api/lugar/'+id, {
-                method: 'GET',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                }
-        });
-        //me devuelve una lista de empleados
-        const lugar = await request.json();
-
-        document.getElementById('txtnombre').value=lugar.nombre;
-        document.getElementById('txtdireccion').value=lugar.direccion;
-        document.getElementById('txtnotas').value=lugar.notas;
-
-        /*document.getElementById('btnSaveChanges').innerHTML = '';
-        document.getElementById('btnCancel').innerHTML = '';
-
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarLugar('+lugar.idLugar+')">Modificar</button>';
-        let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</button>';
-
-        document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;
-        document.getElementById('btnCancel').innerHTML = btnCancel;
-}
-
-async function editarLugar(id){
-
-    let lugarEditado={};
-    lugarEditado.idLugar=id;
-    lugarEditado.direccion = document.getElementById('txtdireccion').value;
-    lugarEditado.nombre = document.getElementById('txtnombre').value;
-    lugarEditado.tipo = document.getElementById('cbxtipo').value;
-
-    const request = await fetch('api/lugar',{
-                method: 'PUT',
-                        headers: {
-                          'Accept': 'application/json',
-                          'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(lugarEditado)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
-                        // y lo convierte en json
-    });
-    $('#formEdicion').modal('hide');;
-    location.reload();
-}*/
 
 async function eliminarLugar(id){
     $('#formEliminar').modal('show');

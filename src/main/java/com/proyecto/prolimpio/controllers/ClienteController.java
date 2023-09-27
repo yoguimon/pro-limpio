@@ -2,10 +2,7 @@ package com.proyecto.prolimpio.controllers;
 
 import com.proyecto.prolimpio.dao.ClienteDaoImp;
 import com.proyecto.prolimpio.dao.CrudDao;
-import com.proyecto.prolimpio.models.Cliente;
-import com.proyecto.prolimpio.models.ClienteYLugarRequest;
-import com.proyecto.prolimpio.models.Empleado;
-import com.proyecto.prolimpio.models.Lugar;
+import com.proyecto.prolimpio.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +16,10 @@ public class ClienteController {
     @RequestMapping(value="api/clientes", method = RequestMethod.GET)
     public List<Cliente> getClientes(){
         return clienteDaoImp.getTodos();
+    }
+    @GetMapping("api/clientesXCarnet/{carnet}")
+    public List<ClienteLugar> getClientesXCarnet(@PathVariable String carnet){
+        return clienteDaoImp.getClientesXId(carnet);
     }
     @PostMapping("api/clientes")
     public void registrarCliente(@RequestBody ClienteYLugarRequest request){

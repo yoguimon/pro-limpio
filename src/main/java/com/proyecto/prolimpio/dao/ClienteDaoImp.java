@@ -1,9 +1,6 @@
 package com.proyecto.prolimpio.dao;
 
-import com.proyecto.prolimpio.models.Cliente;
-import com.proyecto.prolimpio.models.ClienteYLugarRequest;
-import com.proyecto.prolimpio.models.Empleado;
-import com.proyecto.prolimpio.models.Lugar;
+import com.proyecto.prolimpio.models.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -19,7 +16,7 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
     @Override
     @Transactional
     public List<Cliente> getTodos() {
-        String query = "SELECT idCliente,CONCAT(nombre,' ',apellido,' ',apellido_materno),telefono,correo\n" +
+        String query = "SELECT idCliente,carnet,CONCAT(nombre,' ',apellido,' ',apellido_materno),telefono\n" +
                 "FROM cliente";
         List<Cliente> resultado = entityManager.createNativeQuery(query).getResultList();
         return resultado;
@@ -64,5 +61,17 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
         Cliente clienteViejo = entityManager.find(Cliente.class,cliente.getIdCliente());
         cliente.setFecha_creacion(clienteViejo.getFecha_creacion());
         entityManager.merge(cliente);
+    }
+
+    public List<ClienteLugar> getClientesXId(String carnet) {
+        String query = "SELECT C.idCliente,L.idLugar,C.carnet,CONCAT(C.nombre,' ',C.apellido,' ',C.apellido_materno),\n" +
+                "\tL.nombre,L.direccion\n" +
+                "FROM cliente C\n" +
+                "\tINNER JOIN Lugar L ON C.idCliente=L.idCliente\n" +
+                "WHERE C.carnet=:carnet";
+        List<ClienteLugar> resultado = entityManager.createNativeQuery(query)
+                .setParameter("carnet",carnet)
+                .getResultList();
+        return resultado;
     }
 }

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PRO LIMPIO</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <script src="vendor/fontawesome-free/js/all.js"></script>
+    <script src="vendor/fontawesome-free/js/all.min.js"></script>
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <img src="img/logo.png" alt="" width="40">
+            </div>
+            <div class="sidebar-brand-text mx-3">Pro Limpio</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Administrador
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu EMPLEADOS-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-user fa-fw"></i>
+                <span>Empleados</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo empleados:</h6>
+                    <a class="collapse-item" href="listaEmpleados.html">Lista de Empleados</a>
+                    <a class="collapse-item" href="asignarLugares.html">Asignar Lugares de Trabajo</a>
+                    <a class="collapse-item" href="buscarEmpleados.html">Buscar Empleados</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu ASISTENCIA -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAsistencia"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span>Asistencia</span>
+            </a>
+            <div id="collapseAsistencia" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo asistencia:</h6>
+                    <a class="collapse-item" href="reportes.html">Reportes Asistencia</a>
+                    <a class="collapse-item" href="reportesFecha.html">Reportes por Fecha</a>
+                    <a class="collapse-item" href="reportesLugares.html">Reportes por Lugares</a>
+                    <a class="collapse-item" href="generarQrAsistencia.html">Generar Qr</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu Clientes-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClientes"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-solid fa-toolbox"></i>
+                <span>Clientes</span>
+            </a>
+            <div id="collapseClientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo Clientes:</h6>
+                    <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu Servicios-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-solid fa-toolbox"></i>
+                <span>Servicios</span>
+            </a>
+            <div id="collapseServicios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo servicios:</h6>
+                    <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu Asignaciones-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAsignaciones"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-solid fa-toolbox"></i>
+                <span>Asignaciones</span>
+            </a>
+            <div id="collapseAsignaciones" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo asignaciones:</h6>
+                    <a class="collapse-item active" href="registrarAsignacion.html">Asignar Trabajo</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="txtEmailUser"></span>
+                            <img class="img-profile rounded-circle"
+                                 src="img/undraw_profile.svg">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="cambiarContrasena.html">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Cambiar Contraseña
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" onclick="finalizarSession()">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Cerrar Session
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Asignaciones de Trabajo</h1>
+                <p class="mb-4">info soble las asiganciones</p>
+
+                <!-- Modal -->
+                <div class="modal fade" id="formEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Alerta</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Seguro de eleminar elemento?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="botonEliminarElemento">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- DataTales Example-Clientes con sus Lugares -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <!-- Topbar Search -->
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="form-group">
+                                    <label>Seleciona Cliente:</label>
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <input type="text" id="txtBusqueda" class="form-control bg-light border-0 small" placeholder="Buscar por carnet..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="buscarCliente()">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="agregarCliente()">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </div>
+                                    <label id="lblerrorBusqueda" class="ml-4" style="color: red;"></label>
+                                </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaClientesYSusLugares" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Carnet</th>
+                                        <th>Nombre Cliente</th>
+                                        <th>Lugar</th>
+                                        <th>Direccion</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTales Example-Servicios -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <!-- Topbar Search -->
+                            Lista Servicios:
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaServicios" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTales Example-Empleados -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <!-- Topbar Search -->
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="form-group">
+                                    <label>Seleciona Empleado:</label>
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <input type="text" id="txtBusquedaEmpleado" class="form-control bg-light border-0 small" placeholder="Buscar por carnet..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="buscarEmpleado()">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="buscarEmpleado()">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </div>
+                                    <label id="lblerrorBusquedaEmpleado" class="ml-4" style="color: red;"></label>
+                                </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaEmpleados" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Carnet</th>
+                                        <th>Nombre Empleado</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTales Example-Supervisor -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <!-- Topbar Search -->
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="form-group">
+                                    <label>Seleciona Supervisor:</label>
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <input type="text" id="txtBusquedaSupervisor" class="form-control bg-light border-0 small" placeholder="Buscar por carnet..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="buscarSupervisor()">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="buscarSupervisor()">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </div>
+                                    <label id="lblerrorBusquedaSupervisor" class="ml-4" style="color: red;"></label>
+                                </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaSupervisores" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Carnet</th>
+                                        <th>Nombre Supervisor</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <!-- Topbar Search -->
+                            tabla pre Asignacion
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaPreAsignacion" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Cliente</th>
+                                        <th>Lugar</th>
+                                        <th>Servicios</th>
+                                        <th>Empleados</th>
+                                        <th>Supervisor</th>
+                                        <th>Quitar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Jhonny 2023</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/datatables-demo.js"></script>
+<script src="js/control.js"></script>
+<script src="js/asignaciones.js"></script>
+</body>
+
+</html>
