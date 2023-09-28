@@ -247,6 +247,9 @@
                                             <i class="fas fa-user-plus"></i>
                                         </button>
                                     </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarClientes()">Mostrar Clientes</button>
+                                    </div>
                                     <label id="lblerrorBusqueda" class="ml-4" style="color: red;"></label>
                                 </div>
                             </form>
@@ -280,6 +283,15 @@
                         <h6 class="m-0 font-weight-bold text-primary">
                             <!-- Topbar Search -->
                             Lista Servicios:
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarModalServicio()">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                         </h6>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -321,9 +333,12 @@
                                         </button>
                                     </div>
                                     <div class="ml-4 input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="buscarEmpleado()">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarModalEmpleado()">
                                             <i class="fas fa-user-plus"></i>
                                         </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarEmpleados()">Mostrar Empleados</button>
                                     </div>
                                     <label id="lblerrorBusquedaEmpleado" class="ml-4" style="color: red;"></label>
                                 </div>
@@ -369,9 +384,12 @@
                                         </button>
                                     </div>
                                     <div class="ml-4 input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="buscarSupervisor()">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarModalSupervisor">
                                             <i class="fas fa-user-plus"></i>
                                         </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarSupervisores()">Mostrar Supervisores</button>
                                     </div>
                                     <label id="lblerrorBusquedaSupervisor" class="ml-4" style="color: red;"></label>
                                 </div>

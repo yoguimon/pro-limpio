@@ -27,6 +27,18 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
         List<Empleado> resultado = entityManager.createNativeQuery(query).getResultList();
         return resultado;
     }
+    public List<Empleado> getTodosEmpleados() {
+        String query = "SELECT idEmpleado,carnet,nombre,apellido,puesto,telefono\n" +
+                "FROM empleado WHERE puesto=:puesto";
+        List<Empleado> resultado = entityManager.createNativeQuery(query).setParameter("puesto","Auxiliar Limpieza").getResultList();
+        return resultado;
+    }
+    public List<Empleado> getTodosSupervisores() {
+        String query = "SELECT idEmpleado,carnet,nombre,apellido,puesto,telefono\n" +
+                "FROM empleado WHERE puesto=:puesto";
+        List<Empleado> resultado = entityManager.createNativeQuery(query).setParameter("puesto","Supervisor").getResultList();
+        return resultado;
+    }
 
     @Override
     public void eliminar(Long id) {

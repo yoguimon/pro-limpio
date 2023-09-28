@@ -21,6 +21,10 @@ public class ClienteController {
     public List<ClienteLugar> getClientesXCarnet(@PathVariable String carnet){
         return clienteDaoImp.getClientesXId(carnet);
     }
+    @GetMapping("api/clientes/asignacion")
+    public List<ClienteLugar> getTodosClientes(){
+        return clienteDaoImp.getTodosLosClientes();
+    }
     @PostMapping("api/clientes")
     public void registrarCliente(@RequestBody ClienteYLugarRequest request){
         clienteDaoImp.crearCliente(request);
