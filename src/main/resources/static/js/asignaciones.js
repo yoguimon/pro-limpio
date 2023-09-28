@@ -29,9 +29,6 @@ async function buscarCliente(){
               }
               document.querySelector('#listaClientesYSusLugares tbody').outerHTML=listadoHtml;
         }
-
-
-
 }
 async function cargarServiciosAsignacion(){
     const request = await fetch('api/servicio', {
@@ -48,7 +45,7 @@ async function cargarServiciosAsignacion(){
             let cont = 0;
               for(let servicio of servicios){
                 cont=cont+1;
-                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + servicio[0] + '" onclick="anadirATabla(' + servicio[0] + ', \'' + servicio[1] + '\')"></label>'
+                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + servicio[0] + '" onclick="anadirATabla(' + servicio[0] + ', \'' + servicio[1] + '\')"></label>';
                 let clienteHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[2]+'</td><td>'+botonCheckBox+'</td></tr>';
                 listadoHtml+=clienteHtml;
           }
@@ -85,13 +82,8 @@ function anadirATabla(idServicio,nombre){
 
                // Agrega un botón de eliminar a cada fila
                var eliminarCelda = document.createElement("td");
-               var botonEliminar = document.createElement("button");
-               botonEliminar.classList.add("btn", "btn-primary");
-               botonEliminar.innerHTML = '<i class="fas fa-minus-square"></i>';
-               botonEliminar.onclick = function() {
-                    eliminarServicio(id,servicio);
-               };
-               eliminarCelda.appendChild(botonEliminar);
+               var botonEliminar = '<a class="btn btn-primary" onclick="eliminarServicio(' + id + ', \'' + servicio + '\')"><i class="fas fa-minus-square"></i></a>';
+               eliminarCelda.insertAdjacentHTML('beforeend', botonEliminar);
                fila.appendChild(eliminarCelda);
 
                tablaServicios.appendChild(fila);
@@ -112,13 +104,8 @@ function anadirATabla(idServicio,nombre){
                 fila.appendChild(nombreCelda);
 
                 var eliminarCelda = document.createElement("td");
-                var botonEliminar = document.createElement("button");
-                botonEliminar.classList.add("btn", "btn-primary");
-                botonEliminar.innerHTML = '<i class="fas fa-minus-square"></i>';
-                botonEliminar.onclick = function() {
-                    eliminarServicio(id,servicio);
-                };
-                eliminarCelda.appendChild(botonEliminar);
+                var botonEliminar = '<a class="btn btn-primary" onclick="eliminarServicio(' + id + ', \'' + servicio + '\')"><i class="fas fa-minus-square"></i></a>';
+                eliminarCelda.insertAdjacentHTML('beforeend', botonEliminar);
                 fila.appendChild(eliminarCelda);
 
                 tablaServicios.appendChild(fila);
@@ -140,6 +127,28 @@ function eliminarServicio(idServicio,servicio) {
  }
 function tablaPreAsignacion(idCliente,idLugar,nombreCliente,lugar){
     let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
-    let tablaAsignacionHtml =  '<tr><td>'+contAsignaciones+'</td><td>'+nombreCliente+'</td><td>'+lugar+'</td><td></td><td>'+'-'+'</td><td>'+'-'+'</td><td>'+botonEliminar+'</td></tr>';
+    let tablaAsignacionHtml =  '<tr><td>'+contAsignaciones+'</td><td>'+nombreCliente+'</td><td>'+lugar+'</td><td></td><td></td><td></td><td>'+botonEliminar+'</td></tr>';
     document.querySelector('#listaPreAsignacion tbody').outerHTML=tablaAsignacionHtml;
+}
+
+async function buscarEmpleado(){
+    const carnet = document.getElementById("txtBusquedaEmpleado").value.toString();
+    const request = await fetch('api/empleadoXCarnet/'+carnet, {
+                method: 'GET',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                }
+        });
+        try {
+            const empleado = await request.json();
+             document.getElementById("lblerrorBusquedaEmpleado").innerHTML="";
+             let cont = 1;
+             var nombre = empleado.nombre+' '+empleado.apellido+' '+empleado.apellido_materno;
+             let botonRadio = '<label><input type="checkbox" name="opciones" value="' + empleado.idEmpleado + '" onclick="anadirATablaLosEmpleados(' + empleado.idEmpleado + ', \'' + nombre + '\')"></label>';
+             let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado.carnet+'</td><td>'+nombre+'</td><td>'+botonRadio+'</td></tr>';
+             document.querySelector('#listaEmpleadosXId tbody').outerHTML=empleadoHtml;
+        } catch (error) {
+            document.getElementById("lblerrorBusquedaEmpleado").innerHTML="Carnet Incorrecto!";
+        }
 }

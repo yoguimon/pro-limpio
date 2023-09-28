@@ -68,6 +68,13 @@ public class Empleado {
         this.puesto = puesto;
         this.telefono = telefono;
     }
+
+    public Empleado(Long idEmpleado, String carnet, String nombre) {
+        this.idEmpleado = idEmpleado;
+        this.carnet = carnet;
+        this.nombre = nombre;
+    }
+
     public Empleado(){}
 
     public Empleado(Long idEmpleado) {

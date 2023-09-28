@@ -2,10 +2,12 @@ package com.proyecto.prolimpio.dao;
 
 import com.proyecto.prolimpio.models.Cliente;
 import com.proyecto.prolimpio.models.Empleado;
+import com.proyecto.prolimpio.models.EmpleadoAsignacion;
 import com.proyecto.prolimpio.models.Usuario;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,5 +76,19 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
         vieja.setTelefono(empleado.getTelefono());
         vieja.setCorreo(empleado.getCorreo());
         vieja.setFoto(empleado.getFoto());
+    }
+
+    public Empleado getEmpleadoXCarnet(String carnet) {
+        String jpqlQuery = "SELECT e FROM Empleado e WHERE e.carnet = :carnet";
+        TypedQuery<Empleado> query = entityManager.createQuery(jpqlQuery, Empleado.class);
+        query.setParameter("carnet", carnet);
+
+        List<Empleado> resultado = query.getResultList();
+
+        if (!resultado.isEmpty()) {
+            return resultado.get(0);
+        }
+
+        return null;
     }
 }
