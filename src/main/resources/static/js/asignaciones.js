@@ -1,7 +1,13 @@
-var contAsignaciones=1;
+var contador=0;
 var serviciosMap = {};//lista de servicios con su id
+var empleadosMap = {};
+var supervisoresMap={};
+var clienteMap={};
+var lugarMap={};
 $(document).ready(function() {
   cargarServiciosAsignacion();
+  contador=1;
+  agregarFila();
 });
 async function buscarCliente(){
     const carnet = document.getElementById("txtBusqueda").value.toString();
@@ -23,7 +29,7 @@ async function buscarCliente(){
                 let cont = 0;
               for(let cliente of clientes){
                     cont=cont+1;
-                    let botonRadio = '<label><input type="radio" name="opciones" value="" onclick="tablaPreAsignacion(' + cliente[0] + ', \'' + cliente[1] + '\', \'' + cliente[3] + '\', \'' + cliente[4] + '\')"></label>';
+                    let botonRadio = '<label><input type="radio" name="opciones" value="' + cliente[0] + '" onclick="anadirATablaClienteYLugar(' + cliente[0] + ', \'' + cliente[1] + '\', \'' + cliente[3] + '\', \'' + cliente[4] + '\')"></label>';
                     let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+cliente[4]+'</td><td>'+cliente[5]+'</td><td>'+botonRadio+'</td></tr>';
                     listadoHtml+=clienteHtml;
               }
@@ -49,13 +55,75 @@ async function mostrarClientes(){
                 let cont = 0;
               for(let cliente of clientes){
                     cont=cont+1;
-                    let botonRadio = '<label><input type="radio" name="opciones" value="" onclick="tablaPreAsignacion(' + cliente[0] + ', \'' + cliente[1] + '\', \'' + cliente[3] + '\', \'' + cliente[4] + '\')"></label>';
+                    let botonRadio = '<label><input type="radio" name="opciones" value="' + cliente[0] + '" onclick="anadirATablaClienteYLugar(' + cliente[0] + ', \'' + cliente[1] + '\', \'' + cliente[3] + '\', \'' + cliente[4] + '\')"></label>';
                     let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+cliente[4]+'</td><td>'+cliente[5]+'</td><td>'+botonRadio+'</td></tr>';
                     listadoHtml+=clienteHtml;
               }
               document.querySelector('#listaClientesYSusLugares tbody').outerHTML=listadoHtml;
         }
 }
+function anadirATablaClienteYLugar(idCliente,idLugar,nombreCliente,lugar){
+    var tabla = document.getElementById("listaPreAsignacion");
+    var celdaCliente = tabla.rows[contador].cells[1];
+    var celdaLugar = tabla.rows[contador].cells[2];
+    clienteMap={};
+    lugarMap={};
+    celdaCliente.innerHTML='';
+    celdaLugar.innerHTML='';
+
+        clienteMap[idCliente]=nombreCliente;
+        lugarMap[idLugar]=lugar;
+
+        var tablaCliente = document.createElement("table");
+        var fila = document.createElement("tr");
+        var nombreCelda = document.createElement("td");
+        nombreCelda.textContent = nombreCliente;
+        fila.appendChild(nombreCelda);
+
+        var eliminarCelda = document.createElement("td");
+        var botonEliminar = '<a class="btn btn-primary" onclick="eliminarClienteYLugar(' + idCliente + ', \'' + idLugar + '\')"><i class="fas fa-minus-square"></i></a>';
+        eliminarCelda.insertAdjacentHTML('beforeend', botonEliminar);
+        fila.appendChild(eliminarCelda);
+
+        tablaCliente.appendChild(fila);
+        celdaCliente.appendChild(tablaCliente);
+
+        var tablaLugar = document.createElement("table");
+        var filaLugar = document.createElement("tr");
+        var nombreCeldaLugar = document.createElement("td");
+        nombreCeldaLugar.textContent = lugar;
+        filaLugar.appendChild(nombreCeldaLugar);
+
+        var eliminarCeldaLugar = document.createElement("td");
+        var botonEliminarLugar = '<a class="btn btn-primary" onclick="eliminarClienteYLugar(' + idCliente + ', \'' + idLugar + '\')"><i class="fas fa-minus-square"></i></a>';
+        eliminarCeldaLugar.insertAdjacentHTML('beforeend', botonEliminarLugar);
+        filaLugar.appendChild(eliminarCeldaLugar);
+
+        tablaLugar.appendChild(filaLugar);
+        celdaLugar.appendChild(tablaLugar);
+
+}
+function eliminarClienteYLugar(idCliente,idLugar){
+    var tablaCL = document.getElementById("listaClientesYSusLugares");
+        var radios = tablaCL.querySelectorAll('input[type="radio"]');
+
+        radios.forEach(function (radio) {
+            radio.checked = false;
+        });
+    delete clienteMap[idCliente];
+    delete lugarMap[idLugar];
+
+    var tabla = document.getElementById("listaPreAsignacion");
+    var celdaCliente = tabla.rows[contador].cells[1];
+    var celdaLugar = tabla.rows[contador].cells[2];
+
+    celdaCliente.innerHTML = ''; // Limpiar contenido de la celda de cliente
+    celdaLugar.innerHTML = '';
+    console.log(clienteMap);
+    console.log(lugarMap);
+}
+
+
 async function cargarServiciosAsignacion(){
     const request = await fetch('api/servicio', {
             method: 'GET',
@@ -84,7 +152,7 @@ function anadirATabla(idServicio,nombre){
     // Verificar si el checkbox está marcado o desmarcado
     var checkbox = document.querySelector('input[type="checkbox"][value="' + idServicio + '"]');
     var tabla = document.getElementById("listaPreAsignacion");
-    var celda = tabla.rows[1].cells[3]; // Obtén la celda específica
+    var celda = tabla.rows[contador].cells[3]; // Obtén la celda específica
 
     // Eliminar el contenido existente de la celda
     celda.innerHTML = '';
@@ -151,11 +219,7 @@ function eliminarServicio(idServicio,servicio) {
     }
     anadirATabla(idServicio,servicio); // Vuelve a generar la tabla
  }
-function tablaPreAsignacion(idCliente,idLugar,nombreCliente,lugar){
-    let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
-    let tablaAsignacionHtml =  '<tr><td>'+contAsignaciones+'</td><td>'+nombreCliente+'</td><td>'+lugar+'</td><td></td><td></td><td></td><td>'+botonEliminar+'</td></tr>';
-    document.querySelector('#listaPreAsignacion tbody').outerHTML=tablaAsignacionHtml;
-}
+
 
 async function buscarEmpleado(){
     const carnet = document.getElementById("txtBusquedaEmpleado").value.toString();
@@ -218,12 +282,83 @@ async function mostrarEmpleados(){
           for(let empleado of empleados){
                 cont=cont+1;
                 var nombre = empleado[2]+' '+empleado[3];
-                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado[0] + '" onclick="anadirATablaLosEmpleados(' + empleado[0] + ', \'' + empleado[1] + '\')"></label>';
+                let botonCheckBox = '<label><input type="checkbox" name="ops" value="' + empleado[0] + '" onclick="anadirATablaLosEmpleados(' + empleado[0] + ', \'' + nombre + '\')"></label>';
                 let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
                 listadoHtml+=empleadoHtml;
           }
             document.querySelector('#listaEmpleadosXId tbody').outerHTML=listadoHtml;
 }
+function anadirATablaLosEmpleados(idEmpleado,nombre){
+    // Verificar si el checkbox está marcado o desmarcado
+    var checkbox = document.querySelector('input[type="checkbox"][value="' + idEmpleado + '"]');
+    var tabla = document.getElementById("listaPreAsignacion");
+    var celda = tabla.rows[contador].cells[4]; // Obtén la celda específica
+
+    // Eliminar el contenido existente de la celda
+    celda.innerHTML = '';
+
+    if (checkbox.checked) {
+        if (!empleadosMap[idEmpleado]) {
+            empleadosMap[idEmpleado] = nombre;
+        }
+
+        // Crear una nueva tabla para mostrar los servicios
+        var tablaEmpleadosAsignados = document.createElement("table");
+
+         for (var id in empleadosMap) {
+            if (empleadosMap.hasOwnProperty(id)) {
+               var empleado = empleadosMap[id];
+               var fila = document.createElement("tr");
+               var nombreCelda = document.createElement("td");
+               nombreCelda.textContent = empleado;
+               fila.appendChild(nombreCelda);
+
+               // Agrega un botón de eliminar a cada fila
+               var eliminarCelda = document.createElement("td");
+               var botonEliminar = '<a class="btn btn-primary" onclick="eliminarEmpleadoAsignado(' + id + ', \'' + empleado + '\')"><i class="fas fa-minus-square"></i></a>';
+               eliminarCelda.insertAdjacentHTML('beforeend', botonEliminar);
+               fila.appendChild(eliminarCelda);
+
+               tablaEmpleadosAsignados.appendChild(fila);
+            }
+         }
+         celda.appendChild(tablaEmpleadosAsignados);
+         console.log(empleadosMap);
+    } else { // Se desmarcó el checkbox
+        delete empleadosMap[idEmpleado];
+
+        var tablaEmpleadosAsignados = document.createElement("table");
+        for (var id in empleadosMap) {
+            if (empleadosMap.hasOwnProperty(id)) {
+                var empleado = empleadosMap[id];
+                var fila = document.createElement("tr");
+                var nombreCelda = document.createElement("td");
+                nombreCelda.textContent = empleado;
+                fila.appendChild(nombreCelda);
+
+                var eliminarCelda = document.createElement("td");
+                var botonEliminar = '<a class="btn btn-primary" onclick="eliminarEmpleadoAsignado(' + id + ', \'' + empleado + '\')"><i class="fas fa-minus-square"></i></a>';
+                eliminarCelda.insertAdjacentHTML('beforeend', botonEliminar);
+                fila.appendChild(eliminarCelda);
+
+                tablaEmpleadosAsignados.appendChild(fila);
+            }
+        }
+        celda.appendChild(tablaEmpleadosAsignados);
+        console.log(empleadosMap);
+    }
+
+}
+function eliminarEmpleadoAsignado(idEmpleado,nombre) {
+ // Función para eliminar un servicio del mapa y actualizar la tabla
+    delete empleadosMap[idEmpleado];
+    var checkbox = document.querySelector('input[type="checkbox"][value="' + idEmpleado + '"]');
+    if (checkbox) {
+        checkbox.checked = false; // Desmarca el checkbox
+    }
+    anadirATablaLosEmpleados(idEmpleado,nombre); // Vuelve a generar la tabla
+ }
+
 async function mostrarSupervisores(){
     const request = await fetch('api/supervisores/todos', {
             method: 'GET',
@@ -241,9 +376,159 @@ async function mostrarSupervisores(){
           for(let empleado of empleados){
                 cont=cont+1;
                 var nombre = empleado[2]+' '+empleado[3];
-                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado[0] + '" onclick="anadirATablaLosEmpleados(' + empleado[0] + ', \'' + empleado[1] + '\')"></label>';
+                let botonCheckBox = '<label><input type="checkbox" name="op" value="' + empleado[0] + '" onclick="anadirATablaLosSupervisores(' + empleado[0] + ', \'' + nombre + '\')"></label>';
                 let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
                 listadoHtml+=empleadoHtml;
           }
           document.querySelector('#listaSupervisores tbody').outerHTML=listadoHtml;
+}
+function anadirATablaLosSupervisores(idSupervisor,nombre){
+    // Verificar si el checkbox está marcado o desmarcado
+    var checkbox = document.querySelector('input[type="checkbox"][value="' + idSupervisor + '"]');
+    var tabla = document.getElementById("listaPreAsignacion");
+    var celda = tabla.rows[contador].cells[5]; // Obtén la celda específica
+
+    // Eliminar el contenido existente de la celda
+    celda.innerHTML = '';
+
+    if (checkbox.checked) {
+        if (!supervisoresMap[idSupervisor]) {
+            supervisoresMap[idSupervisor] = nombre;
+        }
+
+        // Crear una nueva tabla para mostrar los servicios
+        var tablaSupervisoresAsignados = document.createElement("table");
+
+         for (var id in supervisoresMap) {
+            if (supervisoresMap.hasOwnProperty(id)) {
+               var supervisor = supervisoresMap[id];
+               var fila = document.createElement("tr");
+               var nombreCelda = document.createElement("td");
+               nombreCelda.textContent = supervisor;
+               fila.appendChild(nombreCelda);
+
+               // Agrega un botón de eliminar a cada fila
+               var eliminarCelda = document.createElement("td");
+               var botonEliminar = '<a class="btn btn-primary" onclick="eliminarSupervisorAsignado(' + id + ', \'' + supervisor + '\')"><i class="fas fa-minus-square"></i></a>';
+               eliminarCelda.insertAdjacentHTML('beforeend', botonEliminar);
+               fila.appendChild(eliminarCelda);
+
+               tablaSupervisoresAsignados.appendChild(fila);
+            }
+         }
+         celda.appendChild(tablaSupervisoresAsignados);
+         console.log(supervisoresMap);
+    } else { // Se desmarcó el checkbox
+        delete supervisoresMap[idSupervisor];
+
+        var tablaSupervisoresAsignados = document.createElement("table");
+        for (var id in supervisoresMap) {
+            if (supervisoresMap.hasOwnProperty(id)) {
+                var supervisor = supervisoresMap[id];
+                var fila = document.createElement("tr");
+                var nombreCelda = document.createElement("td");
+                nombreCelda.textContent = supervisor;
+                fila.appendChild(nombreCelda);
+
+                var eliminarCelda = document.createElement("td");
+                var botonEliminar = '<a class="btn btn-primary" onclick="eliminarSupervisorAsignado(' + id + ', \'' + supervisor + '\')"><i class="fas fa-minus-square"></i></a>';
+                eliminarCelda.insertAdjacentHTML('beforeend', botonEliminar);
+                fila.appendChild(eliminarCelda);
+
+                tablaSupervisoresAsignados.appendChild(fila);
+            }
+        }
+        celda.appendChild(tablaSupervisoresAsignados);
+        console.log(supervisoresMap);
+    }
+}
+function eliminarSupervisorAsignado(idSupervisor,nombre) {
+ // Función para eliminar un servicio del mapa y actualizar la tabla
+    delete supervisoresMap[idSupervisor];
+    var checkbox = document.querySelector('input[type="checkbox"][value="' + idSupervisor + '"]');
+    if (checkbox) {
+        checkbox.checked = false; // Desmarca el checkbox
+    }
+    anadirATablaLosSupervisores(idSupervisor,nombre); // Vuelve a generar la tabla
+ }
+function validarDatos(boton) {
+    const errorAsignacion = document.getElementById('lblerrorAsignaciones');
+    errorAsignacion.innerHTML="";
+    if (Object.keys(clienteMap).length === 0) {
+        errorAsignacion.innerHTML = 'Ingrese Cliente y Lugar, ';
+    }
+    if (Object.keys(serviciosMap).length === 0) {
+        errorAsignacion.innerHTML += 'Ingrese Servicios, ';
+    }
+    if (Object.keys(empleadosMap).length === 0) {
+        errorAsignacion.innerHTML += 'Ingrese Empleados, ';
+    }
+    if (Object.keys(supervisoresMap).length === 0) {
+        errorAsignacion.innerHTML += 'Ingrese Supervisores, ';
+    }
+
+    // Verifica si el mensaje de error está vacío
+    if (errorAsignacion.innerHTML === "") {
+        if (boton === 'agregar') {
+            alert("Agregar más Asignaciones");
+            contador=contador+1;
+            //anado siguiente fila ala tabla
+            agregarFila();
+
+            //tengo que guardar datos de asigancion y limpiar todos los maps
+            desmarcar();
+        }
+        if (boton === 'guardar') {
+            alert("Guardar las Asignaciones");
+            //envio todos los datos para la asignacion en bd
+        }
+    }
+
+}
+function agregarFila(){
+    const tabla = document.getElementById('listaPreAsignacion').getElementsByTagName('tbody')[0];
+
+    // Crear una nueva fila
+    const fila = document.createElement('tr');
+
+    // Llena las celdas de la fila con los datos correspondientes
+    fila.innerHTML = `
+      <td>${contador}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        <a class="btn btn-primary btn-circle btn-sm" onclick="eliminarFila(this)"><i class="fas fa-trash"></i></a>
+      </td>
+    `;
+
+    // Agrega la fila a la tabla
+    tabla.appendChild(fila);
+
+}
+function eliminarFila(boton) {
+  // Obtén una referencia a la fila que contiene el botón
+  const fila = boton.closest('tr');
+
+  // Verifica si la fila existe antes de intentar eliminarla
+  if (fila) {
+    fila.remove(); // Elimina la fila
+  }
+  agregarFila();
+  desmarcar();
+  //LIMPIAR TODOS LOS MAPS
+}
+function desmarcar(){
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach((radio) => {
+      radio.checked = false;
+    });
+
+    // Desmarcar checkboxes
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
 }

@@ -421,7 +421,9 @@
                         <h6 class="m-0 font-weight-bold text-primary">
                             <!-- Topbar Search -->
                             tabla pre Asignacion
+                            <label id="lblerrorAsignaciones" class="ml-4" style="color: red;"></label>
                         </h6>
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="listaPreAsignacion" width="100%" cellspacing="0">
@@ -441,6 +443,16 @@
 
                                     </tbody>
                                 </table>
+                            </div>
+                            <br>
+                            <div class="form-group row justify-content-center">
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <a class="btn btn-primary btn-user btn-block btn-lg" onclick="validarDatos('agregar')">Agregar mas asignaciones</a>
+                                </div>
+                                <div class="col-sm-2"></div> <!-- Columna vacía de 2 columnas de ancho para el espacio -->
+                                <div class="col-sm-4">
+                                    <a class="btn btn-primary btn-user btn-block btn-lg" onclick="validarDatos('guardar')">Guardar Asignaciones</a>
+                                </div>
                             </div>
                         </div>
                     </div>
