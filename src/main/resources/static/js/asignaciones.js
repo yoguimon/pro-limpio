@@ -5,7 +5,6 @@ var supervisoresMap={};
 var clienteMap={};
 var lugarMap={};
 $(document).ready(function() {
-  cargarServiciosAsignacion();
   contador=1;
   agregarFila();
 });
@@ -139,14 +138,30 @@ async function cargarServiciosAsignacion(){
             let cont = 0;
               for(let servicio of servicios){
                 cont=cont+1;
+                let totalLimpieza='<input type="text" class="small-input "id="input_' + cont + '" oninput="actualizarTotal(' + cont + ')">';
                 let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + servicio[0] + '" onclick="anadirATabla(' + servicio[0] + ', \'' + servicio[1] + '\')"></label>';
-                let clienteHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[2]+'</td><td>'+botonCheckBox+'</td></tr>';
-                listadoHtml+=clienteHtml;
+                let servicioHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[2]+'</td><td style="text-align: center;">'+servicio[3]+'</td><td style="text-align: center;">'+totalLimpieza+'</td><td style="text-align: center;"><label id="totalServicio_' + cont + '">-</label></td><td>'+botonCheckBox+'</td></tr>';
+                listadoHtml+=servicioHtml;
           }
 
 
           document.querySelector('#listaServicios tbody').outerHTML=listadoHtml;
 
+}
+function actualizarTotal(cont) {
+    const servicioValue = parseFloat(document.querySelector('#listaServicios tbody tr:nth-child(' + cont + ') td:nth-child(4)').textContent);
+    const input = document.getElementById('input_' + cont);
+    const totalServicioLabel = document.getElementById('totalServicio_' + cont);
+
+    if (!isNaN(servicioValue) && !isNaN(input.value)) {
+        const total = servicioValue * parseFloat(input.value);
+        totalServicioLabel.textContent = total;
+    } else {
+        totalServicioLabel.textContent = '-';
+    }
+    if(input.value===''){
+        totalServicioLabel.textContent = '-';
+    }
 }
 function anadirATabla(idServicio,nombre){
     // Verificar si el checkbox está marcado o desmarcado
@@ -469,7 +484,8 @@ function validarDatos(boton) {
 
     // Verifica si el mensaje de error está vacío
     if (errorAsignacion.innerHTML === "") {
-        if (boton === 'agregar') {
+        alert("Guardando Asignacion");
+        /*if (boton === 'agregar') {
             alert("Agregar más Asignaciones");
             contador=contador+1;
             //anado siguiente fila ala tabla
@@ -481,7 +497,7 @@ function validarDatos(boton) {
         if (boton === 'guardar') {
             alert("Guardar las Asignaciones");
             //envio todos los datos para la asignacion en bd
-        }
+        }*/
     }
 
 }
@@ -519,6 +535,10 @@ function eliminarFila(boton) {
   agregarFila();
   desmarcar();
   //LIMPIAR TODOS LOS MAPS
+  empleadosMap = {};
+  supervisoresMap={};
+  clienteMap={};
+  lugarMap={};
 }
 function desmarcar(){
     const radioButtons = document.querySelectorAll('input[type="radio"]');
@@ -532,3 +552,4 @@ function desmarcar(){
       checkbox.checked = false;
     });
 }
+

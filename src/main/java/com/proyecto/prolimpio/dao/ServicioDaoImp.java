@@ -16,8 +16,8 @@ public class ServicioDaoImp implements CrudDao<Servicio>{
     EntityManager entityManager;
     @Override
     public List<Servicio> getTodos() {
-        String query = "SELECT idServicio,nombre,descripcion,categoria\n" +
-                "FROM servicio";
+        String query = "SELECT idServicio,nombre,descripcion,costo_m2,categoria\n" +
+                "FROM servicio WHERE estado=1;";
         List<Servicio> resultado = entityManager.createNativeQuery(query).getResultList();
         return resultado;
     }
@@ -25,11 +25,13 @@ public class ServicioDaoImp implements CrudDao<Servicio>{
     @Override
     public void eliminar(Long id) {
         Servicio servicio = entityManager.find(Servicio.class,id);
-        entityManager.remove(servicio);
+        servicio.setEstado((byte)0);
+        entityManager.merge(servicio);
     }
 
     @Override
     public void crear(Servicio servicio) {
+        servicio.setEstado((byte)1);
         entityManager.merge(servicio);
     }
 

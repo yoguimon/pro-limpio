@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>PRO LIMPIO</title>
-
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
@@ -28,7 +28,6 @@
 
     <script src="vendor/fontawesome-free/js/all.js"></script>
     <script src="vendor/fontawesome-free/js/all.min.js"></script>
-
 </head>
 
 <body id="page-top">
@@ -201,7 +200,7 @@
                 <h1 class="h3 mb-2 text-gray-800">Asignaciones de Trabajo</h1>
                 <p class="mb-4">info soble las asiganciones</p>
 
-                <!-- Modal -->
+                <!-- Modal Eliminar -->
                 <div class="modal fade" id="formEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -222,18 +221,13 @@
                     </div>
                 </div>
 
-
-
                 <!-- DataTales Example-Clientes con sus Lugares -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">
+                            Seleciona Cliente:
                             <!-- Topbar Search -->
                             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                <div class="form-group">
-                                    <label>Seleciona Cliente:</label>
-                                </div>
-                                <br>
                                 <div class="input-group">
                                     <input type="text" id="txtBusqueda" class="form-control bg-light border-0 small" placeholder="Buscar por carnet..."
                                            aria-label="Search" aria-describedby="basic-addon2">
@@ -243,9 +237,9 @@
                                         </button>
                                     </div>
                                     <div class="ml-4 input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="agregarCliente()">
+                                        <a class="btn btn-primary" type="button" href="formularioCliente.html">
                                             <i class="fas fa-user-plus"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                     <div class="ml-4 input-group-append">
                                         <button class="btn btn-primary" type="button" onclick="mostrarClientes()">Mostrar Clientes</button>
@@ -285,10 +279,20 @@
                             Lista Servicios:
                             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                 <div class="input-group">
+                                    <input type="text" id="txtBusquedaServicio" class="form-control bg-light border-0 small" placeholder="Buscar por nombre..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="buscarServicio()">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
                                     <div class="ml-4 input-group-append">
                                         <button class="btn btn-primary" type="button" onclick="mostrarModalServicio()">
                                             <i class="fas fa-user-plus"></i>
                                         </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="cargarServiciosAsignacion()">Mostrar Servicios</button>
                                     </div>
                                 </div>
                             </form>
@@ -301,6 +305,9 @@
                                         <th>Nro</th>
                                         <th>Nombre</th>
                                         <th>Descripcion</th>
+                                        <th style="text-align: center;">Costo x M2 en Bs.</th>
+                                        <th style="text-align: center;">Total M2 de limpieza</th>
+                                        <th>Total en Bs x Servicio</th>
                                         <th>Seleccionar</th>
                                     </tr>
                                     </thead>
@@ -313,17 +320,102 @@
                         </div>
                     </div>
                 </div>
+                <!--MODAL Servicios-->
+                <div class="modal fade" id="formAgregarServicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Datos</h1>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="user">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card" style="width: 15rem;">
+                                                        <div class="card-body">
+                                                            <img src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-character-default-avatar-image_2237203.jpg" class="card-img-top" alt="..." width="15" height="120" id="img">
+                                                            <input type="file" id="foto" class="form-control-file" style="display: none;"/>
+                                                            <label for="foto" class="btn btn-primary btn-block">Subir Foto</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" id="txtnombreServicio"
+                                                   placeholder="Nombre Servicio">
+                                            <label id="lblErrorNombreS"></label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user" id="txtdescripcion"
+                                                   placeholder="Descripcion">
+                                            <label id="lblErrorDescripcion"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user" id="txtcosto"
+                                                   placeholder="Costo m2">
+                                            <label id="lblErrorCosto"></label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" id="cbxcategoria" name="categoria">
+                                                <option value="Pisos" selected>Pisos</option>
+                                                <option value="Ventanas">Ventanas</option>
+                                                <option value="Oficinas">Oficinas</option>
+                                                <option value="Jardines">Jardines</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <a id="btnSaveChanges" class="btn btn-primary btn-user btn-block" onclick="validacionServicioDesdeAsigancion()">
+                                                Agregar Servicio
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a id="btnCancel" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</a><!--revisar esto-->
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
 
                 <!-- DataTales Example-Empleados -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">
+                            Seleciona Empleado:
                             <!-- Topbar Search -->
                             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                <div class="form-group">
-                                    <label>Seleciona Empleado:</label>
-                                </div>
-                                <br>
                                 <div class="input-group">
                                     <input type="text" id="txtBusquedaEmpleado" class="form-control bg-light border-0 small" placeholder="Buscar por carnet..."
                                            aria-label="Search" aria-describedby="basic-addon2">
@@ -364,17 +456,156 @@
                         </div>
                     </div>
                 </div>
+                <!--MODAL Empleado-->
+                <div class="modal fade" id="formAgregarEmpleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabelAsignacion">Agregar Empleado</h1>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="user" id="formulario" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card" style="width: 15rem;">
+                                                        <div class="card-body">
+                                                            <img src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-character-default-avatar-image_2237203.jpg" class="card-img-top" alt="..." width="15" height="120" id="imgAsignacion">
+                                                            <input type="file" id="fotoAsignacion" class="form-control-file" style="display: none;"/>
+                                                            <label for="foto" class="btn btn-primary btn-block">Subir Foto</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" id="txtcarnet"
+                                                   placeholder="Carnet" name="txtcarnet">
+                                            <label id="lblErrorCarnet"></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control form-control-user" id="txtnombre"
+                                                   placeholder="Nombres">
+                                            <label id="lblErrorNombreAsignacion"></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control form-control-user" id="txtapellido"
+                                                   placeholder="Apellido Paterno">
+                                            <label id="lblErrorApellidos"></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control form-control-user" id="txtapellidoM"
+                                                   placeholder="Apellido Materno">
+                                            <label id="lblErrorApellidoM"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-4 mb-3 mb-sm-0">
+                                            <input type="text" id="txtFechaNacimiento" class="form-control form-control-user"
+                                                   placeholder="Fecha Nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+                                            <label id="lblErrorFN"></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control form-control-user"
+                                                   id="txtFechaContratacion" placeholder="Fecha Contratacion" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+                                            <label id="lblErrorFC"></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control form-control-user"
+                                                   id="txtsalario" placeholder="Salario">
+                                            <label id="lblErrorSalario"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-4 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" id="txtdireccion"
+                                                   placeholder="Direccion Domicilio">
+                                            <label id="lblErrorDireccion"></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control form-control-user" id="txttelefono"
+                                                   placeholder="Telefono/Celular">
+                                            <label id="lblErrorTelefono"></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="email" class="form-control form-control-user" id="txtemail"
+                                                   placeholder="Correo Electronico">
+                                            <label id="lblErrorCorreo"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-4 mb-3 mb-sm-0 form-group">
+                                            <select class="form-control" id="cbxsexo" name="sexo">
+                                                <option value="M" selected>Hombre</option>
+                                                <option value="F">Mujer</option>
+                                            </select>
+                                            <label id="lblErrorSexo"></label>
+                                        </div>
+
+                                        <div class="col-sm-4 form-group">
+                                            <select class="form-control" id="cbxpuesto" name="rol">
+                                                <option value="Auxiliar Limpieza" selected>Auxiliar Limpieza</option>
+                                                <option value="Supervisor">Supervisor</option>
+                                            </select>
+                                            <label id="lblErrorPuesto"></label>
+                                        </div>
+
+                                        <div class="col-sm-4 form-group">
+                                            <select class="form-control" id="cbxestado" name="estad0">
+                                                <option value="Soltero" selected>Solter@</option>
+                                                <option value="Casado">Casad@</option>
+                                                <option value="Viudo">Viud@</option>
+                                            </select>
+                                            <label id="lblErrorEC"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <a id="botonCargar" class="btn btn-primary btn-user btn-block" onclick="validarEmpleadoAsignacion()">
+                                                Agregar
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</a><!--revisar esto-->
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
 
                 <!-- DataTales Example-Supervisor -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">
+                            Seleciona Supervisor:
                             <!-- Topbar Search -->
                             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                                <div class="form-group">
-                                    <label>Seleciona Supervisor:</label>
-                                </div>
-                                <br>
                                 <div class="input-group">
                                     <input type="text" id="txtBusquedaSupervisor" class="form-control bg-light border-0 small" placeholder="Buscar por carnet..."
                                            aria-label="Search" aria-describedby="basic-addon2">
@@ -384,7 +615,7 @@
                                         </button>
                                     </div>
                                     <div class="ml-4 input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="mostrarModalSupervisor">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarModalEmpleado()">
                                             <i class="fas fa-user-plus"></i>
                                         </button>
                                     </div>
@@ -446,12 +677,12 @@
                             </div>
                             <br>
                             <div class="form-group row justify-content-center">
-                                <div class="col-sm-4 mb-3 mb-sm-0">
-                                    <a class="btn btn-primary btn-user btn-block btn-lg" onclick="validarDatos('agregar')">Agregar mas asignaciones</a>
-                                </div>
-                                <div class="col-sm-2"></div> <!-- Columna vacía de 2 columnas de ancho para el espacio -->
+                                <div class="col-sm-2 mb-3 mb-sm-0"></div>
                                 <div class="col-sm-4">
-                                    <a class="btn btn-primary btn-user btn-block btn-lg" onclick="validarDatos('guardar')">Guardar Asignaciones</a>
+                                    <a class="btn btn-primary btn-user btn-block btn-lg" onclick="validarDatos('guardar')">Guardar Asignacions</a>
+                                </div> <!-- Columna vacía de 2 columnas de ancho para el espacio -->
+                                <div class="col-sm-2">
+
                                 </div>
                             </div>
                         </div>
@@ -506,7 +737,9 @@
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
 <script src="js/control.js"></script>
+<script src="js/validaciones.js"></script>
 <script src="js/asignaciones.js"></script>
+<script src="js/agregarNuevosEnAsignacion.js"></script>
 </body>
 
 </html>

@@ -73,5 +73,12 @@ label{
 .leaflet-container {
     font-size: 16px; /* Ajusta el tamaño de fuente según tus preferencias */
 }
+.small-input {
+    width: 50px; /* Puedes ajustar este valor según tus necesidades */
+}
+.center-cell {
+    text-align: center; /* Centra horizontalmente el contenido */
+    vertical-align: middle; /* Centra verticalmente el contenido */
+}
 
 

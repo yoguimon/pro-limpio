@@ -139,7 +139,7 @@ async function eliminarEmpleado(id){
                 'Content-Type': 'application/json'
             }
         });
-        $('#formEdicion').modal('hide');
+        $('#formEliminar').modal('hide');
         // Recarga la página o realiza alguna otra acción después de la eliminación
         location.reload();
     });

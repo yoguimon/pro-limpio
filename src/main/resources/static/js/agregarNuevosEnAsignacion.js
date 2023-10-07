@@ -1,7 +1,40 @@
-// Call the dataTables jQuery plugin
-//import {validarNombre} from './validaciones.js';
-async function agregarEmpleado(datos){
-        var popup = document.getElementById("popupEmpleado");
+function mostrarModalServicio(){
+    $('#formAgregarServicio').modal('show');
+}
+async function agregarServicioAsignacion(datos){
+      const request = await fetch('api/servicio', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
+        // y lo convierte en json
+      });
+      $('#formAgregarServicio').modal('hide');
+       cargarServiciosAsignacion();
+}
+function validacionServicioDesdeAsigancion(){
+    let datos = {};
+    datos.nombre = document.getElementById('txtnombreServicio').value;
+    datos.descripcion = document.getElementById('txtdescripcion').value;
+    datos.categoria = document.getElementById('cbxcategoria').value;
+
+    const errorNombreS = document.getElementById('lblErrorNombreS');
+    const errorDescripcion = document.getElementById('lblErrorDescripcion');
+
+    errorNombreS.innerHTML = validarNombre(datos.nombre);
+    errorDescripcion.innerHTML = validarDireccion(datos.descripcion);
+
+    if(errorNombreS.innerHTML==="" && errorDescripcion.innerHTML===""){
+         agregarServicioAsignacion(datos);
+    }
+}
+function mostrarModalEmpleado(){
+    $('#formAgregarEmpleado').modal('show');
+}
+
+async function agregarEmpleadoAsignacion(datos){
         const request = await fetch('api/empleados', {
                 method: 'POST',
                 headers: {
@@ -9,10 +42,11 @@ async function agregarEmpleado(datos){
                   'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(datos)
-              });
-              mostrarAlerta('listaEmpleados.html',popup);
+        });
+        $('#formAgregarEmpleado').modal('hide');
+        mostrarEmpleados();
 }
-async function validarEmpleado(){
+async function validarEmpleadoAsignacion(){
     const botonCargar = document.getElementById('botonCargar');
 
     botonCargar.disabled = true;
@@ -40,7 +74,7 @@ async function validarEmpleado(){
     datos.foto = "sin foto";
 
     const errorCarnet = document.getElementById('lblErrorCarnet');
-    const errorNombres = document.getElementById('lblErrorNombres');
+    const errorNombres = document.getElementById('lblErrorNombreAsignacion');
     const errorApellidos = document.getElementById('lblErrorApellidos');
     const errorApellidoM = document.getElementById('lblErrorApellidoM');
     const errorFN = document.getElementById('lblErrorFN');
@@ -72,7 +106,7 @@ async function validarEmpleado(){
     if(errorCarnet.innerHTML==="" && errorNombres.innerHTML==="" && errorApellidos.innerHTML==="" && errorApellidoM.innerHTML === "" && errorSalario.innerHTML===""
         && errorDireccion.innerHTML==="" && errorTelefono.innerHTML==="" && errorCorreo.innerHTML==="" && errorPuesto.innerHTML===""
         && errorEC.innerHTML==="" && errorFC.innerHTML==="" && errorFN.innerHTML==="") {
-        agregarEmpleado(datos);
+        agregarEmpleadoAsignacion(datos);
     }
 
 }

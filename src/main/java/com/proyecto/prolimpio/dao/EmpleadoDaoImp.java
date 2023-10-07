@@ -23,19 +23,19 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
     @Override
     public List<Empleado> getTodos() {
         String query = "SELECT idEmpleado,carnet,nombre,apellido,puesto,telefono\n" +
-                        "FROM empleado";
+                        "FROM empleado WHERE estado=1;";
         List<Empleado> resultado = entityManager.createNativeQuery(query).getResultList();
         return resultado;
     }
     public List<Empleado> getTodosEmpleados() {
         String query = "SELECT idEmpleado,carnet,nombre,apellido,puesto,telefono\n" +
-                "FROM empleado WHERE puesto=:puesto";
+                "FROM empleado WHERE puesto=:puesto AND estado=1;";
         List<Empleado> resultado = entityManager.createNativeQuery(query).setParameter("puesto","Auxiliar Limpieza").getResultList();
         return resultado;
     }
     public List<Empleado> getTodosSupervisores() {
         String query = "SELECT idEmpleado,carnet,nombre,apellido,puesto,telefono\n" +
-                "FROM empleado WHERE puesto=:puesto";
+                "FROM empleado WHERE puesto=:puesto AND estado=1;";
         List<Empleado> resultado = entityManager.createNativeQuery(query).setParameter("puesto","Supervisor").getResultList();
         return resultado;
     }
@@ -43,11 +43,13 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
     @Override
     public void eliminar(Long id) {
         Empleado empleado = entityManager.find(Empleado.class,id);
-        entityManager.remove(empleado);
+        empleado.setEstado((byte)0);
+        entityManager.merge(empleado);
     }
 
     @Override
     public void crear(Empleado empleado) {
+        empleado.setEstado((byte)1);
         entityManager.persist(empleado);
         String query = "INSERT INTO usuario(idEmpleado,email,pass,rol)\n" +
                 "\tVALUES(:idEmpleado,:email,:pass,:rol);";

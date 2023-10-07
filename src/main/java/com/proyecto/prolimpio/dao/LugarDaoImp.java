@@ -19,9 +19,9 @@ public class LugarDaoImp implements CrudDao<Lugar>{
     @PersistenceContext
     EntityManager entityManager;
     @Override
-    public List<Lugar> getTodos() {
+    public List<Lugar> getTodos() {//ESTO NO LO USO YA, ESTA MAL...
         String query = "SELECT idLugar,direccion,nombre,tipo\n" +
-                "FROM lugar";
+                "FROM lugar WHERE estado=1";
         List<Lugar> resultado = entityManager.createNativeQuery(query).getResultList();
         return resultado;
     }
@@ -29,11 +29,13 @@ public class LugarDaoImp implements CrudDao<Lugar>{
     @Override
     public void eliminar(Long id) {
         Lugar lugar = entityManager.find(Lugar.class,id);
-        entityManager.remove(lugar);
+        lugar.setEstado((byte)0);
+        entityManager.merge(lugar);
     }
 
     @Override
     public void crear(Lugar lugar) {
+        lugar.setEstado((byte)1);
         entityManager.persist(lugar);
     }
 
@@ -46,6 +48,7 @@ public class LugarDaoImp implements CrudDao<Lugar>{
         lugar.setNotas(lugarResponse.getNotas());
         lugar.setLatitud(lugarResponse.getLatitud());
         lugar.setLongitud(lugarResponse.getLongitud());
+        lugar.setEstado((byte)1);
         entityManager.persist(lugar);
     }
 
@@ -69,7 +72,7 @@ public class LugarDaoImp implements CrudDao<Lugar>{
     }
 
     public List<Lugar> getTodosXId(Long id) {
-        String query = "SELECT * FROM lugar WHERE idCliente=:id";
+        String query = "SELECT * FROM lugar WHERE idCliente=:id AND estado=1";
         List<Lugar> resultado = entityManager.createNativeQuery(query)
                 .setParameter("id",id)
                 .getResultList();

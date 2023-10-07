@@ -21,7 +21,7 @@ function validacionServicio(){
     const errorDescripcion = document.getElementById('lblErrorDescripcion');
 
     errorNombreS.innerHTML = validarNombre(datos.nombre);
-    errorDescripcion.innerHTML = validarNombre(datos.descripcion);
+    errorDescripcion.innerHTML = validarDireccion(datos.descripcion);
 
     if(errorNombreS.innerHTML==="" && errorDescripcion.innerHTML===""){
          agregarServicio(datos);

@@ -34,6 +34,8 @@ public class Cliente {
     private String foto;
     @Column(name="fecha_registro")
     private LocalDate fecha_registro;
+    @Column(name="estado")
+    private byte estado;
     @CreationTimestamp
     @Column(name="fecha_creacion")
     private LocalDateTime fecha_creacion;

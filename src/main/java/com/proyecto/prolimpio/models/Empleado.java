@@ -46,6 +46,8 @@ public class Empleado {
     private String correo;
     @Column(name="foto")
     private String foto;
+    @Column(name="estado")
+    private byte estado;
     @CreationTimestamp
     @Column(name="fecha_creacion")
     private LocalDateTime fecha_creacion;

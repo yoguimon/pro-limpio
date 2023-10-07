@@ -1,7 +1,6 @@
 package com.proyecto.prolimpio.controllers;
 
 import com.proyecto.prolimpio.dao.UsuarioDaoImp;
-import com.proyecto.prolimpio.models.Empleado;
 import com.proyecto.prolimpio.models.Usuario;
 import com.proyecto.prolimpio.util.EmailUtil;
 import com.proyecto.prolimpio.util.JWTUtil;
@@ -92,7 +91,4 @@ public class UsuarioController {
             return "fail";
         }
     }
-
-
-
 }

@@ -17,7 +17,7 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
     @Transactional
     public List<Cliente> getTodos() {
         String query = "SELECT idCliente,carnet,CONCAT(nombre,' ',apellido,' ',apellido_materno),telefono\n" +
-                "FROM cliente";
+                "FROM cliente WHERE estado=1;";
         List<Cliente> resultado = entityManager.createNativeQuery(query).getResultList();
         return resultado;
     }
@@ -25,26 +25,30 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
     @Override
     public void eliminar(Long id) {
         Cliente cliente = entityManager.find(Cliente.class,id);
-        entityManager.remove(cliente);
+        cliente.setEstado((byte)0);
+        entityManager.merge(cliente);
     }
 
     @Override
     public void crear(Cliente cliente) {
-        entityManager.merge(cliente);
+        cliente.setEstado((byte)1);
+        entityManager.persist(cliente);
     }
     public void crearCliente(ClienteYLugarRequest request){
         Cliente cliente = request.getCliente();
         Lugar lugar = request.getLugar();
+        cliente.setEstado((byte)1);
         entityManager.persist(cliente);
-        String query = "INSERT INTO lugar(idCliente,nombre,direccion,notas,latitud,longitud)\n" +
-                "\tVALUES(:idCliente,:nombre,:direccion,:notas,:latitud,:longitud);";
+        String query = "INSERT INTO lugar(idCliente,nombre,direccion,notas,latitud,longitud,estado)\n" +
+                "\tVALUES(:idCliente,:nombre,:direccion,:notas,:latitud,:longitud,:estado);";
         Query insertQuery = entityManager.createNativeQuery(query)
                 .setParameter("idCliente",cliente.getIdCliente())
                 .setParameter("nombre",lugar.getNombre())
                 .setParameter("direccion",lugar.getDireccion())
                 .setParameter("notas",lugar.getNotas())
                 .setParameter("latitud",lugar.getLatitud())
-                .setParameter("longitud",lugar.getLongitud());
+                .setParameter("longitud",lugar.getLongitud())
+                .setParameter("estado",1);
 
         insertQuery.executeUpdate();
 
@@ -78,7 +82,7 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
         String query = "SELECT C.idCliente,L.idLugar,C.carnet,CONCAT(C.nombre,' ',C.apellido,' ',C.apellido_materno),\n" +
                 "\tL.nombre,L.direccion\n" +
                 "FROM cliente C\n" +
-                "\tINNER JOIN Lugar L ON C.idCliente=L.idCliente\n";
+                "\tINNER JOIN Lugar L ON C.idCliente=L.idCliente WHERE C.estado=1\n";
         List<ClienteLugar> resultado = entityManager.createNativeQuery(query)
                 .getResultList();
         return resultado;
