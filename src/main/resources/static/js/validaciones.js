@@ -127,6 +127,10 @@ function esNro(texto){
     const patron =/^([0-9])*$/;
     return patron.test(String(texto));
 }
+function esNroDecimal(texto) {
+    const patron = /^([0-9]+([.][0-9]*)?)?$/;
+    return patron.test(String(texto));
+}
 function soloLetras(texto){//aumentar espacio
     const patron =/^[a-zA-Z\s]+$/;
     return patron.test(String(texto))

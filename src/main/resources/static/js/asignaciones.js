@@ -4,6 +4,8 @@ var empleadosMap = {};
 var supervisoresMap={};
 var clienteMap={};
 var lugarMap={};
+
+var servicioMapCosto={};
 $(document).ready(function() {
   contador=1;
   agregarFila();
@@ -138,23 +140,22 @@ async function cargarServiciosAsignacion(){
             let cont = 0;
               for(let servicio of servicios){
                 cont=cont+1;
-                let totalLimpieza='<input type="text" class="small-input "id="input_' + cont + '" oninput="actualizarTotal(' + cont + ')">';
-                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + servicio[0] + '" onclick="anadirATabla(' + servicio[0] + ', \'' + servicio[1] + '\')"></label>';
-                let servicioHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[2]+'</td><td style="text-align: center;">'+servicio[3]+'</td><td style="text-align: center;">'+totalLimpieza+'</td><td style="text-align: center;"><label id="totalServicio_' + cont + '">-</label></td><td>'+botonCheckBox+'</td></tr>';
+                let totalLimpieza='<input type="text" class="small-input" id="input_' + servicio[0] + '" oninput="actualizarTotal(' + servicio[0] + ',' + cont + ')">';
+                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + servicio[0] + '" onclick="validarTotalServicio(' + servicio[0] + ', \'' + servicio[1] + '\')"></label>';
+                let servicioHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[2]+'</td><td style="text-align: center;">'+servicio[3]+'</td><td style="text-align: center;">'+totalLimpieza+'</td><td style="text-align: center;"><label id="totalServicio_' + servicio[0] + '">-</label></td><td>'+botonCheckBox+'</td></tr>';
                 listadoHtml+=servicioHtml;
           }
 
 
           document.querySelector('#listaServicios tbody').outerHTML=listadoHtml;
 
-}
-function actualizarTotal(cont) {
+}//aqui
+function actualizarTotal(idServicio,cont) {
     const servicioValue = parseFloat(document.querySelector('#listaServicios tbody tr:nth-child(' + cont + ') td:nth-child(4)').textContent);
-    const input = document.getElementById('input_' + cont);
-    const totalServicioLabel = document.getElementById('totalServicio_' + cont);
-
+    const input = document.getElementById('input_' + idServicio);
+    const totalServicioLabel = document.getElementById('totalServicio_' + idServicio);
     if (!isNaN(servicioValue) && !isNaN(input.value)) {
-        const total = servicioValue * parseFloat(input.value);
+        const total = (parseFloat(servicioValue) * parseFloat(input.value)).toFixed(1);;
         totalServicioLabel.textContent = total;
     } else {
         totalServicioLabel.textContent = '-';
@@ -163,7 +164,28 @@ function actualizarTotal(cont) {
         totalServicioLabel.textContent = '-';
     }
 }
-function anadirATabla(idServicio,nombre){
+function validarTotalServicio(idServicio,nom){
+    const input = document.getElementById('input_' + idServicio);
+    const totalServicioLabel = document.getElementById('totalServicio_' + idServicio);
+    if(!esNroDecimal(input.value)){
+        $('#formAlertaTotal').modal('show');
+        desmarcharCheckBoxAntes(idServicio);
+    }else if(totalServicioLabel.textContent==='-'){
+        $('#formAlertaTotal').modal('show');
+        desmarcharCheckBoxAntes(idServicio);
+    }else{
+        var total = totalServicioLabel.textContent;
+        input.disabled = true;
+        anadirATabla(idServicio,nom,total);
+    }
+}
+function desmarcharCheckBoxAntes(idServicio){
+    var checkbox = document.querySelector('input[type="checkbox"][value="' + idServicio + '"]');
+    if (checkbox) {
+       checkbox.checked = false; // Desmarca el checkbox
+    }
+}
+function anadirATabla(idServicio,nombre,total){
     // Verificar si el checkbox está marcado o desmarcado
     var checkbox = document.querySelector('input[type="checkbox"][value="' + idServicio + '"]');
     var tabla = document.getElementById("listaPreAsignacion");
@@ -174,14 +196,17 @@ function anadirATabla(idServicio,nombre){
 
     if (checkbox.checked) {
         if (!serviciosMap[idServicio]) {
-            // Agregar el servicio al mapa por su ID
             serviciosMap[idServicio] = nombre;
+            servicioMapCosto[idServicio]=total;
+            var res = parseFloat(document.getElementById('total').textContent)+parseFloat(total);
+            document.getElementById('total').textContent=res;
         }
 
         // Crear una nueva tabla para mostrar los servicios
         var tablaServicios = document.createElement("table");
 
          for (var id in serviciosMap) {
+
             if (serviciosMap.hasOwnProperty(id)) {
                var servicio = serviciosMap[id];
                var fila = document.createElement("tr");
@@ -189,9 +214,14 @@ function anadirATabla(idServicio,nombre){
                nombreCelda.textContent = servicio;
                fila.appendChild(nombreCelda);
 
+               var servicioCosto = servicioMapCosto[id];
+               var nombreCeldaCosto = document.createElement("td");
+               nombreCeldaCosto.textContent = servicioCosto;
+               fila.appendChild(nombreCeldaCosto);
+
                // Agrega un botón de eliminar a cada fila
                var eliminarCelda = document.createElement("td");
-               var botonEliminar = '<a class="btn btn-primary" onclick="eliminarServicio(' + id + ', \'' + servicio + '\')"><i class="fas fa-minus-square"></i></a>';
+               var botonEliminar = '<a class="btn btn-primary" onclick="eliminarServicio(' + id + ', \'' + servicio + '\', ' + total + ')"><i class="fas fa-minus-square"></i></a>';
                eliminarCelda.insertAdjacentHTML('beforeend', botonEliminar);
                fila.appendChild(eliminarCelda);
 
@@ -199,10 +229,16 @@ function anadirATabla(idServicio,nombre){
             }
          }
          celda.appendChild(tablaServicios);
-         //console.log(serviciosMap);
+         console.log(serviciosMap);
+         console.log(servicioMapCosto);
     } else { // Se desmarcó el checkbox
         delete serviciosMap[idServicio];
-
+        delete servicioMapCosto[idServicio];
+        // Aquí limpiamos el input totalLimpieza
+        document.getElementById('input_' + idServicio).value='';
+        document.getElementById('input_' + idServicio).disabled = false;
+        // Aquí limpiamos el label totalServicio
+        document.getElementById('totalServicio_' + idServicio).textContent='-';
         var tablaServicios = document.createElement("table");
         for (var id in serviciosMap) {
             if (serviciosMap.hasOwnProperty(id)) {
@@ -212,8 +248,13 @@ function anadirATabla(idServicio,nombre){
                 nombreCelda.textContent = servicio;
                 fila.appendChild(nombreCelda);
 
+                var servicioCosto = servicioMapCosto[id];
+                var nombreCeldaCosto = document.createElement("td");
+                nombreCeldaCosto.textContent = servicioCosto;
+                fila.appendChild(nombreCeldaCosto);
+
                 var eliminarCelda = document.createElement("td");
-                var botonEliminar = '<a class="btn btn-primary" onclick="eliminarServicio(' + id + ', \'' + servicio + '\')"><i class="fas fa-minus-square"></i></a>';
+                var botonEliminar = '<a class="btn btn-primary" onclick="eliminarServicio(' + id + ', \'' + servicio + '\', ' + total + ')"><i class="fas fa-minus-square"></i></a>';
                 eliminarCelda.insertAdjacentHTML('beforeend', botonEliminar);
                 fila.appendChild(eliminarCelda);
 
@@ -221,18 +262,26 @@ function anadirATabla(idServicio,nombre){
             }
         }
         celda.appendChild(tablaServicios);
-        //console.log(serviciosMap);
+        console.log(serviciosMap);
+        console.log(servicioMapCosto);
     }
 
 }
-function eliminarServicio(idServicio,servicio) {
- // Función para eliminar un servicio del mapa y actualizar la tabla
+function eliminarServicio(idServicio,servicio,total) {
+    // Función para eliminar un servicio del mapa y actualizar la tabla
     delete serviciosMap[idServicio];
+    delete servicioMapCosto[idServicio];
+    // Aquí limpiamos el input totalLimpieza
+     document.getElementById('input_' + idServicio).value='';
+     document.getElementById('input_' + idServicio).disabled = false;
+     // Aquí limpiamos el label totalServicio
+     document.getElementById('totalServicio_' + idServicio).textContent='-';
     var checkbox = document.querySelector('input[type="checkbox"][value="' + idServicio + '"]');
     if (checkbox) {
         checkbox.checked = false; // Desmarca el checkbox
     }
-    anadirATabla(idServicio,servicio); // Vuelve a generar la tabla
+
+    anadirATabla(idServicio,servicio,total); // Vuelve a generar la tabla
  }
 
 
