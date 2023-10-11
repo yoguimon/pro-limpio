@@ -4,7 +4,7 @@ var empleadosMap = {};
 var supervisoresMap={};
 var clienteMap={};
 var lugarMap={};
-
+var totalAPagar=0;
 var servicioMapCosto={};
 $(document).ready(function() {
   contador=1;
@@ -19,7 +19,6 @@ async function buscarCliente(){
                   'Content-Type': 'application/json'
                 }
         });
-        //me devuelve una lista de empleados
         const clientes = await request.json();
         if(clientes.length === 0){
             document.getElementById("lblerrorBusqueda").innerHTML="Carnet Incorrecto!";
@@ -103,6 +102,8 @@ function anadirATablaClienteYLugar(idCliente,idLugar,nombreCliente,lugar){
         tablaLugar.appendChild(filaLugar);
         celdaLugar.appendChild(tablaLugar);
 
+        console.log(lugarMap);
+
 }
 function eliminarClienteYLugar(idCliente,idLugar){
     var tablaCL = document.getElementById("listaClientesYSusLugares");
@@ -120,8 +121,6 @@ function eliminarClienteYLugar(idCliente,idLugar){
 
     celdaCliente.innerHTML = ''; // Limpiar contenido de la celda de cliente
     celdaLugar.innerHTML = '';
-    console.log(clienteMap);
-    console.log(lugarMap);
 }
 
 
@@ -198,8 +197,8 @@ function anadirATabla(idServicio,nombre,total){
         if (!serviciosMap[idServicio]) {
             serviciosMap[idServicio] = nombre;
             servicioMapCosto[idServicio]=total;
-            var res = parseFloat(document.getElementById('total').textContent)+parseFloat(total);
-            document.getElementById('total').textContent=res;
+            totalAPagar=parseFloat(totalAPagar)+parseFloat(total);
+            document.getElementById('total').textContent=totalAPagar+' Bs.';
         }
 
         // Crear una nueva tabla para mostrar los servicios
@@ -216,7 +215,7 @@ function anadirATabla(idServicio,nombre,total){
 
                var servicioCosto = servicioMapCosto[id];
                var nombreCeldaCosto = document.createElement("td");
-               nombreCeldaCosto.textContent = servicioCosto;
+               nombreCeldaCosto.textContent = servicioCosto+' Bs.';
                fila.appendChild(nombreCeldaCosto);
 
                // Agrega un botón de eliminar a cada fila
@@ -237,8 +236,14 @@ function anadirATabla(idServicio,nombre,total){
         // Aquí limpiamos el input totalLimpieza
         document.getElementById('input_' + idServicio).value='';
         document.getElementById('input_' + idServicio).disabled = false;
+
+         var totalS=document.getElementById('totalServicio_' + idServicio).textContent;
+         totalAPagar = (parseFloat(totalAPagar)-parseFloat(totalS));
+         document.getElementById('total').textContent=totalAPagar+' Bs.';
+
         // Aquí limpiamos el label totalServicio
         document.getElementById('totalServicio_' + idServicio).textContent='-';
+
         var tablaServicios = document.createElement("table");
         for (var id in serviciosMap) {
             if (serviciosMap.hasOwnProperty(id)) {
@@ -250,7 +255,7 @@ function anadirATabla(idServicio,nombre,total){
 
                 var servicioCosto = servicioMapCosto[id];
                 var nombreCeldaCosto = document.createElement("td");
-                nombreCeldaCosto.textContent = servicioCosto;
+                nombreCeldaCosto.textContent = servicioCosto+' Bs.';
                 fila.appendChild(nombreCeldaCosto);
 
                 var eliminarCelda = document.createElement("td");
@@ -274,8 +279,7 @@ function eliminarServicio(idServicio,servicio,total) {
     // Aquí limpiamos el input totalLimpieza
      document.getElementById('input_' + idServicio).value='';
      document.getElementById('input_' + idServicio).disabled = false;
-     // Aquí limpiamos el label totalServicio
-     document.getElementById('totalServicio_' + idServicio).textContent='-';
+
     var checkbox = document.querySelector('input[type="checkbox"][value="' + idServicio + '"]');
     if (checkbox) {
         checkbox.checked = false; // Desmarca el checkbox
@@ -533,20 +537,7 @@ function validarDatos(boton) {
 
     // Verifica si el mensaje de error está vacío
     if (errorAsignacion.innerHTML === "") {
-        alert("Guardando Asignacion");
-        /*if (boton === 'agregar') {
-            alert("Agregar más Asignaciones");
-            contador=contador+1;
-            //anado siguiente fila ala tabla
-            agregarFila();
-
-            //tengo que guardar datos de asigancion y limpiar todos los maps
-            desmarcar();
-        }
-        if (boton === 'guardar') {
-            alert("Guardar las Asignaciones");
-            //envio todos los datos para la asignacion en bd
-        }*/
+        agregarAsignacion();
     }
 
 }
@@ -584,10 +575,12 @@ function eliminarFila(boton) {
   agregarFila();
   desmarcar();
   //LIMPIAR TODOS LOS MAPS
+  serviciosMap = {};
   empleadosMap = {};
   supervisoresMap={};
   clienteMap={};
   lugarMap={};
+  servicioMapCosto={};
 }
 function desmarcar(){
     const radioButtons = document.querySelectorAll('input[type="radio"]');
@@ -600,5 +593,27 @@ function desmarcar(){
     checkboxes.forEach((checkbox) => {
       checkbox.checked = false;
     });
+
+    // Encuentra todos los elementos de entrada en la fila
+    const elementosDeEntrada = document.querySelectorAll('input[type="text"], input[type="number"], textarea');
+    // Limpia el valor de cada elemento de entrada
+    elementosDeEntrada.forEach((elemento) => {
+        elemento.value = '';
+        elemento.disabled=false;
+    });
+
+    // Obtén todas las filas de la tabla
+        const filas = document.querySelectorAll('#listaServicios tbody tr');
+
+        filas.forEach((fila) => {
+        // Obtén la etiqueta label de la columna 6 (índice 5)
+        const etiqueta = fila.querySelectorAll('td')[5].querySelector('label');
+
+         // Limpia el contenido de texto de la etiqueta
+        etiqueta.textContent = '-';
+    });
+    totalAPagar=0;
+    document.getElementById('total').textContent=totalAPagar+' Bs.';
 }
+
 

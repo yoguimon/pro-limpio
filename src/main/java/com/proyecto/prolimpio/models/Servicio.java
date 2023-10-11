@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -31,6 +32,14 @@ public class Servicio {
     @UpdateTimestamp
     @Column(name="fecha_actualizacion")
     private LocalDateTime fecha_actualizacion;
+
+    @ManyToMany
+    @JoinTable(
+            name = "asignacion_servicio",
+            joinColumns = @JoinColumn(name = "idServicio"),
+            inverseJoinColumns = @JoinColumn(name = "idAsignacion")
+    )
+    private List<Asignacion> asignaciones;
     public Servicio() {
     }
 

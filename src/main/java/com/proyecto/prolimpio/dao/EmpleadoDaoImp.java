@@ -1,14 +1,10 @@
 package com.proyecto.prolimpio.dao;
 
-import com.proyecto.prolimpio.models.Cliente;
 import com.proyecto.prolimpio.models.Empleado;
-import com.proyecto.prolimpio.models.EmpleadoAsignacion;
-import com.proyecto.prolimpio.models.Usuario;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

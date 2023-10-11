@@ -2,7 +2,6 @@ package com.proyecto.prolimpio.controllers;
 
 import com.proyecto.prolimpio.dao.EmpleadoDaoImp;
 import com.proyecto.prolimpio.models.Empleado;
-import com.proyecto.prolimpio.models.EmpleadoAsignacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

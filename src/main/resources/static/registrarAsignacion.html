@@ -195,7 +195,11 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
+                <div id="popupAsignacion" class="popup">
+                    <img src="img/bien.jpg">
+                    <h2>Asignacion de Trabajo Creada!</h2>
+                    <p>se creo correctamente la asignacion</p>
+                </div>
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Asignaciones de Trabajo</h1>
                 <p class="mb-4">info soble las asiganciones</p>
@@ -565,8 +569,8 @@
 
                                         <div class="col-sm-4 form-group">
                                             <select class="form-control" id="cbxpuesto" name="rol">
-                                                <option value="Auxiliar Limpieza" selected>Auxiliar Limpieza</option>
-                                                <option value="Supervisor">Supervisor</option>
+                                                <option value="Auxiliar Limpieza">Auxiliar Limpieza</option>
+                                                <option value="Supervisor" selected>Supervisor</option>
                                             </select>
                                             <label id="lblErrorPuesto"></label>
                                         </div>
@@ -766,6 +770,7 @@
 <script src="js/validaciones.js"></script>
 <script src="js/asignaciones.js"></script>
 <script src="js/agregarNuevosEnAsignacion.js"></script>
+<script src="js/enviarAsignacion.js"></script>
 </body>
 
 </html>

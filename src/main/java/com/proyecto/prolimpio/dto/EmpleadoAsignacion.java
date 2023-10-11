@@ -1,4 +1,4 @@
-package com.proyecto.prolimpio.models;
+package com.proyecto.prolimpio.dto;
 
 import lombok.Data;
 

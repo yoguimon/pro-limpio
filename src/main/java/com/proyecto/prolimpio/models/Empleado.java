@@ -61,6 +61,14 @@ public class Empleado {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "empleado")
     private List<Asistencia> asistencias;
 
+    @ManyToMany
+    @JoinTable(
+            name = "asignacion_empleado",
+            joinColumns = @JoinColumn(name = "idEmpleado"),
+            inverseJoinColumns = @JoinColumn(name = "idAsignacion")
+    )
+    private List<Asignacion> asignaciones;
+
     public Empleado(Long idEmpleado, String carnet, String nombre, String apellido, String apellido_materno, String puesto, String telefono) {
         this.idEmpleado = idEmpleado;
         this.carnet = carnet;

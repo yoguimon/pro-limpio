@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -38,6 +39,9 @@ public class Lugar {
     @UpdateTimestamp
     @Column(name="fecha_actualizacion")
     private LocalDateTime fecha_actualizacion;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "lugar")
+    private Asignacion asignacion;
     public Lugar() {
     }
 

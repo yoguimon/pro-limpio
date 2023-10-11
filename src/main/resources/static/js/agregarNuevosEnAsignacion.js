@@ -101,7 +101,7 @@ async function validarEmpleadoAsignacion(){
           await existeCorreo(datos.correo);
      }
      botonCargar.disabled = false;
-     botonCargar.textContent = 'Agregar Empleado';
+     botonCargar.textContent = 'Agregar';
 
     if(errorCarnet.innerHTML==="" && errorNombres.innerHTML==="" && errorApellidos.innerHTML==="" && errorApellidoM.innerHTML === "" && errorSalario.innerHTML===""
         && errorDireccion.innerHTML==="" && errorTelefono.innerHTML==="" && errorCorreo.innerHTML==="" && errorPuesto.innerHTML===""
