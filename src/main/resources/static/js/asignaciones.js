@@ -122,7 +122,40 @@ function eliminarClienteYLugar(idCliente,idLugar){
     celdaCliente.innerHTML = ''; // Limpiar contenido de la celda de cliente
     celdaLugar.innerHTML = '';
 }
-
+function validarNombreServicio(){
+    const nombreServicio = document.getElementById("txtBusquedaServicio").value.toString();
+    const errorNombreServicio=document.getElementById("lblerrorBusquedaServicio");
+    errorNombreServicio.innerHTML=validarNombreS(nombreServicio);
+    if(errorNombreServicio.innerHTML===''){
+        buscarServicio(nombreServicio);
+    }
+}
+async function buscarServicio(nombreServicio){
+    const request = await fetch('api/servicio/nombre/'+nombreServicio, {
+                method: 'GET',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                }
+        });
+        const servicios = await request.json();
+        if(servicios.length === 0){
+            document.getElementById("lblerrorBusquedaServicio").innerHTML="Carnet Incorrecto!";
+        }else{
+              document.getElementById("lblerrorBusquedaServicio").innerHTML="";
+              let listadoHtml = '';
+                //para agragar usuarios de json
+                let cont = 0;
+              for(let servicio of servicios){
+                    cont=cont+1;
+                    let totalLimpieza='<input type="text" class="small-input" id="input_' + servicio[0] + '" oninput="actualizarTotal(' + servicio[0] + ',' + cont + ')">';
+                    let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + servicio[0] + '" onclick="validarTotalServicio(' + servicio[0] + ', \'' + servicio[1] + '\')"></label>';
+                    let servicioHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[3]+'</td><td style="text-align: center;">'+servicio[2]+'</td><td style="text-align: center;">'+totalLimpieza+'</td><td style="text-align: center;"><label id="totalServicio_' + servicio[0] + '">-</label></td><td>'+botonCheckBox+'</td></tr>';
+                    listadoHtml+=servicioHtml;
+              }
+              document.querySelector('#listaServicios tbody').outerHTML=listadoHtml;
+        }
+}
 
 async function cargarServiciosAsignacion(){
     const request = await fetch('api/servicio', {
@@ -148,7 +181,7 @@ async function cargarServiciosAsignacion(){
 
           document.querySelector('#listaServicios tbody').outerHTML=listadoHtml;
 
-}//aqui
+}
 function actualizarTotal(idServicio,cont) {
     const servicioValue = parseFloat(document.querySelector('#listaServicios tbody tr:nth-child(' + cont + ') td:nth-child(4)').textContent);
     const input = document.getElementById('input_' + idServicio);
@@ -291,6 +324,13 @@ function eliminarServicio(idServicio,servicio,total) {
 
 async function buscarEmpleado(){
     const carnet = document.getElementById("txtBusquedaEmpleado").value.toString();
+    if(carnet===''){
+        document.getElementById("lblerrorBusquedaEmpleado").innerHTML="Ingrese Carnet!";
+        return;
+    }else if(!esNro(carnet)){
+        document.getElementById("lblerrorBusquedaEmpleado").innerHTML="Ingrese Numeros!";
+        return;
+    }
     const request = await fetch('api/empleadoXCarnet/'+carnet, {
                 method: 'GET',
                 headers: {
@@ -299,13 +339,18 @@ async function buscarEmpleado(){
                 }
         });
         try {
-            const empleado = await request.json();
+            const empleados = await request.json();
              document.getElementById("lblerrorBusquedaEmpleado").innerHTML="";
+             let listadoHtml = '';
              let cont = 1;
-             var nombre = empleado.nombre+' '+empleado.apellido+' '+empleado.apellido_materno;
-             let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado.idEmpleado + '" onclick="anadirATablaLosEmpleados(' + empleado.idEmpleado + ', \'' + nombre + '\')"></label>';
-             let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado.carnet+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
-             document.querySelector('#listaEmpleadosXId tbody').outerHTML=empleadoHtml;
+             for(empleado of empleados){
+                cont=cont+1;
+                var nombre = empleado[2]+' '+empleado[3]+' '+empleado[4];
+                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado[0] + '" onclick="anadirATablaLosEmpleados(' + empleado[0] + ', \'' + nombre + '\')"></label>';
+                let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
+                listadoHtml+=empleadoHtml;
+             }
+             document.querySelector('#listaEmpleadosXId tbody').outerHTML=listadoHtml;
 
         } catch (error) {
             document.getElementById("lblerrorBusquedaEmpleado").innerHTML="Carnet Incorrecto!";
@@ -313,7 +358,14 @@ async function buscarEmpleado(){
 }
 async function buscarSupervisor(){
     const carnet = document.getElementById("txtBusquedaSupervisor").value.toString();
-    const request = await fetch('api/empleadoXCarnet/'+carnet, {
+    if(carnet===''){
+        document.getElementById("lblerrorBusquedaSupervisor").innerHTML="Ingrese Carnet!";
+        return;
+    }else if(!esNro(carnet)){
+        document.getElementById("lblerrorBusquedaSupervisor").innerHTML="Ingrese Numeros!";
+        return;
+    }
+    const request = await fetch('api/supervisorXCarnet/'+carnet, {
                 method: 'GET',
                 headers: {
                   'Accept': 'application/json',
@@ -321,13 +373,18 @@ async function buscarSupervisor(){
                 }
         });
         try {
-            const empleado = await request.json();
+            const empleados = await request.json();
              document.getElementById("lblerrorBusquedaSupervisor").innerHTML="";
+             let listadoHtml = '';
              let cont = 1;
-             var nombre = empleado.nombre+' '+empleado.apellido+' '+empleado.apellido_materno;
-             let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado.idEmpleado + '" onclick="anadirATablaLosSupervisores(' + empleado.idEmpleado + ', \'' + nombre + '\')"></label>';
-             let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado.carnet+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
-             document.querySelector('#listaSupervisores tbody').outerHTML=empleadoHtml;
+             for(empleado of empleados){
+                cont =cont+ 1;
+                var nombre = empleado[2]+' '+empleado[3]+' '+empleado[4];
+                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado[0] + '" onclick="anadirATablaLosSupervisores(' + empleado[0] + ', \'' + nombre + '\')"></label>';
+                let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
+                listadoHtml+=empleadoHtml;
+             }
+             document.querySelector('#listaSupervisores tbody').outerHTML=listadoHtml;
 
         } catch (error) {
             document.getElementById("lblerrorBusquedaSupervisor").innerHTML="Carnet Incorrecto!";
@@ -616,4 +673,8 @@ function desmarcar(){
     document.getElementById('total').textContent=totalAPagar+' Bs.';
 }
 
-
+function enviarDatosdeCliente(){
+    const texto ='asignacion';
+    const clave = encodeURIComponent(texto);
+    window.location.href = `formularioCliente.html?clave=${clave}`;
+}

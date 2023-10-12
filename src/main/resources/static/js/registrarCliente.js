@@ -10,7 +10,13 @@ async function agregarCliente(clienteYlugarData){
         body: JSON.stringify(clienteYlugarData)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
         // y lo convierte en json
       });
-      mostrarAlerta('listaClientes.html',popup);
+     parametrosDeConsulta = new URLSearchParams(window.location.search);
+     const clave = parametrosDeConsulta.get('clave').toString();
+     if(clave==='asignacion'){
+        mostrarAlerta('registrarAsignacion.html',popup);
+     }else{
+        mostrarAlerta('listaClientes.html',popup);
+     }
 }
 function validacionCliente(){
     const registro = document.getElementById('txtfechaRegistro').value;

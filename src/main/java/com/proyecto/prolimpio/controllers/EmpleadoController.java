@@ -29,8 +29,12 @@ public class EmpleadoController {
         return empleadoDaoImp.getPersona(id);
     }
     @GetMapping("api/empleadoXCarnet/{carnet}")
-    public Empleado getEmpleado(@PathVariable String carnet){
+    public List<Empleado> getEmpleado(@PathVariable String carnet){
         return empleadoDaoImp.getEmpleadoXCarnet(carnet);
+    }
+    @GetMapping("api/supervisorXCarnet/{carnet}")
+    public List<Empleado> getSupervisores(@PathVariable String carnet){
+        return empleadoDaoImp.getSupervisoresXCarnet(carnet);
     }
     @PutMapping("api/empleados")
     public void modificarEmpleado(@RequestBody Empleado empleado){

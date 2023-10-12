@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.controllers;
 
+import com.proyecto.prolimpio.models.ClienteLugar;
 import com.proyecto.prolimpio.models.Servicio;
 import com.proyecto.prolimpio.services.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,10 @@ public class ServicioController {
     @PutMapping("/servicio")
     public void setServicio(@RequestBody Servicio servicio){
         servicioService.modificar(servicio);
+    }
+
+    @GetMapping("/servicio/nombre/{nombre}")
+    public List<Servicio> getServiciosXCarnet(@PathVariable String nombre){
+        return servicioService.getServiciosXCarnet(nombre);
     }
 }

@@ -60,6 +60,11 @@ function mostrarLugares(id,nombre){
         // Redirige a la página "listaLugares.html" con el ID y el nombre en la URL
         window.location.href = `listaLugares.html?id=${idCodificado}&nombre=${nombreCodificado}`;
 }
+function nuevoClienteL(){
+    const texto ='lista';
+    const clave = encodeURIComponent(texto);
+    window.location.href = `formularioCliente.html?clave=${clave}`;
+}
 async function mostrarCliente(id){
     $('#formEdicion').modal('show');//posoble error
     const request = await fetch('api/clientes/'+id, {

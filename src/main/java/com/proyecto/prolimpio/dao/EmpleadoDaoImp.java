@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.dao;
 
+import com.proyecto.prolimpio.models.ClienteLugar;
 import com.proyecto.prolimpio.models.Empleado;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -88,17 +89,20 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
         vieja.setFoto(empleado.getFoto());
     }
 
-    public Empleado getEmpleadoXCarnet(String carnet) {
-        String jpqlQuery = "SELECT e FROM Empleado e WHERE e.carnet = :carnet";
-        TypedQuery<Empleado> query = entityManager.createQuery(jpqlQuery, Empleado.class);
-        query.setParameter("carnet", carnet);
+    public List<Empleado> getEmpleadoXCarnet(String carnet) {
+        String jpqlQuery = "SELECT * FROM Empleado WHERE carnet LIKE :carnet AND estado=1";
+        List<Empleado> resultado = entityManager.createNativeQuery(jpqlQuery)
+                .setParameter("carnet",carnet + "%")
+                .getResultList();
+        return resultado;
+    }
 
-        List<Empleado> resultado = query.getResultList();
-
-        if (!resultado.isEmpty()) {
-            return resultado.get(0);
-        }
-
-        return null;
+    public List<Empleado> getSupervisoresXCarnet(String carnet) {
+        String jpqlQuery = "SELECT * FROM Empleado WHERE carnet LIKE :carnet AND estado=1 AND puesto=:puesto";
+        List<Empleado> resultado = entityManager.createNativeQuery(jpqlQuery)
+                .setParameter("carnet",carnet + "%")
+                .setParameter("puesto","Supervisor")
+                .getResultList();
+        return resultado;
     }
 }

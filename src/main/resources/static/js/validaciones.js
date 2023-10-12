@@ -20,6 +20,17 @@ function validarNombre(nombre){
             return "";
         }
 }
+function validarNombreS(nombre){//validarNombreServicio
+    if(nombre===""){
+            return "Ingrese el nombre del servicio";
+        }else if(esNro(nombre)){
+            return "Ingrese un nombre de servicio";
+        }else if(!soloLetras(nombre)){
+            return "El nombres debe ser de solo letras";
+        }else{
+            return "";
+        }
+}
 function validarApellidoP(apellidoP){
     if(apellidoP===""){
         return "Ingrese el apellido";
@@ -130,6 +141,15 @@ function esNro(texto){
 function esNroDecimal(texto) {
     const patron = /^([0-9]+([.][0-9]*)?)?$/;
     return patron.test(String(texto));
+}
+function validarCosto(costo){
+    if(costo===""){
+        return "ingrese costo de servicio";
+    }else if(!esNroDecimal(costo)){
+        return "ingrese un numero entero o decimal"
+    }else{
+        return "";
+    }
 }
 function soloLetras(texto){//aumentar espacio
     const patron =/^[a-zA-Z\s]+$/;

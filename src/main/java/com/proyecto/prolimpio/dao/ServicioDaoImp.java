@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.dao;
 
+import com.proyecto.prolimpio.models.ClienteLugar;
 import com.proyecto.prolimpio.models.Empleado;
 import com.proyecto.prolimpio.models.Servicio;
 import jakarta.persistence.EntityManager;
@@ -32,7 +33,7 @@ public class ServicioDaoImp implements CrudDao<Servicio>{
     @Override
     public void crear(Servicio servicio) {
         servicio.setEstado((byte)1);
-        entityManager.merge(servicio);
+        entityManager.persist(servicio);
     }
 
     @Override
@@ -43,5 +44,13 @@ public class ServicioDaoImp implements CrudDao<Servicio>{
     @Override
     public void modificar(Servicio servicio) {
         entityManager.merge(servicio);
+    }
+
+    public List<Servicio> getServiciosXNombre(String nombre) {
+        String query = "SELECT * FROM Servicio WHERE nombre LIKE :nombre AND estado=1";
+        List<Servicio> resultado = entityManager.createNativeQuery(query)
+                .setParameter("nombre","%" + nombre + "%")
+                .getResultList();
+        return resultado;
     }
 }

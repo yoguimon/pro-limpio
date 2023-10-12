@@ -35,4 +35,8 @@ public class ServicioService implements CrudService<Servicio>{
     public void modificar(Servicio service) {
         servicioDaoImp.modificar(service);
     }
+
+    public List<Servicio> getServiciosXCarnet(String nombre) {
+        return servicioDaoImp.getServiciosXNombre(nombre);
+    }
 }

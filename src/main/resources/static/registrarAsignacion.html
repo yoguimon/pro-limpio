@@ -28,6 +28,7 @@
 
     <script src="vendor/fontawesome-free/js/all.js"></script>
     <script src="vendor/fontawesome-free/js/all.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -241,7 +242,7 @@
                                         </button>
                                     </div>
                                     <div class="ml-4 input-group-append">
-                                        <a class="btn btn-primary" type="button" href="formularioCliente.html">
+                                        <a class="btn btn-primary" type="button" onclick="enviarDatosdeCliente()">
                                             <i class="fas fa-user-plus"></i>
                                         </a>
                                     </div>
@@ -286,7 +287,7 @@
                                     <input type="text" id="txtBusquedaServicio" class="form-control bg-light border-0 small" placeholder="Buscar por nombre..."
                                            aria-label="Search" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="buscarServicio()">
+                                        <button class="btn btn-primary" type="button" onclick="validarNombreServicio()">
                                             <i class="fas fa-search fa-sm"></i>
                                         </button>
                                     </div>
@@ -298,6 +299,7 @@
                                     <div class="ml-4 input-group-append">
                                         <button class="btn btn-primary" type="button" onclick="cargarServiciosAsignacion()">Mostrar Servicios</button>
                                     </div>
+                                    <label id="lblerrorBusquedaServicio" class="ml-4" style="color: red;"></label>
                                 </div>
                             </form>
                         </h6>
@@ -329,7 +331,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Datos</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Servicio</h1>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
