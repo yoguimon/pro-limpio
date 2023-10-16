@@ -14,9 +14,9 @@ function armarJson(){
     return data;
 }
 async function agregarAsignacion(){
-    var popup = document.getElementById("popupAsignacion");
+    //var popup = document.getElementById("popupAsignacion");
 
-      const request = await fetch('api/asignacion', {
+     const request = await fetch('api/asignacion', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -25,5 +25,6 @@ async function agregarAsignacion(){
         body: JSON.stringify(armarJson())//llama a la funcion JSON.STRI...agarra cualquier objeto de js
         // y lo convierte en json
       });
-    mostrarAlerta('index.html',popup);
+    //mostrarAlerta('listaClientes.html',popup);
+    $('#formExitoAsignacion').modal('show');
 }

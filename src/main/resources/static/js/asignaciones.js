@@ -12,6 +12,13 @@ $(document).ready(function() {
 });
 async function buscarCliente(){
     const carnet = document.getElementById("txtBusqueda").value.toString();
+    if(carnet===''){
+       document.getElementById("lblerrorBusqueda").innerHTML="Ingrese Carnet!";
+       return;
+    }else if(!esNro(carnet)){
+       document.getElementById("lblerrorBusqueda").innerHTML="Ingrese Numeros!";
+       return;
+    }
     const request = await fetch('api/clientesXCarnet/'+carnet, {
                 method: 'GET',
                 headers: {

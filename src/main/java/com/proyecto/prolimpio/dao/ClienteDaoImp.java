@@ -74,7 +74,7 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
                 "\tINNER JOIN Lugar L ON C.idCliente=L.idCliente\n" +
                 "WHERE C.carnet LIKE :carnet";
         List<ClienteLugar> resultado = entityManager.createNativeQuery(query)
-                .setParameter("carnet",carnet.substring(0, 4) + "%")
+                .setParameter("carnet",carnet + "%")
                 .getResultList();
         return resultado;
     }

@@ -80,4 +80,102 @@ label{
     text-align: center; /* Centra horizontalmente el contenido */
     vertical-align: middle; /* Centra verticalmente el contenido */
 }
+#data ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
 
+#data li {
+    margin-right: 20px;
+}
+#data span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+#data ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#data li {
+    margin-right: 20px;
+}
+#data span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+//fecha fin
+#dataFin ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataFin li {
+    margin-right: 20px;
+}
+#dataFin span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+#dataFin ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataFin li {
+    margin-right: 20px;
+}
+#dataFin span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+//hora dataHoraIni
+#dataHoraIni ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataHoraIni li {
+    margin-right: 20px;
+}
+#dataHoraIni span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+#dataHoraIni ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataHoraIni li {
+    margin-right: 20px;
+}
+#dataHoraIni span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+//hora dataHoraFin
+#dataHoraFin ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataHoraFin li {
+    margin-right: 20px;
+}
+#dataHoraFin span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+#dataHoraFin ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataHoraFin li {
+    margin-right: 20px;
+}
+#dataHoraFin span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}

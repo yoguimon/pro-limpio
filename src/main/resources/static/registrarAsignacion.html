@@ -11,6 +11,7 @@
 
     <title>PRO LIMPIO</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
@@ -28,6 +29,11 @@
 
     <script src="vendor/fontawesome-free/js/all.js"></script>
     <script src="vendor/fontawesome-free/js/all.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- Agrega la hoja de estilo de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
 </head>
 
@@ -202,8 +208,95 @@
                     <p>se creo correctamente la asignacion</p>
                 </div>
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Asignaciones de Trabajo</h1>
-                <p class="mb-4">info soble las asiganciones</p>
+
+                <div class="container">
+                    <h3>ASIGNACION DE TRABAJO</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                                <div class="row">
+                                    <div id="data" class="col-md-3">
+                                        <div class="mb-0">
+                                            <label>Fecha Inicio:</label>
+                                        </div>
+                                        <ul>
+                                            <li>
+					                            <span id="dia"></span>
+                                                <p>Dia</p>
+                                            </li>
+                                            <li>
+					                            <span id="mes"></span>
+                                                <p>Mes</p>
+                                            </li>
+                                            <li>
+					                            <span id="ano"></span>
+                                                <p>Año</p>
+                                            </li>
+                                            <li>
+                                                <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                                    <i class="fas fa-calendar" style="font-size:30px;color:white"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="dataFin" class="col-md-3" style="margin-left:25px;">
+                                        <div class="mb-0">
+                                            <label>Fecha Fin:</label>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <span id="diaFin"></span>
+                                                <p>Dia</p>
+                                            </li>
+                                            <li>
+                                                <span id="mesFin"></span>
+                                                <p>Mes</p>
+                                            </li>
+                                            <li>
+                                                <span id="anoFin"></span>
+                                                <p>Año</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="dataHoraIni" class="col-md-2">
+                                        <div class="mb-0">
+                                            <label>Hora Inicio:</label>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <span id="horaIni"></span>
+                                                <p style="margin-right:10px;">Hora</p>
+                                            </li>
+                                            <li>
+                                                <span id="minutoIni"></span>
+                                                <p>Min</p>
+                                            </li>
+                                            <li>
+                                                <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalHora">
+                                                    <i class="fas fa-clock" style="font-size:30px;color:white"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="dataHoraFin" class="col-md-2">
+                                        <div class="mb-0">
+                                            <label>Hora Fin:</label>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <span id="horaFin"></span>
+                                                <p>Hora</p>
+                                            </li>
+                                            <li>
+                                                <span id="minutoFin"></span>
+                                                <p>Min</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
 
                 <!-- Modal Eliminar -->
                 <div class="modal fade" id="formEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -571,8 +664,8 @@
 
                                         <div class="col-sm-4 form-group">
                                             <select class="form-control" id="cbxpuesto" name="rol">
-                                                <option value="Auxiliar Limpieza">Auxiliar Limpieza</option>
-                                                <option value="Supervisor" selected>Supervisor</option>
+                                                <option value="Auxiliar Limpieza" selected>Auxiliar Limpieza</option>
+                                                <option value="Supervisor">Supervisor</option>
                                             </select>
                                             <label id="lblErrorPuesto"></label>
                                         </div>
@@ -750,7 +843,70 @@
         </div>
     </div>
 </div>
-
+<!-- Modal Alerta -->
+<div class="modal fade" id="formExitoAsignacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleMod">Alerta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h1>Asignacion creada Exitosamente!</h1>
+                <label>datos..</label>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-secondary" href="index.html">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal fecha-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Seleccionar Fecha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="datepickerInicio" placeholder="fecha Inicio">
+                <input type="text" id="datepickerFin" placeholder="fecha Fin">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="seleccionarFecha()" data-dismiss="modal">Seleccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal hora-->
+<div class="modal fade" id="myModalHora" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel4">Seleccionar Hora</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="txthoraInicio">Hora inicio:</label>
+                <input type="time" id="txthoraInicio" placeholder="Hora Inicio">
+                <label for="txthoraFin">Hora Fin:</label>
+                <input type="time" id="txthoraFin" placeholder="Hora Fin">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="seleccionarHora()" data-dismiss="modal">Seleccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -762,17 +918,20 @@
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Incluye las bibliotecas de jQuery y jQuery UI -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
+
+
+<!-- Page level custom scripts
+<script src="js/demo/datatables-demo.js"></script>-->
 <script src="js/control.js"></script>
 <script src="js/validaciones.js"></script>
 <script src="js/asignaciones.js"></script>
 <script src="js/agregarNuevosEnAsignacion.js"></script>
 <script src="js/enviarAsignacion.js"></script>
+<script src="js/calendar.js"></script>
 </body>
 
 </html>
