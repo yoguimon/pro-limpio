@@ -1,6 +1,5 @@
 function armarJson(){
-    // Obtener los IDs de servicios
-    //const serviciosIds = Object.keys(serviciosMap).map(Number);
+
     const empleadosIds = Object.keys(empleadosMap).map(Number);
     const supervisoresIds = Object.keys(supervisoresMap).map(Number);
     const lugarIds = Object.keys(lugarMap).map(Number);
@@ -9,6 +8,10 @@ function armarJson(){
       empleadosIds: empleadosIds,
       supervisoresIds: supervisoresIds,
       lugarIds: lugarIds,
+      fecha_inicio: fechaAuxInicio.toISOString().split('T')[0],
+      fecha_fin: fechaAuxFin.toISOString().split('T')[0],
+      hora_inicio: horaAuxIni,
+      hora_fin: horaAuxFin,
       total: totalAPagar
     };
     return data;

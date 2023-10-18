@@ -24,6 +24,10 @@ public class AsignacionDaoImp {
         Lugar lugar = entityManager.find(Lugar.class,idLugar);
         asignacion.setLugar(lugar);
         asignacion.setTotal(asignacionResponse.getTotal());
+        asignacion.setFecha_inicio(asignacionResponse.getFecha_inicio());
+        asignacion.setFecha_fin(asignacionResponse.getFecha_fin());
+        asignacion.setHora_inicio(asignacionResponse.getHora_inicio());
+        asignacion.setHora_fin(asignacionResponse.getHora_fin());
         asignacion.setEstado((byte)1);
 
         List<Empleado> empleados = new ArrayList<>();

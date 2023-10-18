@@ -207,9 +207,11 @@ function validarTotalServicio(idServicio,nom){
     const input = document.getElementById('input_' + idServicio);
     const totalServicioLabel = document.getElementById('totalServicio_' + idServicio);
     if(!esNroDecimal(input.value)){
+        $("#formAlertaTotal .modal-body").text("Ingresa un nro en 'Total M2 de Limpieza', si quieres agregar un decimal, recuerda que este tenga '.'");
         $('#formAlertaTotal').modal('show');
         desmarcharCheckBoxAntes(idServicio);
     }else if(totalServicioLabel.textContent==='-'){
+        $("#formAlertaTotal .modal-body").text("Ingresa un nro en 'Total M2 de Limpieza', si quieres agregar un decimal, recuerda que este tenga '.'");
         $('#formAlertaTotal').modal('show');
         desmarcharCheckBoxAntes(idServicio);
     }else{
@@ -583,7 +585,7 @@ function eliminarSupervisorAsignado(idSupervisor,nombre) {
     }
     anadirATablaLosSupervisores(idSupervisor,nombre); // Vuelve a generar la tabla
  }
-function validarDatos(boton) {
+function validarDatos() {
     const errorAsignacion = document.getElementById('lblerrorAsignaciones');
     errorAsignacion.innerHTML="";
     if (Object.keys(clienteMap).length === 0) {
@@ -599,9 +601,11 @@ function validarDatos(boton) {
         errorAsignacion.innerHTML += 'Ingrese Supervisores, ';
     }
 
+
     // Verifica si el mensaje de error está vacío
-    if (errorAsignacion.innerHTML === "") {
+    if (errorAsignacion.innerHTML === "" && fechaEsValida() && horaEsValida()) {
         agregarAsignacion();
+        //alert("agregando asignacion");
     }
 
 }
@@ -685,3 +689,4 @@ function enviarDatosdeCliente(){
     const clave = encodeURIComponent(texto);
     window.location.href = `formularioCliente.html?clave=${clave}`;
 }
+

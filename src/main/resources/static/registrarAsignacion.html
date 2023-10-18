@@ -10,29 +10,22 @@
     <meta name="author" content="">
 
     <title>PRO LIMPIO</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <!-- jQuery y jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap y dependencias -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-
-
-    <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-    <script src="vendor/fontawesome-free/js/all.js"></script>
-    <script src="vendor/fontawesome-free/js/all.min.js"></script>
-
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- Agrega la hoja de estilo de Font Awesome -->
+    <!-- Bibliotecas de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
 </head>
@@ -232,7 +225,7 @@
                                                 <p>Año</p>
                                             </li>
                                             <li>
-                                                <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                                <a type="button" class="btn btn-primary" onclick="mostarModalFecha()">
                                                     <i class="fas fa-calendar" style="font-size:30px;color:white"></i>
                                                 </a>
                                             </li>
@@ -271,7 +264,7 @@
                                                 <p>Min</p>
                                             </li>
                                             <li>
-                                                <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalHora">
+                                                <a type="button" class="btn btn-primary" onclick="mostarModalHora()">
                                                     <i class="fas fa-clock" style="font-size:30px;color:white"></i>
                                                 </a>
                                             </li>
@@ -788,7 +781,7 @@
                             <div class="form-group row justify-content-center">
                                 <div class="col-sm-2 mb-3 mb-sm-0"></div>
                                 <div class="col-sm-4">
-                                    <a class="btn btn-primary btn-user btn-block btn-lg" onclick="validarDatos('guardar')">Guardar Asignacions</a>
+                                    <a class="btn btn-primary btn-user btn-block btn-lg" onclick="validarDatos()">Guardar Asignacions</a>
                                 </div> <!-- Columna vacía de 2 columnas de ancho para el espacio -->
                                 <div class="col-sm-2"></div>
                             </div>
@@ -835,7 +828,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Ingresa un nro en "Total M2 de Limpieza", si quieres agregar un decimal, recuerda que este tenga "."
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
@@ -864,33 +857,35 @@
     </div>
 </div>
 <!-- Modal fecha-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="myModalFecha" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Seleccionar Fecha</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title fs-5" id="myModalLabel">Seleccionar Fecha de Asignacion</h5>
+                <button type="button" class="close" onclick="seleccionarFecha('cancelar')" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <label for="datepickerInicio">fecha inicio:</label>
                 <input type="text" id="datepickerInicio" placeholder="fecha Inicio">
+                <label for="datepickerFin">fecha fin:</label>
                 <input type="text" id="datepickerFin" placeholder="fecha Fin">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="seleccionarFecha()" data-dismiss="modal">Seleccionar</button>
+                <button type="button" class="btn btn-secondary" onclick="seleccionarFecha('cancelar')">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="seleccionarFecha('seleccionar')">Seleccionar</button>
             </div>
         </div>
     </div>
 </div>
 <!-- Modal hora-->
-<div class="modal fade" id="myModalHora" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="myModalHora" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel4">Seleccionar Hora</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title fs-5" id="myModalLabel4">Seleccionar Hora</h5>
+                <button type="button" class="close" onclick="seleccionarHora('cancelar')" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -901,31 +896,16 @@
                 <input type="time" id="txthoraFin" placeholder="Hora Fin">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="seleccionarHora()" data-dismiss="modal">Seleccionar</button>
+                <button type="button" class="btn btn-secondary" onclick="seleccionarHora('cancelar')">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="seleccionarHora('seleccionar')">Seleccionar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
+<!-- Scripts personalizados -->
 <script src="js/sb-admin-2.min.js"></script>
-
-<!-- Incluye las bibliotecas de jQuery y jQuery UI -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
-
-
-<!-- Page level custom scripts
-<script src="js/demo/datatables-demo.js"></script>-->
 <script src="js/control.js"></script>
 <script src="js/validaciones.js"></script>
 <script src="js/asignaciones.js"></script>
