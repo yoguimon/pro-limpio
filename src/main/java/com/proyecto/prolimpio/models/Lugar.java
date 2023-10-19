@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -40,8 +41,8 @@ public class Lugar {
     @Column(name="fecha_actualizacion")
     private LocalDateTime fecha_actualizacion;
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "lugar")
-    private Asignacion asignacion;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "lugar")
+    private List<Asignacion> asignaciones;
     public Lugar() {
     }
 

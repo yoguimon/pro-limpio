@@ -1,6 +1,8 @@
 package com.proyecto.prolimpio.dao;
 
 import com.proyecto.prolimpio.dto.AsignacionResponse;
+import com.proyecto.prolimpio.dto.AsistenciaReporte;
+import com.proyecto.prolimpio.dto.VerificarAsignacionDTO;
 import com.proyecto.prolimpio.models.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -74,5 +76,25 @@ public class AsignacionDaoImp {
             asignacionServicio.setTotalServicio(listaPrecios.get(j));
             entityManager.persist(asignacionServicio);
         }
+    }
+
+    public List<EmpleadoAux> verificarFechasYEmpleados(VerificarAsignacionDTO verificarAsignacionDTO) {
+        String query ="SELECT A.idAsignacion,CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),\n" +
+                "\t\tAE.cargo,A.fecha_inicio,A.fecha_fin,hora_inicio,hora_fin,L.nombre\n" +
+                "FROM asignacion A\n" +
+                "\t INNER JOIN asignacion_empleado AE ON A.idAsignacion=AE.idAsignacion\n" +
+                "     INNER JOIN empleado E ON AE.idEmpleado=E.idEmpleado\n" +
+                "     INNER JOIN lugar L ON A.idLugar=L.idLugar\n" +
+                "WHERE fecha_inicio <= :fecha_fin AND fecha_fin >= :fecha_inicio\n" +
+                "\t\tAND hora_inicio < :hora_fin AND hora_fin > :hora_inicio\n" +
+                "        AND AE.idEmpleado IN :ids";
+        List<EmpleadoAux> resultado = entityManager.createNativeQuery(query)
+                .setParameter("fecha_inicio",verificarAsignacionDTO.getFecha_inicio())
+                .setParameter("fecha_fin",verificarAsignacionDTO.getFecha_fin())
+                .setParameter("hora_inicio",verificarAsignacionDTO.getHora_inicio())
+                .setParameter("hora_fin",verificarAsignacionDTO.getHora_fin())
+                .setParameter("ids",verificarAsignacionDTO.getEmpleadosIds())
+                .getResultList();
+        return resultado;
     }
 }

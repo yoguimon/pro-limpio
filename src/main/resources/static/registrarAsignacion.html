@@ -902,7 +902,42 @@
         </div>
     </div>
 </div>
+<!-- Modal Empleados ya existentes en una asignacion similar-->
+<div class="modal fade" id="modalFechaHoraIds" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="myModa">Estos Empleados ya fueron Asignados en la misma fecha y hora!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="listaEmpleadosYaAsigandos" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Nombre</th>
+                            <th>Cargo</th>
+                            <th>Fecha Inicio-Fin</th>
+                            <th>Hora Inicio-Fin</th>
+                            <th>Razon Social</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Scripts personalizados -->
 <script src="js/sb-admin-2.min.js"></script>

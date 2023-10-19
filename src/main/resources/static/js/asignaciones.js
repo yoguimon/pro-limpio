@@ -604,8 +604,7 @@ function validarDatos() {
 
     // Verifica si el mensaje de error está vacío
     if (errorAsignacion.innerHTML === "" && fechaEsValida() && horaEsValida()) {
-        agregarAsignacion();
-        //alert("agregando asignacion");
+        verificarAsignacion();
     }
 
 }

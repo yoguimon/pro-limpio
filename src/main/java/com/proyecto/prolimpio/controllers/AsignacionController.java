@@ -4,8 +4,8 @@ import com.proyecto.prolimpio.dao.AsignacionDaoImp;
 import com.proyecto.prolimpio.dto.AsignacionResponse;
 import com.proyecto.prolimpio.dto.AsistenciaReporte;
 import com.proyecto.prolimpio.dto.AsistenciaResponse;
-import com.proyecto.prolimpio.services.AsistenciaService;
-import jdk.swing.interop.SwingInterOpUtils;
+import com.proyecto.prolimpio.dto.VerificarAsignacionDTO;
+import com.proyecto.prolimpio.models.EmpleadoAux;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +20,9 @@ public class AsignacionController {
     @PostMapping("/asignacion")
     public void agregarAsistencia(@RequestBody AsignacionResponse asignacionResponse){
         asignacionDaoImp.crearAsignacion(asignacionResponse);
-        /*System.out.println(asignacionResponse.getFecha_inicio());
-        System.out.println(asignacionResponse.getFecha_fin());
-        System.out.println(asignacionResponse.getHora_inicio());
-        System.out.println(asignacionResponse.getHora_fin());*/
+    }
+    @PostMapping("/asignacion/verificar")//verificar si existe empleados que ya existen en la asignacion
+    public List<EmpleadoAux> getEmpleadosExistentesEnAsignacion(@RequestBody VerificarAsignacionDTO verificarAsignacionDTO){
+        return asignacionDaoImp.verificarFechasYEmpleados(verificarAsignacionDTO);
     }
 }
