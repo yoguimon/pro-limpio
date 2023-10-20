@@ -10,7 +10,6 @@ import java.util.List;
 public class VerificarAsignacionDTO {
     private LocalDate fecha_inicio;
     private LocalDate fecha_fin;
-    private LocalTime hora_inicio;
-    private LocalTime hora_fin;
+    private String turno;
     private List<Integer> empleadosIds;
 }

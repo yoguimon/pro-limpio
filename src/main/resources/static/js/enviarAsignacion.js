@@ -10,8 +10,7 @@ function armarJson(){
       lugarIds: lugarIds,
       fecha_inicio: fechaAuxInicio.toISOString().split('T')[0],
       fecha_fin: fechaAuxFin.toISOString().split('T')[0],
-      hora_inicio: horaAuxIni,
-      hora_fin: horaAuxFin,
+      turno: document.getElementById('cbxturno').value,
       total: totalAPagar
     };
     return data;
@@ -21,8 +20,7 @@ function jsonFechaHoraIds(){
     const data = {
         fecha_inicio: fechaAuxInicio.toISOString().split('T')[0],
         fecha_fin: fechaAuxFin.toISOString().split('T')[0],
-        hora_inicio: horaAuxIni,
-        hora_fin: horaAuxFin,
+        turno: document.getElementById('cbxturno').value,
         empleadosIds: empleadosIds
     };
     return data;
@@ -47,8 +45,8 @@ async function verificarAsignacion(){
           for(let empleado of empleados){
                 cont=cont+1;
                 var fecha = empleado[3]+'/'+empleado[4];
-                var hora = empleado[5]+'-'+empleado[6];
-                let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+empleado[2]+'</td><td>'+fecha+'</td><td>'+hora+'</td><td>'+empleado[7]+'</td></tr>';
+                //var hora = empleado[5]+'-'+empleado[6];turno
+                let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+empleado[2]+'</td><td>'+fecha+'</td><td>'+empleado[5]+'</td><td>'+empleado[6]+'</td></tr>';
                 listadoHtml+=empleadoHtml;
           }
           document.querySelector('#listaEmpleadosYaAsigandos tbody').outerHTML=listadoHtml;

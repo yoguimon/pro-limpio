@@ -14,7 +14,6 @@ public class AsignacionResponse {
     private List<Integer> lugarIds;
     private LocalDate fecha_inicio;
     private LocalDate fecha_fin;
-    private LocalTime hora_inicio;
-    private LocalTime hora_fin;
+    private String turno;
     private double total;
 }

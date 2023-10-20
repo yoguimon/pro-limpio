@@ -27,10 +27,8 @@ public class Asignacion {
     private LocalDate fecha_inicio;
     @Column(name = "fecha_fin")
     private LocalDate fecha_fin;
-    @Column(name = "hora_inicio")
-    private LocalTime hora_inicio;
-    @Column(name = "hora_fin")
-    private LocalTime hora_fin;
+    @Column(name = "turno")
+    private String turno;
     @Column(name = "estado")
     private byte estado;
     @UpdateTimestamp

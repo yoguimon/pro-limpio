@@ -12,7 +12,6 @@ public class EmpleadoAux {
     private String cargo;
     private LocalDate fecha_inicio;
     private LocalDate fecha_fin;
-    private LocalTime hora_inicio;
-    private LocalTime hora_fin;
+    private String turno;
     private String nombre;
 }

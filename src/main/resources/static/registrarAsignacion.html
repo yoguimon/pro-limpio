@@ -250,40 +250,18 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div id="dataHoraIni" class="col-md-2">
+                                    <div class="col-md-4">
                                         <div class="mb-0">
-                                            <label>Hora Inicio:</label>
+                                            <label>Seleccione turno:</label>
                                         </div>
-                                        <ul>
-                                            <li>
-                                                <span id="horaIni"></span>
-                                                <p style="margin-right:10px;">Hora</p>
-                                            </li>
-                                            <li>
-                                                <span id="minutoIni"></span>
-                                                <p>Min</p>
-                                            </li>
-                                            <li>
-                                                <a type="button" class="btn btn-primary" onclick="mostarModalHora()">
-                                                    <i class="fas fa-clock" style="font-size:30px;color:white"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div id="dataHoraFin" class="col-md-2">
-                                        <div class="mb-0">
-                                            <label>Hora Fin:</label>
+                                        <div class="form-inputs row">
+                                            <div class="col-sm-6">
+                                                <select class="form-control" id="cbxturno" name="categoria">
+                                                    <option value="Manana" selected>Manana</option>
+                                                    <option value="Tarde">Tarde</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <ul>
-                                            <li>
-                                                <span id="horaFin"></span>
-                                                <p>Hora</p>
-                                            </li>
-                                            <li>
-                                                <span id="minutoFin"></span>
-                                                <p>Min</p>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                         </div>
@@ -879,35 +857,12 @@
         </div>
     </div>
 </div>
-<!-- Modal hora-->
-<div class="modal fade" id="myModalHora" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fs-5" id="myModalLabel4">Seleccionar Hora</h5>
-                <button type="button" class="close" onclick="seleccionarHora('cancelar')" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <label for="txthoraInicio">Hora inicio:</label>
-                <input type="time" id="txthoraInicio" placeholder="Hora Inicio">
-                <label for="txthoraFin">Hora Fin:</label>
-                <input type="time" id="txthoraFin" placeholder="Hora Fin">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="seleccionarHora('cancelar')">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="seleccionarHora('seleccionar')">Seleccionar</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Modal Empleados ya existentes en una asignacion similar-->
 <div class="modal fade" id="modalFechaHoraIds" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fs-5" id="myModa">Estos Empleados ya fueron Asignados en la misma fecha y hora!</h5>
+                <h5 class="modal-title fs-5" id="myModa">Estos Empleados ya fueron asignados en otra orden de trabajo que coinciden con la fecha y hora!</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -921,7 +876,7 @@
                             <th>Nombre</th>
                             <th>Cargo</th>
                             <th>Fecha Inicio-Fin</th>
-                            <th>Hora Inicio-Fin</th>
+                            <th>Turno</th>
                             <th>Razon Social</th>
                         </tr>
                         </thead>

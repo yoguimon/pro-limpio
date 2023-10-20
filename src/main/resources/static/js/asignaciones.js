@@ -600,20 +600,15 @@ function validarDatos() {
     if (Object.keys(supervisoresMap).length === 0) {
         errorAsignacion.innerHTML += 'Ingrese Supervisores, ';
     }
-
-
     // Verifica si el mensaje de error está vacío
-    if (errorAsignacion.innerHTML === "" && fechaEsValida() && horaEsValida()) {
+    if (errorAsignacion.innerHTML === "" && fechaEsValida()) {
         verificarAsignacion();
     }
-
 }
 function agregarFila(){
     const tabla = document.getElementById('listaPreAsignacion').getElementsByTagName('tbody')[0];
-
     // Crear una nueva fila
     const fila = document.createElement('tr');
-
     // Llena las celdas de la fila con los datos correspondientes
     fila.innerHTML = `
       <td>${contador}</td>
@@ -626,7 +621,6 @@ function agregarFila(){
         <a class="btn btn-primary btn-circle btn-sm" onclick="eliminarFila(this)"><i class="fas fa-trash"></i></a>
       </td>
     `;
-
     // Agrega la fila a la tabla
     tabla.appendChild(fila);
 
@@ -634,7 +628,6 @@ function agregarFila(){
 function eliminarFila(boton) {
   // Obtén una referencia a la fila que contiene el botón
   const fila = boton.closest('tr');
-
   // Verifica si la fila existe antes de intentar eliminarla
   if (fila) {
     fila.remove(); // Elimina la fila
@@ -654,13 +647,11 @@ function desmarcar(){
     radioButtons.forEach((radio) => {
       radio.checked = false;
     });
-
     // Desmarcar checkboxes
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {
       checkbox.checked = false;
     });
-
     // Encuentra todos los elementos de entrada en la fila
     const elementosDeEntrada = document.querySelectorAll('input[type="text"], input[type="number"], textarea');
     // Limpia el valor de cada elemento de entrada
@@ -668,7 +659,6 @@ function desmarcar(){
         elemento.value = '';
         elemento.disabled=false;
     });
-
     // Obtén todas las filas de la tabla
         const filas = document.querySelectorAll('#listaServicios tbody tr');
 
@@ -682,7 +672,6 @@ function desmarcar(){
     totalAPagar=0;
     document.getElementById('total').textContent=totalAPagar+' Bs.';
 }
-
 function enviarDatosdeCliente(){
     const texto ='asignacion';
     const clave = encodeURIComponent(texto);

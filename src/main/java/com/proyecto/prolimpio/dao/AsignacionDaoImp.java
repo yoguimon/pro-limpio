@@ -28,8 +28,7 @@ public class AsignacionDaoImp {
         asignacion.setTotal(asignacionResponse.getTotal());
         asignacion.setFecha_inicio(asignacionResponse.getFecha_inicio());
         asignacion.setFecha_fin(asignacionResponse.getFecha_fin());
-        asignacion.setHora_inicio(asignacionResponse.getHora_inicio());
-        asignacion.setHora_fin(asignacionResponse.getHora_fin());
+        asignacion.setTurno(asignacionResponse.getTurno());
         asignacion.setEstado((byte)1);
 
         List<Empleado> empleados = new ArrayList<>();
@@ -80,19 +79,18 @@ public class AsignacionDaoImp {
 
     public List<EmpleadoAux> verificarFechasYEmpleados(VerificarAsignacionDTO verificarAsignacionDTO) {
         String query ="SELECT A.idAsignacion,CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),\n" +
-                "\t\tAE.cargo,A.fecha_inicio,A.fecha_fin,hora_inicio,hora_fin,L.nombre\n" +
+                "\t\tAE.cargo,A.fecha_inicio,A.fecha_fin,A.turno,L.nombre\n" +
                 "FROM asignacion A\n" +
                 "\t INNER JOIN asignacion_empleado AE ON A.idAsignacion=AE.idAsignacion\n" +
                 "     INNER JOIN empleado E ON AE.idEmpleado=E.idEmpleado\n" +
                 "     INNER JOIN lugar L ON A.idLugar=L.idLugar\n" +
                 "WHERE fecha_inicio <= :fecha_fin AND fecha_fin >= :fecha_inicio\n" +
-                "\t\tAND hora_inicio < :hora_fin AND hora_fin > :hora_inicio\n" +
+                "\t\tAND turno = :turno\n" +
                 "        AND AE.idEmpleado IN :ids";
         List<EmpleadoAux> resultado = entityManager.createNativeQuery(query)
                 .setParameter("fecha_inicio",verificarAsignacionDTO.getFecha_inicio())
                 .setParameter("fecha_fin",verificarAsignacionDTO.getFecha_fin())
-                .setParameter("hora_inicio",verificarAsignacionDTO.getHora_inicio())
-                .setParameter("hora_fin",verificarAsignacionDTO.getHora_fin())
+                .setParameter("turno",verificarAsignacionDTO.getTurno())
                 .setParameter("ids",verificarAsignacionDTO.getEmpleadosIds())
                 .getResultList();
         return resultado;
