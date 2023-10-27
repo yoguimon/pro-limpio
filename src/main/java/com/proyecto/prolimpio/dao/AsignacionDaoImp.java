@@ -5,6 +5,7 @@ import com.proyecto.prolimpio.dto.VerificarAsignacionDTO;
 import com.proyecto.prolimpio.models.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
@@ -21,6 +22,8 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Repository
@@ -28,6 +31,7 @@ import java.util.*;
 public class AsignacionDaoImp {
     @PersistenceContext
     EntityManager entityManager;
+    String query = "";
     public ResponseEntity<Resource> crearAsignacion(AsignacionResponse asignacionResponse){
         //creo asignacion
         Asignacion asignacion = new Asignacion();
@@ -88,7 +92,7 @@ public class AsignacionDaoImp {
     }
 
     public List<EmpleadoAux> verificarFechasYEmpleados(VerificarAsignacionDTO verificarAsignacionDTO) {
-        String query ="SELECT A.idAsignacion,CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),\n" +
+        query ="SELECT A.idAsignacion,CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),\n" +
                 "\t\tAE.cargo,A.fecha_inicio,A.fecha_fin,A.turno,L.nombre\n" +
                 "FROM asignacion A\n" +
                 "\t INNER JOIN asignacion_empleado AE ON A.idAsignacion=AE.idAsignacion\n" +
@@ -109,6 +113,8 @@ public class AsignacionDaoImp {
     public ResponseEntity<Resource> generarPdf(int id) {
         List<Object[]> empleados = empleadosAsignados(id);
         List<Object[]> servicios = serviciosAsignados(id);
+        Object[] asigncionDadoId = datosServicio(id);
+        Object[] lugarYCliente = lugarYClienteAsignados(id);
         try {
             final File file = ResourceUtils.getFile("classpath:reportes/reporteAsignacion.jasper");
             final File imgLogo = ResourceUtils.getFile("classpath:imagenes/logo.png");
@@ -144,14 +150,25 @@ public class AsignacionDaoImp {
             JRBeanCollectionDataSource dataSourceServicios = new JRBeanCollectionDataSource(dataServicios);
             parameters.put("dsEmp", dataSourceEmpleados);
             parameters.put("dsServicios", dataSourceServicios);
-            parameters.put("cliente","Juan Pablo");
-            parameters.put("lugar","Globos");
-            parameters.put("fechaini", new Date());
-            parameters.put("fechafin", new Date());
-            parameters.put("turno","tarde");
-            parameters.put("nroa",3);
+            parameters.put("cliente",lugarYCliente[1]);
+            parameters.put("lugar",lugarYCliente[0]);
+
+            Date inicio = (Date) asigncionDadoId[3];
+            SimpleDateFormat formato = new SimpleDateFormat("d 'de' MMMM 'del' yyyy", new Locale("es", "ES"));
+            String fechaInicio = formato.format(inicio);
+            Date fin = (Date) asigncionDadoId[4];
+            String fechaFin = formato.format(fin);
+            Date actual = new Date();
+            String fecha = formato.format(actual);
+
+            parameters.put("fechaini", fechaInicio);
+            parameters.put("fechafin", fechaFin);
+            parameters.put("turno",asigncionDadoId[5]);
+            parameters.put("nroa",asigncionDadoId[0]);
             parameters.put("email","jose@gmail.com");
-            parameters.put("totalfinal",234.5);
+            parameters.put("totalfinal",asigncionDadoId[2]);
+            parameters.put("direccion",lugarYCliente[2]);
+            parameters.put("fecha",fecha);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
             byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
@@ -177,7 +194,7 @@ public class AsignacionDaoImp {
     }
 
     public List<Object[]> empleadosAsignados(int id){
-        String query = "SELECT A.idEmpleado, CONCAT(E.nombre,' ',E.apellido,' ',apellido_materno),E.carnet,A.cargo,E.telefono " +
+        query = "SELECT A.idEmpleado, CONCAT(E.nombre,' ',E.apellido,' ',apellido_materno),E.carnet,A.cargo,E.telefono " +
                 "FROM asignacion_empleado A " +
                 "INNER JOIN empleado E ON A.idEmpleado=E.idEmpleado " +
                 "WHERE idAsignacion=:id";
@@ -189,7 +206,7 @@ public class AsignacionDaoImp {
         return resultado;
     }
     public List<Object[]> serviciosAsignados(int id){
-        String query = "SELECT A.idServicio, S.descripcion, S.categoria, A.total_servicio\n" +
+        query = "SELECT A.idServicio, S.descripcion, S.categoria, A.total_servicio\n" +
                 "FROM servicio S\n" +
                 "\t\tINNER JOIN asignacion_servicio A ON S.idServicio=A.idServicio\n" +
                 "WHERE idAsignacion=:id";
@@ -200,6 +217,23 @@ public class AsignacionDaoImp {
 
         return resultado;
     }
-
+    public Object[] lugarYClienteAsignados(int id){
+        query = "SELECT L.nombre,CONCAT(C.nombre,' ',C.apellido,' ',C.apellido_materno),L.direccion\n" +
+                "FROM asignacion A\n" +
+                "\tINNER JOIN lugar L ON A.idLugar=L.idLugar\n" +
+                "    INNER JOIN cliente C ON L.idCliente=C.idCliente\n" +
+                "WHERE A.idAsignacion=:id";
+        List<Object[]> resultado = entityManager.createNativeQuery(query)
+                .setParameter("id", id)
+                .getResultList();
+        return resultado.get(0);
+    }
+    public Object[] datosServicio(int id) {
+        String query = "SELECT * FROM asignacion WHERE idAsignacion = :id";
+        Object[] servicio = (Object[]) entityManager.createNativeQuery(query)
+                .setParameter("id", id)
+                .getSingleResult();
+        return servicio;
+    }
 
 }

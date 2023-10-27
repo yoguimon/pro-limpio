@@ -4,12 +4,14 @@ import com.proyecto.prolimpio.dao.AsignacionDaoImp;
 import com.proyecto.prolimpio.dto.AsignacionResponse;
 import com.proyecto.prolimpio.dto.VerificarAsignacionDTO;
 import com.proyecto.prolimpio.models.EmpleadoAux;
+import com.proyecto.prolimpio.models.Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -30,7 +32,7 @@ public class AsignacionController {
         return asignacionDaoImp.generarPdf(26);
     }
     @GetMapping("/asignacion/prueba")
-    public List<Object[]> prueba(){
-        return asignacionDaoImp.serviciosAsignados(12);
+    public Object[] prueba(){
+        return asignacionDaoImp.datosServicio(12);
     }
 }

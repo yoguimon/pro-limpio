@@ -15,7 +15,7 @@ public class Servicio {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="idServicio")
-    private Long idServicio;
+    private int idServicio;
     @Column(name="nombre")
     private String nombre;
     @Column(name="costo_m2")
@@ -43,7 +43,7 @@ public class Servicio {
     public Servicio() {
     }
 
-    public Servicio(Long idServicio, String nombre, double costo_m2, String descripcion, String categoria, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
+    public Servicio(int idServicio, String nombre, double costo_m2, String descripcion, String categoria, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
         this.idServicio = idServicio;
         this.nombre = nombre;
         this.costo_m2 = costo_m2;
@@ -53,7 +53,7 @@ public class Servicio {
         this.fecha_actualizacion = fecha_actualizacion;
     }
 
-    public Servicio(Long idServicio, String nombre, double costo_m2, String descripcion, String categoria) {
+    public Servicio(int idServicio, String nombre, double costo_m2, String descripcion, String categoria) {
         this.idServicio = idServicio;
         this.nombre = nombre;
         this.costo_m2 = costo_m2;
