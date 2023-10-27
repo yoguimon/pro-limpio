@@ -52,20 +52,29 @@ async function verificarAsignacion(){
           document.querySelector('#listaEmpleadosYaAsigandos tbody').outerHTML=listadoHtml;
     }
 }
-
-
 async function agregarAsignacion(){
-    //var popup = document.getElementById("popupAsignacion");
-
      const request = await fetch('api/asignacion', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(armarJson())//llama a la funcion JSON.STRI...agarra cualquier objeto de js
-        // y lo convierte en json
+        body: JSON.stringify(armarJson())
       });
-    //mostrarAlerta('listaClientes.html',popup);
-    $('#formExitoAsignacion').modal('show');
+      /*$('#formExitoAsignacion').modal('show');
+          setTimeout(function() {
+              $('#formExitoAsignacion').modal('hide');
+          }, 2000);*/
+      if (request.ok) {
+          const response = await request.blob();
+          const file = new Blob([response], { type: 'application/pdf' });
+          const fileURL = URL.createObjectURL(file);
+          //setTimeout(function() {
+              window.open(fileURL, '_blank');
+              location.reload();
+          //}, 2000);
+      } else {
+          // Manejar el caso en el que la generación de reporte falla
+          alert("fallo la generacion de reportes...");
+      }
 }

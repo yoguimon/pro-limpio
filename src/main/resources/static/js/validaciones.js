@@ -22,14 +22,14 @@ function validarNombre(nombre){
 }
 function validarNombreS(nombre){//validarNombreServicio
     if(nombre===""){
-            return "Ingrese el nombre del servicio";
-        }else if(esNro(nombre)){
-            return "Ingrese un nombre de servicio";
-        }else if(!soloLetras(nombre)){
-            return "El nombres debe ser de solo letras";
-        }else{
-            return "";
-        }
+        return "Ingrese el nombre del servicio";
+    }else if(esNro(nombre)){
+        return "Ingrese un nombre de servicio";
+    }else if(!soloLetras(nombre)){
+        return "El nombres debe ser de solo letras";
+    }else{
+        return "";
+    }
 }
 function validarApellidoP(apellidoP){
     if(apellidoP===""){

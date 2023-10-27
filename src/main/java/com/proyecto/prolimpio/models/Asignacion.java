@@ -17,7 +17,7 @@ public class Asignacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idAsignacion")
-    private Long idAsignacion;
+    private int idAsignacion;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER) // Una asignacion se asocia con un lugar
     @JoinColumn(name = "idLugar", referencedColumnName = "idLugar")
     private Lugar lugar;
