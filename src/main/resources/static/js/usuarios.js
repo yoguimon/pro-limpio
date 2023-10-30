@@ -51,6 +51,7 @@ async function iniciarSesion(email,pass){
             const answer = await request.text();
             if(answer=='nuevo'){
                 localStorage.setItem('pass', datos.pass);
+                localStorage.setItem('email', datos.email);
                 window.location.href = 'cambiarContrasena.html';
 
             }else if(answer=='viejo'){

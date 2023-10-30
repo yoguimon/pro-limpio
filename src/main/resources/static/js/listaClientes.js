@@ -33,19 +33,19 @@ async function cargarClientes(){
     const clientes = await request.json();
 
     let listadoHtml = '';
-            //para agragar usuarios de json
-            let cont = 0;
-          for(let cliente of clientes){
-                cont=cont+1;
-                let botonLugar = '<a href="#" class="btn btn-success btn-circle btn-sm" onclick="mostrarLugares(' + cliente[0] + ', \'' + cliente[2] + '\')"><i class="fas fa-home"></i></a>';
-                let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarCliente('+cliente[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
-                let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarCliente('+cliente[0]+')"><i class="fas fa-trash"></i></a>';
-                let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[1]+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+botonLugar+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
-                listadoHtml+=clienteHtml;
-          }
+        //para agragar usuarios de json
+        let cont = 0;
+      for(let cliente of clientes){
+            cont=cont+1;
+            let botonLugar = '<a href="#" class="btn btn-success btn-circle btn-sm" onclick="mostrarLugares(' + cliente[0] + ', \'' + cliente[2] + '\')"><i class="fas fa-home"></i></a>';
+            let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarCliente('+cliente[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
+            let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarCliente('+cliente[0]+')"><i class="fas fa-trash"></i></a>';
+            let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[1]+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+botonLugar+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
+            listadoHtml+=clienteHtml;
+      }
 
 
-          document.querySelector('#listaClientes tbody').outerHTML=listadoHtml;
+      document.querySelector('#listaClientes tbody').outerHTML=listadoHtml;
 
 }
 function mostrarLugares(id,nombre){

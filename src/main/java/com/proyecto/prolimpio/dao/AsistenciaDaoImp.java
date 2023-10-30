@@ -65,4 +65,13 @@ public class AsistenciaDaoImp implements CrudDao<Asistencia>{
                 .getResultList();
         return resultado;
     }
+    public List<Asistencia> getTodasAsistencias(Long id){
+        String query = "SELECT * \n" +
+                "FROM asistencia\n" +
+                "WHERE idEmpleado=:id";
+        List<Asistencia> resultado = entityManager.createNativeQuery(query)
+                .setParameter("id",id)
+                .getResultList();
+        return resultado;
+    }
 }

@@ -36,7 +36,10 @@ public class AsistenciaController {
     public void setAsistencia(@RequestBody Asistencia asistencia){
         asistenciaService.modificar(asistencia);
     }
-
+    @GetMapping("/asistencia/empleado/{id}")
+    public List<Asistencia> getAsistenciasEmpleado(@PathVariable Long id){
+        return asistenciaService.getAsistencias(id);
+    }
     //@GetMapping("/asistencia/{id}")
     //public List<Asistencia> getTodosXId(@PathVariable Long id){
         //return asistenciaService.getAllXId(id);

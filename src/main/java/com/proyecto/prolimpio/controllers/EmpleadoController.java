@@ -48,4 +48,8 @@ public class EmpleadoController {
     public List<Empleado> getTodosEmpleados(){
         return empleadoDaoImp.getTodosEmpleados();
     }
+    @GetMapping("api/empleados/asistencia")
+    public List<Empleado> getAllEmployes(){
+        return empleadoDaoImp.getAllEmployes();
+    }
 }

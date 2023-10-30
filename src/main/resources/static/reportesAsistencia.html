@@ -10,7 +10,6 @@
   <meta name="author" content="">
 
   <title>PRO LIMPIO</title>
-
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
@@ -28,6 +27,11 @@
 
   <script src="vendor/fontawesome-free/js/all.js"></script>
   <script src="vendor/fontawesome-free/js/all.min.js"></script>
+  <!--maptiler-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <!--hora y fecha-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 </head>
 
@@ -89,30 +93,30 @@
         <i class="fa fa-calendar" aria-hidden="true"></i>
         <span>Asistencia</span>
       </a>
-      <div id="collapseAsistencia" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseAsistencia" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo asistencia:</h6>
-          <a class="collapse-item" href="reportesAsistencia.html">Reportes Asistencia</a>
+          <a class="collapse-item active" href="reportesAsistencia.html">Reportes Asistencia</a>
           <a class="collapse-item" href="reportesFecha.html">Reportes por Fecha</a>
           <a class="collapse-item" href="reportesLugares.html">Reportes por Lugares</a>
         </div>
       </div>
     </li>
 
-      <!-- Nav Item - Pages Collapse Menu Clientes-->
-      <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClientes"
-             aria-expanded="true" aria-controls="collapseTwo">
-              <i class="fa fa-solid fa-toolbox"></i>
-              <span>Clientes</span>
-          </a>
-          <div id="collapseClientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-              <div class="bg-white py-2 collapse-inner rounded">
-                  <h6 class="collapse-header">Modulo Clientes:</h6>
-                  <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
-              </div>
-          </div>
-      </li>
+    <!-- Nav Item - Pages Collapse Menu Clientes-->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClientes"
+         aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa fa-solid fa-toolbox"></i>
+        <span>Clientes</span>
+      </a>
+      <div id="collapseClientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Modulo Clientes:</h6>
+          <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
+        </div>
+      </div>
+    </li>
 
     <!-- Nav Item - Pages Collapse Menu Servicios-->
     <li class="nav-item">
@@ -121,10 +125,10 @@
         <i class="fa fa-solid fa-toolbox"></i>
         <span>Servicios</span>
       </a>
-      <div id="collapseServicios" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseServicios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo servicios:</h6>
-          <a class="collapse-item active" href="listaServicios.html">Lista de Servicios</a>
+          <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
         </div>
       </div>
     </li>
@@ -196,141 +200,68 @@
       <!-- Begin Page Content -->
       <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Lista Servicios</h1>
-        <p class="mb-4">info soble los Servicios</p>
-
-        <!-- Modal -->
-        <div class="modal fade" id="formEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
+        <!-- Modal Mapa-->
+        <div class="modal fade" id="modalMapa" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Alerta</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title fs-5" id="myModalLabel">Mapa</h5>
+                <button type="button" class="close" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                Seguro de eleminar elemento?
+                <div id="map-container" style="height:500px"></div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="botonEliminarElemento">Eliminar</button>
+                <button type="button" class="btn btn-secondary" onclick="cerrarMapa()">Cerrar</button>
               </div>
             </div>
           </div>
         </div>
-
-        <!--MODAL-->
-        <div class="modal fade" id="formEdicion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Datos</h1>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form class="user">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="card" style="width: 15rem;">
-                            <img src="img/logo.png" class="card-img-top" alt="..." width="15" height="120">
-                            <div class="card-body">
-                              <a href="#" class="btn btn-primary">Subir Foto</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="form-group row">
-                    <div class="col-sm-12 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="txtnombreServicio"
-                             placeholder="Nombre Servicio">
-                    </div>
-                    <br><br><br>
-                    <div class="col-sm-12 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="txtdescripcion"
-                             placeholder="descripcion">
-                    </div>
-                    <br><br><br>
-                    <div class="col-sm-12 mb-3 mb-sm-0">
-                      <select class="form-control" id="cbxcategoria" name="categoria">
-                        <option value="Pisos">Pisos</option>
-                        <option value="Ventanas">Ventanas</option>
-                        <option value="Oficinas">Oficinas</option>
-                        <option value="Jardines">Jardines</option>
-                      </select>
-                    </div>
-                  </div>
-
-                </form>
-                <div class="d-flex justify-content-between mt-3" id="botones">
-                  <button id="btnSaveChanges" type="button" class="btn btn-primary flex-grow-1 me-2">Modificar</button>
-                  <button id="btnCancel" type="button" class="btn btn-warning flex-grow-1" data-dismiss="modal">Cancelar</button>
-                </div>
-              </div>
-
-
-
-            </div>
-          </div>
-        </div>
-
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-          <form action="formularioServicio.html">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">
-                <button type="submit" class="btn btn-primary">Agregar Servicio</button>
+                <!--<button class="btn btn-primary" onclick="mostrarUbicacion()">Ver Ubicacion</button>-->
+                <input id="search" class="form-control form-control-user" type="search" name="search" placeholder="buscar empleado por nombre...">
               </h6>
             </div>
-          </form>
         </div>
 
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="listaServicios" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="listaEmpleadosAsistencia" width="100%" cellspacing="0">
               <thead>
               <tr>
                 <th>Nro</th>
-                <th>Nombre Servicio</th>
-                <th>Descripcion</th>
-                <th>Categoria</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <th>Nombre Empleado</th>
+                <th>Carnet</th>
+                <th>Cargo</th>
+                <th>Telefono</th>
+                <th>Mostrar Asistencias</th>
               </tr>
               </thead>
-              <tfoot>
+              <tbody>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="listaAsistenciasEmpleado" width="100%" cellspacing="0">
+              <thead>
               <tr>
                 <th>Nro</th>
-                <th>Nombre Servicio</th>
-                <th>Descripcion</th>
-                <th>Categoria</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Tipo</th>
+                <th>Ubicacion</th>
               </tr>
-              </tfoot>
+              </thead>
               <tbody>
 
 
@@ -385,7 +316,8 @@
 
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
-<script src="js/listaServicios.js"></script>
+<script src="js/control.js"></script>
+<script src="js/reportesAsistencia.js"></script>
 
 </body>
 

@@ -43,4 +43,7 @@ public class AsistenciaService implements CrudService<Asistencia>{
     public void agregarAistenciar(AsistenciaResponse asistenciaResponse) {
         asistenciaDaoImp.agregar(asistenciaResponse);
     }
+    public List<Asistencia> getAsistencias(Long id){
+       return asistenciaDaoImp.getTodasAsistencias(id);
+    }
 }
