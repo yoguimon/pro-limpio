@@ -235,5 +235,29 @@ public class AsignacionDaoImp {
                 .getSingleResult();
         return servicio;
     }
+    //Aqui muestro asignaciones de la tabla asignacion sin detalles solo ids
+    public List<Object[]> asignacionesPendientes(){
+        query= "SELECT * FROM asignacion WHERE estado=1";
+        List<Object[]> asignaciones = entityManager.createNativeQuery(query)
+                .getResultList();
+        return asignaciones;
+    }
+    //Aqui obtengo todos las asignaciones conn detalles
+    public List<AsignacionReporte> getTodasAsignacionesPendientes(){
+        List<Object[]> asignaciones = asignacionesPendientes();
+        List<AsignacionReporte> asignacionesPendientes= new ArrayList<AsignacionReporte>();
+        for(Object[] asignacion:asignaciones){
+            AsignacionReporte asignacionReporte = new AsignacionReporte();
+            asignacionReporte.setClienteLugar(lugarYClienteAsignados((int)asignacion[0]));
+            asignacionReporte.setServicioId(datosServicio((int)asignacion[0]));
+            asignacionesPendientes.add(asignacionReporte);
+        }
+        return asignacionesPendientes;
+    }
 
+    public void finalizarAsignacion(int id) {
+        Asignacion asignacion = entityManager.find(Asignacion.class,id);
+        asignacion.setEstado((byte)0);
+        entityManager.merge(asignacion);
+    }
 }

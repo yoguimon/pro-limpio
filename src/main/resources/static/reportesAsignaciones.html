@@ -10,18 +10,25 @@
     <meta name="author" content="">
 
     <title>PRO LIMPIO</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <!-- Custom fonts for this template-->
+
+    <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+
+    <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <!--maptiler-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <script src="vendor/fontawesome-free/js/all.js"></script>
+    <script src="vendor/fontawesome-free/js/all.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -37,7 +44,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <img src="img/logo.png" alt="" width="40">
             </div>
-            <div class="sidebar-brand-text mx-3">PRO LIMPIO</div>
+            <div class="sidebar-brand-text mx-3">Pro Limpio</div>
         </a>
 
         <!-- Divider -->
@@ -58,10 +65,10 @@
             Administrador
         </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item active">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-               aria-controls="collapseTwo">
+        <!-- Nav Item - Pages Collapse Menu EMPLEADOS-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fa fa-user fa-fw"></i>
                 <span>Empleados</span>
             </a>
@@ -99,10 +106,10 @@
                 <i class="fa fa-solid fa-toolbox"></i>
                 <span>Clientes</span>
             </a>
-            <div id="collapseClientes" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseClientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Modulo Clientes:</h6>
-                    <a class="collapse-item active" href="listaClientes.html">Lista Clientes</a>
+                    <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
                 </div>
             </div>
         </li>
@@ -142,10 +149,10 @@
                 <i class="fa fa-solid fa-toolbox"></i>
                 <span>Reportes</span>
             </a>
-            <div id="collapseReportes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseReportes" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Modulo reportes:</h6>
-                    <a class="collapse-item" href="reportesAsignaciones.html">Reportes de Asignacion</a>
+                    <a class="collapse-item active" href="reportesAsignaciones.html">Reportes de Asignacion</a>
                 </div>
             </div>
         </li>
@@ -163,10 +170,10 @@
 
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <div class="topbar-divider d-none d-sm-block"></div>
+
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -201,136 +208,60 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <div id="popupCliente" class="popup">
-                    <img src="img/bien.jpg">
-                    <h2>Cliente Creado!</h2>
-                    <p>se creo correctamente el cliente</p>
-                </div>
+
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Agregar Cliente</h1>
-                </div>
+                <h1 class="h3 mb-2 text-gray-800">Asignaciones Realizadas</h1>
+                <p class="mb-4">En la tabla se muestran las asignaciones pendientes que aun no concluyeron</p>
 
-                <form class="user">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-md-12">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card" style="width: 15rem;">
-                                        <div class="card-body">
-                                            <img src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-character-default-avatar-image_2237203.jpg" class="card-img-top" alt="..." width="15" height="120" id="img">
-                                            <input type="file" id="foto" class="form-control-file" style="display: none;"/>
-                                            <label for="foto" class="btn btn-primary btn-block">Subir Foto</label>
-                                        </div>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarClientes()">Imprimir Reporte</button>
                                     </div>
                                 </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaTodasAsignaciones" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Cliente</th>
+                                        <th>Lugar</th>
+                                        <th>Empleados</th>
+                                        <th>Servicios</th>
+                                        <th>Total en Bs.</th>
+                                        <th>Fecha</th>
+                                        <th>Finalizar</th>
+                                        <th>Imprimir</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-md-12">
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <br>
-                    <div class="form-inputs row">
-                        <div class="col-sm-4 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="txtnombreEmpresa"
-                                   placeholder="Nombre Empresa">
-                            <label id="lblErrorNombreE"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-user" id="txtnombre"
-                                   placeholder="Nombre Cliente">
-                            <label id="lblErrorNombre"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-user" id="txtapellido"
-                                   placeholder="Apellido Paterno">
-                            <label id="lblErrorApellidoP"></label>
-                        </div>
-                    </div>
-                    <div class="form-inputs row">
-                        <div class="col-sm-3 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="txtapellidoM"
-                                   placeholder="Apellido Materno">
-                            <label id="lblErrorApellidoM"></label>
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control form-control-user" id="txtcarnet"
-                                   placeholder="Carnet">
-                            <label id="lblErrorCarnet"></label>
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control form-control-user" id="txttelefono"
-                                   placeholder="telefono">
-                            <label id="lblErrorTelefono"></label>
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control form-control-user" id="txtcorreo"
-                                   placeholder="Correo">
-                            <label id="lblErrorCorreo"></label>
-                        </div>
-                    </div>
-                    <div class="form-inputs row">
-                        <div class="col-sm-4 mb-3 mb-sm-0">
-                            <input type="text" id="txtfechaRegistro" class="form-control form-control-user"
-                                   placeholder="Fecha Registro" onfocus="(this.type='date')" onfocusout="(this.type='text')">
-                            <label id="lblErrorFR"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-user" id="txtdireccion"
-                                   placeholder="Direccion">
-                            <label id="lblErrorDireccion"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-user"
-                                   id="txtnotas" placeholder="datos importantes">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>Ingrese su Ubicacion:</h3>
-                            <div id="map-container"></div>
-                            <label id="lblErrorMapa"></label>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <a class="btn btn-primary btn-user btn-block" onclick="validacionCliente()">
-                                        Agregar Cliente
-                                    </a>
-                                </div>
-                                <div class="col-sm-6">
-                                    <a class="btn btn-warning btn-user btn-block" href="listaClientes.html">Cancelar</a><!--revisar esto-->
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                </form>
-
+                </div>
             </div>
-            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Main Content -->
+        <!-- /.container-fluid -->
+
+
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+                    <span>Copyright &copy; Jhonny 2023</span>
                 </div>
             </div>
         </footer>
@@ -347,21 +278,115 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+<!-- Logout Modal-->
+<!-- Modal Empleados-->
+<div class="modal fade" id="modalEmpleados" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="myModa">Empleados Asignados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="listaEmpleadosAsignados" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Nombre</th>
+                            <th>Carnet</th>
+                            <th>Cargo</th>
+                            <th>Telefono</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Empleados-->
+<div class="modal fade" id="modalServicios" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="myModas">Empleados Asignados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="listaServiciosAsignados" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Descripcion</th>
+                            <th>Categoria</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="formFinalizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Mensaje</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Quieres dar por finalizado esta asignacion?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="botonFinalizar">Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
 <!-- Core plugin JavaScript-->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/datatables-demo.js"></script>
 <script src="js/control.js"></script>
-<script src="js/mapa.js"></script>
-<script src="js/validaciones.js"></script>
-<script src="js/registrarCliente.js"></script>
-<script src="js/cargarImagen.js"></script>
+<script src="js/reportesAsignaciones.js"></script>
+
 </body>
 
 </html>
