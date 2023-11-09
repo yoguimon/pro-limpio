@@ -260,4 +260,5 @@ public class AsignacionDaoImp {
         asignacion.setEstado((byte)0);
         entityManager.merge(asignacion);
     }
+    
 }

@@ -97,3 +97,22 @@ async function imprimirAsignacion(id){
         alert("fallo la generacion de reportes...");
     }
 }
+async function imprimirReporteGeneralAsignaciones(){
+    const request = await fetch('api/reporte', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+    });
+    if (request.ok) {
+        const response = await request.blob();
+        const file = new Blob([response], { type: 'application/pdf' });
+        const fileURL = URL.createObjectURL(file);
+          window.open(fileURL, '_blank');
+          location.reload();
+    } else {
+      // Manejar el caso en el que la generación de reporte falla
+        alert("fallo la generacion de reportes...");
+    }
+}

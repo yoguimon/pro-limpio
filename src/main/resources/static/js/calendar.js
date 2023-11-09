@@ -42,7 +42,7 @@ function seleccionarFecha(texto) {
     }
 
     var dia = dateIni.getDate();
-    var mes = dateIni.getMonth() + 1; // Se suma 1 porque los meses se indexan desde 0
+    var mes = meses[dateIni.getMonth()]; // Se suma 1 porque los meses se indexan desde 0
     var ano = dateIni.getFullYear();
 
     $("#dia").text(dia);
@@ -50,7 +50,7 @@ function seleccionarFecha(texto) {
     $("#ano").text(ano);
 
     dia = dateFin.getDate();
-    mes = dateFin.getMonth() + 1; // Se suma 1 porque los meses se indexan desde 0
+    mes = meses[dateFin.getMonth()]; // Se suma 1 porque los meses se indexan desde 0
     ano = dateFin.getFullYear();
 
     $("#diaFin").text(dia);

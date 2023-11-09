@@ -209,72 +209,112 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
 
-                <div class="container">
-                    <h3>ASIGNACION DE TRABAJO</h3>
-                    <div class="row">
-                        <div class="col-md-12">
-                                <div class="row">
-                                    <div id="data" class="col-md-3">
-                                        <div class="mb-0">
-                                            <label>Fecha Inicio:</label>
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Asignar Orden de Trabajo</h1>
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-8 col-md-10 mb-4">
+                        <div class="card shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-md-5">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha Inicio:</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight text-gray-800">
+                                                        <div class="content" style="display: flex;">
+                                                            <ul style="list-style-type: none; display: flex; padding: 0; margin: 0;">
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="dia">23</span>
+                                                                    <p style="margin-top: 5px;">Dia</p>
+                                                                </li>
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="mes">Noviembre</span>
+                                                                    <p style="margin-top: 5px;">Mes</p>
+                                                                </li>
+                                                                <li>
+                                                                    <span id="ano">2023</span>
+                                                                    <p style="margin-top: 5px;">Año</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <ul>
-                                            <li>
-					                            <span id="dia"></span>
-                                                <p>Dia</p>
-                                            </li>
-                                            <li>
-					                            <span id="mes"></span>
-                                                <p>Mes</p>
-                                            </li>
-                                            <li>
-					                            <span id="ano"></span>
-                                                <p>Año</p>
-                                            </li>
-                                            <li>
-                                                <a type="button" class="btn btn-primary" onclick="mostarModalFecha()">
-                                                    <i class="fas fa-calendar" style="font-size:30px;color:white"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </div>
-                                    <div id="dataFin" class="col-md-3" style="margin-left:25px;">
-                                        <div class="mb-0">
-                                            <label>Fecha Fin:</label>
-                                        </div>
-                                        <ul>
-                                            <li>
-                                                <span id="diaFin"></span>
-                                                <p>Dia</p>
-                                            </li>
-                                            <li>
-                                                <span id="mesFin"></span>
-                                                <p>Mes</p>
-                                            </li>
-                                            <li>
-                                                <span id="anoFin"></span>
-                                                <p>Año</p>
-                                            </li>
-                                        </ul>
+                                    <div class="col-md-2">
+                                        <a type="button" class="btn btn-primary" onclick="mostarModalFecha()">
+                                            <i class="fas fa-calendar" style="font-size:30px;color:white"></i>
+                                        </a>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-0">
-                                            <label>Seleccione turno:</label>
-                                        </div>
-                                        <div class="form-inputs row">
-                                            <div class="col-sm-6">
-                                                <select class="form-control" id="cbxturno" name="categoria">
-                                                    <option value="Manana" selected>Manana</option>
-                                                    <option value="Tarde">Tarde</option>
-                                                </select>
+                                    <div class="col-md-5">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha Fin:</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight text-gray-800">
+                                                        <div class="content" style="display: flex;">
+                                                            <ul style="list-style-type: none; display: flex; padding: 0; margin: 0;">
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="diaFin">23</span>
+                                                                    <p style="margin-top: 5px;">Dia</p>
+                                                                </li>
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="mesFin">Noviembre</span>
+                                                                    <p style="margin-top: 5px;">Mes</p>
+                                                                </li>
+                                                                <li>
+                                                                    <span id="anoFin">2023</span>
+                                                                    <p style="margin-top: 5px;">Año</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
+                    </div>
 
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Seleccione turno:</div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                    <div class="form-inputs row">
+                                                        <div class="col-sm-12">
+                                                            <select class="form-control" id="cbxturno" name="categoria">
+                                                                <option value="Manana" selected>Mañana</option>
+                                                                <option value="Tarde">Tarde</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
+
 
                 <!-- Modal Eliminar -->
                 <div class="modal fade" id="formEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

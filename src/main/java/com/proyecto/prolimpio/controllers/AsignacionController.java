@@ -55,7 +55,7 @@ public class AsignacionController {
     }
     //prueba
     @GetMapping("/asignacion/prueba")
-    public List<AsignacionReporte> prueba(){
-        return asignacionDaoImp.getTodasAsignacionesPendientes();
+    public List<Object[]> prueba(){
+        return null;
     }
 }
