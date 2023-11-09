@@ -60,4 +60,11 @@ public class Servicio {
         this.descripcion = descripcion;
         this.categoria = categoria;
     }
+
+    public Servicio(int idServicio, String nombre, double costo_m2, String categoria) {
+        this.idServicio = idServicio;
+        this.nombre = nombre;
+        this.costo_m2 = costo_m2;
+        this.categoria = categoria;
+    }
 }

@@ -25,8 +25,8 @@ public class EmpleadoController {
         empleadoDaoImp.eliminar(id);
     }
     @GetMapping("api/empleados/{id}")
-    public Empleado getPersona(@PathVariable Long id){
-        return empleadoDaoImp.getPersona(id);
+    public Object[] getPersona(@PathVariable Long id){
+        return empleadoDaoImp.getEmpleado(id);
     }
     @GetMapping("api/empleadoXCarnet/{carnet}")
     public List<Empleado> getEmpleado(@PathVariable String carnet){

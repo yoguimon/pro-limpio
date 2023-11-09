@@ -26,12 +26,12 @@ public class ServicioController {
         servicioService.crear(servicio);
     }
     @GetMapping("/servicio/{id}")
-    public Servicio getServicio(@PathVariable Long id){
-        return servicioService.getPersona(id);
+    public Object[] getServicio(@PathVariable int id){
+        return servicioService.getServicio(id);
     }
     @PutMapping("/servicio")
     public void setServicio(@RequestBody Servicio servicio){
-        servicioService.modificar(servicio);
+        servicioService.modificarServicio(servicio);
     }
 
     @GetMapping("/servicio/nombre/{nombre}")

@@ -57,55 +57,65 @@ function seleccionarFecha(texto) {
     $("#mesFin").text(mes);
     $("#anoFin").text(ano);
     $('#myModalFecha').modal('hide');
+
 }
 
-function seleccionarHora(texto) {
+function fechaEsValida(texto){
+    var fechaIni = $("#datepickerInicio").datepicker("getDate");
+    var fechaFin = $("#datepickerFin").datepicker("getDate");
     if(texto==="cancelar"){
-        document.getElementById("txthoraInicio").value=horaAuxIni;
-        document.getElementById("txthoraFin").value=horaAuxFin;
-        $('#myModalHora').modal('hide');
+        $("#datepickerInicio").datepicker("setDate", fechaAuxInicio);
+        $("#datepickerFin").datepicker("setDate", fechaAuxFin);
+        $('#myModalFecha').modal('hide');
         return;
     }
-    var horaSeleccionada = document.getElementById("txthoraInicio").value;
-    var horaDiv = document.getElementById("horaIni");
-    var minutoDiv = document.getElementById("minutoIni");
-    var horaMinuto = horaSeleccionada.split(":");
-    horaDiv.innerText = horaMinuto[0]+" :";
-    minutoDiv.innerText = horaMinuto[1];
 
-    horaSeleccionada = document.getElementById("txthoraFin").value;
-    horaDiv = document.getElementById("horaFin");
-    minutoDiv = document.getElementById("minutoFin");
-    horaMinuto = horaSeleccionada.split(":");
-    horaDiv.innerText = horaMinuto[0]+" :";
-    minutoDiv.innerText = horaMinuto[1];
-
-    $('#myModalHora').modal('hide');
-}
-function fechaEsValida(){
     var fechaActual = new Date();
     fechaActual.setHours(0, 0, 0, 0);
-    var fechaIni = $("#datepickerInicio").datepicker("getDate");
     fechaIni.setHours(0, 0, 0, 0);
-    var fechaFin = $("#datepickerFin").datepicker("getDate");
     fechaFin.setHours(0, 0, 0, 0);
     if(fechaIni.getTime() < fechaActual.getTime()) {
         $("#formAlertaTotal .modal-body").text("La fecha de inicio no puede ser anterior a la fecha actual");
+        $('#myModalFecha').modal('hide');
         $("#formAlertaTotal").modal("show");
-        return false;
+        iniciarFechaYHora();
+        return;
+        //return false;
     }
     if(fechaFin.getTime() < fechaIni.getTime()) {
         $("#formAlertaTotal .modal-body").text("La fecha de finalización no puede ser anterior a la fecha de inicio");
+        $('#myModalFecha').modal('hide');
         $("#formAlertaTotal").modal("show");
-        return false;
+        iniciarFechaYHora();
+        return;
+        //return false;
     }
     if(fechaIni.getTime() > fechaFin.getTime()) {
         $("#formAlertaTotal .modal-body").text("La fecha de inicio no puede ser posterior a la fecha de finalización");
+        $('#myModalFecha').modal('hide');
         $("#formAlertaTotal").modal("show");
-        return false;
+        iniciarFechaYHora();
+        return;
+        //return false;
     }
     fechaAuxInicio=fechaIni;
     fechaAuxFin=fechaFin;
-    return true;
+  //  return true;
 
+    var dia = fechaIni.getDate();
+    var mes = meses[fechaIni.getMonth()]; // Se suma 1 porque los meses se indexan desde 0
+    var ano = fechaIni.getFullYear();
+
+    $("#dia").text(dia);
+    $("#mes").text(mes);
+    $("#ano").text(ano);
+
+    dia = fechaFin.getDate();
+    mes = meses[fechaFin.getMonth()]; // Se suma 1 porque los meses se indexan desde 0
+    ano = fechaFin.getFullYear();
+
+    $("#diaFin").text(dia);
+    $("#mesFin").text(mes);
+    $("#anoFin").text(ano);
+    $('#myModalFecha').modal('hide');
 }

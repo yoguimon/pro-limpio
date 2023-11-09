@@ -41,9 +41,22 @@ public class ServicioDaoImp implements CrudDao<Servicio>{
         return entityManager.find(Servicio.class,id);
     }
 
+    public Object[] getServicio(int id){
+        String query="SELECT * FROM servicio WHERE idServicio=:id";
+        Object[] resultado =(Object[]) entityManager.createNativeQuery(query).setParameter("id",id).getSingleResult();
+        return resultado;
+    }
     @Override
     public void modificar(Servicio servicio) {
         entityManager.merge(servicio);
+    }
+
+    public void modificarServicio(Servicio servicioNuevo){
+        Servicio servicioActual= entityManager.find(Servicio.class,servicioNuevo.getIdServicio());
+        servicioActual.setNombre(servicioNuevo.getNombre());
+        servicioActual.setCategoria(servicioNuevo.getCategoria());
+        servicioActual.setCosto_m2(servicioNuevo.getCosto_m2());
+        entityManager.merge(servicioActual);
     }
 
     public List<Servicio> getServiciosXNombre(String nombre) {

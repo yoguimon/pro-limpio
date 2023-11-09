@@ -63,25 +63,25 @@ async function mostrarEmpleado(id){
         const empleado = await request.json();
 
 
-        document.getElementById('txtcarnet').value=empleado.carnet;
-        document.getElementById('txtnombre').value=empleado.nombre;
-        document.getElementById('txtapellido').value=empleado.apellido;
-        document.getElementById('txtapellidoM').value=empleado.apellido_materno;
-        document.getElementById('txtFechaContratacion').value=empleado.fecha_contratacion;
-        document.getElementById('cbxpuesto').value=empleado.puesto;
-        document.getElementById('txtsalario').value=empleado.salario;
-        document.getElementById('txtFechaNacimiento').value=empleado.fecha_nacimiento;
-        document.getElementById('cbxestado').value=empleado.estado_civil;
-        document.getElementById('cbxsexo').value=empleado.sexo;
-        document.getElementById('txtdireccion').value=empleado.direccion;
-        document.getElementById('txttelefono').value=empleado.telefono;
-        document.getElementById('txtemail').value=empleado.correo;
+        document.getElementById('txtcarnet').value=empleado[1];
+        document.getElementById('txtnombre').value=empleado[2];
+        document.getElementById('txtapellido').value=empleado[3];
+        document.getElementById('txtapellidoM').value=empleado[4];
+        document.getElementById('txtFechaContratacion').value=empleado[5];
+        document.getElementById('cbxpuesto').value=empleado[6];
+        document.getElementById('txtsalario').value=empleado[7];
+        document.getElementById('txtFechaNacimiento').value=empleado[8];
+        document.getElementById('cbxestado').value=empleado[9];
+        document.getElementById('cbxsexo').value=empleado[10];
+        document.getElementById('txtdireccion').value=empleado[11];
+        document.getElementById('txttelefono').value=empleado[12];
+        document.getElementById('txtemail').value=empleado[13];
         //datos.foto = "sin foto";
 
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
 
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarEmpleado('+empleado.idEmpleado+')">Modificar</button>';
+        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarEmpleado('+empleado[0]+')">Modificar</button>';
         let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</button>';
 
         document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;

@@ -601,7 +601,7 @@ function validarDatos() {
         errorAsignacion.innerHTML += 'Ingrese Supervisores, ';
     }
     // Verifica si el mensaje de error está vacío
-    if (errorAsignacion.innerHTML === "" && fechaEsValida()) {
+    if (errorAsignacion.innerHTML === "") {
         verificarAsignacion();
     }
 }

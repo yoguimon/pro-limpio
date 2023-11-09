@@ -69,6 +69,11 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
         Empleado empleado = entityManager.find(Empleado.class,id);
         return empleado;
     }
+    public Object[] getEmpleado(Long id){
+        String query="SELECT * FROM empleado WHERE idEmpleado=:id";
+        Object[] resultado =(Object[]) entityManager.createNativeQuery(query).setParameter("id",id).getSingleResult();
+        return resultado;
+    }
 
     @Override
     public void modificar(Empleado empleado) {

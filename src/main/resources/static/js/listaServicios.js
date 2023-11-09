@@ -38,7 +38,7 @@ async function cargarServicios(){
                 cont=cont+1;
                 let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarServicio('+servicio[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
                 let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarServicio('+servicio[0]+')"><i class="fas fa-trash"></i></a>';
-                let clienteHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[2]+'</td><td>'+servicio[3]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
+                let clienteHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[4]+'</td><td>'+servicio[3]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                 listadoHtml+=clienteHtml;
           }
 
@@ -59,14 +59,14 @@ async function mostrarServicio(id){
         const servicio = await request.json();
 
 
-        document.getElementById('txtnombreServicio').value=servicio.nombre;
-        document.getElementById('txtdescripcion').value=servicio.descripcion;
-        document.getElementById('cbxcategoria').value=servicio.categoria;
+        document.getElementById('txtnombreServicio').value=servicio[1];
+        document.getElementById('txtcosto').value=servicio[2];
+        document.getElementById('cbxcategoria').value=servicio[4];
 
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
 
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarServicio('+servicio.idServicio+')">Modificar</button>';
+        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarServicio('+servicio[0]+')">Modificar</button>';
         let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</button>';
 
         document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;
@@ -78,7 +78,7 @@ async function editarServicio(id){
     let servicioEditado={};
     servicioEditado.idServicio=id;
     servicioEditado.nombre = document.getElementById('txtnombreServicio').value;
-    servicioEditado.descripcion = document.getElementById('txtdescripcion').value;
+    servicioEditado.costo_m2 = document.getElementById('txtcosto').value;
     servicioEditado.categoria = document.getElementById('cbxcategoria').value;
 
     const request = await fetch('api/servicio',{
