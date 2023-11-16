@@ -4,6 +4,7 @@ import com.proyecto.prolimpio.dao.AsistenciaDaoImp;
 import com.proyecto.prolimpio.dao.LugarDaoImp;
 import com.proyecto.prolimpio.dto.AsistenciaReporte;
 import com.proyecto.prolimpio.dto.AsistenciaResponse;
+import com.proyecto.prolimpio.dto.DtoFechas;
 import com.proyecto.prolimpio.models.Asistencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,9 @@ public class AsistenciaService implements CrudService<Asistencia>{
     }
     public List<Asistencia> getAsistencias(Long id){
        return asistenciaDaoImp.getTodasAsistencias(id);
+    }
+
+    public List<Object[]> imprimirPorFechas(DtoFechas dtoFechas) {
+        return asistenciaDaoImp.getAsistenciasXFechas(dtoFechas);
     }
 }

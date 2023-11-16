@@ -1,5 +1,6 @@
-// Call the dataTables jQuery plugin
-//import {validarNombre} from './validaciones.js';
+$(document).ready(function(){
+    cargarFechaActual();
+});
 async function agregarEmpleado(datos){
         var popup = document.getElementById("popupEmpleado");
         const request = await fetch('api/empleados', {
@@ -95,4 +96,25 @@ async function existeCorreo(email){
     }else{
         errorEmail.innerHTML="algo raro paso!";
     }
+
+}
+function cargarFechaActual() {
+    // Obtener la fecha actual en formato dd/mm/aaaa
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; // Los meses son indexados desde 0
+    let yyyy = today.getFullYear();
+
+    // Formatear la fecha como dd/mm/aaaa
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    let formattedDate = dd + '/' + mm + '/' + yyyy;
+    // Asignar la fecha formateada al campo de entrada
+    document.getElementById('txtFechaNacimiento').value = formattedDate;
+    document.getElementById('txtFechaContratacion').value=formattedDate;
+
 }

@@ -210,48 +210,28 @@
         </div>
 
         <form class="user">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="row">
-                <div class="col-md-12">
-
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="card" style="width: 15rem;">
-                    <div class="card-body">
-                      <img src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-character-default-avatar-image_2237203.jpg" class="card-img-top" alt="..." width="15" height="120" id="img">
-                      <input type="file" id="foto" class="form-control-file" style="display: none;"/>
-                      <label for="foto" class="btn btn-primary btn-block">Subir Foto</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="row">
-                <div class="col-md-12">
-
-                </div>
-              </div>
-            </div>
-          </div>
           <br>
           <div class="form-inputs row">
-            <div class="col-sm-4 mb-3 mb-sm-0">
+            <div class="col-sm-8 mb-3 mb-sm-0">
               <input type="text" class="form-control form-control-user" id="txtnombreServicio"
                      placeholder="Nombre Servicio">
               <label id="lblErrorNombreS"></label>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 mb-3 mb-sm-0">
+              <input type="text" class="form-control form-control-user" id="txtcosto"
+                     placeholder="Costo por M2 del Servicio">
+              <label id="lblErrorCosto"></label>
+            </div>
+          </div>
+          <div class="form-inputs row">
+            <div class="col-sm-12">
               <input type="text" class="form-control form-control-user" id="txtdescripcion"
                      placeholder="Descripcion">
               <label id="lblErrorDescripcion"></label>
             </div>
-            <div class="col-sm-4">
+          </div>
+          <div class="form-inputs row">
+            <div class="col-sm-12">
               <select class="form-control" id="cbxcategoria" name="categoria">
                 <option value="Pisos" selected>Pisos</option>
                 <option value="Ventanas">Ventanas</option>
@@ -260,6 +240,7 @@
               </select>
             </div>
           </div>
+          <br>
           <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
               <a class="btn btn-primary btn-user btn-block" onclick="validacionServicio()">
@@ -314,7 +295,6 @@
 <script src="js/control.js"></script>
 <script src="js/validaciones.js"></script>
 <script src="js/registrarServicio.js"></script>
-<script src="js/cargarImagen.js"></script>
 </body>
 
 </html>

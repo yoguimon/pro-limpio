@@ -6,9 +6,17 @@ var clienteMap={};
 var lugarMap={};
 var totalAPagar=0;
 var servicioMapCosto={};
+var contCliente;
+var contServicio;
+var contEmpleado;
+var contSupervisor;
 $(document).ready(function() {
   contador=1;
   agregarFila();
+  contCliente=0;
+  contServicio=0;
+  contEmpleado=0;
+  contSupervisor=0;
 });
 async function buscarCliente(){
     const carnet = document.getElementById("txtBusqueda").value.toString();
@@ -43,6 +51,19 @@ async function buscarCliente(){
               document.querySelector('#listaClientesYSusLugares tbody').outerHTML=listadoHtml;
         }
 }
+function opcion(){
+    if(contCliente===0){
+        mostrarClientes();
+    }else{
+        if(contCliente % 2 === 0){
+            document.querySelector('#listaClientesYSusLugares tbody').style.display = 'table-row-group';
+        }else{
+            document.querySelector('#listaClientesYSusLugares tbody').style.display = 'none';
+        }
+    }
+    contCliente=contCliente+1;
+
+}
 async function mostrarClientes(){
     const request = await fetch('api/clientes/asignacion', {
                 method: 'GET',
@@ -50,24 +71,24 @@ async function mostrarClientes(){
                   'Accept': 'application/json',
                   'Content-Type': 'application/json'
                 }
-        });
-        //me devuelve una lista de empleados
-        const clientes = await request.json();
-        if(clientes.length === 0){
-            document.getElementById("lblerrorBusqueda").innerHTML="No existe clientes agregados!";
-        }else{
-              document.getElementById("lblerrorBusqueda").innerHTML="";
-              let listadoHtml = '';
-                //para agragar usuarios de json
-                let cont = 0;
-              for(let cliente of clientes){
-                    cont=cont+1;
-                    let botonRadio = '<label><input type="radio" name="opciones" value="' + cliente[0] + '" onclick="anadirATablaClienteYLugar(' + cliente[0] + ', \'' + cliente[1] + '\', \'' + cliente[3] + '\', \'' + cliente[4] + '\')"></label>';
-                    let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+cliente[4]+'</td><td>'+cliente[5]+'</td><td>'+botonRadio+'</td></tr>';
-                    listadoHtml+=clienteHtml;
-              }
-              document.querySelector('#listaClientesYSusLugares tbody').outerHTML=listadoHtml;
-        }
+    });
+    //me devuelve una lista de empleados
+    const clientes = await request.json();
+    if(clientes.length === 0){
+        document.getElementById("lblerrorBusqueda").innerHTML="No existe clientes agregados!";
+    }else{
+          document.getElementById("lblerrorBusqueda").innerHTML="";
+          let listadoHtml = '';
+            //para agragar usuarios de json
+            let cont = 0;
+          for(let cliente of clientes){
+                cont=cont+1;
+                let botonRadio = '<label><input type="radio" name="opciones" value="' + cliente[0] + '" onclick="anadirATablaClienteYLugar(' + cliente[0] + ', \'' + cliente[1] + '\', \'' + cliente[3] + '\', \'' + cliente[4] + '\')"></label>';
+                let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+cliente[4]+'</td><td>'+cliente[5]+'</td><td>'+botonRadio+'</td></tr>';
+                listadoHtml+=clienteHtml;
+          }
+          document.querySelector('#listaClientesYSusLugares tbody').outerHTML=listadoHtml;
+    }
 }
 function anadirATablaClienteYLugar(idCliente,idLugar,nombreCliente,lugar){
     var tabla = document.getElementById("listaPreAsignacion");
@@ -147,7 +168,7 @@ async function buscarServicio(nombreServicio){
         });
         const servicios = await request.json();
         if(servicios.length === 0){
-            document.getElementById("lblerrorBusquedaServicio").innerHTML="Carnet Incorrecto!";
+            document.getElementById("lblerrorBusquedaServicio").innerHTML="No existe el servicio registrado!";
         }else{
               document.getElementById("lblerrorBusquedaServicio").innerHTML="";
               let listadoHtml = '';
@@ -163,8 +184,20 @@ async function buscarServicio(nombreServicio){
               document.querySelector('#listaServicios tbody').outerHTML=listadoHtml;
         }
 }
-
+function opcionServicio(){
+    if(contServicio===0){
+        cargarServiciosAsignacion();
+    }else{
+        if(contServicio % 2 === 0){
+            document.querySelector('#listaServicios tbody').style.display = 'table-row-group';
+        }else{
+            document.querySelector('#listaServicios tbody').style.display = 'none';
+        }
+    }
+    contServicio=contServicio+1;
+}
 async function cargarServiciosAsignacion(){
+    document.getElementById("lblerrorBusquedaServicio").innerHTML="";
     const request = await fetch('api/servicio', {
             method: 'GET',
             headers: {
@@ -184,8 +217,6 @@ async function cargarServiciosAsignacion(){
                 let servicioHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[2]+'</td><td style="text-align: center;">'+servicio[3]+'</td><td style="text-align: center;">'+totalLimpieza+'</td><td style="text-align: center;"><label id="totalServicio_' + servicio[0] + '">-</label></td><td>'+botonCheckBox+'</td></tr>';
                 listadoHtml+=servicioHtml;
           }
-
-
           document.querySelector('#listaServicios tbody').outerHTML=listadoHtml;
 
 }
@@ -346,24 +377,28 @@ async function buscarEmpleado(){
                   'Accept': 'application/json',
                   'Content-Type': 'application/json'
                 }
-        });
-        try {
-            const empleados = await request.json();
-             document.getElementById("lblerrorBusquedaEmpleado").innerHTML="";
-             let listadoHtml = '';
-             let cont = 1;
-             for(empleado of empleados){
-                cont=cont+1;
-                var nombre = empleado[2]+' '+empleado[3]+' '+empleado[4];
-                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado[0] + '" onclick="anadirATablaLosEmpleados(' + empleado[0] + ', \'' + nombre + '\')"></label>';
-                let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
-                listadoHtml+=empleadoHtml;
-             }
-             document.querySelector('#listaEmpleadosXId tbody').outerHTML=listadoHtml;
+    });
+    const empleados = await request.json();
+    if(empleados.length===0){
+        document.getElementById("lblerrorBusquedaEmpleado").innerHTML="No existe ningun carnet";
+        return;
+    }
+    try {
+         document.getElementById("lblerrorBusquedaEmpleado").innerHTML="";
+         let listadoHtml = '';
+         let cont = 1;
+         for(empleado of empleados){
+            cont=cont+1;
+            var nombre = empleado[2]+' '+empleado[3]+' '+empleado[4];
+            let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado[0] + '" onclick="anadirATablaLosEmpleados(' + empleado[0] + ', \'' + nombre + '\')"></label>';
+            let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
+            listadoHtml+=empleadoHtml;
+         }
+         document.querySelector('#listaEmpleadosXId tbody').outerHTML=listadoHtml;
 
-        } catch (error) {
-            document.getElementById("lblerrorBusquedaEmpleado").innerHTML="Carnet Incorrecto!";
-        }
+    } catch (error) {
+        document.getElementById("lblerrorBusquedaEmpleado").innerHTML="Carnet Incorrecto!";
+    }
 }
 async function buscarSupervisor(){
     const carnet = document.getElementById("txtBusquedaSupervisor").value.toString();
@@ -380,26 +415,43 @@ async function buscarSupervisor(){
                   'Accept': 'application/json',
                   'Content-Type': 'application/json'
                 }
-        });
-        try {
-            const empleados = await request.json();
-             document.getElementById("lblerrorBusquedaSupervisor").innerHTML="";
-             let listadoHtml = '';
-             let cont = 1;
-             for(empleado of empleados){
-                cont =cont+ 1;
-                var nombre = empleado[2]+' '+empleado[3]+' '+empleado[4];
-                let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado[0] + '" onclick="anadirATablaLosSupervisores(' + empleado[0] + ', \'' + nombre + '\')"></label>';
-                let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
-                listadoHtml+=empleadoHtml;
-             }
-             document.querySelector('#listaSupervisores tbody').outerHTML=listadoHtml;
+     });
+     const empleados = await request.json();
+    if(empleados.length===0){
+        document.getElementById("lblerrorBusquedaSupervisor").innerHTML="No existe ningun carnet";
+        return;
+    }
+    try {
+         document.getElementById("lblerrorBusquedaSupervisor").innerHTML="";
+         let listadoHtml = '';
+         let cont = 1;
+         for(empleado of empleados){
+            cont =cont+ 1;
+            var nombre = empleado[2]+' '+empleado[3]+' '+empleado[4];
+            let botonCheckBox = '<label><input type="checkbox" name="opciones" value="' + empleado[0] + '" onclick="anadirATablaLosSupervisores(' + empleado[0] + ', \'' + nombre + '\')"></label>';
+            let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+nombre+'</td><td>'+botonCheckBox+'</td></tr>';
+            listadoHtml+=empleadoHtml;
+         }
+         document.querySelector('#listaSupervisores tbody').outerHTML=listadoHtml;
 
-        } catch (error) {
-            document.getElementById("lblerrorBusquedaSupervisor").innerHTML="Carnet Incorrecto!";
+    } catch (error) {
+        document.getElementById("lblerrorBusquedaSupervisor").innerHTML="Carnet Incorrecto!";
+    }
+}
+function opcionEmpleado(){
+    if(contEmpleado===0){
+        mostrarEmpleados();
+    }else{
+        if(contEmpleado % 2 === 0){
+            document.querySelector('#listaEmpleadosXId tbody').style.display = 'table-row-group';
+        }else{
+            document.querySelector('#listaEmpleadosXId tbody').style.display = 'none';
         }
+    }
+    contEmpleado=contEmpleado+1;
 }
 async function mostrarEmpleados(){
+    document.getElementById("lblerrorBusquedaEmpleado").innerHTML="";
     const request = await fetch('api/empleados/todos', {
             method: 'GET',
             headers: {
@@ -492,8 +544,20 @@ function eliminarEmpleadoAsignado(idEmpleado,nombre) {
     }
     anadirATablaLosEmpleados(idEmpleado,nombre); // Vuelve a generar la tabla
  }
-
+function opcionSupervisor(){
+    if(contSupervisor===0){
+        mostrarSupervisores();
+    }else{
+        if(contSupervisor % 2 === 0){
+            document.querySelector('#listaSupervisores tbody').style.display = 'table-row-group';
+        }else{
+            document.querySelector('#listaSupervisores tbody').style.display = 'none';
+        }
+    }
+    contSupervisor=contSupervisor+1;
+}
 async function mostrarSupervisores(){
+    document.getElementById("lblerrorBusquedaSupervisor").innerHTML="";
     const request = await fetch('api/supervisores/todos', {
             method: 'GET',
             headers: {
@@ -597,9 +661,9 @@ function validarDatos() {
     if (Object.keys(empleadosMap).length === 0) {
         errorAsignacion.innerHTML += 'Ingrese Empleados, ';
     }
-    if (Object.keys(supervisoresMap).length === 0) {
-        errorAsignacion.innerHTML += 'Ingrese Supervisores, ';
-    }
+    //if (Object.keys(supervisoresMap).length === 0) {
+    //    errorAsignacion.innerHTML += 'Ingrese Supervisores, ';
+    //}
     // Verifica si el mensaje de error está vacío
     if (errorAsignacion.innerHTML === "") {
         verificarAsignacion();

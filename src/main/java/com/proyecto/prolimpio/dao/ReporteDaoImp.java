@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.dao;
 
+import com.proyecto.prolimpio.dto.DtoFechas;
 import com.proyecto.prolimpio.util.ConvertirDecimalATexto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -29,9 +30,9 @@ import static com.proyecto.prolimpio.util.ConvertirDecimalATexto.convertirNumero
 public class ReporteDaoImp {
     @PersistenceContext
     EntityManager entityManager;
-    String query = "";
-    public ResponseEntity<Resource> getReporteGeneralEnPdf() {
-        List<Object[]> asignaciones = reporteTodasLasAsignaciones();
+    String query = "";///////
+    public ResponseEntity<Resource> getReporteGeneralEnPdf(List<Object[]> asignaciones) {
+        //List<Object[]> asignaciones = reporteTodasLasAsignaciones();
         try {
             final File file = ResourceUtils.getFile("classpath:reportes/reporteGeneral.jasper");
             final File imgLogo = ResourceUtils.getFile("classpath:imagenes/logo.png");
@@ -90,6 +91,14 @@ public class ReporteDaoImp {
         }
         return null;
     }
+    public ResponseEntity<Resource> imprimirTodo(){
+        List<Object[]> asignaciones = reporteTodasLasAsignaciones();
+        return getReporteGeneralEnPdf(asignaciones);
+    }
+    public ResponseEntity<Resource> imprimirPorFechas(DtoFechas dtoFechas){
+        List<Object[]> asignaciones = reportePorFechaDeLasAsignaciones(dtoFechas);
+        return getReporteGeneralEnPdf(asignaciones);
+    }
     public List<Object[]> reporteTodasLasAsignaciones(){
         query= "SELECT CONCAT(C.nombre,' ',C.apellido,' ',C.apellido_materno),\n" +
                 "L.nombre,L.direccion,CONCAT(A.fecha_inicio,' a ',A.fecha_fin),\n" +
@@ -102,4 +111,19 @@ public class ReporteDaoImp {
                 .getResultList();
         return asignaciones;
     }
+    public List<Object[]> reportePorFechaDeLasAsignaciones(DtoFechas dtoFechas){
+        query= "SELECT CONCAT(C.nombre,' ',C.apellido,' ',C.apellido_materno),\n" +
+                "L.nombre,L.direccion,CONCAT(A.fecha_inicio,' a ',A.fecha_fin),\n" +
+                "A.turno,A.total\n" +
+                "FROM asignacion A\n" +
+                "\tINNER JOIN lugar L ON A.idLugar=L.idLugar\n" +
+                "    INNER JOIN cliente C ON L.idCliente=C.idCliente\n" +
+                "WHERE A.estado=1 AND A.fecha_inicio >= :fechaIni AND A.fecha_fin <= :fechaFin";
+        List<Object[]> asignaciones = entityManager.createNativeQuery(query)
+                .setParameter("fechaIni",dtoFechas.getFecha_inicio())
+                .setParameter("fechaFin",dtoFechas.getFecha_fin())
+                .getResultList();
+        return asignaciones;
+    }
+
 }

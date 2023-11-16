@@ -1,7 +1,7 @@
 $(document).ready(function() {
   verificarAutenticacion();
   cargarClientes();
-  $('#listaClientes').DataTable();
+  //$('#listaClientes').DataTable();
   actualizarEmailUser();
 });
 function actualizarEmailUser(){
@@ -77,7 +77,6 @@ async function mostrarCliente(id){
         //me devuelve una lista de empleados
         const cliente = await request.json();
 
-
         document.getElementById('txtnombre').value=cliente.nombre;
         document.getElementById('txtapellido').value=cliente.apellido;
         document.getElementById('txtapellidoM').value=cliente.apellido_materno;
@@ -90,20 +89,18 @@ async function mostrarCliente(id){
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
 
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarCliente('+cliente.idCliente+')">Modificar</button>';
-        let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</button>';
+        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="validarEdicionCliente('+cliente.idCliente+')">Modificar</button>';
+        let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" onclick="cancelar()">Cancelar</button>';
 
         document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;
         document.getElementById('btnCancel').innerHTML = btnCancel;
 }
-
-async function editarCliente(id){
-
-     const registro = document.getElementById('txtfechaRegistro').value;
+function validarEdicionCliente(clienteID){
+    const registro = document.getElementById('txtfechaRegistro').value;
      const fechaRegistro = new Date(registro);
 
     let clienteEditado={};
-    clienteEditado.idCliente=id;
+    clienteEditado.idCliente=clienteID;
     clienteEditado.carnet = document.getElementById('txtcarnet').value;
     clienteEditado.nombre = document.getElementById('txtnombre').value;
     clienteEditado.apellido = document.getElementById('txtapellido').value;
@@ -113,14 +110,44 @@ async function editarCliente(id){
     clienteEditado.foto = "sin foto";
     clienteEditado.fecha_registro=fechaRegistro;
 
-    const request = await fetch('api/clientes',{
+    const errorCarnet = document.getElementById('lblErrorCarnet');
+    const errorNombres = document.getElementById('lblErrorNombres');
+    const errorApellidos = document.getElementById('lblErrorApellidos');
+    const errorApellidoM = document.getElementById('lblErrorApellidoM');
+    const errorFR = document.getElementById('lblErrorFR');
+    const errorTelefono = document.getElementById('lblErrorTelefono');
+    const errorCorreo = document.getElementById('lblErrorCorreo');
+
+    errorCarnet.innerHTML = validarCarnet(clienteEditado.carnet);
+    errorNombres.innerHTML = validarNombre(clienteEditado.nombre);
+    errorApellidos.innerHTML = validarApellidoP(clienteEditado.apellido);
+    errorApellidoM.innerHTML = validarApellidoM(clienteEditado.apellido_materno);
+    errorTelefono.innerHTML = validarTelefono(clienteEditado.telefono);
+    errorCorreo.innerHTML = validarCorreo(clienteEditado.correo);
+    errorFR.innerHTML = validarFC(fechaRegistro);
+
+    if(errorCarnet.innerHTML==="" && errorNombres.innerHTML==="" && errorApellidos.innerHTML==="" && errorApellidoM.innerHTML === "" &&
+        errorTelefono.innerHTML==="" && errorFR.innerHTML===""  && errorCorreo.innerHTML==="") {
+        editarCliente(clienteEditado);
+    }
+}
+function cancelar(){
+    document.getElementById('lblErrorCarnet').innerHTML="";
+    document.getElementById('lblErrorNombres').innerHTML="";
+    document.getElementById('lblErrorApellidos').innerHTML="";
+    document.getElementById('lblErrorApellidoM').innerHTML="";
+    document.getElementById('lblErrorFR').innerHTML="";
+    document.getElementById('lblErrorTelefono').innerHTML="";
+    document.getElementById('lblErrorCorreo').innerHTML="";
+}
+async function editarCliente(clienteEditado){
+    const request = await fetch('api/clientes/edicion',{
                 method: 'PUT',
                         headers: {
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(clienteEditado)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
-                        // y lo convierte en json
+                        body: JSON.stringify(clienteEditado)
     });
     $('#formEdicion').modal('hide');
     cargarClientes();

@@ -2,6 +2,7 @@ package com.proyecto.prolimpio.dao;
 
 import com.proyecto.prolimpio.dto.AsistenciaReporte;
 import com.proyecto.prolimpio.dto.AsistenciaResponse;
+import com.proyecto.prolimpio.dto.DtoFechas;
 import com.proyecto.prolimpio.models.Asistencia;
 import com.proyecto.prolimpio.models.Empleado;
 import com.proyecto.prolimpio.models.Lugar;
@@ -71,6 +72,19 @@ public class AsistenciaDaoImp implements CrudDao<Asistencia>{
                 "WHERE idEmpleado=:id";
         List<Asistencia> resultado = entityManager.createNativeQuery(query)
                 .setParameter("id",id)
+                .getResultList();
+        return resultado;
+    }
+
+    public List<Object[]> getAsistenciasXFechas(DtoFechas dtoFechas) {
+        String query="SELECT A.idAsistencia,CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),\n" +
+                "\t\tA.latitud,A.longitud,A.fecha_hora,A.tipo\n" +
+                "FROM asistencia A\n" +
+                "\tINNER JOIN empleado E ON A.idEmpleado=E.idEmpleado\n" +
+                "WHERE A.fecha_hora >= :fechaIni AND A.fecha_hora <= :fechaFin";
+        List<Object[]> resultado = entityManager.createNativeQuery(query)
+                .setParameter("fechaIni",dtoFechas.getFecha_inicio())
+                .setParameter("fechaFin",dtoFechas.getFecha_fin())
                 .getResultList();
         return resultado;
     }

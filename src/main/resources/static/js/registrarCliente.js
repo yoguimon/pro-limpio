@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    cargarFechaActual();
+});
+
 async function agregarCliente(clienteYlugarData){
     var popup = document.getElementById("popupCliente");
 
@@ -69,4 +73,23 @@ function validacionCliente(){
             };
          agregarCliente(clienteYlugarData);
     }
+}
+function cargarFechaActual() {
+    // Obtener la fecha actual en formato dd/mm/aaaa
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; // Los meses son indexados desde 0
+    let yyyy = today.getFullYear();
+
+    // Formatear la fecha como dd/mm/aaaa
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    let formattedDate = dd + '/' + mm + '/' + yyyy;
+    // Asignar la fecha formateada al campo de entrada
+    document.getElementById('txtfechaRegistro').value = formattedDate;
+
 }

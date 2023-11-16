@@ -1,5 +1,6 @@
 package com.proyecto.prolimpio.dao;
 
+import com.proyecto.prolimpio.dto.DtoClienteEditado;
 import com.proyecto.prolimpio.models.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -63,10 +64,16 @@ public class ClienteDaoImp implements CrudDao<Cliente> {
     @Override
     public void modificar(Cliente cliente) {
         Cliente clienteViejo = entityManager.find(Cliente.class,cliente.getIdCliente());
-        cliente.setFecha_creacion(clienteViejo.getFecha_creacion());
-        entityManager.merge(cliente);
+        clienteViejo.setCarnet(cliente.getCarnet());
+        clienteViejo.setNombre(cliente.getNombre());
+        clienteViejo.setApellido(cliente.getApellido());
+        clienteViejo.setApellido_materno(cliente.getApellido_materno());
+        clienteViejo.setTelefono(cliente.getTelefono());
+        clienteViejo.setCorreo(cliente.getCorreo());
+        clienteViejo.setFecha_registro(cliente.getFecha_registro());
+        //System.out.println("idCliente Viejo ya editado: "+clienteViejo);
+        entityManager.merge(clienteViejo);
     }
-
     public List<ClienteLugar> getClientesXId(String carnet) {
         String query = "SELECT C.idCliente,L.idLugar,C.carnet,CONCAT(C.nombre,' ',C.apellido,' ',C.apellido_materno),\n" +
                 "\tL.nombre,L.direccion\n" +

@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>PRO LIMPIO</title>
-
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
@@ -235,7 +235,7 @@
 
         <!--MODAL-->
         <div class="modal fade" id="formEdicion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Datos</h1>
@@ -245,91 +245,72 @@
               </div>
               <div class="modal-body">
                 <form class="user">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="card" style="width: 15rem;">
-                            <a href="#">
-                              <img src="img/logo.png" class="card-img-top" alt="..." width="15" height="120">
-                            </a>
-                            <div class="card-body">
-                              <a href="#" class="btn btn-primary">Subir Foto</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <br>
-                  <div class="form-group row">
+                  <div class="form-inputs row">
                     <div class="col-sm-3 mb-3 mb-sm-0">
                       <input type="text" class="form-control form-control-user" id="txtcarnet"
                              placeholder="Carnet">
+                      <label id="lblErrorCarnet"></label>
                     </div>
                     <div class="col-sm-3">
                       <input type="text" class="form-control form-control-user" id="txtnombre"
                              placeholder="Nombres">
+                      <label id="lblErrorNombres"></label>
                     </div>
                     <div class="col-sm-3">
                       <input type="text" class="form-control form-control-user" id="txtapellido"
                              placeholder="Apellido Paterno">
+                      <label id="lblErrorApellidos"></label>
                     </div>
                     <div class="col-sm-3">
                       <input type="text" class="form-control form-control-user" id="txtapellidoM"
                              placeholder="Apellido Materno">
+                      <label id="lblErrorApellidoM"></label>
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <div class="form-inputs row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
                       <input type="text" id="txtFechaNacimiento" class="form-control form-control-user"
-                             placeholder="Fecha Nacimiento">
+                             placeholder="Fecha Nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+                      <label id="lblErrorFN"></label>
 
                     </div>
                     <div class="col-sm-4">
                       <input type="text" class="form-control form-control-user"
-                             id="txtFechaContratacion" placeholder="Fecha Contratacion">
+                             id="txtFechaContratacion" placeholder="Fecha Contratacion" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+                      <label id="lblErrorFC"></label>
                     </div>
                     <div class="col-sm-4">
                       <input type="text" class="form-control form-control-user"
                              id="txtsalario" placeholder="Salario">
+                      <label id="lblErrorSalario"></label>
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <div class="form-inputs row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
                       <input type="text" class="form-control form-control-user" id="txtdireccion"
                              placeholder="Direccion Domicilio">
+                      <label id="lblErrorDireccion"></label>
                     </div>
                     <div class="col-sm-4">
                       <input type="text" class="form-control form-control-user" id="txttelefono"
                              placeholder="Telefono/Celular">
+                      <label id="lblErrorTelefono"></label>
                     </div>
                     <div class="col-sm-4">
                       <input type="email" class="form-control form-control-user" id="txtemail"
-                             placeholder="Correo Electronico">
+                             placeholder="Correo Electronico" readonly>
+                      <label id="lblErrorCorreo"></label>
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <div class="form-inputs row">
                     <div class="col-sm-4 mb-3 mb-sm-0 form-group">
                       <select class="form-control" id="cbxsexo" name="sexo">
                         <option value="" selected disabled>Seleccione Sexo</option>
                         <option value="F">Mujer</option>
                         <option value="M">Hombre</option>
                       </select>
+                      <label id="lblErrorSexo"></label>
                     </div>
 
                     <div class="col-sm-4 form-group">
@@ -338,6 +319,7 @@
                         <option value="Auxiliar Limpieza">Auxiliar Limpieza</option>
                         <option value="Supervisor">Supervisor</option>
                       </select>
+                      <label id="lblErrorPuesto"></label>
                     </div>
 
                     <div class="col-sm-4 form-group">
@@ -347,6 +329,7 @@
                         <option value="Casado">Casad@</option>
                         <option value="Viudo">Viud@</option>
                       </select>
+                      <label id="lblErrorEC"></label>
                     </div>
                   </div>
 
@@ -360,7 +343,7 @@
                   <button id="btnSaveChanges" type="button" class="btn btn-primary btn-user btn-block">Modificar</button>
                 </div>
                 <div class="col-sm-6">
-                  <button id="btnCancel" type="button" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</button>
+                  <button id="btnCancel" type="button" class="btn btn-warning btn-user btn-block" onclick="cancelar()">Cancelar</button>
                 </div>
               </div>
 
@@ -397,18 +380,6 @@
                 <th>Eliminar</th>
               </tr>
               </thead>
-              <tfoot>
-              <tr>
-                <th>Nro</th>
-                <th>Carnet</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Puesto</th>
-                <th>telefono</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-              </tr>
-              </tfoot>
               <tbody>
 
 
@@ -463,7 +434,7 @@
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
+<script src="js/validaciones.js"></script>
 <script src="js/listaEmpleados.js"></script>
 
 </body>

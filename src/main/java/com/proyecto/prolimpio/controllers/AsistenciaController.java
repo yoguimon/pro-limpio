@@ -2,12 +2,15 @@ package com.proyecto.prolimpio.controllers;
 
 import com.proyecto.prolimpio.dto.AsistenciaReporte;
 import com.proyecto.prolimpio.dto.AsistenciaResponse;
+import com.proyecto.prolimpio.dto.DtoFechas;
 import com.proyecto.prolimpio.dto.LugarResponse;
 import com.proyecto.prolimpio.models.Asistencia;
 import com.proyecto.prolimpio.models.Lugar;
 import com.proyecto.prolimpio.services.AsistenciaService;
 import com.proyecto.prolimpio.services.LugarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,6 +42,10 @@ public class AsistenciaController {
     @GetMapping("/asistencia/empleado/{id}")
     public List<Asistencia> getAsistenciasEmpleado(@PathVariable Long id){
         return asistenciaService.getAsistencias(id);
+    }
+    @PostMapping("/asistencia/rangoFechas")
+    public List<Object[]> imprimirPorRangoFecha(@RequestBody DtoFechas dtoFechas){
+        return asistenciaService.imprimirPorFechas(dtoFechas);
     }
     //@GetMapping("/asistencia/{id}")
     //public List<Asistencia> getTodosXId(@PathVariable Long id){

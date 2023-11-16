@@ -358,7 +358,9 @@
                                         </a>
                                     </div>
                                     <div class="ml-4 input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="mostrarClientes()">Mostrar Clientes</button>
+                                        <button class="btn btn-primary" type="button" onclick="opcion()">Mostrar Clientes
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
                                     </div>
                                     <label id="lblerrorBusqueda" class="ml-4" style="color: red;"></label>
                                 </div>
@@ -408,7 +410,9 @@
                                         </button>
                                     </div>
                                     <div class="ml-4 input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="cargarServiciosAsignacion()">Mostrar Servicios</button>
+                                        <button class="btn btn-primary" type="button" onclick="opcionServicio()">Mostrar Servicios
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
                                     </div>
                                     <label id="lblerrorBusquedaServicio" class="ml-4" style="color: red;"></label>
                                 </div>
@@ -449,35 +453,6 @@
                             </div>
                             <div class="modal-body">
                                 <form class="user">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card" style="width: 15rem;">
-                                                        <div class="card-body">
-                                                            <img src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-character-default-avatar-image_2237203.jpg" class="card-img-top" alt="..." width="15" height="120" id="img">
-                                                            <input type="file" id="foto" class="form-control-file" style="display: none;"/>
-                                                            <label for="foto" class="btn btn-primary btn-block">Subir Foto</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <br>
                                     <div class="form-inputs row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -547,7 +522,9 @@
                                         </button>
                                     </div>
                                     <div class="ml-4 input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="mostrarEmpleados()">Mostrar Empleados</button>
+                                        <button class="btn btn-primary" type="button" onclick="opcionEmpleado()">Mostrar Empleados
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
                                     </div>
                                     <label id="lblerrorBusquedaEmpleado" class="ml-4" style="color: red;"></label>
                                 </div>
@@ -585,35 +562,6 @@
                             </div>
                             <div class="modal-body">
                                 <form class="user" id="formulario" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="card" style="width: 15rem;">
-                                                        <div class="card-body">
-                                                            <img src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-character-default-avatar-image_2237203.jpg" class="card-img-top" alt="..." width="15" height="120" id="imgAsignacion">
-                                                            <input type="file" id="fotoAsignacion" class="form-control-file" style="display: none;"/>
-                                                            <label for="foto" class="btn btn-primary btn-block">Subir Foto</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="row">
-                                                <div class="col-md-12">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <br>
                                     <div class="form-inputs row">
                                         <div class="col-sm-3 mb-3 mb-sm-0">
@@ -737,7 +685,9 @@
                                         </button>
                                     </div>
                                     <div class="ml-4 input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="mostrarSupervisores()">Mostrar Supervisores</button>
+                                        <button class="btn btn-primary" type="button" onclick="opcionSupervisor()">Mostrar Supervisores
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
                                     </div>
                                     <label id="lblerrorBusquedaSupervisor" class="ml-4" style="color: red;"></label>
                                 </div>
@@ -937,7 +887,26 @@
         </div>
     </div>
 </div>
-
+<!-- Modal de carga mejorado -->
+<div class="modal fade" id="cargandoModal" tabindex="-1" role="dialog" aria-labelledby="cargandoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100" id="cargandoModalLabel">Generando Orden de Trabajo</h5>
+                <!-- Puedes agregar un botón de cierre si lo necesitas -->
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+            <div class="modal-body text-center">
+                <!-- Utiliza un ícono de carga más grande -->
+                <i class="fas fa-spinner fa-5x fa-spin"></i>
+                <p>Cargando...</p>
+                <!-- Puedes agregar más contenido o personalizaciones aquí -->
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Scripts personalizados -->
 <script src="js/sb-admin-2.min.js"></script>
 <script src="js/control.js"></script>

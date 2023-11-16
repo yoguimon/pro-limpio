@@ -63,8 +63,8 @@ async function mostrarLugar(id){
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
 
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarLugar('+lugar.idLugar+')">Modificar</button>';
-        let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" onclick="volverLugaresXCliente()">Cancelar</button>';
+        let btnSaveChanges='<a type="button" class="btn btn-primary btn-user btn-block" onclick="validarEdicionLugar('+lugar.idLugar+')">Modificar</a>';
+        let btnCancel = '<a type="button" class="btn btn-warning btn-user btn-block" onclick="volverLugaresXCliente()">Cancelar</a>';
 
         document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;
         document.getElementById('btnCancel').innerHTML = btnCancel;
@@ -72,10 +72,11 @@ async function mostrarLugar(id){
 async function volverLugaresXCliente(){
     const idCliente = parametrosDeConsulta.get('cliente');;
     const nombre = parametrosDeConsulta.get('nombre');
+    document.getElementById('lblErrorNombre').innerHTML="";
+    document.getElementById('lblErrorDireccion').innerHTML="";
     window.location.href = `listaLugares.html?id=${idCliente}&nombre=${nombre}`;
 }
-async function editarLugar(id){
-
+function validarEdicionLugar(id){
     let lugarEditado={};
     lugarEditado.idLugar=id;
     lugarEditado.nombre = document.getElementById('txtnombre').value;
@@ -84,6 +85,17 @@ async function editarLugar(id){
     lugarEditado.latitud=la1.toString();
     lugarEditado.longitud=lo1.toString();
 
+    const errorNombres = document.getElementById('lblErrorNombre');
+    const errorDireccion = document.getElementById('lblErrorDireccion');
+
+    errorNombres.innerHTML = validarNombre(lugarEditado.nombre);
+    errorDireccion.innerHTML = validarDireccion(lugarEditado.direccion);
+
+    if(errorNombres.innerHTML==="" && errorDireccion.innerHTML===""){
+        editarLugar(lugarEditado);
+    }
+}
+async function editarLugar(lugarEditado){
     const request = await fetch('api/lugar',{
                 method: 'PUT',
                         headers: {

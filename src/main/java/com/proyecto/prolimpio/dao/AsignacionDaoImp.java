@@ -1,6 +1,7 @@
 package com.proyecto.prolimpio.dao;
 
 import com.proyecto.prolimpio.dto.AsignacionResponse;
+import com.proyecto.prolimpio.dto.DtoFechas;
 import com.proyecto.prolimpio.dto.VerificarAsignacionDTO;
 import com.proyecto.prolimpio.models.*;
 import jakarta.persistence.EntityManager;
@@ -237,8 +238,18 @@ public class AsignacionDaoImp {
     }
     //Aqui muestro asignaciones de la tabla asignacion sin detalles solo ids
     public List<Object[]> asignacionesPendientes(){
-        query= "SELECT * FROM asignacion WHERE estado=1";
+        query= "SELECT * FROM asignacion WHERE estado=1 ORDER BY idAsignacion DESC";
         List<Object[]> asignaciones = entityManager.createNativeQuery(query)
+                .getResultList();
+        return asignaciones;
+    }
+    public List<Object[]> asignacionesPendientes(DtoFechas dtoFechas){
+        query= "SELECT * FROM asignacion \n" +
+                "WHERE estado=1 AND fecha_inicio >= :fechaIni AND fecha_fin <= :fechaFin\n" +
+                "ORDER BY idAsignacion DESC";
+        List<Object[]> asignaciones = entityManager.createNativeQuery(query)
+                .setParameter("fechaIni",dtoFechas.getFecha_inicio())
+                .setParameter("fechaFin",dtoFechas.getFecha_fin())
                 .getResultList();
         return asignaciones;
     }
@@ -260,5 +271,16 @@ public class AsignacionDaoImp {
         asignacion.setEstado((byte)0);
         entityManager.merge(asignacion);
     }
-    
+
+    public List<AsignacionReporte> buscarPorRangoFechas(DtoFechas dtoFechas) {
+        List<Object[]> asignaciones = asignacionesPendientes(dtoFechas);
+        List<AsignacionReporte> asignacionesPendientes= new ArrayList<AsignacionReporte>();
+        for(Object[] asignacion:asignaciones){
+            AsignacionReporte asignacionReporte = new AsignacionReporte();
+            asignacionReporte.setClienteLugar(lugarYClienteAsignados((int)asignacion[0]));
+            asignacionReporte.setServicioId(datosServicio((int)asignacion[0]));
+            asignacionesPendientes.add(asignacionReporte);
+        }
+        return asignacionesPendientes;
+    }
 }

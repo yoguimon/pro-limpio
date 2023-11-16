@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>PRO LIMPIO</title>
-
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
@@ -246,42 +246,22 @@
               </div>
               <div class="modal-body">
                 <form class="user">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="card" style="width: 15rem;">
-                            <img src="img/logo.png" class="card-img-top" alt="..." width="15" height="120">
-                            <div class="card-body">
-                              <a href="#" class="btn btn-primary">Subir Foto</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <br>
-                  <div class="form-group row">
+                  <div class="form-inputs row">
                     <div class="col-sm-12 mb-3 mb-sm-0">
                       <input type="text" class="form-control form-control-user" id="txtnombreServicio"
                              placeholder="Nombre Servicio">
+                      <label id="lblErrorNombreS"></label>
                     </div>
-
-                    <br><br><br>
+                  </div>
+                  <div class="form-inputs row">
+                    <div class="col-sm-12 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="txtcosto"
+                             placeholder="costo en m2 del servicio">
+                      <label id="lblErrorCosto"></label>
+                    </div>
+                  </div>
+                  <div class="form-inputs row">
                     <div class="col-sm-12 mb-3 mb-sm-0">
                       <select class="form-control" id="cbxcategoria" name="categoria">
                         <option value="Pisos">Pisos</option>
@@ -290,17 +270,12 @@
                         <option value="Jardines">Jardines</option>
                       </select>
                     </div>
-                    <br><br><br>
-                    <div class="col-sm-12 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="txtcosto"
-                             placeholder="costo">
-                    </div>
                   </div>
 
                 </form>
                 <div class="d-flex justify-content-between mt-3" id="botones">
                   <button id="btnSaveChanges" type="button" class="btn btn-primary flex-grow-1 me-2">Modificar</button>
-                  <button id="btnCancel" type="button" class="btn btn-warning flex-grow-1" data-dismiss="modal">Cancelar</button>
+                  <button id="btnCancel" type="button" class="btn btn-warning flex-grow-1">Cancelar</button>
                 </div>
               </div>
 
@@ -321,7 +296,10 @@
           </form>
         </div>
 
-
+        <div>
+          <button type="submit" class="btn btn-primary" onclick="mostrarCargando()">cargando</button>
+          <button type="submit" class="btn btn-primary" onclick="ocultarCargando()">dejar de cargar</button>
+        </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="listaServicios" width="100%" cellspacing="0">
@@ -335,16 +313,6 @@
                 <th>Eliminar</th>
               </tr>
               </thead>
-              <tfoot>
-              <tr>
-                <th>Nro</th>
-                <th>Nombre Servicio</th>
-                <th>Categoria</th>
-                <th>Costo M2</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-              </tr>
-              </tfoot>
               <tbody>
 
 
@@ -398,7 +366,7 @@
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
+<script src="js/validaciones.js"></script>
 <script src="js/listaServicios.js"></script>
 
 </body>

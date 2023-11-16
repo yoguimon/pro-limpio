@@ -1,7 +1,6 @@
 $(document).ready(function() {
   verificarAutenticacion();
   cargarServicios();
-  $('#listaServicios').DataTable();
   actualizarEmailUser();
 });
 function actualizarEmailUser(){
@@ -66,33 +65,45 @@ async function mostrarServicio(id){
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
 
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="editarServicio('+servicio[0]+')">Modificar</button>';
-        let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</button>';
+        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="validarEdicionServicio('+servicio[0]+')">Modificar</button>';
+        let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" onclick="cancelar()">Cancelar</button>';
 
         document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;
         document.getElementById('btnCancel').innerHTML = btnCancel;
 }
-
-async function editarServicio(id){
-
+function validarEdicionServicio(id){
     let servicioEditado={};
     servicioEditado.idServicio=id;
     servicioEditado.nombre = document.getElementById('txtnombreServicio').value;
     servicioEditado.costo_m2 = document.getElementById('txtcosto').value;
     servicioEditado.categoria = document.getElementById('cbxcategoria').value;
 
+    const errorNombreS = document.getElementById('lblErrorNombreS');
+    const errorCosto = document.getElementById('lblErrorCosto');
+
+    errorNombreS.innerHTML = validarNombre(servicioEditado.nombre);
+    errorCosto.innerHTML = validarCosto(servicioEditado.costo_m2);
+
+    if(errorNombreS.innerHTML==="" && errorCosto.innerHTML===""){
+         editarServicio(servicioEditado);
+    }
+}
+function cancelar(){
+    $('#formEdicion').modal('hide');
+    document.getElementById('lblErrorNombreS').innerHTML="";
+    document.getElementById('lblErrorCosto').innerHTML="";
+}
+async function editarServicio(servicioEditado){
     const request = await fetch('api/servicio',{
-                method: 'PUT',
-                        headers: {
-                          'Accept': 'application/json',
-                          'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(servicioEditado)//llama a la funcion JSON.STRI...agarra cualquier objeto de js
-                        // y lo convierte en json
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(servicioEditado)
     });
     $('#formEdicion').modal('hide');
-    //cargarServicios();
-    location.reload();
+    cargarServicios();
 }
 
 async function eliminarServicio(id){
@@ -113,3 +124,5 @@ async function eliminarServicio(id){
             location.reload();
         });
 }
+
+

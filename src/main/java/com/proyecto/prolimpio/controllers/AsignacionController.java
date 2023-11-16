@@ -2,6 +2,7 @@ package com.proyecto.prolimpio.controllers;
 
 import com.proyecto.prolimpio.dao.AsignacionDaoImp;
 import com.proyecto.prolimpio.dto.AsignacionResponse;
+import com.proyecto.prolimpio.dto.DtoFechas;
 import com.proyecto.prolimpio.dto.VerificarAsignacionDTO;
 import com.proyecto.prolimpio.models.Asignacion;
 import com.proyecto.prolimpio.models.AsignacionReporte;
@@ -52,6 +53,10 @@ public class AsignacionController {
     @GetMapping("/asignacion/imprimir/{id}")
     public ResponseEntity<Resource> getPdfAsignacion(@PathVariable int id) {
         return asignacionDaoImp.generarPdf(id);
+    }
+    @PostMapping("/asignacion/rangoFechas")
+    public List<AsignacionReporte> buscarPorRango(@RequestBody DtoFechas dtoFechas){
+        return asignacionDaoImp.buscarPorRangoFechas(dtoFechas);
     }
     //prueba
     @GetMapping("/asignacion/prueba")

@@ -10,24 +10,22 @@
     <meta name="author" content="">
 
     <title>PRO LIMPIO</title>
+    <!-- jQuery y jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap y dependencias -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <!-- Bibliotecas de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-
-    <!-- Custom styles for this template -->
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-    <script src="vendor/fontawesome-free/js/all.js"></script>
-    <script src="vendor/fontawesome-free/js/all.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 
@@ -213,6 +211,77 @@
                 <h1 class="h3 mb-2 text-gray-800">Asignaciones Realizadas</h1>
                 <p class="mb-4">En la tabla se muestran las asignaciones pendientes que aun no concluyeron</p>
 
+                <div class="row" id="rangoFechas">
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-8 col-md-10 mb-4">
+                        <div class="card shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-md-5">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha Inicio:</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight text-gray-800">
+                                                        <div class="content" style="display: flex;">
+                                                            <ul style="list-style-type: none; display: flex; padding: 0; margin: 0;">
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="dia">23</span>
+                                                                    <p style="margin-top: 5px;">Dia</p>
+                                                                </li>
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="mes">Noviembre</span>
+                                                                    <p style="margin-top: 5px;">Mes</p>
+                                                                </li>
+                                                                <li>
+                                                                    <span id="ano">2023</span>
+                                                                    <p style="margin-top: 5px;">Año</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a type="button" class="btn btn-primary" onclick="mostarModalFecha()">
+                                            <i class="fas fa-calendar" style="font-size:30px;color:white"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha Fin:</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight text-gray-800">
+                                                        <div class="content" style="display: flex;">
+                                                            <ul style="list-style-type: none; display: flex; padding: 0; margin: 0;">
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="diaFin">23</span>
+                                                                    <p style="margin-top: 5px;">Dia</p>
+                                                                </li>
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="mesFin">Noviembre</span>
+                                                                    <p style="margin-top: 5px;">Mes</p>
+                                                                </li>
+                                                                <li>
+                                                                    <span id="anoFin">2023</span>
+                                                                    <p style="margin-top: 5px;">Año</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -220,7 +289,13 @@
                             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                                 <div class="input-group">
                                     <div class="ml-4 input-group-append">
-                                        <button class="btn btn-primary" type="button" onclick="imprimirReporteGeneralAsignaciones()">Imprimir Reporte</button>
+                                        <button class="btn btn-primary" type="button" onclick="mostrarAsignaciones()">Mostrar todas las asignaciones</button>
+                                    </div>
+                                    <div class="ml-4 input-group-append" id="imprimirReporteGeneral" style="display:none">
+                                        <button class="btn btn-primary" type="button" onclick="imprimirReporteGeneralAsignaciones()">Imprimir Reporte General</button>
+                                    </div>
+                                    <div class="ml-4 input-group-append" id="imprimirReporteFechas" style="display:none">
+                                        <button class="btn btn-primary" type="button" onclick="imprimirAsignacionesPorFecha()">Imprimir Reporte por Fechas</button>
                                     </div>
                                 </div>
                             </form>
@@ -368,25 +443,55 @@
         </div>
     </div>
 </div>
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Modal fecha-->
+<div class="modal fade" id="myModalFecha" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="myModalLabel">Seleccionar rango de fechas para los reportes</h5>
+                <button type="button" class="close" onclick="seleccionarFecha('cancelar')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <label for="datepickerInicio">fecha inicio:</label>
+                    <input type="text" id="datepickerInicio" placeholder="fecha Inicio">
+                    <label for="datepickerFin">fecha fin:</label>
+                    <input type="text" id="datepickerFin" placeholder="fecha Fin">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="fechaEsValidaAsigancion('cancelar')">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="fechaEsValidaAsigancion('seleccionar')">Seleccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Alerta -->
+<div class="modal fade" id="formAlertaTotal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal">Alerta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
 <!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
 <script src="js/control.js"></script>
 <script src="js/reportesAsignaciones.js"></script>
-
+<script src="js/calendar.js"></script>
 </body>
 
 </html>

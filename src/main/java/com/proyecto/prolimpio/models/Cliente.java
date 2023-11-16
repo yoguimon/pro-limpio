@@ -17,7 +17,7 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="idCliente")
-    private Long idCliente;
+    private int idCliente;
     @Column(name="carnet")
     private String carnet;
     @Column(name="nombre")
@@ -48,12 +48,13 @@ public class Cliente {
 
     public Cliente(){}
 
-    public Cliente(Long idCliente) {
+    public Cliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
-    public Cliente(Long idCliente, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro) {
+    public Cliente(int idCliente, String carnet, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro) {
         this.idCliente = idCliente;
+        this.carnet=carnet;
         this.nombre = nombre;
         this.apellido = apellido;
         this.apellido_materno = apellido_materno;
@@ -73,7 +74,7 @@ public class Cliente {
         this.fecha_registro = fecha_registro;
     }
 
-    public Cliente(Long idCliente, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
+    public Cliente(int idCliente, String nombre, String apellido, String apellido_materno, String telefono, String correo, String foto, LocalDate fecha_registro, LocalDateTime fecha_creacion, LocalDateTime fecha_actualizacion) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -85,4 +86,21 @@ public class Cliente {
         this.fecha_creacion = fecha_creacion;
         this.fecha_actualizacion = fecha_actualizacion;
     }
+    /*@Override
+    public String toString() {
+        return "Cliente{" +
+                "idCliente=" + idCliente +
+                ", carnet='" + carnet + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", apellido_materno='" + apellido_materno + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", correo='" + correo + '\'' +
+                ", foto='" + foto + '\'' +
+                ", fecha_registro=" + fecha_registro +
+                ", estado=" + estado +
+                ", fecha_creacion=" + fecha_creacion +
+                ", fecha_actualizacion=" + fecha_actualizacion +
+                '}';
+    }*/
 }

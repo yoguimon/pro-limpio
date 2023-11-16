@@ -26,6 +26,7 @@ function jsonFechaHoraIds(){
     return data;
 }
 async function verificarAsignacion(){
+    mostrarCargando();
     const request = await fetch('api/asignacion/verificar', {
             method: 'POST',
             headers: {
@@ -38,6 +39,8 @@ async function verificarAsignacion(){
     if(empleados.length === 0){
         agregarAsignacion();
     }else{
+           await new Promise(resolve => setTimeout(resolve, 500));
+           ocultarCargando();
           $('#modalFechaHoraIds').modal('show');
           let listadoHtml = '';
             //para agragar usuarios de json
@@ -66,6 +69,8 @@ async function agregarAsignacion(){
               $('#formExitoAsignacion').modal('hide');
           }, 2000);*/
       if (request.ok) {
+           await new Promise(resolve => setTimeout(resolve, 1000));
+           ocultarCargando();
           const response = await request.blob();
           const file = new Blob([response], { type: 'application/pdf' });
           const fileURL = URL.createObjectURL(file);
@@ -74,7 +79,16 @@ async function agregarAsignacion(){
               location.reload();
           //}, 2000);
       } else {
+      ocultarCargando();
           // Manejar el caso en el que la generación de reporte falla
           alert("fallo la generacion de reportes...");
       }
+}
+function mostrarCargando() {
+  $('#cargandoModal').modal({ backdrop: 'static', keyboard: false });  // Evita que el modal se cierre haciendo clic fuera o presionando teclas
+}
+
+// Función para ocultar el modal de carga
+function ocultarCargando() {
+  $('#cargandoModal').modal('hide');
 }

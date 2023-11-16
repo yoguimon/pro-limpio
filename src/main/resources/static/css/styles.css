@@ -61,8 +61,32 @@ label{
 .mostrar {
     display: block;
 }
-#map-container {
-    height: 500%;
+.mapaLugar {
+    width:80%;
+    height: 250%;
+    position: relative;
+    margin: auto;  /* Esto centrará horizontalmente */
+    display: flex;
+    justify-content: center; /* Esto centrará verticalmente */
+    align-items: center;
+}
+.mapaLugares {
+    width:80%;
+    height: 400%;
+    position: relative;
+    margin: auto;  /* Esto centrará horizontalmente */
+    display: flex;
+    justify-content: center; /* Esto centrará verticalmente */
+    align-items: center;
+}
+.mapaLugarForm {
+    width:80%;
+    height: 350%;
+    position: relative;
+    margin: auto;  /* Esto centrará horizontalmente */
+    display: flex;
+    justify-content: center; /* Esto centrará verticalmente */
+    align-items: center;
 }
 .table-container {
      display: flex;
@@ -181,4 +205,18 @@ label{
 }
 .content {
     word-wrap: break-word;
+}
+#rangoFechas {
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.div-fechas{
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

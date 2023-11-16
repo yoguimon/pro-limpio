@@ -1,7 +1,9 @@
 $(document).ready(function() {
-  mostrarAsignaciones();
+  //mostrarAsignaciones();
 });
 async function mostrarAsignaciones(){
+    document.getElementById('imprimirReporteGeneral').style.display='block';
+    document.getElementById('imprimirReporteFechas').style.display='none';
     const request = await fetch('api/asignacion/reportes', {
                 method: 'GET',
                 headers: {
@@ -10,6 +12,10 @@ async function mostrarAsignaciones(){
                 }
         });
         const asignaciones = await request.json();
+        tablaAsignaciones(asignaciones);
+}
+function tablaAsignaciones(asignaciones){
+    if(asignaciones.length!=0){
         let listadoHtml = '';
         let cont = 0;
         for(let asignacion of asignaciones){
@@ -23,6 +29,9 @@ async function mostrarAsignaciones(){
             listadoHtml+=asignacionHtml;
         }
         document.querySelector('#listaTodasAsignaciones tbody').outerHTML=listadoHtml;
+    }else{
+        alert("No existe asignaciones en ese rango de fecha");
+    }
 }
 async function mostrarEmpleados(id){
     $('#modalEmpleados').modal('show');
@@ -90,7 +99,7 @@ async function imprimirAsignacion(id){
         const fileURL = URL.createObjectURL(file);
       //setTimeout(function() {
           window.open(fileURL, '_blank');
-          location.reload();
+          //location.reload();
       //}, 2000);
     } else {
       // Manejar el caso en el que la generación de reporte falla
@@ -110,9 +119,52 @@ async function imprimirReporteGeneralAsignaciones(){
         const file = new Blob([response], { type: 'application/pdf' });
         const fileURL = URL.createObjectURL(file);
           window.open(fileURL, '_blank');
-          location.reload();
+          //location.reload();
     } else {
       // Manejar el caso en el que la generación de reporte falla
         alert("fallo la generacion de reportes...");
     }
+}
+async function imprimirAsignacionesPorFecha(){
+    let rango ={
+        fecha_inicio: fechaAuxInicio.toISOString().split('T')[0],
+        fecha_fin:fechaAuxFin.toISOString().split('T')[0]
+    };
+    const request = await fetch('api/reporte/rangoFechas', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(rango)
+    });
+    if (request.ok) {
+        const response = await request.blob();
+        const file = new Blob([response], { type: 'application/pdf' });
+        const fileURL = URL.createObjectURL(file);
+          window.open(fileURL, '_blank');
+          //location.reload();
+    } else {
+      // Manejar el caso en el que la generación de reporte falla
+        alert("fallo la generacion de reportes...");
+    }
+}
+async function mostrarAsignacionesDadoFechas(fechaIni,fechaFin){
+    document.getElementById('imprimirReporteGeneral').style.display='none';
+    document.getElementById('imprimirReporteFechas').style.display='block';
+    let rango ={
+        fecha_inicio: fechaIni.toISOString().split('T')[0],
+        fecha_fin:fechaFin.toISOString().split('T')[0]
+    };
+    const request = await fetch('api/asignacion/rangoFechas', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(rango)
+    });
+    const asignaciones = await request.json();
+    tablaAsignaciones(asignaciones);
+
 }

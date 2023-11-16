@@ -2,7 +2,6 @@ var parametrosDeConsulta;
 $(document).ready(function() {
   verificarAutenticacion();
   mostrarLugaresXCliente(obtenerIdDeUrl());
-  $('#listaLugares').DataTable();
   actualizarEmailUser();
 });
 function actualizarEmailUser(){

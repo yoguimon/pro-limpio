@@ -2,6 +2,7 @@ package com.proyecto.prolimpio.controllers;
 
 import com.proyecto.prolimpio.dao.ClienteDaoImp;
 import com.proyecto.prolimpio.dao.CrudDao;
+import com.proyecto.prolimpio.dto.DtoClienteEditado;
 import com.proyecto.prolimpio.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class ClienteController {
     public Cliente getPersona(@PathVariable Long id){
         return clienteDaoImp.getPersona(id);
     }
-    @PutMapping("api/clientes")
+    @PutMapping("api/clientes/edicion")
     public void modificarCliente(@RequestBody Cliente cliente){
         clienteDaoImp.modificar(cliente);
     }
