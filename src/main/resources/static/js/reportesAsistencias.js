@@ -1,6 +1,7 @@
 var map;
 var latitude;
 var longitude;
+var opcion;
 async function mostrarAsistenciasDadoFechas(fechaAuxInicio,fechaAuxFin){
     let rango ={
         fecha_inicio: fechaAuxInicio.toISOString().split('T')[0],
@@ -16,9 +17,10 @@ async function mostrarAsistenciasDadoFechas(fechaAuxInicio,fechaAuxFin){
     });
     const asistencias = await request.json();
     if(asistencias.length!=0){
+        document.getElementById('divTablaAsistencia').style.display='block';
         let listadoHtml = '';
         let cont = 0;
-        let opcion = document.getElementById('cbxAsistencia').value;
+        opcion = document.getElementById('cbxAsistencia').value;
         if(opcion==='Entrada'){
             for(let asistencia of asistencias){
                 if(asistencia[5]!=1){
@@ -54,9 +56,43 @@ async function mostrarAsistenciasDadoFechas(fechaAuxInicio,fechaAuxFin){
                listadoHtml+=asistenciaHtml;
             }
         }
-        document.querySelector('#listaTodasLasAsistencias tbody').outerHTML=listadoHtml;
+        if(listadoHtml===''){
+            document.querySelector('#listaTodasLasAsistencias tbody').outerHTML='<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+            document.getElementById('divTablaAsistencia').style.display='none';
+            $('#formAlertaTotal').modal('show');
+            $("#formAlertaTotal .modal-body").text("No existe asistencias registradas en ese turno");
+        }else{
+            document.querySelector('#listaTodasLasAsistencias tbody').outerHTML=listadoHtml;
+        }
     }else{
-        alert("No existe asistencias en ese rango de fecha");
+        document.getElementById('divTablaAsistencia').style.display='none';
+        $('#formAlertaTotal').modal('show');
+        $("#formAlertaTotal .modal-body").text("No existe asistencias registradas en ese rango de fecha");
+    }
+}
+async function imprimirReporteAsitenciaPorFechas(){
+    let fechas ={
+        fecha_inicio: fechaAuxInicio.toISOString().split('T')[0],
+        fecha_fin:fechaAuxFin.toISOString().split('T')[0],
+        opcion: opcion.toString()
+    };
+    const request = await fetch('api/reporte/asistencia/rangoFechas', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(fechas)
+    });
+    if (request.ok) {
+        const response = await request.blob();
+        const file = new Blob([response], { type: 'application/pdf' });
+        const fileURL = URL.createObjectURL(file);
+          window.open(fileURL, '_blank');
+          //location.reload();
+    } else {
+      // Manejar el caso en el que la generación de reporte falla
+        alert("fallo la generacion de reportes...");
     }
 }
 function ocultarMostrar(opcion,ruta){

@@ -20,7 +20,11 @@ function tablaAsignaciones(asignaciones){
         let cont = 0;
         for(let asignacion of asignaciones){
             cont=cont+1;
-            let fecha = asignacion.servicioId[3]+' a '+asignacion.servicioId[4];
+            let partesFechaI = asignacion.servicioId[3].toString().split('-');
+            let partesFechaF = asignacion.servicioId[4].toString().split('-');
+            let fechaI = partesFechaI[2] + '/' + partesFechaI[1] + '/' + partesFechaI[0];
+            let fechaF = partesFechaF[2] + '/' + partesFechaF[1] + '/' + partesFechaF[0];
+            let fecha = fechaI+' a '+fechaF;
             let botonEmpleados = '<a href="#" class="btn btn-primary" onclick="mostrarEmpleados(' + asignacion.servicioId[0] + ')"><i class="fas fa-user"></i></a>';
             let botonServicios = '<a href="#" class="btn btn-success" onclick="mostrarServicios(' + asignacion.servicioId[0] + ')"><i class="fas fa-broom"></i></a>';
             let botonFinalizar = '<a href="#" class="btn btn-danger" onclick="finalizarAsignacion(' + asignacion.servicioId[0] + ')"><i class="fas fa-check-circle"></i></a>';

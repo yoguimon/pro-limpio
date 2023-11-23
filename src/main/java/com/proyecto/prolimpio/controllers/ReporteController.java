@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -25,11 +26,17 @@ public class ReporteController {
     public ResponseEntity<Resource> imprimirPorRangoFecha(@RequestBody DtoFechas dtoFechas){
         return reporteDaoImp.imprimirPorFechas(dtoFechas);
     }
-    @GetMapping("/reporte/prueba")
-    public ResponseEntity<Resource> getReporteGeneralPrueba(){
-        return reporteDaoImp.imprimirTodo();
+    @PostMapping("/reporte/asistencia/rangoFechas")
+    public ResponseEntity<Resource> imprimirAsistenciasPorRangoFechas(@RequestBody DtoFechas dtoFechas){
+        return reporteDaoImp.imprimirAsistenciasPorFechas(dtoFechas);
     }
-    //PENDIENTE
 
-    //List<AsignacionReporte>
+    @GetMapping("/reporte/prueba")
+    public ResponseEntity<Resource> getReportePrueba(){
+        DtoFechas fechas = new DtoFechas();
+        fechas.setFecha_inicio(LocalDate.parse("2023-10-18"));
+        fechas.setFecha_fin(LocalDate.parse("2023-11-18"));
+        fechas.setOpcion("Ambos");
+        return reporteDaoImp.imprimirAsistenciasPorFechas(fechas);
+    }
 }

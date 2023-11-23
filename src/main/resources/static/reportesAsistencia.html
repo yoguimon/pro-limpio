@@ -80,8 +80,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo empleados:</h6>
           <a class="collapse-item" href="listaEmpleados.html">Lista de Empleados</a>
-          <a class="collapse-item" href="asignarLugares.html">Asignar Lugares de Trabajo</a>
-          <a class="collapse-item" href="buscarEmpleados.html">Buscar Empleados</a>
+          <a class="collapse-item" href="reportesEmpleado.html">Reportes del Empleado</a>
         </div>
       </div>
     </li>
@@ -97,8 +96,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo asistencia:</h6>
           <a class="collapse-item active" href="reportesAsistencia.html">Reportes Asistencia</a>
-          <a class="collapse-item" href="reportesFecha.html">Reportes por Fecha</a>
-          <a class="collapse-item" href="reportesLugares.html">Reportes por Lugares</a>
+          <a class="collapse-item" href="reportesAsistencias.html">Reportes por Fecha</a>
         </div>
       </div>
     </li>
@@ -143,19 +141,6 @@
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo asignaciones:</h6>
           <a class="collapse-item" href="registrarAsignacion.html">Asignar Trabajo</a>
-        </div>
-      </div>
-    </li>
-    <!-- Nav Item - Pages Collapse Menu Reportes-->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
-         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fa fa-solid fa-toolbox"></i>
-        <span>Reportes</span>
-      </a>
-      <div id="collapseReportes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Modulo reportes:</h6>
           <a class="collapse-item" href="reportesAsignaciones.html">Reportes de Asignacion</a>
         </div>
       </div>
@@ -212,7 +197,8 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
-
+        <h1 class="h3 mb-2 text-gray-800">Asistencias</h1>
+        <p class="mb-4">Aqui se puede buscar al empleado para hacer seguimiento de su asistencia</p>
         <!-- Modal Mapa-->
         <div class="modal fade" id="modalMapa" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -245,7 +231,7 @@
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="listaEmpleadosAsistencia" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="listaEmpleadosBuscador" width="100%" cellspacing="0">
               <thead>
               <tr>
                 <th>Nro</th>
@@ -265,7 +251,7 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="listaAsistenciasEmpleado" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="listaEmpleadosResultados" width="100%" cellspacing="0">
               <thead>
               <tr>
                 <th>Nro</th>
@@ -330,6 +316,7 @@
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
 <script src="js/control.js"></script>
+<script src="js/buscador.js"></script>
 <script src="js/reportesAsistencia.js"></script>
 
 </body>

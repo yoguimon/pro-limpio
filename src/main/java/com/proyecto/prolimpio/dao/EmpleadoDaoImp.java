@@ -115,4 +115,15 @@ public class EmpleadoDaoImp implements CrudDao<Empleado> {
                 .getResultList();
         return resultado;
     }
+    public List<Object[]> getAsignacionesEmpleado(int id){
+        String query = "SELECT A.idAsignacion,L.nombre,L.direccion,A.fecha_inicio,A.fecha_fin,A.turno\n" +
+                "FROM asignacion A \n" +
+                "\tINNER JOIN asignacion_empleado AE ON A.idAsignacion=AE.idAsignacion\n" +
+                "    INNER JOIN lugar L ON A.idLugar=L.idLugar\n" +
+                "WHERE AE.idEmpleado=:id AND A.estado=1";
+        List<Object[]> asignaciones = entityManager.createNativeQuery(query)
+                .setParameter("id",id)
+                .getResultList();
+        return asignaciones;
+    }
 }

@@ -10,18 +10,30 @@
     <meta name="author" content="">
 
     <title>PRO LIMPIO</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <!-- Custom fonts for this template-->
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="css/styles.css">
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+
+    <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <script src="vendor/fontawesome-free/js/all.js"></script>
+    <script src="vendor/fontawesome-free/js/all.min.js"></script>
     <!--maptiler-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!--hora y fecha-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -37,7 +49,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <img src="img/logo.png" alt="" width="40">
             </div>
-            <div class="sidebar-brand-text mx-3">PRO LIMPIO</div>
+            <div class="sidebar-brand-text mx-3">Pro Limpio</div>
         </a>
 
         <!-- Divider -->
@@ -58,18 +70,18 @@
             Administrador
         </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item active">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-               aria-controls="collapseTwo">
+        <!-- Nav Item - Pages Collapse Menu EMPLEADOS-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fa fa-user fa-fw"></i>
                 <span>Empleados</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Modulo empleados:</h6>
                     <a class="collapse-item" href="listaEmpleados.html">Lista de Empleados</a>
-                    <a class="collapse-item" href="reportesEmpleado.html">Reportes del Empleado</a>
+                    <a class="collapse-item active" href="reportesEmpleado.html">Reportes del Empleado</a>
                 </div>
             </div>
         </li>
@@ -97,10 +109,10 @@
                 <i class="fa fa-solid fa-toolbox"></i>
                 <span>Clientes</span>
             </a>
-            <div id="collapseClientes" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseClientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Modulo Clientes:</h6>
-                    <a class="collapse-item active" href="listaClientes.html">Lista Clientes</a>
+                    <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
                 </div>
             </div>
         </li>
@@ -148,10 +160,10 @@
 
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <div class="topbar-divider d-none d-sm-block"></div>
+
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -186,107 +198,99 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <div id="popupCliente" class="popup">
-                    <img src="img/bien.jpg">
-                    <h2>Cliente Creado!</h2>
-                    <p>se creo correctamente el cliente</p>
-                </div>
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Agregar Cliente</h1>
-                </div>
-
-                <form class="user">
-                    <br>
-                    <div class="form-inputs row">
-                        <div class="col-sm-4 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="txtnombreEmpresa"
-                                   placeholder="Razon Social">
-                            <label id="lblErrorNombreE"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-user" id="txtnombre"
-                                   placeholder="Nombre Cliente">
-                            <label id="lblErrorNombre"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-user" id="txtapellido"
-                                   placeholder="Apellido Paterno">
-                            <label id="lblErrorApellidoP"></label>
-                        </div>
-                    </div>
-                    <div class="form-inputs row">
-                        <div class="col-sm-3 mb-3 mb-sm-0">
-                            <input type="text" class="form-control form-control-user" id="txtapellidoM"
-                                   placeholder="Apellido Materno">
-                            <label id="lblErrorApellidoM"></label>
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control form-control-user" id="txtcarnet"
-                                   placeholder="Carnet">
-                            <label id="lblErrorCarnet"></label>
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control form-control-user" id="txttelefono"
-                                   placeholder="telefono">
-                            <label id="lblErrorTelefono"></label>
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control form-control-user" id="txtcorreo"
-                                   placeholder="Correo">
-                            <label id="lblErrorCorreo"></label>
-                        </div>
-                    </div>
-                    <div class="form-inputs row">
-                        <div class="col-sm-4 mb-3 mb-sm-0">
-                            <input type="text" id="txtfechaRegistro" class="form-control form-control-user"
-                                   placeholder="Fecha Registro" onfocus="(this.type='date')" onfocusout="(this.type='text')">
-                            <label id="lblErrorFR"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-user" id="txtdireccion"
-                                   placeholder="Direccion">
-                            <label id="lblErrorDireccion"></label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control form-control-user"
-                                   id="txtnotas" placeholder="datos importantes">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>Ingrese su Ubicacion:</h3>
-                            <div id="map-container" class="mapaLugarForm"></div>
-                            <label id="lblErrorMapa"></label>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <a class="btn btn-primary btn-user btn-block" onclick="validacionCliente()">
-                                        Agregar Cliente
-                                    </a>
-                                </div>
-                                <div class="col-sm-6">
-                                    <a class="btn btn-warning btn-user btn-block" href="listaClientes.html">Cancelar</a><!--revisar esto-->
-                                </div>
+                <h1 class="h3 mb-2 text-gray-800">Reporte Asignacion Empleado</h1>
+                <p class="mb-4">Aqui se puede buscar todas las asignaciones asociadas a un empleado</p>
+                <!-- Modal Mapa-->
+                <div class="modal fade" id="modalMapa" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fs-5" id="myModalLabel">Mapa</h5>
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <br>
+                            <div class="modal-body">
+                                <div id="map-container" style="height:500px"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" onclick="cerrarMapa()">Cerrar</button>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <!--<button class="btn btn-primary" onclick="mostrarUbicacion()">Ver Ubicacion</button>-->
+                            <input id="search" class="form-control form-control-user" type="search" name="search" placeholder="buscar empleado por nombre...">
+                        </h6>
+                    </div>
+                </div>
 
-                    <hr>
 
-                </form>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="listaEmpleadosBuscador" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Nro</th>
+                                <th>Nombre Empleado</th>
+                                <th>Carnet</th>
+                                <th>Cargo</th>
+                                <th>Telefono</th>
+                                <th>Mostrar Asignaciones</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <div id="divBoton" style="display:none;">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                <button class="btn btn-primary" id="btnImprimir">Imprimir</button>
+                            </h6>
+                        </div>
+                        <br>
+                        <table class="table table-bordered" id="listaEmpleadosResultados" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Nro</th>
+                                <th>Lugar</th>
+                                <th>Direccion</th>
+                                <th>Fecha</th>
+                                <th>Turno</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Main Content -->
+        <!-- /.container-fluid -->
+
+
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
+                    <span>Copyright &copy; Jhonny 2023</span>
                 </div>
             </div>
         </footer>
@@ -303,20 +307,47 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+<!-- Logout Modal-->
+<!-- Modal Alerta -->
+<div class="modal fade" id="formAlertaTotal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal">Alerta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script src="vendor/bootstrap/js/bootstrap.bundle.js"></script>
 <!-- Core plugin JavaScript-->
 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/datatables-demo.js"></script>
 <script src="js/control.js"></script>
-<script src="js/mapa.js"></script>
-<script src="js/validaciones.js"></script>
-<script src="js/registrarCliente.js"></script>
+<script src="js/buscador.js"></script>
+<script src="js/reportesEmpleados.js"></script>
+
 </body>
 
 </html>

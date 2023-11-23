@@ -52,4 +52,8 @@ public class EmpleadoController {
     public List<Empleado> getAllEmployes(){
         return empleadoDaoImp.getAllEmployes();
     }
+    @GetMapping("api/empleados/reporte/{id}")
+    public List<Object[]> getAsignacionesEmpleado(@PathVariable int id){
+        return empleadoDaoImp.getAsignacionesEmpleado(id);
+    }
 }

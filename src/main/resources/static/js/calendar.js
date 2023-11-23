@@ -32,7 +32,7 @@ function iniciarFechaYHora(){
 	document.getElementById("ano").innerHTML = data.getFullYear();
 	document.getElementById("anoFin").innerHTML = data.getFullYear();
 
-
+    
     // Establecer valores por defecto de los datepickers
     $(function () {
         $("#datepickerInicio").datepicker().datepicker("setDate", new Date());
