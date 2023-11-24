@@ -1,6 +1,7 @@
 package com.proyecto.prolimpio.dao;
 
 import com.proyecto.prolimpio.dto.DtoFechas;
+import com.proyecto.prolimpio.models.Empleado;
 import com.proyecto.prolimpio.util.ConvertirDecimalATexto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.OneToMany;
@@ -8,6 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ContentDisposition;
@@ -33,6 +35,8 @@ import static com.proyecto.prolimpio.util.ConvertirDecimalATexto.convertirNumero
 public class ReporteDaoImp {
     @PersistenceContext
     EntityManager entityManager;
+    @Autowired
+    EmpleadoDaoImp empleadoDaoImp;
     String query = "";///////
     public ResponseEntity<Resource> getReporteEnPdf(HashMap<String, Object> parameters, String nombreJasper) {
         try {
@@ -226,4 +230,39 @@ public class ReporteDaoImp {
         String nombreJasper = "reportesAsistencia";
         return getReporteEnPdf(parameters,nombreJasper);
     }
+
+    public ResponseEntity<Resource> imprimirAsignacionesEmpleado(int id){
+        List<Object[]> asignaciones = empleadoDaoImp.getAsignacionesEmpleado(id);
+        Empleado empleado = entityManager.find(Empleado.class,id);
+        String nombre = empleado.getNombre()+" "+empleado.getApellido()+" "+empleado.getApellido_materno();
+        HashMap<String, Object> parameters = new HashMap<>();
+
+        List<Map<String, Object>> dataAsignaciones = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d'/'MM'/'yyyy", new Locale("es", "ES"));
+        LocalDate fechaI,fechaF;
+        int cont=1;
+        for (Object[] asignacion : asignaciones) {
+            fechaI = LocalDate.parse(asignacion[3]+"");
+            fechaF = LocalDate.parse(asignacion[4]+"");
+            String fecha = fechaI.format(formatter)+" a "+fechaF.format(formatter);
+            Map<String, Object> map = new HashMap<>();
+            map.put("nro", cont);
+            map.put("lugar", asignacion[1]);
+            map.put("direccion", asignacion[2]);
+            map.put("fecha", fecha);
+            map.put("turno",asignacion[5]);
+            dataAsignaciones.add(map);
+            cont++;
+
+        }
+        JRBeanCollectionDataSource dataSourceAsignaciones = new JRBeanCollectionDataSource(dataAsignaciones);
+        parameters.put("dsAsignacionesEmpleado", dataSourceAsignaciones);
+
+        parameters.put("nombre", nombre);
+        parameters.put("fechaactual", LocalDate.now().format(formatter));
+
+        String archivo = "reporteAsignacionesEmpleado";
+        return getReporteEnPdf(parameters,archivo);
+    }
+
 }
