@@ -283,4 +283,35 @@ public class AsignacionDaoImp {
         }
         return asignacionesPendientes;
     }
+    public Object[] getTodasAsignacionesFinalizadasPorMes() {
+        String query = "SELECT IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 1 THEN 1 ELSE 0 END), 0) AS Ene,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 2 THEN 1 ELSE 0 END), 0) AS Feb,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 3 THEN 1 ELSE 0 END), 0) AS Mar,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 4 THEN 1 ELSE 0 END), 0) AS Abr,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 5 THEN 1 ELSE 0 END), 0) AS May,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 6 THEN 1 ELSE 0 END), 0) AS Jun,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 7 THEN 1 ELSE 0 END), 0) AS Jul,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 8 THEN 1 ELSE 0 END), 0) AS Ago,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 9 THEN 1 ELSE 0 END), 0) AS Sep,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 10 THEN 1 ELSE 0 END), 0) AS Oct,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 11 THEN 1 ELSE 0 END), 0) AS Nov,\n" +
+                "       IFNULL(SUM(CASE WHEN MONTH(fecha_fin) = 12 THEN 1 ELSE 0 END), 0) AS Dic\n" +
+                "FROM asignacion\n" +
+                "WHERE estado = 0\n" +
+                "GROUP BY YEAR(fecha_fin)";
+        Object[] asignacionesFinalizadas = (Object[]) entityManager.createNativeQuery(query)
+                .getSingleResult();
+        return asignacionesFinalizadas;
+    }
+
+    public Object[] getDatosIndex(){
+        String query="SELECT \n" +
+                "    (SELECT COUNT(idAsignacion) FROM asignacion WHERE estado = 1),\n" +
+                "    (SELECT COUNT(idEmpleado) FROM empleado WHERE estado = 1),\n" +
+                "    (SELECT COUNT(idServicio) FROM servicio WHERE estado = 1),\n" +
+                "    (SELECT COUNT(idCliente) FROM cliente WHERE estado = 1);";
+        Object[] datos = (Object[]) entityManager.createNativeQuery(query)
+                .getSingleResult();
+        return datos;
+    }
 }

@@ -4,10 +4,7 @@ import com.proyecto.prolimpio.dao.AsignacionDaoImp;
 import com.proyecto.prolimpio.dto.AsignacionResponse;
 import com.proyecto.prolimpio.dto.DtoFechas;
 import com.proyecto.prolimpio.dto.VerificarAsignacionDTO;
-import com.proyecto.prolimpio.models.Asignacion;
-import com.proyecto.prolimpio.models.AsignacionReporte;
-import com.proyecto.prolimpio.models.EmpleadoAux;
-import com.proyecto.prolimpio.models.Servicio;
+import com.proyecto.prolimpio.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -58,9 +55,13 @@ public class AsignacionController {
     public List<AsignacionReporte> buscarPorRango(@RequestBody DtoFechas dtoFechas){
         return asignacionDaoImp.buscarPorRangoFechas(dtoFechas);
     }
+    @GetMapping("/asignacion/finalizadas")
+    public Object[] getTodasAsignacionesFinalizadasXMes(){
+        return asignacionDaoImp.getTodasAsignacionesFinalizadasPorMes();
+    }
     //prueba
-    @GetMapping("/asignacion/prueba")
-    public List<Object[]> prueba(){
-        return null;
+    @GetMapping("/asignacion/datos")
+    public Object[] getDatosInicio(){
+        return asignacionDaoImp.getDatosIndex();
     }
 }
