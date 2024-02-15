@@ -29,17 +29,6 @@ public class UsuarioDaoImp implements CrudDao<Usuario>{
                 Argon2 argon2= Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
                 if(argon2.verify(passwordHashed,usuario.getPass())){
                     return lista.get(0);
-                    /*Usuario aux = lista.get(0);
-                    String rol = aux.getRol();
-                    if(rol.equals("Supervisor")){
-                        return "Supervisor";
-                    }else{
-                        if(rol.equals("Auxiliar Limpieza")){
-                            return "Auxiliar Limpieza";
-                        }else{
-                            return "Fail";
-                        }
-                    }*/
                 }
             }
             //return "Fail";

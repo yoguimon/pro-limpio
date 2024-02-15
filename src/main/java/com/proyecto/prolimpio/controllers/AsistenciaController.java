@@ -1,16 +1,11 @@
 package com.proyecto.prolimpio.controllers;
 
+import com.proyecto.prolimpio.dao.AsistenciaDaoImp;
 import com.proyecto.prolimpio.dto.AsistenciaReporte;
 import com.proyecto.prolimpio.dto.AsistenciaResponse;
 import com.proyecto.prolimpio.dto.DtoFechas;
-import com.proyecto.prolimpio.dto.LugarResponse;
 import com.proyecto.prolimpio.models.Asistencia;
-import com.proyecto.prolimpio.models.Lugar;
-import com.proyecto.prolimpio.services.AsistenciaService;
-import com.proyecto.prolimpio.services.LugarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,38 +13,34 @@ import java.util.List;
 @RequestMapping("/api")
 public class AsistenciaController {
     @Autowired
-    private AsistenciaService asistenciaService;
+    private AsistenciaDaoImp asistenciaDaoImp;
     @GetMapping("/asistencias/{id}")
     public List<AsistenciaReporte> getTodos(@PathVariable Long id){
-        return asistenciaService.getTodasAsistencia(id);
+        return asistenciaDaoImp.getTodasAsistencia(id);
     }
     @DeleteMapping("/asistencia/{id}")
     public void eliminarAsistencia(@PathVariable Long id){
-        asistenciaService.eliminar(id);
+        asistenciaDaoImp.eliminar(id);
     }
     @PostMapping("/asistencia")
     public void agregarAsistencia(@RequestBody AsistenciaResponse asistenciaResponse){
-        asistenciaService.agregarAistenciar(asistenciaResponse);
+        asistenciaDaoImp.agregar(asistenciaResponse);
     }
     @GetMapping("/asistencia/{id}")
     public Asistencia getAsistencia(@PathVariable Long id){
-        return asistenciaService.getPersona(id);
+        return asistenciaDaoImp.getPersona(id);
     }
     @PutMapping("/asistencia")
     public void setAsistencia(@RequestBody Asistencia asistencia){
-        asistenciaService.modificar(asistencia);
+        asistenciaDaoImp.modificar(asistencia);
     }
     @GetMapping("/asistencia/empleado/{id}")
     public List<Asistencia> getAsistenciasEmpleado(@PathVariable Long id){
-        return asistenciaService.getAsistencias(id);
+        return asistenciaDaoImp.getTodasAsistencias(id);
     }
     @PostMapping("/asistencia/rangoFechas")
     public List<Object[]> imprimirPorRangoFecha(@RequestBody DtoFechas dtoFechas){
-        return asistenciaService.imprimirPorFechas(dtoFechas);
+        return asistenciaDaoImp.getAsistenciasXFechas(dtoFechas);
     }
-    //@GetMapping("/asistencia/{id}")
-    //public List<Asistencia> getTodosXId(@PathVariable Long id){
-        //return asistenciaService.getAllXId(id);
-    //}
 
 }

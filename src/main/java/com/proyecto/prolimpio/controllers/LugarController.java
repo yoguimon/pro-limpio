@@ -1,10 +1,8 @@
 package com.proyecto.prolimpio.controllers;
 
+import com.proyecto.prolimpio.dao.LugarDaoImp;
 import com.proyecto.prolimpio.dto.LugarResponse;
 import com.proyecto.prolimpio.models.Lugar;
-import com.proyecto.prolimpio.models.Servicio;
-import com.proyecto.prolimpio.services.LugarService;
-import com.proyecto.prolimpio.services.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,30 +12,30 @@ import java.util.List;
 @RequestMapping("/api")
 public class LugarController {
     @Autowired
-    private LugarService lugarService;
+    private LugarDaoImp lugarDaoImp;
     @GetMapping("/lugar")
     public List<Lugar> getTodos(){
-        return lugarService.getTodos();
+        return lugarDaoImp.getTodos();
     }
     @DeleteMapping("/lugar/{id}")
     public void eliminarLugar(@PathVariable Long id){
-        lugarService.eliminar(id);
+        lugarDaoImp.eliminar(id);
     }
     @PostMapping("/lugar")
     public void crearLugar(@RequestBody LugarResponse lugarResponse){
-        lugarService.crearLugar(lugarResponse);
+        lugarDaoImp.crearLugar(lugarResponse);
     }
     @GetMapping("/lugar/{id}")
     public Lugar getLugar(@PathVariable Long id){
-        return lugarService.getPersona(id);
+        return lugarDaoImp.getPersona(id);
     }
     @PutMapping("/lugar")
     public void setLugar(@RequestBody Lugar lugar){
-        lugarService.modificar(lugar);
+        lugarDaoImp.modificar(lugar);
     }
 
     @GetMapping("/lugares/{id}")
     public List<Lugar> getTodosXId(@PathVariable Long id){
-        return lugarService.getAllXId(id);
+        return lugarDaoImp.getTodosXId(id);
     }
 }

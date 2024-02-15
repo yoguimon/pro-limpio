@@ -20,10 +20,8 @@ import java.util.Date;
 public class JWTUtil {
     @Value("${security.jwt.secret}")
     private String key;
-
     @Value("${security.jwt.issuer}")
     private String issuer;
-
     @Value("${security.jwt.ttlMillis}")
     private long ttlMillis;
 

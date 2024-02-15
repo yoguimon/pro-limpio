@@ -1,8 +1,7 @@
 package com.proyecto.prolimpio.controllers;
 
-import com.proyecto.prolimpio.models.ClienteLugar;
+import com.proyecto.prolimpio.dao.ServicioDaoImp;
 import com.proyecto.prolimpio.models.Servicio;
-import com.proyecto.prolimpio.services.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,30 +11,30 @@ import java.util.List;
 @RequestMapping("/api")
 public class ServicioController {
     @Autowired
-    private ServicioService servicioService;
+    private ServicioDaoImp servicioDaoImp;
     @GetMapping("/servicio")
     public List<Servicio> getTodos(){
-        return servicioService.getTodos();
+        return servicioDaoImp.getTodos();
     }
     @DeleteMapping("/servicio/{id}")
     public void eliminarServicio(@PathVariable Long id){
-        servicioService.eliminar(id);
+        servicioDaoImp.eliminar(id);
     }
     @PostMapping("/servicio")
     public void crearServicio(@RequestBody Servicio servicio){
-        servicioService.crear(servicio);
+        servicioDaoImp.crear(servicio);
     }
     @GetMapping("/servicio/{id}")
     public Object[] getServicio(@PathVariable int id){
-        return servicioService.getServicio(id);
+        return servicioDaoImp.getServicio(id);
     }
     @PutMapping("/servicio")
     public void setServicio(@RequestBody Servicio servicio){
-        servicioService.modificarServicio(servicio);
+        servicioDaoImp.modificarServicio(servicio);
     }
 
     @GetMapping("/servicio/nombre/{nombre}")
     public List<Servicio> getServiciosXCarnet(@PathVariable String nombre){
-        return servicioService.getServiciosXCarnet(nombre);
+        return servicioDaoImp.getServiciosXNombre(nombre);
     }
 }

@@ -220,3 +220,8 @@ label{
     justify-content: center;
     align-items: center;
 }
+.bigger-image {
+    width: 100%; /* Ancho máximo de la imagen */
+    height: auto; /* Altura automática para mantener la proporción */
+    max-width: 1000px; /* Cambia este valor según el tamaño máximo deseado */
+}

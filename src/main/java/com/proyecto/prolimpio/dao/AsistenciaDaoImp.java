@@ -18,6 +18,7 @@ import java.util.List;
 public class AsistenciaDaoImp implements CrudDao<Asistencia>{
     @PersistenceContext
     EntityManager entityManager;
+    private String query;
     @Override
     public List<Asistencia> getTodos() {
         return null;
@@ -56,7 +57,7 @@ public class AsistenciaDaoImp implements CrudDao<Asistencia>{
     }
 
     public List<AsistenciaReporte> getTodasAsistencia(Long id) {
-        String query = "SELECT CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),E.carnet,\n" +
+        query = "SELECT CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),E.carnet,\n" +
                 "       DATE(A.fecha_hora),TIME(A.fecha_hora),A.tipo\n" +
                 "FROM empleado E \n" +
                 "\tINNER JOIN asistencia A ON E.idEmpleado=A.idEmpleado\n" +
@@ -67,7 +68,7 @@ public class AsistenciaDaoImp implements CrudDao<Asistencia>{
         return resultado;
     }
     public List<Asistencia> getTodasAsistencias(Long id){
-        String query = "SELECT * \n" +
+        query = "SELECT * \n" +
                 "FROM asistencia\n" +
                 "WHERE idEmpleado=:id";
         List<Asistencia> resultado = entityManager.createNativeQuery(query)
@@ -77,11 +78,13 @@ public class AsistenciaDaoImp implements CrudDao<Asistencia>{
     }
 
     public List<Object[]> getAsistenciasXFechas(DtoFechas dtoFechas) {
-        String query="SELECT A.idAsistencia,CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),\n" +
+        System.out.println(dtoFechas.getFecha_inicio());
+        System.out.println(dtoFechas.getFecha_fin());
+        query="SELECT A.idAsistencia,CONCAT(E.nombre,' ',E.apellido,' ',E.apellido_materno),\n" +
                 "\t\tA.latitud,A.longitud,A.fecha_hora,A.tipo\n" +
                 "FROM asistencia A\n" +
                 "\tINNER JOIN empleado E ON A.idEmpleado=E.idEmpleado\n" +
-                "WHERE A.fecha_hora >= :fechaIni AND A.fecha_hora <= :fechaFin";
+                "WHERE (A.fecha_hora >= :fechaIni AND A.fecha_hora <= :fechaFin) OR DATE(A.fecha_hora) = CURDATE()";
         List<Object[]> resultado = entityManager.createNativeQuery(query)
                 .setParameter("fechaIni",dtoFechas.getFecha_inicio())
                 .setParameter("fechaFin",dtoFechas.getFecha_fin())

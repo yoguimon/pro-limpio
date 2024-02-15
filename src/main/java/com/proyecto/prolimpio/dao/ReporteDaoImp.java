@@ -214,8 +214,6 @@ public class ReporteDaoImp {
                 }
                 break;
         }
-
-
         JRBeanCollectionDataSource dataSourceAsistencias = new JRBeanCollectionDataSource(dataAsistencias);
         parameters.put("dsTablaAsistencias", dataSourceAsistencias);
 

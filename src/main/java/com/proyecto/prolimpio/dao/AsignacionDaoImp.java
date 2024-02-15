@@ -22,6 +22,7 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -121,55 +122,7 @@ public class AsignacionDaoImp {
             final File imgLogo = ResourceUtils.getFile("classpath:imagenes/logo.png");
             final JasperReport report = (JasperReport) JRLoader.loadObject(file);
 
-            HashMap<String, Object> parameters = new HashMap<>();
-            parameters.put("logoProlimpio", new FileInputStream(imgLogo));
-
-            List<Map<String, Object>> dataEmpleados = new ArrayList<>();
-            int cont=1;
-            for (Object[] empleado : empleados) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("nro", cont);
-                map.put("nombre", empleado[1]);
-                map.put("carnet", empleado[2]);
-                map.put("cargo", empleado[3]);
-                map.put("telefono", empleado[4]);
-                dataEmpleados.add(map);
-                cont++;
-            }
-            List<Map<String, Object>> dataServicios = new ArrayList<>();
-            cont=1;
-            for (Object[] servicio : servicios) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("nro", cont);
-                map.put("nombre", servicio[1]);
-                map.put("categoria", servicio[2]);
-                map.put("total", servicio[3].toString());
-                dataServicios.add(map);
-                cont++;
-            }
-            JRBeanCollectionDataSource dataSourceEmpleados = new JRBeanCollectionDataSource(dataEmpleados);
-            JRBeanCollectionDataSource dataSourceServicios = new JRBeanCollectionDataSource(dataServicios);
-            parameters.put("dsEmp", dataSourceEmpleados);
-            parameters.put("dsServicios", dataSourceServicios);
-            parameters.put("cliente",lugarYCliente[1]);
-            parameters.put("lugar",lugarYCliente[0]);
-
-            Date inicio = (Date) asigncionDadoId[3];
-            SimpleDateFormat formato = new SimpleDateFormat("d 'de' MMMM 'del' yyyy", new Locale("es", "ES"));
-            String fechaInicio = formato.format(inicio);
-            Date fin = (Date) asigncionDadoId[4];
-            String fechaFin = formato.format(fin);
-            Date actual = new Date();
-            String fecha = formato.format(actual);
-
-            parameters.put("fechaini", fechaInicio);
-            parameters.put("fechafin", fechaFin);
-            parameters.put("turno",asigncionDadoId[5]);
-            parameters.put("nroa",asigncionDadoId[0]);
-            parameters.put("email","jose@gmail.com");
-            parameters.put("totalfinal",asigncionDadoId[2]);
-            parameters.put("direccion",lugarYCliente[2]);
-            parameters.put("fecha",fecha);
+            HashMap<String, Object> parameters= getParametros(empleados,servicios,asigncionDadoId,lugarYCliente,imgLogo);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
             byte[] reporte = JasperExportManager.exportReportToPdf(jasperPrint);
@@ -190,8 +143,59 @@ public class AsignacionDaoImp {
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        //ResponseEntity.noContent().build();
         return null;
+    }
+    public HashMap<String, Object> getParametros(List<Object[]> empleados,List<Object[]> servicios,Object[] asigncionDadoId,Object[] lugarYCliente,File imgLogo) throws FileNotFoundException {
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("logoProlimpio", new FileInputStream(imgLogo));
+
+        List<Map<String, Object>> dataEmpleados = new ArrayList<>();
+        int cont=1;
+        for (Object[] empleado : empleados) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("nro", cont);
+            map.put("nombre", empleado[1]);
+            map.put("carnet", empleado[2]);
+            map.put("cargo", empleado[3]);
+            map.put("telefono", empleado[4]);
+            dataEmpleados.add(map);
+            cont++;
+        }
+        List<Map<String, Object>> dataServicios = new ArrayList<>();
+        cont=1;
+        for (Object[] servicio : servicios) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("nro", cont);
+            map.put("nombre", servicio[1]);
+            map.put("categoria", servicio[2]);
+            map.put("total", servicio[3].toString());
+            dataServicios.add(map);
+            cont++;
+        }
+        JRBeanCollectionDataSource dataSourceEmpleados = new JRBeanCollectionDataSource(dataEmpleados);
+        JRBeanCollectionDataSource dataSourceServicios = new JRBeanCollectionDataSource(dataServicios);
+        parameters.put("dsEmp", dataSourceEmpleados);
+        parameters.put("dsServicios", dataSourceServicios);
+        parameters.put("cliente",lugarYCliente[1]);
+        parameters.put("lugar",lugarYCliente[0]);
+
+        Date inicio = (Date) asigncionDadoId[3];
+        SimpleDateFormat formato = new SimpleDateFormat("d 'de' MMMM 'del' yyyy", new Locale("es", "ES"));
+        String fechaInicio = formato.format(inicio);
+        Date fin = (Date) asigncionDadoId[4];
+        String fechaFin = formato.format(fin);
+        Date actual = new Date();
+        String fecha = formato.format(actual);
+
+        parameters.put("fechaini", fechaInicio);
+        parameters.put("fechafin", fechaFin);
+        parameters.put("turno",asigncionDadoId[5]);
+        parameters.put("nroa",asigncionDadoId[0]);
+        parameters.put("email","jose@gmail.com");
+        parameters.put("totalfinal",asigncionDadoId[2]);
+        parameters.put("direccion",lugarYCliente[2]);
+        parameters.put("fecha",fecha);
+        return parameters;
     }
 
     public List<Object[]> empleadosAsignados(int id){
