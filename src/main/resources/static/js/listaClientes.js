@@ -37,9 +37,9 @@ async function cargarClientes(){
         let cont = 0;
       for(let cliente of clientes){
             cont=cont+1;
-            let botonLugar = '<a href="#" class="btn btn-success btn-circle btn-sm" onclick="mostrarLugares(' + cliente[0] + ', \'' + cliente[2] + '\')"><i class="fas fa-home"></i></a>';
-            let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarCliente('+cliente[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
-            let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarCliente('+cliente[0]+')"><i class="fas fa-trash"></i></a>';
+            let botonLugar = '<a href="#" class="btn btn-primary btn-circle btn-sm" onclick="mostrarLugares(' + cliente[0] + ', \'' + cliente[2] + '\')"><i class="fas fa-home"></i></a>';
+            let botonEditar = '<a href="#" class="btn btn-primary btn-circle btn-sm" onclick="mostrarCliente('+cliente[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
+            let botonEliminar = '<a href="#" class="btn btn-primary btn-circle btn-sm" onclick="eliminarCliente('+cliente[0]+')"><i class="fas fa-trash"></i></a>';
             let clienteHtml =  '<tr><td>'+cont+'</td><td>'+cliente[1]+'</td><td>'+cliente[2]+'</td><td>'+cliente[3]+'</td><td>'+botonLugar+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
             listadoHtml+=clienteHtml;
       }
@@ -89,8 +89,8 @@ async function mostrarCliente(id){
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
 
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="validarEdicionCliente('+cliente.idCliente+')">Modificar</button>';
-        let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" onclick="cancelar()">Cancelar</button>';
+        let btnSaveChanges='<button type="button" class="btn text-white" onclick="validarEdicionCliente('+cliente.idCliente+')">Modificar</button>';
+        let btnCancel = '<button type="button" class="btn text-white" onclick="cancelar()">Cancelar</button>';
 
         document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;
         document.getElementById('btnCancel').innerHTML = btnCancel;

@@ -21,6 +21,7 @@
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
   <!--maptiler-->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 
@@ -162,19 +163,15 @@
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Profile
-              </a>
               <a class="dropdown-item" href="cambiarContrasena.html">
                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cambiar Contraseña
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" onclick="finalizarSession()">
+              <button class="dropdown-item" onclick="finalizarSession()">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cerrar Session
-              </a>
+              </button>
             </div>
           </li>
 
@@ -222,12 +219,12 @@
               <label id="lblErrorMapa"></label>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                  <a id="btnSaveChanges" class="btn btn-primary btn-user btn-block">
+                  <a id="btnSaveChanges" class="btn btn-block">
                     Modificar
                   </a>
                 </div>
                 <div class="col-sm-6">
-                  <a button id="btnCancel" class="btn btn-warning btn-user btn-block">Cancelar</a><!--revisar esto-->
+                  <a button id="btnCancel" class="btn btn-block">Cancelar</a><!--revisar esto-->
                 </div>
               </div>
               <br>
@@ -247,7 +244,7 @@
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Jhonny 2023</span>
+          <span>Copyright &copy; Jhonny 2024</span>
         </div>
       </div>
     </footer>

@@ -24,6 +24,7 @@
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
   <script src="vendor/fontawesome-free/js/all.js"></script>
   <script src="vendor/fontawesome-free/js/all.min.js"></script>
 
@@ -110,19 +111,15 @@
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Profile
-              </a>
               <a class="dropdown-item" href="cambiarContrasena.html">
                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cambiar Contraseña
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" onclick="finalizarSession()">
+              <button class="dropdown-item" onclick="finalizarSession()">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cerrar Session
-              </a>
+              </button>
             </div>
           </li>
 
@@ -143,7 +140,7 @@
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="listaAsistencias" width="100%" cellspacing="0">
-              <thead>
+              <thead class="table-warning">
               <tr>
                 <th>Nro</th>
                 <th>Carnet</th>
@@ -153,16 +150,6 @@
                 <th>Tipo</th>
               </tr>
               </thead>
-              <tfoot>
-              <tr>
-                <th>Nro</th>
-                <th>Carnet</th>
-                <th>Nombres</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Tipo</th>
-              </tr>
-              </tfoot>
               <tbody>
 
 
@@ -177,7 +164,7 @@
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Jhonny 2023</span>
+          <span>Copyright &copy; Jhonny 2024</span>
         </div>
       </div>
     </footer>
@@ -211,13 +198,6 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
 <script src="js/control.js"></script>
 <script src="js/asistenciaEmpleado.js"></script>
 </body>

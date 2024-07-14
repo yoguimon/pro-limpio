@@ -19,7 +19,7 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+  <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 </head>
 
 <body id="page-top">
@@ -105,19 +105,15 @@
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Profile
-              </a>
               <a class="dropdown-item" href="cambiarContrasena.html">
                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cambiar Contraseña
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" onclick="finalizarSession()" data-toggle="modal" data-target="#logoutModal">
+              <button class="dropdown-item" onclick="finalizarSession()" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cerrar Session
-              </a>
+              </button>
             </div>
           </li>
 
@@ -139,10 +135,9 @@
           <p>Marco Salida Correctamente</p>
         </div>
         <!-- Page Heading -->
+        <p style="color:#40AA3E;">El trabajador puede marcar Entrada y Salida, El Supervisor podra ver la hora, fecha y la ubicación desde donde marco la asistencia cada trabajador (modulo asistencia)</p>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Asistencia: Asegurate haber recibido mensaje se Exito antes de salir!</h1>
-          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                  class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
 
         <!-- Content Row -->
@@ -182,7 +177,7 @@
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Pro Limpio 2023</span>
+          <span>Copyright &copy; Jhonny 2024</span>
         </div>
       </div>
     </footer>

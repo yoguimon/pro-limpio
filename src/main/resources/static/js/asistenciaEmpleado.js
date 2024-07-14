@@ -1,6 +1,5 @@
 $(document).ready(function() {
   cargarAsistencias();
-  $('#listaAsistencias').DataTable();
 });
 
 //REPORTES ASISTENCIA EMPLEADO
@@ -21,7 +20,6 @@ async function cargarAsistencias(){
             let cont = 0;
           for(let asistencia of asistencias){
                 cont=cont+1;
-                console.log(asistencia.tipo);
                 var tipo="";
                 if(asistencia[4]===0){
                     tipo="entrada";

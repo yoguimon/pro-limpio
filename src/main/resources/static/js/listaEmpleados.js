@@ -40,8 +40,8 @@ async function cargarEmpleados(){
             let cont = 0;
           for(let empleado of empleados){
                 cont=cont+1;
-                let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarEmpleado('+empleado[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
-                let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarEmpleado('+empleado[0]+')"><i class="fas fa-trash"></i></a>';
+                let botonEditar = '<a href="#" class="btn btn-primary btn-circle btn-sm" onclick="mostrarEmpleado('+empleado[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
+                let botonEliminar = '<a href="#" class="btn btn-primary btn-circle btn-sm" onclick="eliminarEmpleado('+empleado[0]+')"><i class="fas fa-trash"></i></a>';
                 let empleadoHtml =  '<tr><td>'+cont+'</td><td>'+empleado[1]+'</td><td>'+empleado[2]+'</td><td>'+empleado[3]+'</td><td>'+empleado[4]+'</td><td>'+empleado[5]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                 listadoHtml+=empleadoHtml;
           }
@@ -57,11 +57,8 @@ async function mostrarEmpleado(id){
                   'Content-Type': 'application/json'
                 }
         });
-
-        //me devuelve una lista de empleados
+        //me devuelve un empleado
         const empleado = await request.json();
-
-
         document.getElementById('txtcarnet').value=empleado[1];
         document.getElementById('txtnombre').value=empleado[2];
         document.getElementById('txtapellido').value=empleado[3];
@@ -75,13 +72,12 @@ async function mostrarEmpleado(id){
         document.getElementById('txtdireccion').value=empleado[11];
         document.getElementById('txttelefono').value=empleado[12];
         document.getElementById('txtemail').value=empleado[13];
-        //datos.foto = "sin foto";
 
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
 
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="validarEdicionEmpleado('+empleado[0]+')">Modificar</button>';
-        let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" onclick="cancelar()">Cancelar</button>';
+        let btnSaveChanges='<button type="button" class="btn text-white" onclick="validarEdicionEmpleado('+empleado[0]+')">Modificar</button>';
+        let btnCancel = '<button type="button" class="btn text-white" onclick="cancelar()">Cancelar</button>';
 
         document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;
         document.getElementById('btnCancel').innerHTML = btnCancel;

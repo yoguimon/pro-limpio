@@ -1,5 +1,13 @@
 
+function usuarioSupervisor(){
+    document.getElementById('txtEmail').value="lucifer@gmail.com";
+    document.getElementById('txtPassword').value="Lucifer24@";
+}
 
+function usuarioTrabajador(){
+    document.getElementById('txtEmail').value="roberto@gmail.com";
+    document.getElementById('txtPassword').value="Roberto24@";
+}
 async function registrarUsuario(){
 
     let datos = {};

@@ -130,8 +130,6 @@ function anadirATablaClienteYLugar(idCliente,idLugar,nombreCliente,lugar){
         tablaLugar.appendChild(filaLugar);
         celdaLugar.appendChild(tablaLugar);
 
-        console.log(lugarMap);
-
 }
 function eliminarClienteYLugar(idCliente,idLugar){
     var tablaCL = document.getElementById("listaClientesYSusLugares");
@@ -301,8 +299,6 @@ function anadirATabla(idServicio,nombre,total){
             }
          }
          celda.appendChild(tablaServicios);
-         console.log(serviciosMap);
-         console.log(servicioMapCosto);
     } else { // Se desmarcó el checkbox
         delete serviciosMap[idServicio];
         delete servicioMapCosto[idServicio];
@@ -340,8 +336,6 @@ function anadirATabla(idServicio,nombre,total){
             }
         }
         celda.appendChild(tablaServicios);
-        console.log(serviciosMap);
-        console.log(servicioMapCosto);
     }
 
 }
@@ -509,7 +503,6 @@ function anadirATablaLosEmpleados(idEmpleado,nombre){
             }
          }
          celda.appendChild(tablaEmpleadosAsignados);
-         console.log(empleadosMap);
     } else { // Se desmarcó el checkbox
         delete empleadosMap[idEmpleado];
 
@@ -531,7 +524,6 @@ function anadirATablaLosEmpleados(idEmpleado,nombre){
             }
         }
         celda.appendChild(tablaEmpleadosAsignados);
-        console.log(empleadosMap);
     }
 
 }
@@ -615,7 +607,6 @@ function anadirATablaLosSupervisores(idSupervisor,nombre){
             }
          }
          celda.appendChild(tablaSupervisoresAsignados);
-         console.log(supervisoresMap);
     } else { // Se desmarcó el checkbox
         delete supervisoresMap[idSupervisor];
 
@@ -637,7 +628,6 @@ function anadirATablaLosSupervisores(idSupervisor,nombre){
             }
         }
         celda.appendChild(tablaSupervisoresAsignados);
-        console.log(supervisoresMap);
     }
 }
 function eliminarSupervisorAsignado(idSupervisor,nombre) {

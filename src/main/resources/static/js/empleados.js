@@ -53,13 +53,13 @@ async function marcarAsistencia(asistencia){
             botonCargar.disabled = false;
             botonCargar.textContent = 'Marcar Entrada';
             var popup = document.getElementById("popupEmpleado");
-            mostrarAlerta("indexAuxiliar.html",popup);
+            mostrarAlerta("reportes.html",popup);
     } else if (asistencia.tipo === 1) {
             const botonCargar = document.getElementById('botonCargar2');
             botonCargar.disabled = false;
             botonCargar.textContent = 'Marcar Salida';
             var popup2 = document.getElementById("popupEmpleado2");
-            mostrarAlerta("indexAuxiliar.html",popup2);
+            mostrarAlerta("reportes.html",popup2);
     } else {
             alert("Algo fallo Corre!!!"); // Puedes manejar otros casos aquí si es necesario
     }

@@ -25,7 +25,7 @@
 
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+  <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
   <script src="vendor/fontawesome-free/js/all.js"></script>
   <script src="vendor/fontawesome-free/js/all.min.js"></script>
 
@@ -169,19 +169,15 @@
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="#">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Profile
-              </a>
               <a class="dropdown-item" href="cambiarContrasena.html">
                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cambiar Contraseña
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" onclick="finalizarSession()">
+              <button class="dropdown-item" onclick="finalizarSession()">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Cerrar Session
-              </a>
+              </button>
             </div>
           </li>
 
@@ -208,7 +204,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                Seguro de eleminar elemento?
+                Seguro de eleminar cliente?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -275,9 +271,9 @@
                     </div>
                   </div>
                 </form>
-                <div class="d-flex justify-content-between mt-3" id="botones">
-                  <button id="btnSaveChanges" type="button" class="btn btn-primary flex-grow-1 me-2">Modificar</button>
-                  <button id="btnCancel" type="button" class="btn btn-warning flex-grow-1" data-dismiss="modal">Cancelar</button>
+                <div class="text-center mt-3" id="botones">
+                  <button id="btnSaveChanges" type="button" class="btn btn-primary">Modificar</button>
+                  <button id="btnCancel" type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
                 </div>
               </div>
 
@@ -331,7 +327,7 @@
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Jhonny 2023</span>
+          <span>Copyright &copy; Jhonny 2024</span>
         </div>
       </div>
     </footer>

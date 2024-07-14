@@ -59,7 +59,13 @@ public class LugarDaoImp implements CrudDao<Lugar>{
 
     @Override
     public void modificar(Lugar lugar) {
-        entityManager.merge(lugar);
+        Lugar lugarViejo = entityManager.find(Lugar.class,lugar.getIdLugar());
+        lugarViejo.setNombre(lugar.getNombre());
+        lugarViejo.setDireccion(lugar.getDireccion());
+        lugarViejo.setNotas(lugar.getNotas());
+        lugarViejo.setLongitud(lugar.getLongitud());
+        lugarViejo.setLatitud(lugar.getLatitud());
+        entityManager.merge(lugarViejo);
     }
     public void modificarLugar(Lugar lugar) {
         Lugar lugarViejo = entityManager.find(Lugar.class,lugar.getIdLugar());

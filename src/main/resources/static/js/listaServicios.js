@@ -35,8 +35,8 @@ async function cargarServicios(){
             let cont = 0;
               for(let servicio of servicios){
                 cont=cont+1;
-                let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="mostrarServicio('+servicio[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
-                let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarServicio('+servicio[0]+')"><i class="fas fa-trash"></i></a>';
+                let botonEditar = '<a href="#" class="btn btn-primary btn-circle btn-sm" onclick="mostrarServicio('+servicio[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
+                let botonEliminar = '<a href="#" class="btn btn-primary btn-circle btn-sm" onclick="eliminarServicio('+servicio[0]+')"><i class="fas fa-trash"></i></a>';
                 let clienteHtml =  '<tr><td>'+cont+'</td><td>'+servicio[1]+'</td><td>'+servicio[4]+'</td><td>'+servicio[3]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                 listadoHtml+=clienteHtml;
           }
@@ -65,8 +65,8 @@ async function mostrarServicio(id){
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
 
-        let btnSaveChanges='<button type="button" class="btn btn-primary btn-user btn-block" onclick="validarEdicionServicio('+servicio[0]+')">Modificar</button>';
-        let btnCancel = '<button type="button" class="btn btn-warning btn-user btn-block" onclick="cancelar()">Cancelar</button>';
+        let btnSaveChanges='<button type="button" class="btn text-white" onclick="validarEdicionServicio('+servicio[0]+')">Modificar</button>';
+        let btnCancel = '<button type="button" class="btn text-white" onclick="cancelar()">Cancelar</button>';
 
         document.getElementById('btnSaveChanges').innerHTML = btnSaveChanges;
         document.getElementById('btnCancel').innerHTML = btnCancel;

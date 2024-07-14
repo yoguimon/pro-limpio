@@ -49,8 +49,8 @@ async function mostrarLugaresXCliente(id){
                let cont = 0;
               for(let lugar of lugares){
                     cont=cont+1;
-                    let botonEditar = '<a href="#" class="btn btn-warning btn-circle btn-sm" onclick="enviarAFormularioEditar('+lugar[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
-                    let botonEliminar = '<a href="#" class="btn btn-danger btn-circle btn-sm" onclick="eliminarLugar('+lugar[0]+')"><i class="fas fa-trash"></i></a>';
+                    let botonEditar = '<a href="#" class="btn btn-primary btn-circle btn-sm" onclick="enviarAFormularioEditar('+lugar[0]+')"><i class="fas fa-exclamation-triangle"></i></a>';
+                    let botonEliminar = '<a href="#" class="btn btn-primary btn-circle btn-sm" onclick="eliminarLugar('+lugar[0]+')"><i class="fas fa-trash"></i></a>';
                     let lugarHtml =  '<tr><td>'+cont+'</td><td>'+lugar[2]+'</td><td>'+lugar[3]+'</td><td>'+lugar[4]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                     listadoHtml+=lugarHtml;
               }

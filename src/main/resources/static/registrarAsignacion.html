@@ -26,8 +26,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 </head>
 
 <body id="page-top">
@@ -168,19 +167,15 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
-                            </a>
                             <a class="dropdown-item" href="cambiarContrasena.html">
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Cambiar Contraseña
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" onclick="finalizarSession()">
+                            <button class="dropdown-item" onclick="finalizarSession()">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Cerrar Session
-                            </a>
+                            </button>
                         </div>
                     </li>
 
@@ -197,7 +192,7 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Asignar Orden de Trabajo</h1>
                 </div>
-
+                <p style="color:#40AA3E;">Para crear una Orden de Trabajo, se debe escoger fecha(sino defecto), turno(sino defecto), cliente, servicios, empleados y supervisores(opcional), caso contrario no se podra generar una orden de trabajo. Todos los campos se agregar en la tabla pre Asignacion, en cada campo podra buscar, agregar y generar, Todos los campos cuentan con sus validaciones correspondientes.</p>
                 <!-- Content Row -->
                 <div class="row">
                     <!-- Earnings (Monthly) Card Example -->
@@ -759,7 +754,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Jhonny 2023</span>
+                    <span>Copyright &copy; Jhonny 2024</span>
                 </div>
             </div>
         </footer>

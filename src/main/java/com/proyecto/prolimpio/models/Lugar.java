@@ -85,4 +85,13 @@ public class Lugar {
         this.latitud = latitud;
         this.longitud = longitud;
     }
+
+    public Lugar(Long idLugar, String nombre, String direccion, String notas, String latitud, String longitud) {
+        this.idLugar = idLugar;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.notas = notas;
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
 }

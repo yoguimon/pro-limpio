@@ -44,7 +44,8 @@ async function mostrarLugar(id){
         document.getElementById('txtnombre').value=lugar.nombre;
         document.getElementById('txtdireccion').value=lugar.direccion;
         document.getElementById('txtnotas').value=lugar.notas;
-
+        console.log(lugar.latitud);
+        console.log(lugar.longitud);
         if (marker) {
              map.removeLayer(marker);
         }
@@ -58,7 +59,7 @@ async function mostrarLugar(id){
                 lo1 = e.latlng.lng;
                 // Actualiza la posición del marcador con la posición del clic
                 marcador.setLatLng(e.latlng);
-            });
+         });
 
         document.getElementById('btnSaveChanges').innerHTML = '';
         document.getElementById('btnCancel').innerHTML = '';
@@ -84,7 +85,7 @@ function validarEdicionLugar(id){
     lugarEditado.notas = document.getElementById('txtnotas').value;
     lugarEditado.latitud=la1.toString();
     lugarEditado.longitud=lo1.toString();
-
+    console.log(lugarEditado);
     const errorNombres = document.getElementById('lblErrorNombre');
     const errorDireccion = document.getElementById('lblErrorDireccion');
 
