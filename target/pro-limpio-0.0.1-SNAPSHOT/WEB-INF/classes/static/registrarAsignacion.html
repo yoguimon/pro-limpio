@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PRO LIMPIO</title>
+    <!-- jQuery y jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap y dependencias -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bibliotecas de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <img src="img/logo.png" alt="" width="40">
+            </div>
+            <div class="sidebar-brand-text mx-3">Pro Limpio</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Administrador
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu EMPLEADOS-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-user fa-fw"></i>
+                <span>Empleados</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo empleados:</h6>
+                    <a class="collapse-item" href="listaEmpleados.html">Lista de Empleados</a>
+                    <a class="collapse-item" href="reportesEmpleado.html">Reportes del Empleado</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu Clientes-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClientes"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-user-tie"></i>
+                <span>Clientes</span>
+            </a>
+            <div id="collapseClientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo Clientes:</h6>
+                    <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu Servicios-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-broom"></i>
+                <span>Servicios</span>
+            </a>
+            <div id="collapseServicios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo servicios:</h6>
+                    <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu Asignaciones-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAsignaciones"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-solid fa-toolbox"></i>
+                <span>Asignaciones</span>
+            </a>
+            <div id="collapseAsignaciones" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo asignaciones:</h6>
+                    <a class="collapse-item active" href="registrarAsignacion.html">Asignar Trabajo</a>
+                    <a class="collapse-item" href="reportesAsignaciones.html">Reportes de Asignacion</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu ASISTENCIA -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAsistencia"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span>Asistencia</span>
+            </a>
+            <div id="collapseAsistencia" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo asistencia:</h6>
+                    <a class="collapse-item" href="reportesAsistencia.html">Reportes Asistencia</a>
+                    <a class="collapse-item" href="reportesAsistencias.html">Reportes por Fecha</a>
+                </div>
+            </div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="txtEmailUser"></span>
+                            <img class="img-profile rounded-circle"
+                                 src="img/undraw_profile.svg">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="cambiarContrasena.html">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Cambiar Contraseña
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" onclick="finalizarSession()">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Cerrar Session
+                            </button>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- Page Heading -->
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Asignar Orden de Trabajo</h1>
+                </div>
+                <p style="color:#40AA3E;">Para crear una Orden de Trabajo, se debe escoger fecha(sino defecto), turno(sino defecto), cliente, servicios, empleados y supervisores(opcional), caso contrario no se podra generar una orden de trabajo. Todos los campos se agregar en la tabla pre Asignacion, en cada campo podra buscar, agregar y generar, Todos los campos cuentan con sus validaciones correspondientes.</p>
+                <!-- Content Row -->
+                <div class="row">
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-8 col-md-10 mb-4">
+                        <div class="card shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-md-5">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha Inicio:</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight text-gray-800">
+                                                        <div class="content" style="display: flex;">
+                                                            <ul style="list-style-type: none; display: flex; padding: 0; margin: 0;">
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="dia">23</span>
+                                                                    <p style="margin-top: 5px;">Dia</p>
+                                                                </li>
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="mes">Noviembre</span>
+                                                                    <p style="margin-top: 5px;">Mes</p>
+                                                                </li>
+                                                                <li>
+                                                                    <span id="ano">2023</span>
+                                                                    <p style="margin-top: 5px;">Año</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a type="button" class="btn btn-primary" onclick="mostarModalFecha()">
+                                            <i class="fas fa-calendar" style="font-size:30px;color:white"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha Fin:</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight text-gray-800">
+                                                        <div class="content" style="display: flex;">
+                                                            <ul style="list-style-type: none; display: flex; padding: 0; margin: 0;">
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="diaFin">23</span>
+                                                                    <p style="margin-top: 5px;">Dia</p>
+                                                                </li>
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="mesFin">Noviembre</span>
+                                                                    <p style="margin-top: 5px;">Mes</p>
+                                                                </li>
+                                                                <li>
+                                                                    <span id="anoFin">2023</span>
+                                                                    <p style="margin-top: 5px;">Año</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-4 col-md-6 mb-4">
+                        <div class="card shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Seleccione turno:</div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                    <div class="form-inputs row">
+                                                        <div class="col-sm-12">
+                                                            <select class="form-control" id="cbxturno" name="categoria">
+                                                                <option value="Manana" selected>Mañana</option>
+                                                                <option value="Tarde">Tarde</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- Modal Eliminar -->
+                <div class="modal fade" id="formEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Alerta</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Seguro de eleminar elemento?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="botonEliminarElemento">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTales Example-Clientes con sus Lugares -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Seleciona Cliente:
+                            <!-- Topbar Search -->
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" id="txtBusqueda" class="form-control bg-light border-0 small" placeholder="Buscar por carnet..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="buscarCliente()">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <a class="btn btn-primary" type="button" onclick="enviarDatosdeCliente()">
+                                            <i class="fas fa-user-plus"></i>
+                                        </a>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="opcion()">Mostrar Clientes
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                    </div>
+                                    <label id="lblerrorBusqueda" class="ml-4" style="color: red;"></label>
+                                </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaClientesYSusLugares" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Carnet</th>
+                                        <th>Nombre Cliente</th>
+                                        <th>Lugar</th>
+                                        <th>Direccion</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTales Example-Servicios -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <!-- Topbar Search -->
+                            Lista Servicios:
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" id="txtBusquedaServicio" class="form-control bg-light border-0 small" placeholder="Buscar por nombre..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="validarNombreServicio()">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarModalServicio()">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="opcionServicio()">Mostrar Servicios
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                    </div>
+                                    <label id="lblerrorBusquedaServicio" class="ml-4" style="color: red;"></label>
+                                </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaServicios" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th style="text-align: center;">Costo x M2 en Bs.</th>
+                                        <th style="text-align: center;">Total M2 de limpieza</th>
+                                        <th>Total en Bs x Servicio</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--MODAL Servicios-->
+                <div class="modal fade" id="formAgregarServicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Servicio</h1>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="user">
+                                    <br>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" id="txtnombreServicio"
+                                                   placeholder="Nombre Servicio">
+                                            <label id="lblErrorNombreS"></label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user" id="txtdescripcion"
+                                                   placeholder="Descripcion">
+                                            <label id="lblErrorDescripcion"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user" id="txtcosto"
+                                                   placeholder="Costo m2">
+                                            <label id="lblErrorCosto"></label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" id="cbxcategoria" name="categoria">
+                                                <option value="Pisos" selected>Pisos</option>
+                                                <option value="Ventanas">Ventanas</option>
+                                                <option value="Oficinas">Oficinas</option>
+                                                <option value="Jardines">Jardines</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <a id="btnSaveChanges" class="btn btn-primary btn-user btn-block" onclick="validacionServicioDesdeAsigancion()">
+                                                Agregar Servicio
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a id="btnCancel" class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</a><!--revisar esto-->
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTales Example-Empleados -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Seleciona Empleado:
+                            <!-- Topbar Search -->
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" id="txtBusquedaEmpleado" class="form-control bg-light border-0 small" placeholder="Buscar por carnet..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="buscarEmpleado()">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarModalEmpleado()">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="opcionEmpleado()">Mostrar Empleados
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                    </div>
+                                    <label id="lblerrorBusquedaEmpleado" class="ml-4" style="color: red;"></label>
+                                </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaEmpleadosXId" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Carnet</th>
+                                        <th>Nombre Empleado</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--MODAL Empleado-->
+                <div class="modal fade" id="formAgregarEmpleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabelAsignacion">Agregar Empleado</h1>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="user" id="formulario" enctype="multipart/form-data">
+                                    <br>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" id="txtcarnet"
+                                                   placeholder="Carnet" name="txtcarnet">
+                                            <label id="lblErrorCarnet"></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control form-control-user" id="txtnombre"
+                                                   placeholder="Nombres">
+                                            <label id="lblErrorNombreAsignacion"></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control form-control-user" id="txtapellido"
+                                                   placeholder="Apellido Paterno">
+                                            <label id="lblErrorApellidos"></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control form-control-user" id="txtapellidoM"
+                                                   placeholder="Apellido Materno">
+                                            <label id="lblErrorApellidoM"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-4 mb-3 mb-sm-0">
+                                            <input type="text" id="txtFechaNacimiento" class="form-control form-control-user"
+                                                   placeholder="Fecha Nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+                                            <label id="lblErrorFN"></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control form-control-user"
+                                                   id="txtFechaContratacion" placeholder="Fecha Contratacion" onfocus="(this.type='date')" onfocusout="(this.type='text')">
+                                            <label id="lblErrorFC"></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control form-control-user"
+                                                   id="txtsalario" placeholder="Salario">
+                                            <label id="lblErrorSalario"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-4 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" id="txtdireccion"
+                                                   placeholder="Direccion Domicilio">
+                                            <label id="lblErrorDireccion"></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control form-control-user" id="txttelefono"
+                                                   placeholder="Telefono/Celular">
+                                            <label id="lblErrorTelefono"></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="email" class="form-control form-control-user" id="txtemail"
+                                                   placeholder="Correo Electronico">
+                                            <label id="lblErrorCorreo"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-inputs row">
+                                        <div class="col-sm-4 mb-3 mb-sm-0 form-group">
+                                            <select class="form-control" id="cbxsexo" name="sexo">
+                                                <option value="M" selected>Hombre</option>
+                                                <option value="F">Mujer</option>
+                                            </select>
+                                            <label id="lblErrorSexo"></label>
+                                        </div>
+
+                                        <div class="col-sm-4 form-group">
+                                            <select class="form-control" id="cbxpuesto" name="rol">
+                                                <option value="Auxiliar Limpieza" selected>Auxiliar Limpieza</option>
+                                                <option value="Supervisor">Supervisor</option>
+                                            </select>
+                                            <label id="lblErrorPuesto"></label>
+                                        </div>
+
+                                        <div class="col-sm-4 form-group">
+                                            <select class="form-control" id="cbxestado" name="estad0">
+                                                <option value="Soltero" selected>Solter@</option>
+                                                <option value="Casado">Casad@</option>
+                                                <option value="Viudo">Viud@</option>
+                                            </select>
+                                            <label id="lblErrorEC"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <a id="botonCargar" class="btn btn-primary btn-user btn-block" onclick="validarEmpleadoAsignacion()">
+                                                Agregar
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a class="btn btn-warning btn-user btn-block" data-dismiss="modal">Cancelar</a><!--revisar esto-->
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTales Example-Supervisor -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Seleciona Supervisor:
+                            <!-- Topbar Search -->
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" id="txtBusquedaSupervisor" class="form-control bg-light border-0 small" placeholder="Buscar por carnet..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="buscarSupervisor()">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarModalEmpleado()">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="opcionSupervisor()">Mostrar Supervisores
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                    </div>
+                                    <label id="lblerrorBusquedaSupervisor" class="ml-4" style="color: red;"></label>
+                                </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaSupervisores" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Carnet</th>
+                                        <th>Nombre Supervisor</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <!-- Topbar Search -->
+                            tabla pre Asignacion
+                            <label id="lblerrorAsignaciones" class="ml-4" style="color: red;"></label>
+                        </h6>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaPreAsignacion" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Cliente</th>
+                                        <th>Lugar</th>
+                                        <th>Servicios</th>
+                                        <th>Empleados</th>
+                                        <th>Supervisor</th>
+                                        <th>Quitar</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                            <div class="form-group row justify-content-center">
+                                <div class="col-sm-2 mb-3 mb-sm-0"></div>
+                                <div class="col-sm-1">
+                                    <h3>total:</h3>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h3 id="total">0</h3>
+                                </div> <!-- Columna vacía de 2 columnas de ancho para el espacio -->
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <div class="col-sm-2 mb-3 mb-sm-0"></div>
+                                <div class="col-sm-4">
+                                    <a class="btn btn-primary btn-user btn-block btn-lg" onclick="validarDatos()">Guardar Asignacions</a>
+                                </div> <!-- Columna vacía de 2 columnas de ancho para el espacio -->
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Jhonny 2024</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Modal Alerta -->
+<div class="modal fade" id="formAlertaTotal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal">Alerta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Alerta -->
+<div class="modal fade" id="formExitoAsignacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleMod">Alerta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h1>Asignacion creada Exitosamente!</h1>
+                <label>datos..</label>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal fecha-->
+<div class="modal fade" id="myModalFecha" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="myModalLabel">Seleccionar Fecha de Asignacion</h5>
+                <button type="button" class="close" onclick="seleccionarFecha('cancelar')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="datepickerInicio">fecha inicio:</label>
+                <input type="text" id="datepickerInicio" placeholder="fecha Inicio">
+                <label for="datepickerFin">fecha fin:</label>
+                <input type="text" id="datepickerFin" placeholder="fecha Fin">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="fechaEsValida('cancelar')">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="fechaEsValida('seleccionar')">Seleccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Empleados ya existentes en una asignacion similar-->
+<div class="modal fade" id="modalFechaHoraIds" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="myModa">Estos Empleados ya fueron asignados en otra orden de trabajo que coinciden con la fecha y hora!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="listaEmpleadosYaAsigandos" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Nombre</th>
+                            <th>Cargo</th>
+                            <th>Fecha Inicio-Fin</th>
+                            <th>Turno</th>
+                            <th>Razon Social</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal de carga mejorado -->
+<div class="modal fade" id="cargandoModal" tabindex="-1" role="dialog" aria-labelledby="cargandoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100" id="cargandoModalLabel">Generando Orden de Trabajo</h5>
+                <!-- Puedes agregar un botón de cierre si lo necesitas -->
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+            <div class="modal-body text-center">
+                <!-- Utiliza un ícono de carga más grande -->
+                <i class="fas fa-spinner fa-5x fa-spin"></i>
+                <p>Cargando...</p>
+                <!-- Puedes agregar más contenido o personalizaciones aquí -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Scripts personalizados -->
+<script src="js/sb-admin-2.min.js"></script>
+<script src="js/control.js"></script>
+<script src="js/validaciones.js"></script>
+<script src="js/asignaciones.js"></script>
+<script src="js/agregarNuevosEnAsignacion.js"></script>
+<script src="js/enviarAsignacion.js"></script>
+<script src="js/calendar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PRO LIMPIO</title>
+    <!-- jQuery y jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap y dependencias -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bibliotecas de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <img src="img/logo.png" alt="" width="40">
+            </div>
+            <div class="sidebar-brand-text mx-3">Pro Limpio</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Administrador
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu EMPLEADOS-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-user fa-fw"></i>
+                <span>Empleados</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo empleados:</h6>
+                    <a class="collapse-item" href="listaEmpleados.html">Lista de Empleados</a>
+                    <a class="collapse-item" href="reportesEmpleado.html">Reportes del Empleado</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu Clientes-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClientes"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-user-tie"></i>
+                <span>Clientes</span>
+            </a>
+            <div id="collapseClientes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo Clientes:</h6>
+                    <a class="collapse-item" href="listaClientes.html">Lista Clientes</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu Servicios-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServicios"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-broom"></i>
+                <span>Servicios</span>
+            </a>
+            <div id="collapseServicios" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo servicios:</h6>
+                    <a class="collapse-item" href="listaServicios.html">Lista de Servicios</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu Asignaciones-->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAsignaciones"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-solid fa-toolbox"></i>
+                <span>Asignaciones</span>
+            </a>
+            <div id="collapseAsignaciones" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo asignaciones:</h6>
+                    <a class="collapse-item" href="registrarAsignacion.html">Asignar Trabajo</a>
+                    <a class="collapse-item active" href="reportesAsignaciones.html">Reportes de Asignacion</a>
+                </div>
+            </div>
+        </li>
+        <!-- Nav Item - Pages Collapse Menu ASISTENCIA -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAsistencia"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span>Asistencia</span>
+            </a>
+            <div id="collapseAsistencia" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Modulo asistencia:</h6>
+                    <a class="collapse-item" href="reportesAsistencia.html">Reportes Asistencia</a>
+                    <a class="collapse-item" href="reportesAsistencias.html">Reportes por Fecha</a>
+                </div>
+            </div>
+        </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="txtEmailUser">Douglas McGee</span>
+                            <img class="img-profile rounded-circle"
+                                 src="img/undraw_profile.svg">
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                             aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="cambiarContrasena.html">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Cambiar Contraseña
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" onclick="finalizarSession()">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Cerrar Session
+                            </button>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Asignaciones Realizadas</h1>
+                <p class="mb-4">En la tabla se muestran las asignaciones pendientes que aun no concluyeron</p>
+
+                <div class="row" id="rangoFechas">
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-8 col-md-10 mb-4">
+                        <div class="card shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-md-5">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha Inicio:</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight text-gray-800">
+                                                        <div class="content" style="display: flex;">
+                                                            <ul style="list-style-type: none; display: flex; padding: 0; margin: 0;">
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="dia">23</span>
+                                                                    <p style="margin-top: 5px;">Dia</p>
+                                                                </li>
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="mes">Noviembre</span>
+                                                                    <p style="margin-top: 5px;">Mes</p>
+                                                                </li>
+                                                                <li>
+                                                                    <span id="ano">2023</span>
+                                                                    <p style="margin-top: 5px;">Año</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a type="button" class="btn btn-primary" onclick="mostarModalFecha()">
+                                            <i class="fas fa-calendar" style="font-size:30px;color:white"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Fecha Fin:</div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight text-gray-800">
+                                                        <div class="content" style="display: flex;">
+                                                            <ul style="list-style-type: none; display: flex; padding: 0; margin: 0;">
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="diaFin">23</span>
+                                                                    <p style="margin-top: 5px;">Dia</p>
+                                                                </li>
+                                                                <li style="margin-right: 20px;">
+                                                                    <span id="mesFin">Noviembre</span>
+                                                                    <p style="margin-top: 5px;">Mes</p>
+                                                                </li>
+                                                                <li>
+                                                                    <span id="anoFin">2023</span>
+                                                                    <p style="margin-top: 5px;">Año</p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+                                    <div class="ml-4 input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="mostrarAsignaciones()">Mostrar todas las asignaciones</button>
+                                    </div>
+                                    <div class="ml-4 input-group-append" id="imprimirReporteGeneral" style="display:none">
+                                        <button class="btn btn-primary" type="button" onclick="imprimirReporteGeneralAsignaciones()">Imprimir Reporte General</button>
+                                    </div>
+                                    <div class="ml-4 input-group-append" id="imprimirReporteFechas" style="display:none">
+                                        <button class="btn btn-primary" type="button" onclick="imprimirAsignacionesPorFecha()">Imprimir Reporte por Fechas</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaTodasAsignaciones" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Cliente</th>
+                                        <th>Lugar</th>
+                                        <th>Empleados</th>
+                                        <th>Servicios</th>
+                                        <th>Total en Bs.</th>
+                                        <th>Fecha</th>
+                                        <th>Finalizar</th>
+                                        <th>Imprimir</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Jhonny 2024</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<!-- Modal Empleados-->
+<div class="modal fade" id="modalEmpleados" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="myModa">Empleados Asignados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="listaEmpleadosAsignados" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Nombre</th>
+                            <th>Carnet</th>
+                            <th>Cargo</th>
+                            <th>Telefono</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Empleados-->
+<div class="modal fade" id="modalServicios" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="myModas">Empleados Asignados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="listaServiciosAsignados" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Descripcion</th>
+                            <th>Categoria</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="formFinalizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Mensaje</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Quieres dar por finalizado esta asignacion?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="botonFinalizar">Finalizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal fecha-->
+<div class="modal fade" id="myModalFecha" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-5" id="myModalLabel">Seleccionar rango de fechas para los reportes</h5>
+                <button type="button" class="close" onclick="seleccionarFecha('cancelar')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <label for="datepickerInicio">fecha inicio:</label>
+                    <input type="text" id="datepickerInicio" placeholder="fecha Inicio">
+                    <label for="datepickerFin">fecha fin:</label>
+                    <input type="text" id="datepickerFin" placeholder="fecha Fin">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="fechaEsValidaAsigancion('cancelar')">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="fechaEsValidaAsigancion('seleccionar')">Seleccionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Alerta -->
+<div class="modal fade" id="formAlertaTotal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal">Alerta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/control.js"></script>
+<script src="js/reportesAsignaciones.js"></script>
+<script src="js/calendar.js"></script>
+</body>
+
+</html>

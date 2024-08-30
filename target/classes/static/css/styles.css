@@ -1,0 +1,227 @@
+.form-inputs {
+    margin-bottom: 0px;
+}
+
+.form-inputs input,
+.form-inputs label {
+    margin-bottom: 0px;
+}
+
+.form-inputs label {
+    color: red; /* Cambia el color de los labels a rojo */
+    font-size: 10px; /* Oculta los labels inicialmente */
+    margin-rigth: 50px;
+}
+
+label{
+    margin-left: 20px;
+}
+
+.popup {
+    width: 300px;
+    background: #FFF;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    display: none;
+    border: 2px solid #40AA3E;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+}
+.popup img{
+    width: 250px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgbs(0, 0, 0, 0.2);
+}
+.popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+
+#cuerpo{
+    z-index: 1;
+}
+#lblpass{
+    display: none;
+}
+
+
+.ocultar {
+    display: none;
+}
+
+/* Clase para mostrar un elemento */
+.mostrar {
+    display: block;
+}
+.mapaLugar {
+    width:80%;
+    height: 250%;
+    position: relative;
+    margin: auto;  /* Esto centrará horizontalmente */
+    display: flex;
+    justify-content: center; /* Esto centrará verticalmente */
+    align-items: center;
+}
+.mapaLugares {
+    width:80%;
+    height: 400%;
+    position: relative;
+    margin: auto;  /* Esto centrará horizontalmente */
+    display: flex;
+    justify-content: center; /* Esto centrará verticalmente */
+    align-items: center;
+}
+.mapaLugarForm {
+    width:80%;
+    height: 350%;
+    position: relative;
+    margin: auto;  /* Esto centrará horizontalmente */
+    display: flex;
+    justify-content: center; /* Esto centrará verticalmente */
+    align-items: center;
+}
+.table-container {
+     display: flex;
+     justify-content: center; /* Centrar horizontalmente */
+     align-items: center; /* Centrar verticalmente */
+     height: 100vh; /* Esto hace que el contenedor ocupe el 100% del alto de la ventana */
+}
+.leaflet-container {
+    font-size: 16px; /* Ajusta el tamaño de fuente según tus preferencias */
+}
+.small-input {
+    width: 50px; /* Puedes ajustar este valor según tus necesidades */
+}
+.center-cell {
+    text-align: center; /* Centra horizontalmente el contenido */
+    vertical-align: middle; /* Centra verticalmente el contenido */
+}
+#data ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#data li {
+    margin-right: 20px;
+}
+#data span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+#data ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#data li {
+    margin-right: 20px;
+}
+#data span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+//fecha fin
+#dataFin ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataFin li {
+    margin-right: 20px;
+}
+#dataFin span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+#dataFin ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataFin li {
+    margin-right: 20px;
+}
+#dataFin span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+//hora dataHoraIni
+#dataHoraIni ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataHoraIni li {
+    margin-right: 20px;
+}
+#dataHoraIni span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+#dataHoraIni ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataHoraIni li {
+    margin-right: 20px;
+}
+#dataHoraIni span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+//hora dataHoraFin
+#dataHoraFin ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataHoraFin li {
+    margin-right: 20px;
+}
+#dataHoraFin span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+#dataHoraFin ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+#dataHoraFin li {
+    margin-right: 20px;
+}
+#dataHoraFin span {
+    font-size: 24px; /* Tamaño de fuente más grande */
+}
+.content {
+    word-wrap: break-word;
+}
+#rangoFechas {
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.div-fechas{
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bigger-image {
+    width: 100%; /* Ancho máximo de la imagen */
+    height: auto; /* Altura automática para mantener la proporción */
+    max-width: 1000px; /* Cambia este valor según el tamaño máximo deseado */
+}
