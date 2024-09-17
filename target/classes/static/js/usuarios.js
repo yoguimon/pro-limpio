@@ -45,6 +45,10 @@ function mostrarAlerta(){
         }, 2000); // 2000 milliseconds = 2 seconds
 }
 async function iniciarSesion(email,pass){
+    const btn = document.querySelector("#btnlogin");
+    btn.innerHTML = 'Cargando... <i class="fas fa-spinner fa-spin"></i>';
+    btn.classList.add('disabled');
+    btn.style.pointerEvents = 'none';
     let datos = {};
     datos.email = email;
     datos.pass = pass;
@@ -124,6 +128,10 @@ async function verificarYAsignarRol(){
         }else{
             mostrarAlerta();
         }
+        const btn = document.querySelector("#btnlogin");
+        btn.innerHTML = 'Ingresar';
+        btn.classList.remove('disabled');
+        btn.style.pointerEvents = 'auto';
 }
 
 function validarContrasena(){
