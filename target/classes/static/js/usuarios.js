@@ -72,6 +72,9 @@ async function iniciarSesion(email,pass){
             }else{
                 mostrarAlerta();
             }
+            btn.innerHTML = 'Ingresar';
+            btn.classList.remove('disabled');
+            btn.style.pointerEvents = 'auto';
 }
 function validarLogin(){
     let datos = {};
