@@ -71,10 +71,10 @@ async function iniciarSesion(email,pass){
                 verificarYAsignarRol();
             }else{
                 mostrarAlerta();
+                btn.innerHTML = 'Ingresar';
+                btn.classList.remove('disabled');
+                btn.style.pointerEvents = 'auto';
             }
-            btn.innerHTML = 'Ingresar';
-            btn.classList.remove('disabled');
-            btn.style.pointerEvents = 'auto';
 }
 function validarLogin(){
     let datos = {};
