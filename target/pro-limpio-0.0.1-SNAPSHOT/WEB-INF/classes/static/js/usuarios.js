@@ -65,16 +65,18 @@ async function iniciarSesion(email,pass){
                 localStorage.setItem('pass', datos.pass);
                 localStorage.setItem('email', datos.email);
                 window.location.href = 'cambiarContrasena.html';
-
+                btn.innerHTML = 'Ingresar';
+                btn.classList.remove('disabled');
+                btn.style.pointerEvents = 'auto';
             }else if(answer=='viejo'){
                 localStorage.setItem('pass', datos.pass);
                 verificarYAsignarRol();
             }else{
                 mostrarAlerta();
+                btn.innerHTML = 'Ingresar';
+                btn.classList.remove('disabled');
+                btn.style.pointerEvents = 'auto';
             }
-            btn.innerHTML = 'Ingresar';
-            btn.classList.remove('disabled');
-            btn.style.pointerEvents = 'auto';
 }
 function validarLogin(){
     let datos = {};
