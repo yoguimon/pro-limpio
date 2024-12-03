@@ -1,14 +1,11 @@
-# Usa una imagen base de Tomcat con soporte para JDK 17
-FROM tomcat:9.0-jdk17
+# Usa una imagen base de OpenJDK
+FROM openjdk:17-jdk-slim
 
-# Elimina la aplicación ROOT por defecto de Tomcat
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
+# Copia el archivo JAR del proyecto al contenedor
+COPY target/pro-limpio-0.0.1-SNAPSHOT.war /app.war
 
-# Copia tu archivo WAR al directorio de aplicaciones web de Tomcat
-COPY target/pro-limpio-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
-
-# Expón el puerto que usará Tomcat
+# Expón el puerto que usará tu aplicación
 EXPOSE 8080
 
-# Comando para iniciar Tomcat
-CMD ["catalina.sh", "run"]
+# Ejecuta el archivo JAR
+ENTRYPOINT ["java", "-jar", "/app.war"]
