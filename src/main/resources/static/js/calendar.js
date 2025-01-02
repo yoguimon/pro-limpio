@@ -181,10 +181,10 @@ function fechaEsValidaAsigancion(texto){
     $("#diaFin").text(dia);
     $("#mesFin").text(mes);
     $("#anoFin").text(ano);
-    $('#myModalFecha').modal('hide');
 
     //mostramos la tabla de asignaciones dado un rango de fecha
     mostrarAsignacionesDadoFechas(fechaAuxInicio,fechaAuxFin);
+    $('#myModalFecha').modal('hide');
 }
 function fechaEsValidaAsistencia(texto){
     var fechaIni = $("#datepickerInicio").datepicker("getDate");
