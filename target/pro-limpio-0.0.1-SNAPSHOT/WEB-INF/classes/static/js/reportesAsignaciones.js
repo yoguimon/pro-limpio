@@ -4,6 +4,10 @@ $(document).ready(function() {
 async function mostrarAsignaciones(){
     document.getElementById('imprimirReporteGeneral').style.display='block';
     document.getElementById('imprimirReporteFechas').style.display='none';
+    const btn = document.querySelector("#btnAsignaciones");
+    btn.innerHTML = 'Cargando... <i class="fas fa-spinner fa-spin"></i>';
+    btn.classList.add('disabled');
+    btn.style.pointerEvents = 'none';
     const request = await fetch('api/asignacion/reportes', {
                 method: 'GET',
                 headers: {
@@ -13,6 +17,9 @@ async function mostrarAsignaciones(){
         });
         const asignaciones = await request.json();
         tablaAsignaciones(asignaciones);
+        btn.innerHTML = 'Mostrar todas las asignaciones';
+        btn.classList.remove('disabled');
+        btn.style.pointerEvents = 'auto';
 }
 function tablaAsignaciones(asignaciones){
     if(asignaciones.length!=0){
@@ -156,6 +163,10 @@ async function imprimirAsignacionesPorFecha(){
 async function mostrarAsignacionesDadoFechas(fechaIni,fechaFin){
     document.getElementById('imprimirReporteGeneral').style.display='none';
     document.getElementById('imprimirReporteFechas').style.display='block';
+    const btn = document.querySelector("#btnSeleccionar");
+    btn.innerHTML = 'Cargando... <i class="fas fa-spinner fa-spin"></i>';
+    btn.classList.add('disabled');
+    btn.style.pointerEvents = 'none';
     let rango ={
         fecha_inicio: fechaIni.toISOString().split('T')[0],
         fecha_fin:fechaFin.toISOString().split('T')[0]
@@ -168,6 +179,9 @@ async function mostrarAsignacionesDadoFechas(fechaIni,fechaFin){
             },
             body: JSON.stringify(rango)
     });
+    btn.innerHTML = 'Seleccionar';
+    btn.classList.remove('disabled');
+    btn.style.pointerEvents = 'auto';
     const asignaciones = await request.json();
     tablaAsignaciones(asignaciones);
 

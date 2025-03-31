@@ -1,7 +1,7 @@
 
 function usuarioSupervisor(){
-    document.getElementById('txtEmail').value="lucifer@gmail.com";
-    document.getElementById('txtPassword').value="Lucifer24@";
+    document.getElementById('txtEmail').value="jhonny@gmail.com";
+    document.getElementById('txtPassword').value="Jhonny23@";
 }
 
 function usuarioTrabajador(){

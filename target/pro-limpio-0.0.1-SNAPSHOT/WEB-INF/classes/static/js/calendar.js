@@ -181,10 +181,9 @@ function fechaEsValidaAsigancion(texto){
     $("#diaFin").text(dia);
     $("#mesFin").text(mes);
     $("#anoFin").text(ano);
-    $('#myModalFecha').modal('hide');
-
     //mostramos la tabla de asignaciones dado un rango de fecha
     mostrarAsignacionesDadoFechas(fechaAuxInicio,fechaAuxFin);
+    $('#myModalFecha').modal('hide');
 }
 function fechaEsValidaAsistencia(texto){
     var fechaIni = $("#datepickerInicio").datepicker("getDate");
@@ -195,7 +194,6 @@ function fechaEsValidaAsistencia(texto){
         $('#myModalFecha').modal('hide');
         return;
     }
-
     var fechaActual = new Date();
     fechaActual.setHours(0, 0, 0, 0);
     fechaIni.setHours(0, 0, 0, 0);
@@ -224,7 +222,6 @@ function fechaEsValidaAsistencia(texto){
     }
     fechaAuxInicio=fechaIni;
     fechaAuxFin=fechaFin;
-  //  return true;
 
     var dia = fechaIni.getDate();
     var mes = meses[fechaIni.getMonth()]; // Se suma 1 porque los meses se indexan desde 0
